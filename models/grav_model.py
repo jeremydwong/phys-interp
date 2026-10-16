@@ -29,7 +29,8 @@ TAU_SCALE = np.array([11.0, 4.5], np.float32)
 
 
 def device():
-    return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    from analysis.device import get_device
+    return get_device()
 
 
 # ------------------------------------------------------------------ features

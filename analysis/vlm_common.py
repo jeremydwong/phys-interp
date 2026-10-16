@@ -88,13 +88,9 @@ def render_clip(q_ep: np.ndarray, start: int, res=RES) -> np.ndarray:
 # ------------------------------------------------------------------ model
 
 def get_device() -> str:
-    """cuda, then mps, then cpu."""
-    import torch
-    if torch.cuda.is_available():
-        return "cuda"
-    if torch.backends.mps.is_available():
-        return "mps"
-    return "cpu"
+    """cuda, then mps, then cpu (see analysis/device.py)."""
+    from analysis.device import get_device as _get
+    return _get().type
 
 
 DEV = None

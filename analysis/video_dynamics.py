@@ -151,7 +151,8 @@ def main():
             rin = binned_r2_matrix(Yt[sel], a[sel, None], bins=10)[0] if sel.sum() > 50 else np.full(len(names), np.nan)
             rows.append({"band": f"{lo}-{hi}", "n": int(sel.sum()),
                          "top_shift": [(names[j], float(shift[j])) for j in top],
-                         "within_best_var": names[int(np.nanargmax(rin))], "within_best_r2": float(np.nanmax(rin)),
+                         "within_best_var": names[int(np.nanargmax(rin))] if np.isfinite(rin).any() else None,
+                         "within_best_r2": float(np.nanmax(rin)) if np.isfinite(rin).any() else None,
                          "within_r2_of_overall_best": float(rin[bv])})
         bands[d["name"]] = rows
         # plot: standardized mean of the unit's top-3 overall variables per band

@@ -22,12 +22,13 @@ import torch.nn.functional as F
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from analysis.common import load_frames, load_states, targets  # noqa: E402
+from analysis.device import get_device  # noqa: E402
 from models.video_model import load as load_model_file  # noqa: E402
 
 CKPT = os.environ.get("VIDEO_CKPT", os.path.join(ROOT, "models", "video_ckpt"))
 CACHE = os.path.join(ROOT, "models", "video_cache")
 RESULTS = os.path.join(ROOT, "reports", "results")
-DEV = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
+DEV = get_device()
 LAYERS = ["enc0", "enc1", "enc2", "enc3", "tmp0", "tmp1", "tmp2", "tmp3"]
 TEST = np.arange(2000, 2400)
 PROBE_TRAIN = np.arange(0, 400)

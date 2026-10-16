@@ -108,7 +108,8 @@ def r2(pred, true):
 
 # ------------------------------------------------------------------ training
 def train(steps=60000, batch=1024, lr=3e-4, wd=0.05, seed=0, device=None):
-    device = device or ("mps" if torch.backends.mps.is_available() else "cpu")
+    from analysis.device import get_device
+    device = device or get_device()
     torch.manual_seed(seed)
     np.random.seed(seed)
     ds = build_dataset()

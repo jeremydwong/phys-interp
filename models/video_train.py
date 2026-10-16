@@ -2,7 +2,10 @@
 
     uv run python models/video_train.py --steps 4000            # the checkpoint analysed (bs 32)
     uv run python models/video_train.py --steps 20000 --bs 64 --lr 8e-4   # suggested longer CUDA run
-Device: cuda if available, else mps, else cpu. On CUDA the train split (3.7 GB uint8) is kept on the GPU.
+Device: cuda if available, else mps, else cpu. On CUDA the train split (3.7 GB uint8) is kept on the GPU,
+and the training forward pass runs under bf16 autocast with TF32 matmuls (2.4x faster on the msi
+RTX 5070 Ti; --no-amp disables it). Validation always runs in fp32.
+Checkpoint dir: $VIDEO_CKPT, default models/video_ckpt.
 
 Loss: weighted MSE on frames t+1 (weight 1) and t+2 (weight 0.5). Pixel weight is
 1 + 25 * mask, where mask marks pixels that change between t-1..t+2 (dilated 5x5), i.e. the
@@ -26,19 +29,14 @@ import torch.nn.functional as F
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
+from analysis.device import get_device  # noqa: E402
 from models.video_model import VideoPredictor  # noqa: E402
 
-CKPT = os.path.join(ROOT, "models", "video_ckpt")
+CKPT = os.environ.get("VIDEO_CKPT", os.path.join(ROOT, "models", "video_ckpt"))
 CFG = dict(c=128, n_enc=4, n_tmp=4, heads=4, mult=4)
 T0, T1 = 3, 147          # valid "frame t" indices (need t-3 .. t+2)
 
 
-def pick_device():
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    if torch.backends.mps.is_available():
-        return torch.device("mps")
-    return torch.device("cpu")
 
 
 def to_input(win_u8):
@@ -100,11 +98,15 @@ def main():
     ap.add_argument("--bs", type=int, default=32)
     ap.add_argument("--lr", type=float, default=6e-4)
     ap.add_argument("--bench", action="store_true")
+    ap.add_argument("--no-amp", action="store_true")
     a = ap.parse_args()
     torch.manual_seed(0)
     np.random.seed(0)
-    dev = pick_device()
-    print(f"device: {dev}", flush=True)
+    dev = get_device()
+    amp = dev.type == "cuda" and not a.no_amp
+    if dev.type == "cuda":
+        torch.backends.cuda.matmul.allow_tf32 = torch.backends.cudnn.allow_tf32 = True
+    print(f"device: {dev}, bf16 autocast: {amp}", flush=True)
     os.makedirs(CKPT, exist_ok=True)
 
     fr = np.load(os.path.join(ROOT, "data", "main", "frames64.npy"), mmap_mode="r")
@@ -137,7 +139,8 @@ def main():
                    os.path.join(CKPT, f"video_step{step:06d}.pt"))
 
     offs = torch.arange(-3, 3, device=dev)
-    log = {"cfg": CFG, "params": n_par, "save_at": save_at, "train": [], "val": []}
+    log = {"cfg": CFG, "params": n_par, "save_at": save_at, "train": [], "val": [],
+           "args": vars(a), "device": str(dev), "amp": amp}
     t_start = time.time()
     run = 0.0
     for step in range(a.steps + 1):
@@ -156,8 +159,9 @@ def main():
         seq = to_input(gather(train, e, t, offs))
         seq = (seq * (1 + 0.05 * (torch.rand(a.bs, 1, 1, 1, 1, device=dev) - 0.5))).clamp(0, 1)
         mask = change_mask(seq)
-        pred = model(seq[:, :4])
-        loss = weighted_loss(pred, seq[:, 4:], mask)
+        with torch.autocast(dev.type, torch.bfloat16, enabled=amp):
+            pred = model(seq[:, :4])
+        loss = weighted_loss(pred.float(), seq[:, 4:], mask)
         for g in opt.param_groups:
             g["lr"] = lr_at(step)
         opt.zero_grad(set_to_none=True)
