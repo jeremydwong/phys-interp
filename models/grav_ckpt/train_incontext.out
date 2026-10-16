@@ -1,0 +1,18 @@
+incontext params 803204 train eps 10000
+incontext step      0 test 1.23121 late 1.23601  1s
+incontext step   2000 test 0.00874 late 0.00893  231s
+incontext step   4000 test 0.00437 late 0.00449  512s
+incontext step   6000 test 0.00408 late 0.00437  834s
+incontext step   8000 test 0.00479 late 0.00489  1186s
+incontext step  10000 test 0.00394 late 0.00414  1497s
+incontext step  12000 test 0.00306 late 0.00326  1826s
+incontext step  14000 test 0.00265 late 0.00289  2180s
+incontext step  16000 test 0.00305 late 0.00333  2413s
+incontext step  18000 test 0.00217 late 0.00243  2609s
+incontext step  20000 test 0.00227 late 0.00250  2808s
+incontext step  22000 test 0.00205 late 0.00235  3117s
+incontext step  24000 test 0.00201 late 0.00229  3462s
+incontext step  26000 test 0.00197 late 0.00226  3802s
+incontext step  28000 test 0.00196 late 0.00224  4274s
+incontext step  30000 test 0.00195 late 0.00224  4831s
+saved incontext

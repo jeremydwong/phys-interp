@@ -1,0 +1,18 @@
+h1 params 803204 train eps 10000
+h1 step      0 test 1.30280 late 1.31862  2s
+h1 step   2000 test 0.01765 late 0.01798  306s
+h1 step   4000 test 0.01391 late 0.01439  659s
+h1 step   6000 test 0.01313 late 0.01355  993s
+h1 step   8000 test 0.01359 late 0.01411  1452s
+h1 step  10000 test 0.01301 late 0.01350  2026s
+h1 step  12000 test 0.01187 late 0.01229  7152s
+h1 step  14000 test 0.01142 late 0.01191  7402s
+h1 step  16000 test 0.01141 late 0.01189  7666s
+h1 step  18000 test 0.01116 late 0.01168  7940s
+h1 step  20000 test 0.01087 late 0.01132  8153s
+h1 step  22000 test 0.01077 late 0.01126  8358s
+h1 step  24000 test 0.01062 late 0.01107  8557s
+h1 step  26000 test 0.01053 late 0.01101  8749s
+h1 step  28000 test 0.01046 late 0.01092  8942s
+h1 step  30000 test 0.01042 late 0.01089  9159s
+saved h1

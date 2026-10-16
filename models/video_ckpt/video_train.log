@@ -1,0 +1,42 @@
+/Users/jeremy/Git/phys-interp/models/video_train.py:101: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:219.)
+  train = torch.from_numpy(np.ascontiguousarray(fr[:2000])).to(dev)
+loaded frames in 9s
+1.75M params
+[val] step 0 model=0.00133 copy=0.00133 linear=0.00199 model_arm=0.02301 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00214 copy_t2=0.00214 time=16.95463
+step 0 loss 0.01899 lr 1.50e-06 48s
+[val] step 100 model=0.00137 copy=0.00133 linear=0.00199 model_arm=0.02176 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00228 copy_t2=0.00214 time=142.93676
+[val] step 151 model=0.00131 copy=0.00133 linear=0.00199 model_arm=0.02076 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00210 copy_t2=0.00214 time=198.08350
+step 200 loss 0.01422 lr 3.01e-04 251s
+[val] step 227 model=0.00117 copy=0.00133 linear=0.00199 model_arm=0.01894 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00183 copy_t2=0.00214 time=269.97876
+[val] step 342 model=0.00095 copy=0.00133 linear=0.00199 model_arm=0.01567 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00145 copy_t2=0.00214 time=378.59887
+step 400 loss 0.01065 lr 6.00e-04 440s
+[val] step 500 model_arm=0.01314 copy_arm=0.02301
+[val] step 515 model=0.00077 copy=0.00133 linear=0.00199 model_arm=0.01257 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00133 copy_t2=0.00214 time=558.75155
+step 600 loss 0.00889 lr 5.95e-04 645s
+[val] step 776 model=0.00060 copy=0.00133 linear=0.00199 model_arm=0.01013 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00105 copy_t2=0.00214 time=784.71115
+step 800 loss 0.00779 lr 5.82e-04 806s
+step 1000 loss 0.00706 lr 5.60e-04 954s
+[val] step 1000 model_arm=0.00909 copy_arm=0.02301
+[val] step 1170 model=0.00051 copy=0.00133 linear=0.00199 model_arm=0.00865 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00091 copy_t2=0.00214 time=1099.11545
+step 1200 loss 0.00637 lr 5.30e-04 1123s
+step 1400 loss 0.00601 lr 4.93e-04 1266s
+[val] step 1500 model_arm=0.00798 copy_arm=0.02301
+step 1600 loss 0.00580 lr 4.50e-04 1412s
+[val] step 1762 model=0.00042 copy=0.00133 linear=0.00199 model_arm=0.00714 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00081 copy_t2=0.00214 time=1515.19273
+step 1800 loss 0.00519 lr 4.03e-04 1535s
+step 2000 loss 0.00545 lr 3.52e-04 1627s
+[val] step 2000 model_arm=0.00683 copy_arm=0.02301
+step 2200 loss 0.00514 lr 3.00e-04 1724s
+step 2400 loss 0.00488 lr 2.48e-04 1804s
+[val] step 2500 model_arm=0.00633 copy_arm=0.02301
+step 2600 loss 0.00478 lr 1.97e-04 1904s
+[val] step 2655 model=0.00036 copy=0.00133 linear=0.00199 model_arm=0.00617 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00070 copy_t2=0.00214 time=1944.63557
+step 2800 loss 0.00469 lr 1.50e-04 2009s
+step 3000 loss 0.00451 lr 1.07e-04 2104s
+[val] step 3000 model_arm=0.00610 copy_arm=0.02301
+step 3200 loss 0.00444 lr 7.02e-05 2288s
+step 3400 loss 0.00443 lr 4.02e-05 2457s
+[val] step 3500 model_arm=0.00581 copy_arm=0.02301
+step 3600 loss 0.00435 lr 1.81e-05 2600s
+step 3800 loss 0.00423 lr 4.56e-06 2768s
+[val] step 4000 model=0.00034 copy=0.00133 linear=0.00199 model_arm=0.00574 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00066 copy_t2=0.00214 time=2922.20015

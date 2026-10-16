@@ -1,0 +1,18 @@
+given params 803460 train eps 10000
+given step      0 test 1.45733 late 1.48905  2s
+given step   2000 test 0.00401 late 0.00442  299s
+given step   4000 test 0.00450 late 0.00491  644s
+given step   6000 test 0.00276 late 0.00316  971s
+given step   8000 test 0.00401 late 0.00443  1426s
+given step  10000 test 0.00282 late 0.00327  1998s
+given step  12000 test 0.00237 late 0.00278  7132s
+given step  14000 test 0.00203 late 0.00249  7375s
+given step  16000 test 0.00261 late 0.00303  7634s
+given step  18000 test 0.00192 late 0.00237  7901s
+given step  20000 test 0.00194 late 0.00238  8126s
+given step  22000 test 0.00182 late 0.00229  8327s
+given step  24000 test 0.00181 late 0.00227  8531s
+given step  26000 test 0.00178 late 0.00226  8724s
+given step  28000 test 0.00176 late 0.00222  8916s
+given step  30000 test 0.00177 late 0.00224  9138s
+saved given
