@@ -1,0 +1,675 @@
+<title>Finding Physics Neurons</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<script>
+window.MathJax = { tex: { inlineMath: [["$","$"]], displayMath: [["$$","$$"]], packages: {"[+]": ["ams"]} },
+  svg: { fontCache: "global" }, options: { skipHtmlTags: ["script","noscript","style","textarea","pre","code"] } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js" async></script>
+<style>
+/* Layout: a single reading column (lab-notebook width) with wide breakouts for tables, diagrams and code. */
+:root {
+  --bg: #f5f7f9;
+  --surface: #ffffff;
+  --ink: #18212b;
+  --muted: #5a6876;
+  --rule: #d6dde4;
+  --accent: #2550c4;      /* cobalt: structure, links */
+  --force: #b8601c;       /* amber: anything that is a force, torque or contact */
+  --ok: #2c7a4b;
+  --warn: #a8611a;
+  --no: #b03636;
+  --code-bg: #eef2f6;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161c; --surface: #18202a; --ink: #e3e9ef; --muted: #98a6b4; --rule: #2c3743;
+    --accent: #7d9cf0; --force: #e39a5c; --ok: #6cc28e; --warn: #e0a35e; --no: #ec7b7b; --code-bg: #1d2631;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161c; --surface: #18202a; --ink: #e3e9ef; --muted: #98a6b4; --rule: #2c3743;
+  --accent: #7d9cf0; --force: #e39a5c; --ok: #6cc28e; --warn: #e0a35e; --no: #ec7b7b; --code-bg: #1d2631;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 1.07rem; line-height: 1.62;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 5rem;
+}
+.wrap { max-width: 46rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1.1rem; }
+.wide { max-width: 64rem; width: 100%; margin: 0 auto; }
+h1, h2, h3, h4 { font-family: var(--display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.3rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.75rem; font-weight: 800; margin-top: 2.2rem; padding-top: 1.4rem; border-top: 2px solid var(--ink); }
+h3 { font-size: 1.22rem; font-weight: 700; margin-top: 1.2rem; }
+h4 { font-size: 1rem; font-weight: 700; }
+p, ul, ol { margin: 0; }
+ul, ol { padding-left: 1.3rem; display: flex; flex-direction: column; gap: .35rem; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.eyebrow { font-family: var(--mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.22rem; color: var(--ink); }
+.meta { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.sec-num { font-family: var(--mono); color: var(--accent); font-weight: 600; margin-right: .5rem; }
+code, kbd { font-family: var(--mono); font-size: .86em; background: var(--code-bg); padding: .08em .3em; border-radius: 3px; }
+pre { font-family: var(--mono); font-size: .82rem; line-height: 1.5; background: var(--code-bg); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 0; }
+pre code { background: none; padding: 0; font-size: inherit; }
+.force { color: var(--force); font-weight: 600; }
+.note { border-left: 3px solid var(--force); padding: .2rem 0 .2rem 1rem; color: var(--ink); }
+.note strong { font-family: var(--display); }
+.hyp { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--force); border: 1px solid var(--force); border-radius: 3px; padding: 0 .3rem; white-space: nowrap; }
+.toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem 1.5rem; padding: 1rem 0; border-block: 1px solid var(--rule); font-family: var(--display); font-size: .95rem; }
+.toc a { text-decoration: none; color: var(--ink); }
+.toc a span { color: var(--accent); font-family: var(--mono); margin-right: .4rem; }
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-bottom: 1px solid var(--rule); }
+th { font-family: var(--display); font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--code-bg); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td:first-child { font-weight: 600; font-family: var(--display); }
+.pill { display: inline-block; font-family: var(--mono); font-size: .72rem; padding: .05rem .45rem; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); } .pill.no { color: var(--no); }
+figure { margin: 0; display: flex; flex-direction: column; gap: .5rem; }
+figcaption { font-size: .9rem; color: var(--muted); }
+.diagram { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .75rem; }
+.diagram svg { display: block; min-width: 640px; width: 100%; height: auto; }
+.eq { font-family: var(--mono); font-size: .9rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; overflow-x: auto; white-space: nowrap; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; min-width: 0; font-size: .97rem; }
+.card h4 { display: flex; justify-content: space-between; gap: .5rem; align-items: baseline; }
+.card .tag { font-family: var(--mono); font-size: .7rem; color: var(--muted); font-weight: 400; }
+.steps { counter-reset: s; list-style: none; padding: 0; gap: .9rem; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 2.2rem 1fr; gap: .5rem; }
+.steps li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); color: var(--accent); font-weight: 600; padding-top: .1rem; }
+.bars { display: flex; flex-direction: column; gap: .45rem; font-family: var(--mono); font-size: .78rem; }
+.bar { display: grid; grid-template-columns: 11.5rem 1fr 4.2rem; gap: .6rem; align-items: center; }
+.bar .track { position: relative; height: 14px; background: var(--code-bg); border-radius: 2px; }
+.bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 2px; }
+.bar .fill.q { background: var(--force); }
+.bar .limit { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--no); }
+.bar .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 1rem; font-family: var(--mono); font-size: .75rem; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; margin-right: .35rem; vertical-align: -1px; }
+.refs { font-size: .92rem; }
+
+.eq-block { overflow-x: auto; overflow-y: hidden; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .4rem .8rem; font-size: .95rem; }
+.src { font-family: var(--mono); font-size: .74rem; color: var(--muted); overflow-wrap: anywhere; }
+.ours { background: color-mix(in srgb, var(--force) 10%, transparent); border-bottom: 1px dotted var(--force); }
+.math-key { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; font-size: .9rem; color: var(--muted); }
+mjx-container[display="true"] { margin: .4em 0 !important; }
+mjx-container { color: var(--ink); }
+.plate { background: #fcfcfb; border: 1px solid var(--rule); border-radius: 6px; padding: .5rem; }
+.plate img { display: block; width: 100%; height: auto; }
+@media (max-width: 560px) {
+  .bar { grid-template-columns: 7.5rem 1fr 3.4rem; }
+  body { font-size: 1rem; }
+}
+</style>
+
+<main class="wrap">
+  <header style="display:flex;flex-direction:column;gap:.9rem">
+    <div class="eyebrow">phys-interp · working notes · 15 Oct 2026</div>
+    <h1>Finding physics neurons</h1>
+    <p class="lede">What changed between the 2017 circuits work and Nick Cammarata's <a href="https://already-clean.goodfire.com/">“Neural Networks Are Already Clean”</a>, which architectures should make <span class="force">forces, torques and contacts</span> legible inside a video model, and how to run all of it on a 48&nbsp;GB M4&nbsp;Max.</p>
+    <p class="meta">Machine checked: Apple M4 Max · 48 GB unified memory · macOS 26.5.1 · uv, Homebrew and Ollama installed · 375 GB free disk</p>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#s1"><span>1</span>What changed since InceptionV1</a>
+    <a href="#s2"><span>2</span>Architectures, physics targets, gravity</a>
+    <a href="#s3"><span>3</span>Running models on the M4 Max</a>
+    <a href="#s4"><span>4</span>A first two weeks</a>
+    <a href="#s5"><span>5</span>Which frames each model sees</a>
+    <a href="#s6"><span>6</span>The mathematics of the improvements</a>
+  </nav>
+
+  <!-- ============================ 1 ============================ -->
+  <h2 id="s1"><span class="sec-num">1</span>What changed since InceptionV1</h2>
+
+  <p>The essay's thesis is that most of what looked like <em>superposition</em> (neurons arbitrarily packing unrelated features) was really two ordinary problems: an architecture that learned poorly, and tools that rendered neurons badly. Fix both and the same-size network looks clean. The residual mess is mostly what Cammarata calls <em>recursive generalization</em>: a neuron that detects a V-shape grows to fire on cat ears and car fronts because those share a shape, not because the network ran out of room.</p>
+
+  <p>The headline numbers for InceptionV1's last layer: about 5% of neurons interpretable with 2023 tools, about 50% with better visualization, about 70% with modern regularization, and about 99% in a ConvNeXt of the same size (7.06M parameters) trained on the same data. On Qwen3-32B he reports, as preliminary, roughly 90% of neuron poles doing one main job.</p>
+
+  <h3>1.1 The architecture: “residual connections, LayerNorm, and a couple other improvements”</h3>
+
+  <p>The essay never names the other improvements. The modern model it compares against is ConvNeXt, and the <a href="https://arxiv.org/abs/2201.03545">ConvNeXt paper</a> documents exactly which changes it made, one at a time, starting from a ResNet. So the list below is the documented difference between ConvNeXt and a 2014-era network like InceptionV1. The right-hand column is my reading of why each might matter for interpretability; the essay only makes that argument for residuals.</p>
+
+  <div class="tbl wide">
+  <table>
+    <thead><tr><th>Change</th><th>InceptionV1 (2014)</th><th>ConvNeXt (2022)</th><th>Why it might make neurons cleaner</th></tr></thead>
+    <tbody>
+      <tr><td>Residual connections</td><td>None. Every layer must re-encode everything the next layer needs.</td><td>Each block adds to a running “residual stream”: <code>x ← x + f(x)</code>.</td><td>A block only computes what is <em>new</em>. Neurons don't have to spend capacity copying old features forward. The essay says residuals “help the deeper layers be conceptually clean.”</td></tr>
+      <tr><td>LayerNorm</td><td>Local Response Normalization (BatchNorm in later variants).</td><td>LayerNorm per example, per position, over channels.</td><td>A neuron's value depends only on the current input, not on batch statistics. Activations sit on a stable scale across layers, so thresholds and comparisons mean the same thing everywhere. <span class="hyp">hypothesis</span></td></tr>
+      <tr><td>Depthwise conv, 7×7</td><td>Mixed 1×1/3×3/5×5 branches that blend space and channels together.</td><td>One large depthwise conv mixes space only; separate 1×1 layers mix channels only.</td><td>“Where” and “what” happen in different layers. The channel-mixing neurons become pure feature detectors you can read one at a time. <span class="hyp">hypothesis</span></td></tr>
+      <tr><td>Inverted bottleneck (4× wide MLP)</td><td>Narrow 1×1 reductions before expensive convs.</td><td>Expand channels 4×, apply nonlinearity, project back down. The same shape as a transformer MLP.</td><td>A wide hidden layer means more neurons per feature. The essay's position is that more features than dimensions is fine; a wide layer simply gives each one a home. <span class="hyp">hypothesis</span></td></tr>
+      <tr><td>GELU, and fewer of them</td><td>ReLU after every conv.</td><td>One GELU and one norm per block.</td><td>Only one nonlinearity per block means one privileged basis to inspect, the hidden layer of the MLP. GELU's small negative region gives a readable negative pole. <span class="hyp">hypothesis</span></td></tr>
+      <tr><td>Stem and downsampling</td><td>Conv + max-pool stem; pooling inside inception modules.</td><td>4×4 stride-4 “patchify” stem; dedicated downsampling layers between stages.</td><td>Resolution changes happen in known places, so a stage's neurons all work at one spatial scale.</td></tr>
+      <tr><td>Training recipe</td><td>SGD, dropout, light augmentation, auxiliary classifier heads.</td><td>AdamW with weight decay, 300 epochs, RandAugment, Mixup, CutMix, random erasing, label smoothing, stochastic depth, layer scale, EMA weights.</td><td>The essay's “more reasonable modern regularization” alone moved InceptionV1's last layer from ~50% to ~70% interpretable. Heavy augmentation rewards features that hold up across transformations, which is what a reader wants a neuron to be.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note"><strong>The general lesson.</strong> Nobody designed these changes for interpretability. They were designed to make deep networks train well, and cleaner neurons came along with that. For your project this means: don't build an exotic “interpretable” architecture. Build a well-trained, conventional one, and choose the conventional options that keep a privileged neuron basis and separate the kinds of mixing.</p>
+
+  <h3>1.2 The tools</h3>
+  <ul>
+    <li><strong>Feature visualization that works.</strong> The original 2017 method lacked <em>transformation robustness</em> (jittering, scaling and rotating the image while optimizing it). Adding it made early neurons crisp. Deep-layer visualizations were still poor because the regularization settings were slightly off. In deep layers the optimizer “takes the easiest path, which in InceptionV1 often means dogs.” Small tuning fixed it.</li>
+    <li><strong>Dataset examples at scale.</strong> Rank the top activating examples over the whole training set (50,000 images in the essay) and read raw activation shapes, not only percentiles.</li>
+    <li><strong>Read the negative pole.</strong> A neuron's most negative examples tell you which distinction it draws. Examples from the essay: taxis versus ambulances, wolves versus huskies. A label from the positive side alone can mislead.</li>
+    <li><strong>Watch neurons grow over training.</strong> Checkpoint replays show a neuron start on one concept and spread to related ones. This is the evidence for recursive generalization over arbitrary packing.</li>
+    <li><strong>Steering and ablation.</strong> If you think a neuron means X, push it up and check that the output changes in an X-like way. Then ablate the circuits it reads from.</li>
+    <li><strong>Neuron-level attribution graphs.</strong> Trace which upstream neurons drive a given activation, and test the trace with ablation.</li>
+    <li><strong>Agents in the loop.</strong> 2023 automated explainers scored neurons by how well a short label predicts activations. The essay argues this rewarded vague labels. Agents that propose a hypothesis, build test inputs and check them close much of the gap.</li>
+    <li><strong>Sparse autoencoders as a check, not a prerequisite.</strong> On the last ConvNeXt layer about 88% of SAE activity was near-copies of single neurons, and removing the remaining dictionary directions didn't change accuracy. SAEs helped most on the smallest model, whose neurons were coarse.</li>
+  </ul>
+
+  <h3>1.3 Why this matters for dynamics</h3>
+  <p>One finding transfers directly. The famous “car–dog superposition” circuit from <a href="https://distill.pub/2020/circuits/zoom-in/">Zoom In</a> turns out to be <strong>pose</strong>: neurons that group cars and dogs by the way they face the camera. These pose neurons persist in DINOv2 and in ConvNeXt at several sizes. A vision network trained only on still images already builds abstract geometric variables that cut across object categories. The bet behind your project is that a network trained to <em>predict</em> motion will build the same kind of abstract variables for physics: contact, impulse, support, and torque transmitted through a linkage.</p>
+
+  <!-- ============================ 2 ============================ -->
+  <h2 id="s2"><span class="sec-num">2</span>Architectures built to be read</h2>
+
+  <p>There are two routes, and you should do both. <strong>Pretrained video models</strong> tell you what large models trained on real video actually learned, but you never get ground-truth forces for the clips. <strong>Small models trained from scratch on simulation</strong> give you every force, torque and contact at every frame, so you can check any neuron against the truth. The simulated route is where you will get clean results first.</p>
+
+  <div class="note"><strong>A physics catch to design around.</strong> A camera sees kinematics, not forces. A model can only represent force as something like mass × acceleration, or by recognizing contexts in which forces occur (contact, a taut rope, a supporting surface). A neuron that correlates with force might just track acceleration. So build stimulus pairs where the kinematics match and the forces differ (same trajectory, different mass, and therefore different force) and pairs where the forces match and the kinematics differ. Only a neuron that follows force across both pairs is a force neuron.</div>
+
+  <h3>2.1 Design principles taken from §1</h3>
+  <ul>
+    <li><strong>Residual stream with pre-LayerNorm.</strong> Blocks write deltas, and you can read the stream between any two blocks.</li>
+    <li><strong>Wide, single-nonlinearity MLPs (ReLU or GELU).</strong> Start without gated units like SwiGLU. Gated neurons are readable, but the essay found a “double-negative” regime where both halves are negative and the product is positive, which you then have to account for.</li>
+    <li><strong>Factorize the mixing.</strong> Keep spatial, temporal and channel mixing in separate layers, the same way ConvNeXt separates spatial from channel mixing. Then a temporal-mixing layer is the only place where velocity and acceleration can be computed, and you know where to look.</li>
+    <li><strong>Causal in time.</strong> Each timestep's activations depend only on the past, so you can align a neuron's response to the contact frame without leakage from the future.</li>
+    <li><strong>Entities and pairs as separate things.</strong> Interactions happen between pairs of objects or pairs of linked segments. An architecture with explicit pairwise “edges” gives interaction variables a natural home.</li>
+    <li><strong>Conventional, modern training.</strong> AdamW, weight decay, augmentation and a long enough schedule. Under-trained models look messy for reasons that have nothing to do with superposition.</li>
+  </ul>
+
+  <h3>2.2 Three candidate models to train from scratch</h3>
+
+  <div class="cards wide">
+    <div class="card">
+      <h4>A · Slot interaction net <span class="tag">~5–20M params</span></h4>
+      <p>A ConvNeXt-style frame encoder, then <a href="https://arxiv.org/abs/2006.15055">Slot Attention</a> to split each frame into K object slots, then an <a href="https://arxiv.org/abs/1612.00222">Interaction Network</a> core that computes a message for every pair of slots with a wide ReLU MLP. It predicts the next frame's slots.</p>
+      <p><strong>Why:</strong> <a href="https://arxiv.org/abs/2006.11287">Cranmer et al. (2020)</a> trained exactly this kind of edge-message network on particle systems and found the messages were linear transforms of the true pairwise forces. They then recovered the force law symbolically. This is the strongest prior result that “force neurons” exist and can be found.</p>
+    </div>
+    <div class="card">
+      <h4>B · Factorized space-time ViT <span class="tag">~10–30M params</span></h4>
+      <p>Patch tokens per frame. Each block has spatial attention within a frame, causal temporal attention across frames at the same location, and a wide GELU MLP. Pre-LN residual stream. Predict the next frame's latents (JEPA-style) or pixels.</p>
+      <p><strong>Why:</strong> it has no built-in objects or pairs. Compare it with A. If it invents contact and force variables on its own, that is a stronger finding. It is also a small version of V-JEPA 2, so what you learn here carries over to the pretrained model.</p>
+    </div>
+    <div class="card">
+      <h4>C · State-space dynamics model <span class="tag">~1–5M params</span></h4>
+      <p>Skip pixels. Feed joint angles and velocities (or object states) into a small residual MLP or transformer that predicts the next state. Use this for the two-link arm and humanoid experiments.</p>
+      <p><strong>Why:</strong> it is the fastest way to answer whether a dynamics predictor builds an interaction-torque variable. It trains in minutes, and every quantity in the equations of motion is available as ground truth.</p>
+    </div>
+  </div>
+
+  <figure class="wide">
+    <div class="diagram">
+      <svg viewBox="0 0 960 300" role="img" aria-label="Diagram of candidate A: video frames pass through a ConvNeXt frame encoder into object slots, then an interaction network computes pairwise edge messages that sum into slot updates, which predict next-step slots. Probes attach to edge messages for forces and contacts.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        </defs>
+        <g font-family="JetBrains Mono, monospace" font-size="12" fill="var(--ink)">
+          <!-- frames -->
+          <rect x="20" y="95" width="60" height="60" fill="var(--surface)" stroke="var(--rule)"/>
+          <rect x="30" y="85" width="60" height="60" fill="var(--surface)" stroke="var(--rule)"/>
+          <rect x="40" y="75" width="60" height="60" fill="var(--surface)" stroke="var(--ink)"/>
+          <circle cx="60" cy="110" r="9" fill="var(--accent)"/>
+          <circle cx="82" cy="100" r="7" fill="var(--force)"/>
+          <text x="60" y="185" text-anchor="middle" fill="var(--muted)">frames t−k…t</text>
+          <line x1="108" y1="105" x2="148" y2="105" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+          <!-- encoder -->
+          <rect x="152" y="70" width="130" height="70" rx="4" fill="var(--surface)" stroke="var(--ink)"/>
+          <text x="217" y="100" text-anchor="middle" font-weight="600">ConvNeXt</text>
+          <text x="217" y="118" text-anchor="middle" fill="var(--muted)">frame encoder</text>
+          <line x1="282" y1="105" x2="322" y2="105" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+          <!-- slots -->
+          <rect x="326" y="55" width="110" height="100" rx="4" fill="var(--surface)" stroke="var(--ink)"/>
+          <text x="381" y="76" text-anchor="middle" font-weight="600">slots</text>
+          <circle cx="356" cy="105" r="11" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <circle cx="406" cy="105" r="11" fill="none" stroke="var(--force)" stroke-width="2"/>
+          <circle cx="381" cy="134" r="11" fill="none" stroke="var(--muted)" stroke-width="2"/>
+          <line x1="436" y1="105" x2="476" y2="105" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+          <!-- interaction core -->
+          <rect x="480" y="30" width="290" height="160" rx="4" fill="var(--surface)" stroke="var(--ink)"/>
+          <text x="625" y="52" text-anchor="middle" font-weight="600">interaction core (residual, ×L)</text>
+          <rect x="498" y="68" width="122" height="60" rx="3" fill="var(--code-bg)" stroke="var(--force)" stroke-width="1.5"/>
+          <text x="559" y="92" text-anchor="middle">edge MLP</text>
+          <text x="559" y="110" text-anchor="middle" fill="var(--muted)">m_ij = φ(s_i, s_j)</text>
+          <line x1="620" y1="98" x2="650" y2="98" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+          <rect x="654" y="68" width="100" height="60" rx="3" fill="var(--code-bg)" stroke="var(--rule)"/>
+          <text x="704" y="92" text-anchor="middle">node MLP</text>
+          <text x="704" y="110" text-anchor="middle" fill="var(--muted)">s_i += ψ(Σm)</text>
+          <text x="625" y="160" text-anchor="middle" fill="var(--muted)">pre-LN · wide ReLU hidden layer</text>
+          <line x1="770" y1="105" x2="810" y2="105" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+          <!-- prediction -->
+          <rect x="814" y="70" width="128" height="70" rx="4" fill="var(--surface)" stroke="var(--ink)"/>
+          <text x="878" y="100" text-anchor="middle" font-weight="600">predict</text>
+          <text x="878" y="118" text-anchor="middle" fill="var(--muted)">slots at t+1</text>
+          <!-- probe callout -->
+          <line x1="559" y1="128" x2="559" y2="232" stroke="var(--force)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="420" y="232" width="278" height="50" rx="4" fill="var(--surface)" stroke="var(--force)"/>
+          <text x="559" y="253" text-anchor="middle" fill="var(--force)" font-weight="600">read here: contact, impulse,</text>
+          <text x="559" y="270" text-anchor="middle" fill="var(--force)" font-weight="600">pairwise force (Cranmer 2020)</text>
+          <line x1="381" y1="155" x2="381" y2="232" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="250" y="232" width="150" height="50" rx="4" fill="var(--surface)" stroke="var(--accent)"/>
+          <text x="325" y="253" text-anchor="middle" fill="var(--accent)" font-weight="600">read here: mass,</text>
+          <text x="325" y="270" text-anchor="middle" fill="var(--accent)" font-weight="600">velocity, pose</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Candidate A. Per-object properties should live in the slots; interaction variables should live in the hidden layer of the edge MLP. The architecture tells you where to look before you start.</figcaption>
+  </figure>
+
+  <h3>2.3 Pretrained models worth opening up</h3>
+  <div class="tbl wide">
+  <table>
+    <thead><tr><th>Model</th><th>What it is</th><th>Why for dynamics</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://arxiv.org/abs/2506.09985">V-JEPA 2</a> (Meta)</td><td>Video ViT (L / H / g, 0.3–1B params) trained to predict masked video in latent space. Has an action-conditioned variant for robot planning.</td><td>The best first target. <a href="https://arxiv.org/abs/2502.11831">Garrido et al. (2025)</a> showed V-JEPA's prediction error rises on physically impossible events (objects passing through each other, teleporting), so some intuitive-physics signal is in there to find.</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2203.12602">VideoMAE</a></td><td>Video ViT-B/L trained by reconstructing masked pixel tubes.</td><td>A pixel-reconstruction baseline to compare against V-JEPA's latent prediction. Small and fast.</td></tr>
+      <tr><td>DINOv2 / <a href="https://arxiv.org/abs/2508.10104">DINOv3</a></td><td>Image ViTs with strong dense features.</td><td>The essay's pose neurons appear in DINOv2. Run per frame to find static precursors (contact, support, occlusion, pose) before you look for temporal ones.</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2408.12569">Sapiens</a> (Meta)</td><td>Human-centric ViTs (0.3–2B) for 2D pose, depth, normals and body-part segmentation.</td><td>The pose-detection route. Look for neurons that respond to limb configurations which imply load: a planted foot, a braced arm, a lifted object.</td></tr>
+      <tr><td>Qwen2.5-VL / Qwen3-VL 7–8B</td><td>Open vision-language models with native video input.</td><td>Language gives you a second readout: ask “what happens next?” or “which object is heavier?” and trace which visual-token features drive the answer. Larger and slower to work with, so do this after the others.</td></tr>
+      <tr><td>NVIDIA Cosmos (Predict, 2B)</td><td>Video world-model generators.</td><td>Generative video predictors, the closest public analogue to “a visual system that predicts dynamics.” The large variants are too big for this machine; the 2B ones fit.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>2.4 Stimuli with ground truth</h3>
+  <ul>
+    <li><strong>MuJoCo</strong> (<code>pip install mujoco</code>, native on Apple Silicon). Two-link arm, humanoid, objects on tables. Log <code>data.qfrc_*</code>, contact forces from <code>mj_contactForce</code>, and inverse-dynamics torques at every step, and render frames with its offscreen renderer.</li>
+    <li><strong><a href="https://arxiv.org/abs/2203.03570">Kubric</a> / MOVi</strong>: photoreal falling and colliding objects with per-object masks and states.</li>
+    <li><strong><a href="https://arxiv.org/abs/2106.08261">Physion</a></strong>, <strong>IntPhys 2</strong>, <strong><a href="https://arxiv.org/abs/1910.01442">CLEVRER</a></strong>: benchmark videos of collisions, support, rolling and containment, with labeled outcomes.</li>
+    <li><strong>AddBiomechanics</strong>: human motion capture with ground-reaction forces and joint torques solved per frame. Use it to test pose models on real people with real forces.</li>
+  </ul>
+
+  <h3>2.5 Interaction torques as a concrete target</h3>
+  <p>For a planar two-link arm (shoulder angle q₁, elbow angle q₂), the shoulder torque is</p>
+  <div class="eq">τ₁ = M₁₁(q₂)·q̈₁ &nbsp;+&nbsp; <span class="force">M₁₂(q₂)·q̈₂ &nbsp;−&nbsp; h(q₂)·(2q̇₁q̇₂ + q̇₂²)</span><br>
+  M₁₂ = I₂ + m₂·l₁·l<sub>c2</sub>·cos q₂ &nbsp;&nbsp;&nbsp; h = m₂·l₁·l<sub>c2</sub>·sin q₂</div>
+  <p>The highlighted terms are the <span class="force">interaction torque</span>: the load the shoulder feels because the elbow moved. This is a good probe target because it is <em>nonlinear</em> in observable kinematics (products of velocities, multiplied by trig functions of posture). A neuron that tracks it linearly cannot be a copy of any single input; the model had to compute it. Compare against probes for the simpler terms (q̈₁ alone, q̇₂² alone) to show the model is tracking the interaction and not one of its ingredients.</p>
+
+  <h3>2.6 Gravity vector extraction</h3>
+  <p>Gravity is the one force that is always present, so it makes a good first target. The question is whether the model holds an explicit estimate of “which way is down” and “how strong is gravity,” and whether it uses that estimate when it predicts motion. A video model has three kinds of evidence for it:</p>
+  <ul>
+    <li><strong>Dynamic cues.</strong> Free-falling and thrown objects share one constant acceleration. Its direction is down in the image, and its size (in pixels per frame²) gives g once scale is known.</li>
+    <li><strong>Static cues.</strong> Floors, horizons, vertical edges of walls and doors, things resting on surfaces, hanging ropes. A single frame is enough. Image models like DINOv2 almost certainly carry some of this, since camera up-vector estimation from single images (for example <em>Perspective Fields</em>, CVPR 2023) works well.</li>
+    <li><strong>Body cues.</strong> How people and animals lean, brace and balance. This connects to the pose route.</li>
+  </ul>
+
+  <h4>What to look for</h4>
+  <p>Direction in the image plane is an angle, so expect it to be encoded the way head-direction cells encode heading: a population of neurons each with a preferred direction and roughly cosine tuning, not a single “gravity neuron.” Concretely:</p>
+  <ul>
+    <li><strong>Probe for (cos θ, sin θ)</strong> of gravity's angle in the image, not θ itself, since the angle wraps around. A two-output linear probe on a layer either recovers the angle well or it doesn't.</li>
+    <li><strong>Fit tuning curves per neuron.</strong> Sweep camera roll through 360° and fit a von Mises curve to each neuron. Plot the distribution of preferred directions. A uniform spread suggests a population code for the full circle; a cluster at 270° (image-down) suggests the model has only learned “down usually means down the screen.”</li>
+    <li><strong>Probe magnitude separately.</strong> Simulate the same scenes at Earth, Moon and 2× Earth gravity and probe for g. Direction and magnitude may live in different places.</li>
+    <li><strong>Check equivariance.</strong> Rotate the whole input by α. A real gravity representation rotates its probe readout by α too. A representation tied to image axes won't.</li>
+  </ul>
+
+  <h4>Stimuli that separate the cues</h4>
+  <ul>
+    <li><strong>Rolled camera.</strong> The easiest manipulation in MuJoCo or Kubric: roll the camera so gravity points anywhere in the image, with all cues agreeing.</li>
+    <li><strong>Cue conflict.</strong> Tilt the room geometry one way and the physics gravity vector another (simulators allow arbitrary <code>gravity</code> vectors). Which cue does the probe follow? Does that change over the clip as falling objects reveal the true direction? This is the same experiment as a tilted-room illusion in human perception.</li>
+    <li><strong>Gravito-inertial ambiguity.</strong> An accelerating camera produces the same image-plane acceleration of a dropped object as tilted gravity. This is the otolith problem from vestibular physiology. Compare clips where the camera accelerates against clips where gravity tilts, and check whether the model separates them using static cues.</li>
+    <li><strong>No dynamic cue.</strong> Static scenes, or only objects resting on surfaces. If the probe still works, the estimate comes from layout, not from watching things fall.</li>
+  </ul>
+
+  <h4>Testing that the model uses it</h4>
+  <p>Find the probe direction for gravity angle, then add a rotated version of it to the residual stream (steering) and roll the predictor forward. If dropped objects in the predicted frames now fall sideways, the representation is causal. In the state-only arm model (candidate C) the matching target is the gravity torque, which you can probe alongside the interaction torque:</p>
+  <div class="eq">G₁(q) = (m₁·l<sub>c1</sub> + m₂·l₁)·g·cos q₁ &nbsp;+&nbsp; m₂·l<sub>c2</sub>·g·cos(q₁ + q₂)</div>
+  <p>Train with gravity direction randomized per episode and given only implicitly (through the motion), and the model has to infer g from the first few frames and hold it. That gives you an inferred latent you can locate, the same way you would locate a context variable in a language model.</p>
+
+  <h3>2.7 The experiment loop</h3>
+  <ol class="steps">
+    <li><div><strong>Catalogue.</strong> For every neuron in the chosen layers, store top and bottom activating clips and frames. Align each clip's activations to a physical event (contact onset, peak force) and plot the event-aligned average, the way a neurophysiologist builds a peri-stimulus time histogram.</div></li>
+    <li><div><strong>Correlate.</strong> Regress each neuron, and linear probes on the whole layer, against the ground-truth variables: contact flag, impulse magnitude, net force, interaction torque, plus the kinematic confounds (velocity, acceleration, distance to nearest object).</div></li>
+    <li><div><strong>Contrast.</strong> Run the matched pairs: collision vs. near-miss with identical approach, same trajectory with heavy vs. light objects. A contact neuron should split the first pair; a force neuron should split the second.</div></li>
+    <li><div><strong>Intervene.</strong> Clamp or amplify the candidate neuron and roll the predictor forward. A contact neuron pushed high during a near-miss should make the predicted trajectory bounce. Without this step you have a correlate, not a mechanism.</div></li>
+    <li><div><strong>Trace and replay.</strong> Find which upstream neurons feed it (attribution plus ablation), read its negative pole, and replay its tuning across training checkpoints to see what it started as.</div></li>
+  </ol>
+
+  <!-- ============================ 3 ============================ -->
+  <h2 id="s3"><span class="sec-num">3</span>Running models on the M4 Max</h2>
+
+  <p>48 GB of unified memory is shared by the CPU and GPU. By default macOS lets the GPU wire roughly two-thirds to three-quarters of it; your <code>iogpu.wired_limit_mb</code> is <code>0</code>, which means the default applies. That leaves something like 32–36 GB for model weights, activations and anything else on the GPU. You can raise it until the next reboot:</p>
+  <pre><code>sudo sysctl iogpu.wired_limit_mb=40960   # 40 GB for the GPU; leave ~8 GB for macOS</code></pre>
+
+  <figure>
+    <div class="bars" role="img" aria-label="Weight memory by model at 16-bit precision, with the default GPU limit marked at about 36 GB">
+      <div class="legend"><span><i style="background:var(--accent)"></i>bf16 weights</span><span><i style="background:var(--force)"></i>4-bit quantized</span><span><i style="background:var(--no)"></i>~36 GB default GPU limit</span></div>
+      <div class="bar"><span>VideoMAE-B · 87M</span><div class="track"><div class="fill" style="width:0.4%"></div><div class="limit" style="left:75%"></div></div><span class="v">0.2 GB</span></div>
+      <div class="bar"><span>DINOv3 ViT-L · 0.3B</span><div class="track"><div class="fill" style="width:1.25%"></div><div class="limit" style="left:75%"></div></div><span class="v">0.6 GB</span></div>
+      <div class="bar"><span>V-JEPA 2 ViT-g · 1B</span><div class="track"><div class="fill" style="width:4.2%"></div><div class="limit" style="left:75%"></div></div><span class="v">2 GB</span></div>
+      <div class="bar"><span>Sapiens 2B</span><div class="track"><div class="fill" style="width:8.3%"></div><div class="limit" style="left:75%"></div></div><span class="v">4 GB</span></div>
+      <div class="bar"><span>Qwen-VL 7–8B</span><div class="track"><div class="fill" style="width:35%"></div><div class="limit" style="left:75%"></div></div><span class="v">16.8 GB</span></div>
+      <div class="bar"><span>Qwen3-VL 32B · 4-bit</span><div class="track"><div class="fill q" style="width:39.6%"></div><div class="limit" style="left:75%"></div></div><span class="v">19 GB</span></div>
+      <div class="bar"><span>Qwen3-VL 32B · bf16</span><div class="track"><div class="fill" style="width:100%"></div><div class="limit" style="left:75%"></div></div><span class="v">64 GB</span></div>
+    </div>
+    <figcaption>Weights only, scaled to 48 GB. Video inputs add a lot on top: a 16-frame clip becomes thousands of tokens, and attention memory grows with the square of that. The 32B bf16 bar is clipped at 48 GB; it does not fit.</figcaption>
+  </figure>
+
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Model</th><th>Fits?</th><th>Toolchain</th></tr></thead>
+    <tbody>
+      <tr><td>Your own 1–30M models</td><td><span class="pill ok">easily</span></td><td>PyTorch on MPS. Training from scratch on 64×64 simulated video is practical here.</td></tr>
+      <tr><td>V-JEPA 2, VideoMAE, DINOv2/v3</td><td><span class="pill ok">easily</span></td><td>Hugging Face <code>transformers</code> on MPS in bf16, with forward hooks.</td></tr>
+      <tr><td>Sapiens 0.3–2B</td><td><span class="pill ok">yes</span></td><td>Meta's repo (PyTorch). Some ops may need CPU fallback.</td></tr>
+      <tr><td>Qwen2.5-VL-7B / Qwen3-VL-8B</td><td><span class="pill ok">yes</span></td><td><code>transformers</code> + <code>nnsight</code> in bf16. Keep clips short (8–16 frames, low fps, ~336px).</td></tr>
+      <tr><td>Qwen3-VL-32B</td><td><span class="pill warn">4-bit only</span></td><td><code>mlx-vlm</code>. Activations can be read by editing the MLX model code, but quantization adds noise. Save it for confirming results found in smaller models.</td></tr>
+      <tr><td>Anything run through Ollama</td><td><span class="pill no">not for this</span></td><td>Ollama and llama.cpp are built for chatting with a model and don't expose internal activations. Keep Ollama for quick “what does this model say about this clip” checks.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>3.1 Environment</h3>
+  <p>Your default <code>python3</code> is the one bundled with Julia's conda. Use a separate <code>uv</code> project in this repo so the two don't interfere.</p>
+<pre><code>cd ~/Git/phys-interp
+uv init --python 3.12
+uv add torch torchvision transformers accelerate nnsight \
+       mujoco av decord einops numpy zarr scikit-learn matplotlib jupyterlab
+uv add mlx mlx-vlm          # only if you want the quantized 32B VLM
+export PYTORCH_ENABLE_MPS_FALLBACK=1   # run unsupported ops on CPU instead of erroring</code></pre>
+
+  <h3>3.2 Capturing activations from V-JEPA 2</h3>
+  <p>A minimal starting point. Module names differ between models, so print them first and pick the MLP hidden layers (the post-GELU activations are the neurons).</p>
+<pre><code>import torch
+from transformers import AutoModel, AutoVideoProcessor
+
+repo = "facebook/vjepa2-vitl-fpc64-256"        # check the model card for current ids
+model = AutoModel.from_pretrained(repo, torch_dtype=torch.bfloat16).to("mps").eval()
+proc  = AutoVideoProcessor.from_pretrained(repo)
+
+for name, _ in model.named_modules():           # find the MLP activation modules
+    if "mlp" in name: print(name)
+
+acts = {}
+def keep(name):
+    def hook(mod, inp, out):
+        acts[name] = out.detach().to("cpu", torch.float16)
+    return hook
+
+targets = [n for n, m in model.named_modules() if n.endswith("mlp.activation")]  # adjust to what you saw
+handles = [dict(model.named_modules())[n].register_forward_hook(keep(n)) for n in targets]
+
+video = ...  # uint8 array, (T, H, W, 3), e.g. 16 frames rendered from MuJoCo
+inputs = proc(video, return_tensors="pt").to("mps")
+with torch.no_grad():
+    model.get_vision_features(**inputs) if hasattr(model, "get_vision_features") else model(**inputs)
+
+for h in handles: h.remove()</code></pre>
+
+  <h3>3.3 Storage budget</h3>
+  <p>Video activations are large. For ViT-L on a 16-frame 256px clip: 8 temporal × 16 × 16 spatial = 2,048 tokens, times 4,096 MLP neurons, times 2 bytes = <strong>about 17 MB per layer per clip</strong>. A thousand clips across all 24 layers is about 400 GB, more than your free disk. So:</p>
+  <ul>
+    <li>Pick 3–4 layers (early, middle, late) rather than all of them.</li>
+    <li>Store per-neuron summaries for the full set (max, mean, the event-aligned time course pooled over space) and keep full tensors only for each neuron's top clips.</li>
+    <li>Write with <code>zarr</code> in fp16 so you can read slices without loading everything.</li>
+  </ul>
+
+  <h3>3.4 Practical notes for MPS</h3>
+  <ul>
+    <li>Use bf16 or fp16; fp32 doubles memory for no interpretability benefit at inference.</li>
+    <li>FlashAttention isn't available. <code>attn_implementation="sdpa"</code> works and is the default in recent <code>transformers</code>.</li>
+    <li>Run one clip at a time for the 7–8B VLMs. Batch small vision models freely.</li>
+    <li>If something is slow or fails on MPS, run it on CPU before suspecting your code. The CPU side of the M4 Max is fast enough for small models.</li>
+  </ul>
+
+  <h3>3.5 Would a bigger laptop help?</h3>
+  <p>For everything in this plan, no. Every model up to the 7–8B VLMs fits on this machine, and the from-scratch models are small. What limits you is activation storage and speed, not weight memory. Upgrades that would change what you can do:</p>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Option</th><th>What it gives you</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>MacBook Pro, Max chip, 128 GB</td><td>About 96–110 GB usable by the GPU. Runs 32B VLMs in bf16 with room for video activations. Same software stack as now.</td><td><span class="pill warn">only for 32B work</span> It is the same speed class, so it adds capacity, not throughput.</td></tr>
+      <tr><td>Laptop with RTX 5090 (24 GB VRAM)</td><td>CUDA, so TransformerLens, SAE libraries, FlashAttention and bitsandbytes all work as documented. Much faster training of your own models.</td><td><span class="pill warn">faster, less memory</span> Less usable memory than your Mac. Loud and hot under sustained load.</td></tr>
+      <tr><td>AMD Ryzen AI Max+ 395 laptop, 128 GB</td><td>Unified memory like Apple's, up to ~96 GB for the GPU, on ROCm.</td><td><span class="pill no">not recommended</span> ROCm support for interpretability libraries is still patchy.</td></tr>
+      <tr><td>Rented cloud GPU (A100 / H100, 80 GB)</td><td>Roughly $1–3 per hour. Full CUDA stack, enough memory for 32B models in bf16.</td><td><span class="pill ok">best for occasional large runs</span> Develop locally, rent for the few big sweeps.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================ 4 ============================ -->
+  <h2 id="s4"><span class="sec-num">4</span>A first two weeks</h2>
+  <p class="note"><strong>Status, 16 Oct 2026.</strong> Steps 1–3 are done, and the gravity study has run too. The results are in report 2.</p>
+  <ol class="steps">
+    <li><div><strong>Two-link arm, state only (candidate C).</strong> Simulate random reaching in MuJoCo, train a small residual MLP to predict the next state, and probe its hidden layers for interaction torque against kinematic confounds. This takes a day and tells you whether the method works before any pixels are involved.</div></li>
+    <li><div><strong>Same arm, rendered.</strong> Render the arm as 64×64 video and train candidate B on it. Ask whether the interaction-torque variable survives the move to pixels, and in which layer it appears.</div></li>
+    <li><div><strong>Two balls colliding (candidate A vs. B).</strong> Generate collision and near-miss pairs with varied masses. Look for contact and impulse neurons in the edge MLP of A, and check whether B builds an equivalent without being given slots.</div></li>
+    <li><div><strong>V-JEPA 2 on the same stimuli.</strong> Render the collision set at 256px and run it through the pretrained model. Use event-aligned averages to find candidates, then check them on IntPhys 2 or Physion clips.</div></li>
+    <li><div><strong>Gravity.</strong> Retrain the arm and collision models with gravity direction and magnitude randomized per episode and the camera rolled. Fit tuning curves, run the cue-conflict clips, then steer the gravity direction and check that predicted falls change.</div></li>
+    <li><div><strong>Pose and load.</strong> Run Sapiens or DINOv3 on AddBiomechanics-style clips and look for neurons that track ground-reaction force or joint load rather than posture alone.</div></li>
+  </ol>
+
+
+  <!-- ============================ 5 ============================ -->
+  <h2 id="s5"><span class="sec-num">5</span>Which frames each model sees</h2>
+  <p>Everything comes from one MuJoCo simulation of the two-link arm, logged at <strong>50 Hz</strong> (a 2 ms physics step, recorded every 10 steps). Each episode is 150 frames (3 s), with one of three controllers: passive swinging, sums of random sinusoidal torques, or PD reaching to random targets. The scene has a floor 0.86 m below the shoulder and a wall 0.68 m to the right. Only the forearm can reach either one. The four models are fed very different slices of that same simulation:</p>
+  <div class="tbl wide">
+  <table>
+    <thead><tr><th>Model</th><th>Input</th><th>Resolution and timing</th><th>Trained to predict</th><th>Never sees</th></tr></thead>
+    <tbody>
+      <tr><td>State MLP <span class="tag">candidate C</span></td><td>No pixels. Joint state at frame t: sin q, cos q, q̇, motor torque τ.</td><td>1 frame</td><td>Δq, Δq̇ over the next 20 ms</td><td>acceleration, gravity, contact, obstacles</td></tr>
+      <tr><td>Gravity transformer</td><td>No pixels. The same joint state for up to 64 past frames, from a scene with no obstacles and gravity pointing in a random direction each episode.</td><td>Up to 1.28 s of history, causal</td><td>Next-frame Δq, Δq̇</td><td>which way gravity points</td></tr>
+      <tr><td>Video model <span class="tag">candidate B</span></td><td>4 rendered RGB frames, t−3 … t. The per-frame encoder sees one frame at a time; only the space-time stage mixes frames.</td><td>64 × 64 px, 60 ms of motion</td><td>Frames t+1 and t+2 (pixels)</td><td>all states, forces and torques</td></tr>
+      <tr><td>Qwen3-VL-4B (VLM)</td><td>8 rendered frames at 25 fps (every 2nd sim frame, 0.32 s), passed as a video with the prompt “Describe the motion of the arm.” Qwen merges frame pairs into 4 temporal groups; each group is 20 × 20 vision patches (16 px), and 2 × 2 merges give 100 language tokens. Activations are aligned to each group's midpoint frame.</td><td>320 px; 300 test episodes × 9 clips</td><td>Nothing here; pretrained on the web</td><td>everything except pixels</td></tr>
+      <tr><td>V-JEPA 2 ViT-L (msi only so far)</td><td>8 frames, as 4 tubelets of 16 × 16 tokens</td><td>256 px</td><td>Masked video in latent space (pretrained)</td><td>everything except pixels</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <figure class="wide">
+    <div class="plate"><img src="figs/setup_frames.png" alt="Frames around a forearm impact with the floor, rendered at 224 px and 64 px, plus a row from the gravity set with no obstacles."></div>
+    <figcaption>A fast forearm impact with the floor (test episode 2077), five frames before to three frames after contact. Top: a 224 px render like the VLM's input. Middle: the 64 px frames the video model sees. Bottom: a different clip from the gravity set, which has no floor or wall, so the only cue to “down” is how the arm moves. At 50 Hz a fast swing moves the hand several centimetres per frame, so an impact spans only one or two frames.</figcaption>
+  </figure>
+  <p class="note"><strong>Why this matters for interpretation.</strong> A unit in the state MLP that tracks gravity torque could just be reading cos q₁ from its input. A unit in the video model that tracks velocity has to compute it, because a single frame has no velocity. That is why the video model's per-frame encoder is a built-in control. The gravity transformer is the only model where a physical quantity, the gravity direction, is truly hidden and has to be inferred. Report 2 is built around these differences.</p>
+
+  <!-- ============================ 6 ============================ -->
+  <h2 id="s6"><span class="sec-num">6</span>The mathematics of the improvements</h2>
+  <p>Cammarata's essay climbs from roughly 5% to 99% interpretable neurons in steps: better tools, a better training recipe, a better architecture. Below, each step is written as equations. The sources are the essay, his co-authored Distill papers (Curve Detectors, Curve Circuits, Zoom In, Multimodal Neurons), and the method papers he builds on (Feature Visualization and Building Blocks by Olah et al., ConvNeXt, the toy model of superposition, TopK sparse autoencoders). The essay's companion technical paper is not yet public.</p>
+  <div class="math-key"><span><span class="ours">Highlighted text</span> is our formalization, not the author's.</span><span>Grey mono lines give sources.</span></div>
+
+
+<h3>6.0 Notation and the interpretability ladder</h3>
+<p>Write $x$ for an input (image or token context), $z_j(x)$ for the pre-activation of neuron $j$, and $a_j(x)=\phi(z_j(x))$ for its activation. For convolutional channels, a per-image score is the spatial maximum. The essay gives four estimates for the share of interpretable neurons in InceptionV1's last layer. Read as a sequence, they split the gain into tools, training recipe and architecture.</p>
+<div class="eq-block">$$\underbrace{\sim 5\%}_{\text{2014 weights, 2017 tools}} \;\xrightarrow{\;\Delta_{\text{tools}}\approx +45\;}\; \underbrace{\sim 50\%}_{\text{same weights, fixed feature vis + attribution}} \;\xrightarrow{\;\Delta_{\text{recipe}}\approx +20\;}\; \underbrace{\sim 70\%}_{\text{retrained, modern regularization}} \;\xrightarrow{\;\Delta_{\text{arch}}\approx +29\;}\; \underbrace{\sim 99\%}_{\text{ConvNeXt, 7.06M params}}$$</div>
+<p><span class="ours">The additive split is our reading. The essay gives only the four levels, and the steps are not shown to be independent or to commute.</span> The essay's own wording: "I put it around 5% with tools of that era, others at ~0%. With better interpretability tools (fixed feature visualization, methods for visualizing attribution etc) it's more like 50% on the same network ... Retraining the same architecture with more reasonable modern regularization it's more like 70%. In the ConvNeXt of the same size, it's about 99%."</p>
+<p class="src">Source: Cammarata 2026, "Neural Networks Are Already Clean", https://already-clean.goodfire.com/ (section "A History of Microscope Errors").</p>
+
+<h3>6.1 Architecture</h3>
+
+<h4>6.1.1 Residual stream: blocks write deltas</h4>
+<p>InceptionV1 is a plain feed-forward stack. Each layer's output is the only path forward, so its channels must carry everything later layers need. A residual network adds each block's output to a running stream.</p>
+<div class="eq-block">$$\text{plain (InceptionV1):}\quad x_{\ell+1}=F_\ell(x_\ell) \qquad\qquad \text{residual (ConvNeXt):}\quad x_{\ell+1}=x_\ell+\gamma_\ell\odot F_\ell(x_\ell)$$</div>
+<div class="eq-block">$$x_L = x_0+\sum_{\ell=0}^{L-1}\gamma_\ell\odot F_\ell(x_\ell),\qquad \frac{\partial x_L}{\partial x_\ell}= I+\sum_{m=\ell}^{L-1}\frac{\partial\,(\gamma_m\odot F_m(x_m))}{\partial x_\ell}$$</div>
+<p>The identity term gives every block a direct gradient path and a direct read path to the output. <span class="ours">The "delta" argument, as we formalize it: in a plain net, layer $\ell$'s $C_\ell$ channels are a bottleneck. By the data-processing inequality, $I(x_{\ell+1};y)\le I(a_\ell;y)$, so every downstream-relevant distinction must be re-encoded in $a_\ell$, and neurons must relay information they do not themselves compute. In a residual net, the block's hidden units only need to encode the update $F_\ell(x_\ell)$, while unchanged information passes through on the identity. That removes the relay pressure the essay calls "overflow".</span> The essay states the empirical side. The residual stream "was introduced to help learn deeper neural networks, and it also seems to help the deeper layers be conceptually clean". "Architectural problems made later layers overflow." Its compression tests deliberately remove the bypass: "crush the last layer, stop it from routing around the residual stream".</p>
+<p class="src">Source: https://already-clean.goodfire.com/ ("The Short Version"; "What Neurons Do Under Pressure"); He et al. 2016 (ResNet).</p>
+
+<h4>6.1.2 The ConvNeXt block (depthwise conv, inverted bottleneck, GELU, layer scale)</h4>
+<p>ConvNeXt modernizes a ResNet into a Transformer-like block. It uses a 7×7 depthwise conv for spatial mixing, then a single LayerNorm, then a 1×1 MLP that expands the width 4× with one GELU, then layer scale, then the residual add.</p>
+<div class="eq-block">$$F(x)=W_2\,\mathrm{GELU}\!\big(W_1\,\mathrm{LN}(\mathrm{DWConv}_{7\times7}(x))\big),\qquad W_1\in\mathbb{R}^{4C\times C},\; W_2\in\mathbb{R}^{C\times 4C}$$</div>
+<div class="eq-block">$$\mathrm{DWConv}(x)_{c,h,w}=\sum_{\Delta h,\Delta w=-3}^{3}K_{c,\Delta h,\Delta w}\,x_{c,h+\Delta h,w+\Delta w}\qquad(\text{one }7\times7\text{ filter per channel; no channel mixing})$$</div>
+<div class="eq-block">$$y = x+\frac{b}{1-p}\,\gamma\odot F(x),\qquad \gamma_{\text{init}}=10^{-6}\mathbf{1},\quad b\sim\mathrm{Bernoulli}(1-p)\ \text{(stochastic depth; } b\equiv 1-p \text{ at test, factor folded)}$$</div>
+<p>The paper's ablation path on ImageNet-1K top-1 (ResNet-50 regime): 76.1 (ResNet-50) → 78.8 (modern recipe alone) → 79.4 (stage ratio 3:3:9:3) → 79.5 (4×4 stride-4 "patchify" stem) → 80.5 (depthwise conv, width 96) → 80.6 (inverted bottleneck) → 79.9 (move depthwise conv up) → 80.6 (7×7 kernel) → 80.6 (ReLU→GELU) → 81.3 (one activation per block) → 81.4 (one norm per block) → 81.5 (BN→LN) → 82.0 (separate 2×2 stride-2 downsampling with LN). Stage widths for ConvNeXt-T are $C=(96,192,384,768)$ with block counts $B=(3,3,9,3)$. <span class="ours">The essay's models (92k, 7.06M and 28.6M parameters; the large one has 18 blocks) are custom sizes. The essay does not give their widths or depths beyond these numbers.</span></p>
+<p class="src">Source: Liu et al. 2022, "A ConvNet for the 2020s", arXiv:2201.03545 (Sec. 2, Fig. 2/4, Table 5); essay "Exploring Image Models".</p>
+
+<h4>6.1.3 Normalization: LRN (InceptionV1) vs BatchNorm vs LayerNorm</h4>
+<p>InceptionV1 (GoogLeNet) normalizes with local response normalization in its stem, which divides each channel by the energy of its neighboring channels. BatchNorm normalizes each channel with batch statistics. ConvNeXt's LayerNorm normalizes each spatial position across its channels.</p>
+<div class="eq-block">$$\textbf{LRN:}\quad b_{c}=a_{c}\Big/\Big(k+\tfrac{\alpha}{n}\!\!\sum_{c'=\max(0,c-n/2)}^{\min(C-1,c+n/2)}\!\! a_{c'}^{2}\Big)^{\beta}\qquad(\text{AlexNet: }k=2,\;n=5,\;\alpha=10^{-4},\;\beta=0.75)$$</div>
+<div class="eq-block">$$\textbf{BN:}\quad \hat x_{n,c,h,w}=g_c\,\frac{x_{n,c,h,w}-\mu^{\mathcal B}_c}{\sqrt{(\sigma^{\mathcal B}_c)^2+\epsilon}}+b_c,\qquad \mu^{\mathcal B}_c=\tfrac{1}{NHW}\textstyle\sum_{n,h,w}x_{n,c,h,w}$$</div>
+<div class="eq-block">$$\textbf{LN (channels-last, per position):}\quad \hat x_{c}=g_c\,\frac{x_{c}-\mu}{\sqrt{\sigma^2+\epsilon}}+b_c,\qquad \mu=\tfrac1C\textstyle\sum_c x_c,\;\; \sigma^2=\tfrac1C\textstyle\sum_c (x_c-\mu)^2$$</div>
+<p>The essay found that ConvNeXt puts almost all of its residual activation mass into one unread coordinate, which "it can change to scale all the other dimensions that are read through LayerNorm". At medium ConvNeXt stage 3 block 8, coordinate 112 holds "94.5% of the raw energy", and the figure's gain is $1/\sqrt{\text{channel variance}+10^{-6}}$. <span class="ours">Why one coordinate works as a global volume knob: if $x_k=s$ is large and the others are $O(1)$, then $\mu\approx s/C$ and $\sigma^2\approx s^2(C-1)/C^2\approx s^2/C$. The LN gain on every other channel is then $\approx\sqrt{C}/|s|$. Writing $s$ sets the read-out scale of the whole position (the essay calls this a "saliency signal"), and $x_k$ need not be read by any neuron.</span></p>
+<div class="eq-block">$$\text{gain}(x)=\frac{1}{\sqrt{\sigma^2(x)+\epsilon}}\;\approx\;\frac{\sqrt{C}}{|x_k|}\quad\text{when } x_k^2\gg\textstyle\sum_{c\ne k}x_c^2$$</div>
+<p class="src">Source: Szegedy et al. 2015 (GoogLeNet); Krizhevsky et al. 2012 (LRN); Ioffe and Szegedy 2015; Ba et al. 2016; essay sections "The Residual Stream" and "Looking at the Residual Stream" (https://already-clean.goodfire.com/).</p>
+
+<h4>6.1.4 GELU, ReLU, and the "votes" picture of a neuron</h4>
+<p>The essay describes a neuron as a sum of signed votes before its nonlinearity. In a ReLU network, its negative side gets no gradient directly, but each vote does whenever the neuron is on.</p>
+<div class="eq-block">$$z_j=\sum_i w_{ji}a_i+b_j,\qquad \frac{\partial \mathcal L}{\partial w_{ji}}=\delta_j\,\phi'(z_j)\,a_i,\qquad \phi=\mathrm{ReLU}\Rightarrow \phi'(z_j)=\mathbf 1[z_j\gt 0]$$</div>
+<div class="eq-block">$$\mathrm{GELU}(z)=z\,\Phi(z)\approx \tfrac12 z\Big(1+\tanh\!\big(\sqrt{2/\pi}\,(z+0.044715z^3)\big)\Big),\qquad \min_z \mathrm{GELU}(z)\approx-0.17\ \text{at } z\approx-0.75$$</div>
+<p>Quote: "A neuron is built from votes: each input weight votes for its positive side or its negative side, and the votes add up before the nonlinearity. The negative side never gets gradient on its own, but the individual votes do whenever the neuron is on". <span class="ours">Two of our observations. (i) GELU's derivative $\Phi(z)+z\varphi(z)$ is nonzero for $z\lt 0$, so its negative side gets a small direct gradient. (ii) The essay reports negative-pole values such as −61 and −37 in ConvNeXt. These are far below GELU's floor of −0.17, so its poles must be measured on a signed quantity (pre-activation or residual-branch output channel), not on the post-GELU hidden unit. The essay does not say which tensor it calls a ConvNeXt "neuron".</span></p>
+<p class="src">Source: Hendrycks and Gimpel 2016 (GELU); essay "How I Think About Neurons" (https://already-clean.goodfire.com/).</p>
+
+<h3>6.2 Training-recipe regularization</h3>
+<p>The essay attributes the 50%→70% step to retraining InceptionV1 "with more reasonable modern regularization" but does not list the regularizers. It also says the ConvNeXt comparison used the "same data and recipe". The standard modern recipe is the one in the ConvNeXt paper. <span class="ours">Assigning these specific terms to the essay's 70% retrain is our assumption.</span></p>
+<div class="eq-block">$$\textbf{AdamW:}\quad m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\quad v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,\quad \theta_t=\theta_{t-1}-\eta_t\Big(\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}+\lambda\,\theta_{t-1}\Big)$$</div>
+<p>The decay $\lambda\theta$ is applied outside the adaptive preconditioner ("decoupled"). With L2-in-the-loss Adam, the penalty gradient is divided by $\sqrt{\hat v}$, so it shrinks least where gradients are large. ConvNeXt uses $\eta=4\times10^{-3}$ (batch 4096, 20-epoch linear warmup, cosine decay, 300 epochs), $\lambda=0.05$ and $(\beta_1,\beta_2)=(0.9,0.999)$.</p>
+<div class="eq-block">$$\textbf{Label smoothing:}\quad q_k=(1-\varepsilon)\,\mathbf 1[k=y]+\frac{\varepsilon}{K},\qquad \mathcal L=-\sum_k q_k\log p_k,\qquad \varepsilon=0.1$$</div>
+<div class="eq-block">$$\textbf{Mixup:}\quad \tilde x=\lambda x_i+(1-\lambda)x_j,\;\; \tilde y=\lambda y_i+(1-\lambda)y_j,\;\; \lambda\sim\mathrm{Beta}(0.8,0.8)$$</div>
+<div class="eq-block">$$\textbf{CutMix:}\quad \tilde x=M\odot x_i+(\mathbf 1-M)\odot x_j,\;\; \tilde y=\lambda y_i+(1-\lambda)y_j,\;\; \lambda=1-\tfrac{|\text{box}|}{HW},\; \lambda_0\sim\mathrm{Beta}(1,1)$$</div>
+<div class="eq-block">$$\textbf{EMA of weights:}\quad \bar\theta_t=\tau\,\bar\theta_{t-1}+(1-\tau)\,\theta_t,\qquad \tau=0.9999\ \ (\text{evaluate }\bar\theta)$$</div>
+<p>Other settings: RandAugment (9, 0.5), Random Erasing 0.25, stochastic depth 0.1/0.4/0.5/0.5 for T/S/B/L, layer scale $10^{-6}$, no gradient clipping. <span class="ours">One hypothesis for why these help neuron legibility: label smoothing and mixup bound the logit margins and reward behavior that is linear between classes. That penalizes very high-gain, idiosyncratic units, and those are a channel for "bad learning", one of the essay's five causes of apparent polysemanticity. The essay does not test which term matters.</span></p>
+<p class="src">Source: Loshchilov and Hutter 2019 (AdamW); Szegedy et al. 2016 (label smoothing); Zhang et al. 2018 (mixup); Yun et al. 2019 (CutMix); Liu et al. 2022 arXiv:2201.03545 Table 5; essay (https://already-clean.goodfire.com/).</p>
+
+<h3>6.3 Feature visualization</h3>
+
+<h4>6.3.1 Objective with transformation robustness</h4>
+<p>Feature visualization optimizes an input to drive a unit. The 2017 recipe has three parts: optimize parameters $\theta$ of a decorrelated image parameterization $P$, take the expectation over small random transformations, and optionally add regularizers.</p>
+<div class="eq-block">$$\theta^\star=\arg\max_\theta\;\mathbb E_{t\sim\mathcal T}\Big[\,\mathcal O\big(f(t(P(\theta)))\big)\Big]-\sum_r\lambda_r\,R_r\big(P(\theta)\big),\qquad x^\star=P(\theta^\star)$$</div>
+<div class="eq-block">$$\mathcal O_{\text{neuron}}=z_{\ell}[h,w,j],\qquad \mathcal O_{\text{channel}}=\sum_{h,w}z_\ell[h,w,j],\qquad \mathcal O_{\text{class}}=\ell_k\ (\text{pre-softmax logit})$$</div>
+<p>The transformation distribution in the Distill article is: pad 16 px, jitter up to 16 px, scale $\in\{1,0.975,1.025,0.95,1.05\}$, rotate $\in\{-5,\dots,5\}^\circ$, jitter up to 8 px, then crop. The defaults were 2560 steps of Adam at learning rate 0.05. Lucid's <code>standard_transforms</code> are: pad 12 (constant 0.5), jitter 8, scale $1+(i-5)/50$ for $i=0..10$, rotate $-10..10^\circ$ (extra weight on $0^\circ$), jitter 4. The essay: "It turned out the method was missing transformation robustness. Once researchers added it, the same neurons came out crisp."</p>
+<p class="src">Source: Olah, Mordvintsev, Schubert 2017, https://distill.pub/2017/feature-visualization/; lucid/optvis/transform.py (github.com/tensorflow/lucid); essay "A History of Microscope Errors".</p>
+
+<h4>6.3.2 Decorrelated (Fourier + color) parameterization</h4>
+<p>Optimizing raw pixels favors high frequencies. Lucid instead optimizes Fourier coefficients scaled by $1/f$, so all frequencies start with equal energy. It then maps a decorrelated color space to RGB with the square root of ImageNet's color covariance, and applies a sigmoid.</p>
+<div class="eq-block">$$P(\theta)=\sigma\!\Big(\tilde C\;\tfrac14\,\mathcal F^{-1}_{2D}\big[S\odot(\theta_{\Re}+i\,\theta_{\Im})\big]\Big),\qquad S(f)=\frac{\sqrt{WH}}{\max\!\big(|f|,\,1/\max(W,H)\big)^{d}},\;\; d=1$$</div>
+<div class="eq-block">$$\tilde C=\frac{C_{\sqrt{}}}{\max_k\|C_{\sqrt{},:k}\|_2},\qquad C_{\sqrt{}}=\begin{pmatrix}0.26\;\;0.09\;\;0.02\\0.27\;\;0.00\;\;-0.05\\0.27\;\;-0.09\;\;0.03\end{pmatrix}\;(\text{SVD square root of ImageNet RGB correlation})$$</div>
+<p>The article describes this as a preconditioner. Gradient descent in a whitened basis amounts to steepest descent under a metric that does not over-reward high frequencies ("a good first guess is one that makes your data decorrelated and whitened").</p>
+<p class="src">Source: lucid/optvis/param/spatial.py (<code>fft_image</code>, <code>rfft2d_freqs</code>) and param/color.py (<code>color_correlation_svd_sqrt</code>), github.com/tensorflow/lucid; https://distill.pub/2017/feature-visualization/ ("Preconditioning and Parameterization").</p>
+
+<h4>6.3.3 Regularizers</h4>
+<div class="eq-block">$$R_{\text{TV}}(x)=\sum_{h,w,c}\big|x_{h+1,w,c}-x_{h,w,c}\big|+\big|x_{h,w+1,c}-x_{h,w,c}\big|,\qquad R_{L1}(x)=\sum|x-c_0|$$</div>
+<div class="eq-block">$$R_{\text{blur}}(x)=\tfrac12\big\|x-\mathrm{sg}[\mathrm{blur}(x)]\big\|_2^2\;\;\Longleftrightarrow\;\; x\leftarrow(1-k)\,x+k\,\mathrm{blur}(x)\ \text{per step}$$</div>
+<div class="eq-block">$$\textbf{Diversity:}\quad G^{(a)}_{ij}=\sum_{h,w}z_\ell[h,w,i]\,z_\ell[h,w,j],\qquad C_{\text{div}}=-\sum_a\sum_{b\ne a}\cos\big(\mathrm{vec}\,G^{(a)},\mathrm{vec}\,G^{(b)}\big)$$</div>
+<p>$\mathrm{sg}$ is stop-gradient. The essay credits deep-layer improvements to "a few subtle tweaks to reasonable settings" and "small regularization tweaks", but does not give the 2026 settings.</p>
+<p class="src">Source: lucid/optvis/objectives.py (<code>total_variation</code>, <code>L1</code>, <code>blur_input_each_step</code>, <code>diversity</code>); https://distill.pub/2017/feature-visualization/; essay.</p>
+
+<h4>6.3.4 Faceted and attribution visualizations (Cammarata co-authored)</h4>
+<div class="eq-block">$$\textbf{Faceted FV:}\quad \max_x\; f(g(x))+w^{\top}\big(g(x)\odot\nabla f(g(x))\big)$$</div>
+<p>Here $g$ maps the input to a lower layer, $f$ is the original objective, and $w$ is a linear probe trained to separate a facet's images (text, face, pose, ...) from generic images. Multimodal Neurons reports that the gradient-gated term beats $f+w^\top g$.</p>
+<div class="eq-block">$$\textbf{Attribution FV (Curve Detectors):}\quad \mathrm{FeatureVisualization}\big(\,|W\odot h_{\text{prev}}|\,\big)$$</div>
+<p class="src">Source: Goh, Cammarata, Voss et al. 2021, https://distill.pub/2021/multimodal-neurons/ ("Faceted Feature Visualization"); Cammarata et al. 2020, https://distill.pub/2020/circuits/curve-detectors/.</p>
+
+<h4>6.3.5 Failure mode: reward hacking in deep layers, and the path-anchored fix</h4>
+<p>In late InceptionV1 layers, free optimization finds routes that natural images rarely use. "It takes the easiest path, which in InceptionV1 often means dogs ... the early optimization falls into them and never recovers." The fix is to bias early optimization toward the routes that real top examples use: "We took the neuron's top dataset examples, traced the paths they take, and gave the optimization an incentive to follow those paths, often only for the first 64 steps". The essay says "we don't have a canonical best one". It notes elsewhere that "the path weight is scaled to each unit's activation range".</p>
+<div class="eq-block">$$\nabla_x a_j=\phi'(z_j)\sum_i w_{ji}\,\nabla_x a_i\qquad(\text{the ascent direction is dominated by upstream units with large } w_{ji}\,\|\nabla_x a_i\|)$$</div>
+<div class="eq-block">$$\text{path-anchored:}\quad \mathcal J_s(\theta)=\mathbb E_t\big[a_j(x_\theta)\big]+\lambda_s\,\rho_j\,\cos\!\big(A_{\cdot\to j}(x_\theta),\,\bar r_j\big),\qquad \bar r_j=\tfrac1K\sum_{x\in D_j^+(K)}A_{\cdot\to j}(x),\quad \lambda_s=\lambda_0\,\mathbf 1[s\le 64]$$</div>
+<p><span class="ours">The first equation is the standard chain rule. The specific path term (cosine to the mean incoming attribution profile $\bar r_j$ of the top-$K$ examples, gated to the first 64 steps and scaled by the unit's activation range $\rho_j$) is our formalization. The essay describes the incentive only qualitatively. Our reading of the "dog basin" is a rich-get-richer ascent: InceptionV1 has many dog units with positive weights into late units, so the first steps amplify them, and the iterate settles in a basin far from the car route.</span></p>
+<p class="src">Source: essay, main text "Cars and Animals" and appendix "Feature Visualization in Later Layers" (https://already-clean.goodfire.com/).</p>
+
+<h3>6.4 Dataset examples, percentiles, poles, and the census</h3>
+
+<h4>6.4.1 Positive and negative poles</h4>
+<div class="eq-block">$$s_j(x)=\max_{h,w} z_j(x)[h,w],\;\; s^{\min}_j(x)=\min_{h,w} z_j(x)[h,w],\qquad D_j^{+}(k)=\operatorname*{top\text{-}k}_{x\in\mathcal D}\,s_j(x),\qquad D_j^{-}(k)=\operatorname*{top\text{-}k}_{x\in\mathcal D}\,\big(-s^{\min}_j(x)\big)$$</div>
+<p>$|\mathcal D|=50{,}000$ images in the essay's vision scans ("Each neuron's 20 strongest responses out of 50,000 images"; "Photos rank each neuron's image maxima over 50,000 training images"). The negative pole is the argmin set. The essay reads it as a gate that names the distinction being drawn ("the V neuron's negative side is an O"; "+ Taxis − Ambulances"). For ReLU nets, poles are read on pre-activations. Curve Detectors: "When studying ReLU networks, we find it helpful to look at the distribution of pre-activation values." For SwiGLU, see §8.</p>
+<p class="src">Source: essay "How I Think About Neurons"; https://distill.pub/2020/circuits/curve-detectors/ ("Dataset Analysis").</p>
+
+<h4>6.4.2 Percentiles vs raw activations</h4>
+<div class="eq-block">$$q_j(x)=\hat F_j\big(a_j(x)\big)=\frac1N\sum_{x'}\mathbf 1\big[a_j(x')\le a_j(x)\big],\qquad r_j(x)=\frac{a_j(x)}{\max_{x'}a_j(x')}$$</div>
+<div class="eq-block">$$\text{mean spacing between events above percentile } p:\;\; \frac{1}{1-p}\ \text{tokens}\;\Rightarrow\; p=0.99\!:\,100,\quad 0.999\!:\,10^3,\quad 0.9999\!:\,10^4$$</div>
+<p>At about 400 tokens per page, these spacings match the essay's "1 token in 100 is about a quarter of a page ... the 99.9th percentile is every two or three pages, the 99.99th every 25 or 30". The essay prefers the raw shape $r_j$. "Percentiles flatten that, and it's often what tells you whether you're looking at a dial, where the middle matters, or a detector, where it mostly doesn't." For example, the Christmas neuron drops off "at about 5% of its max". Tails are exponential, not Gaussian: $p(z)\propto e^{-z/s}$ (Curve Detectors, crediting Brice Ménard). Curve Detectors weights the activation spectrum by contribution to expected value, $x\,p(x)$, or by $x\,\tfrac{d\,\text{logit}}{dx}\,p(x)$. Multimodal Neurons, which Cammarata co-authored, credits him with discovering "that negative pre-ReLU activations are often interpretable" and "that neurons sometimes contain a distinct regime change between medium and strong activations". Both are early forms of the essay's negative-pole and raw-shape views.</p>
+<p class="src">Source: essay "Percentiles or raw activations?"; https://distill.pub/2020/circuits/curve-detectors/; https://distill.pub/2021/multimodal-neurons/.</p>
+
+<h4>6.4.3 The "one main job" census</h4>
+<p>The essay's headline census, for Qwen3-32B, is per neuron pole: "roughly 90% of neuron poles have one main job, often with small related offshoots; another ~7% have two related jobs; and only ~2-4% are not yet understood". Restricted to strong activations, it is "closer to 97% non-arbitrary mixtures" (small samples). The essay says the number depends on "the threshold for counting weak activations, depth, density of sub-circuits, and what you view as 'one thing'", and gives no formula.</p>
+<div class="eq-block">$$S_{j,\pm}(\tau)=\Big\{x:\ \pm a_j(x)\ \ge\ \tau\cdot\max_{x'}\big(\pm a_j(x')\big)\Big\},\qquad S_{j,\pm}(\tau)=\textstyle\bigsqcup_{m=1}^{M}J_m,\quad \pi_m=\frac{\sum_{x\in J_m}|a_j(x)|}{\sum_{x\in S}|a_j(x)|}$$</div>
+<div class="eq-block">$$\text{one main job}\iff \pi_1\ge\theta\ \wedge\ \forall m\gt 1:\ d(J_m,J_1)\le\delta;\qquad \text{two related jobs}\iff M_{\text{major}}=2\ \wedge\ d(J_1,J_2)\le\delta$$</div>
+<p><span class="ours">$\tau$, $\theta$, $\delta$, the clustering into jobs $J_m$ and the semantic distance $d$ are our placeholders. In the essay, an agent pipeline and judge do this step, writing 1,000 "neuron papers" on Qwen3-32B and Qwen3.6-35B-A3B neurons.</span> The essay's tests of explanations are concrete. Blind maximum: a second agent sees only the explanation and writes an input that should maximize the neuron, and these inputs beat the best of 10B corpus tokens. Near-miss controls: for 200 random neurons, 183 with positive-side explanations, new examples fired strongly 76% of the time versus 11% for near misses (won 164, tied 15, lost 4). Earlier censuses for comparison: Multimodal Neurons, CLIP final conv layer, $n=50$: 76% interpretable (95% CI 64–88%), 18% polysemantic with interpretable facets, 6% uninterpretable. Bills et al. 2023: about 1.7% of GPT-2 XL neurons interpretable. Towards Monosemanticity: median neuron 0/14. GPT-2 XL re-audited: about 70% roughly one thing, about 5% pristine.</p>
+<p class="src">Source: essay "The Short Version" footnote 1, "Explanations That Can Lose", "Slouching Towards Monosemanticity"; https://already-clean.goodfire.com/neuron-scientist/papers/; https://distill.pub/2021/multimodal-neurons/ (Guided Tour footnote).</p>
+
+<h3>6.5 Attribution, ablation, steering</h3>
+
+<h4>6.5.1 Gradient × activation and direct weights</h4>
+<div class="eq-block">$$A_{i\to y}(x)=a_i(x)\,\frac{\partial y}{\partial a_i}(x)\qquad\text{(Building Blocks: activation times gradient)}$$</div>
+<div class="eq-block">$$A_{i\to j}(x)=a_i(x)\,\frac{\partial z_j}{\partial a_i}(x)\;\overset{\text{adjacent, linear }z_j}{=}\;W_{ji}\,a_i(x),\qquad \text{conv: }A_{i\to j}=\sum_{\Delta}W_{j,i,\Delta}\,a_i[\cdot+\Delta]$$</div>
+<div class="eq-block">$$\text{residual, LN gain frozen:}\quad W^{\text{virt}}_{ji}=\big(W_{\text{in}}^{(j)}\big)^{\!\top}\,\mathrm{diag}(g/\sigma)\,W_{\text{out}}^{(i)}$$</div>
+<p>Building Blocks: "we estimate the effect of a neuron on the output is its activation times the rate at which increasing its activation increases the output." Curve Detectors: "The attribution tensor describing how all neurons in the previous layer influenced a given neuron is the activations pointwise multiplied by the weights". The essay reports edges as "mean routed attribution" over 8 examples, with a sign-agreement count (e.g. "+0.335768; 8/8 examples share the mean sign"). Its graph target is "the ground-truth class's one-vs-rest log-odds margin". <span class="ours">The virtual-weight form across the residual stream is the standard frozen-LN linearization, not stated in the essay. "RelP", the essay's name for its graph method, is not defined in the text.</span></p>
+<div class="eq-block">$$\bar A_{i\to j}=\frac1K\sum_{k=1}^{K}A_{i\to j}(x_k),\qquad \text{agree}_{ij}=\#\{k:\operatorname{sign}A_{i\to j}(x_k)=\operatorname{sign}\bar A_{i\to j}\},\qquad m(x)=\ell_y-\log\sum_{c\ne y}e^{\ell_c}$$</div>
+<p class="src">Source: Olah et al. 2018, https://distill.pub/2018/building-blocks/; https://distill.pub/2020/circuits/curve-detectors/; essay "Late Circuits", "Edge Featurizers".</p>
+
+<h4>6.5.2 Attribution graphs and edge motifs</h4>
+<div class="eq-block">$$\mathcal G(x)=(V,E),\quad V=\{j: |a_j(x)|\ \text{large}\},\quad E=\{(i\!\to\! j,\ \bar A_{i\to j}) : |\bar A_{i\to j}|\ge\kappa\};\qquad \mathbf E\in\mathbb R^{n_{\text{graphs}}\times n_{\text{edges}}}\approx UV$$</div>
+<p>The essay reports "Factoring 25,000 ImageNet attribution graphs gave us connected circuits of ordinary neurons", for example a teapot motif. It finds that ablation damage tracks motif usage (correlations up to $\rho=0.80$ across motifs). <span class="ours">The graph-by-edge matrix and the low-rank factorization $UV$ are our rendering. The essay does not name the factorization method.</span> It also clusters incoming attribution into "bundles" and runs one blind maximum per bundle with the other bundles ablated.</p>
+<p class="src">Source: essay "Edge Featurizers", "Explanations That Can Lose", "Audits of Attribution Graphs".</p>
+
+<h4>6.5.3 Ablation, weak-activation removal, steering</h4>
+<div class="eq-block">$$\textbf{ablate:}\ h_i\leftarrow 0,\qquad \textbf{effect: }\Delta P=P(y\mid \mathrm{do}(h_S=0))-P(y);\qquad \textbf{steer:}\ h_i\leftarrow h_i+\alpha\quad(\text{or } h_i\leftarrow \alpha\,\max h_i)$$</div>
+<div class="eq-block">$$\textbf{weak-activation removal:}\ h_i\leftarrow h_i\,\mathbf 1\big[|h_i|\ge\tau_i\big],\ \tau_i=Q_{0.75}(|h_i|)\qquad \textbf{extreme removal:}\ \text{out}_i\leftarrow 0\ \text{if}\ g_i\gt Q^{\text{ordinary}}_{0.999}(g_i)$$</div>
+<p>Reported numbers. Medium ConvNeXt, all 18 blocks: removing the weakest 75% gives 72%→71% accuracy with 1 in 10 answers changed. Removing the strongest 7% ("the same total activation as the weakest 75%") gives 72%→4%. InceptionV1 final layer, keeping about the strongest quarter of positive activations: 69.47% vs 70.08%. Qwen: removing 8 Santa negative-pole neurons drops Santa to 6%; removing the 20 neurons labeled Christmas/Santa leaves it at 76%. Zeroing the Poe neuron moves P(" dre") from 87% to 50%. Kimi K3: removing one "holds back" neuron moves P(return) from 0.83 to 0.98. Gate above its 99.9th percentile zeroed: Psalm 23 recitation fails. Steering: the Colorado comma neuron "made the model want to go hiking". <span class="ours">The quantile threshold $\tau_i$ is our reading of "weakest 75%". Whether that is per neuron or global is not stated.</span></p>
+<p class="src">Source: essay "Do Weak Activations Matter?", appendix "Weak Activations: Further Measurements", "Exploring Language Models", "Memorization and Composition", "Superposition of the Gaps" (https://already-clean.goodfire.com/).</p>
+
+<h3>6.6 Sparse autoencoders and the near-copy comparison</h3>
+<div class="eq-block">$$z=\mathrm{TopK}_k\big(W_{\text{enc}}(x-b_{\text{pre}})\big),\qquad \hat x=W_{\text{dec}}z+b_{\text{pre}},\qquad \mathcal L=\|x-\hat x\|_2^2+\alpha\,\|e-\hat e\|_2^2,\;\; \hat e=W_{\text{dec}}\,\mathrm{TopK}_{k_{\text{aux}}}(z_{\text{dead}})$$</div>
+<p>The TopK SAE of Gao et al. 2024 has an auxiliary loss that reconstructs the residual $e=x-\hat x$ from dead latents. The essay's crushed-layer SAE: 640 features, $k=2$, auxiliary loss on, 25.6M positions from 200,000 ImageNet images. It reaches 82% held-out variance explained ($\mathrm{FVU}=0.18$), and spliced in, it drops top-1 from 58.8% to 43.0%. Matched to the original curve detectors (24–56° wide, silent at the opposite angle), the best SAE features are 44–174° wide and two-sided, with shape correlation 0.38–0.79. An SAE on the original layer matches at 0.96–1.00.</p>
+<div class="eq-block">$$c_f=\max_i\big|\cos(d_f,e_i)\big|,\qquad \text{near-copy}(f)\iff c_f\ge\kappa,\qquad \text{share}=\frac{\sum_{f:\,\text{near-copy}}\mathbb E[z_f]}{\sum_f\mathbb E[z_f]}\;=\;0.88\ (\text{essay, last layer})$$</div>
+<div class="eq-block">$$\text{curve-neuron share of SAE feature }f:\ \ \frac{\sum_{i\in\text{curve}}|d_{f,i}|}{\sum_i|d_{f,i}|}\in\{97.5\%,98.0\%,97.2\%\}\ (\text{essay examples})$$</div>
+<div class="eq-block">$$\text{rotation search:}\quad R^\star=\arg\max_{R\in SO(n)}\ \mathbb E_x\Big[\textstyle\sum_i (R\,h(x))_i^4\Big]\ \Rightarrow\ R^\star\approx\text{signed permutation (the neuron basis)}$$</div>
+<p>Quotes: "On the last layer, 88% of its activity is near-copies of single neurons, and the rest is faint: removing every dictionary direction that matches no neuron leaves accuracy unchanged". Also: "if you search the rotations of a layer for the one where a handful of units carry the most activity, starting from a random one, you land back on the neurons, in every block." <span class="ours">The decoder–neuron cosine $c_f$, threshold $\kappa$, $\mathbb E[z_f]$ as "activity", the $L_1$ share formula and the kurtosis-style rotation objective are our formalizations. The essay does not give them.</span></p>
+<p class="src">Source: Gao et al. 2024, "Scaling and Evaluating Sparse Autoencoders", arXiv:2406.04341; essay "What Dictionaries Learn", "What Neurons Do Under Pressure", appendix "Missing Curves"; Gorton 2024 arXiv:2406.03662.</p>
+
+<h3>6.7 Superposition vs recursive generalization</h3>
+
+<h4>6.7.1 The toy model of superposition</h4>
+<div class="eq-block">$$h=Wx,\qquad x'=\mathrm{ReLU}(W^{\top}h+b)=\mathrm{ReLU}(W^{\top}Wx+b),\qquad \mathcal L=\sum_x\sum_i I_i\,(x_i-x'_i)^2$$</div>
+<div class="eq-block">$$x_i=0\ \text{w.p. } S_i,\ \text{else } x_i\sim U[0,1];\qquad D_i=\frac{\|W_i\|^2}{\sum_j(\hat W_i\cdot W_j)^2}\qquad(\text{interference: off-diagonal } (W^\top W)_{ij})$$</div>
+<p>The essay's critique: the toy "prices the cost of sharing a neuron, interference, but not the benefit, reuse", because "every feature is an end in itself, and nothing downstream builds on what two features share". The essay's modified toy has 20 inputs in 4 correlated groups of 5, a 5-dimensional bottleneck, and an added layer of hidden neurons. In it, "related inputs grew onto the neurons". The share of bottleneck weight along the data's top principal components was 0.37 (original toy, density 0.1), 0.80 (40 hidden neurons, density 0.1) and 0.79 (original toy, dense 0.9, PCA-like).</p>
+<div class="eq-block">$$\text{PC share}(W)=\frac{\|W P_k\|_F^2}{\|W\|_F^2},\qquad P_k=\text{projector onto top-}k\text{ principal components of }\mathrm{Cov}(x)$$</div>
+<p><span class="ours">The PC-share formula is our reading of "share of the bottleneck's weights along the data's top principal components".</span></p>
+<p class="src">Source: Elhage et al. 2022, https://transformer-circuits.pub/2022/toy_model/index.html; essay appendix "Toy Models".</p>
+
+<h4>6.7.2 Two opposite predictions</h4>
+<p>The essay frames generalization and superposition as making opposite, testable predictions: "generalization should be local, superposition should be non-local". "Generalization would want a floppy ear dog neuron ... Superposition would want a floppy ear dog + Latin poetry neuron." <span class="ours">With a semantic distance $d$ and co-occurrence probability $P(u\wedge v)$ over the members of a neuron's receptive set $S_j$:</span></p>
+<div class="eq-block">$$\textbf{generalization:}\ \ \mathbb E_{u,v\in S_j}\,d(u,v)\ \text{small};\qquad \textbf{superposition:}\ \ S_j=\arg\min_{S}\sum_{u\ne v\in S}P(u\wedge v)\ \ \Rightarrow\ \ \mathbb E_{u,v\in S_j}\,d(u,v)\ \text{large}$$</div>
+<p class="src">Source: essay "Superposition" and "Superposition of the Gaps" (https://already-clean.goodfire.com/).</p>
+
+<h4>6.7.3 Recursive generalization (our formalization)</h4>
+<p>The essay's definition: "a neuron generalizing along more than one axis, often first along one axis, then sprouting outwards in ways that are easy to follow locally, but stop it from being 'monosemantic' in the end". Example: "iy" → "diy" → "do it yourself". <span class="ours">Let each input $u$ have a set of facets $\phi(u)$ (sub-features such as the letters "iy", the meaning DIY, yellow, field). Neuron $j$'s receptive set at training time $t$ is $S_j(t)=\{u: a_j^{(t)}(u)\ge\tau\}$. Recursive generalization is the growth rule below.</span></p>
+<div class="eq-block">$$u'\in S_j(t+1)\setminus S_j(t)\ \Longrightarrow\ \exists\,u\in S_j(t):\ \phi(u)\cap\phi(u')\ne\varnothing$$</div>
+<p><span class="ours">So the final set $S_j(T)$ is path-connected under the facet-sharing graph and rooted at the seed $S_j(t_0)$. Its endpoints need not share any facet: $\phi(\text{"iy"})\cap\phi(\text{"do it yourself"})=\varnothing$ while each adjacent pair overlaps. Single-concept monosemanticity fails, but the set has a narrow, checkable shape in both semantic space and time. That is the essay's "specific shape in both semantic space and time, and a narrow target to hit by chance". The mechanism the essay proposes ("A neuron that fires on 'iy' is already on for 'diy,' so it's first in line") follows from the ReLU gradient in §1.4. On a new input $u'$, only neurons with $z_j(u')\gt 0$ receive weight updates, and the update is proportional to their current activation of shared inputs.</span></p>
+<div class="eq-block">$$\Delta w_j\ \propto\ -\,\delta_j(u')\,\mathbf 1[z_j(u')\gt 0]\,a_{\text{in}}(u')\quad\Rightarrow\quad \text{neurons already partly on for }u'\text{ (shared facet) are recruited first}$$</div>
+<p><span class="ours">A linear model of the essay's "circuit race" (the Labrador example). Two circuits, broad ($b$) and exact ($e$), share the residual error and receive gradient in proportion to their coverage $c_b\gg c_e$ (fraction of the input they fire on):</span></p>
+<div class="eq-block">$$\epsilon(t)=y-u_b(t)-u_e(t),\qquad \dot u_k=\eta\,c_k\,\epsilon(t)\ \Rightarrow\ \epsilon(t)=y\,e^{-\eta(c_b+c_e)t},\qquad u_k(\infty)=\frac{c_k}{c_b+c_e}\,y$$</div>
+<p><span class="ours">The broad circuit captures a fraction $c_b/(c_b+c_e)$ of the target, and the exact circuit "starves" because the shared error vanishes. On the next example the broad circuit starts partly on, which is the rich-get-richer step. This matches coherent gradients (Chatterjee 2020): per-example gradients $g=\sum_x g_x$ add along shared directions.</span> The essay's whole-network version: a blank 7.1M model alone reaches 48–50% on Flowers-102, but trained jointly with a pretrained twin on a shared objective it reaches about 2%, while the twin takes 92.8–97.4% of the "marginal objective credit".</p>
+<p class="src">Source: essay "Recursive Generalization", appendices "Why Networks Generalize", "Circuit Racing", "More on Circuit Ecology", "Is Recursive Generalization Hard to Vary?"; Multimodal Neurons "conjoined features" (https://distill.pub/2021/multimodal-neurons/: concepts "overlapping in a superficial way in one facet, and then generalizing out in multiple directions").</p>
+
+<h4>6.7.4 Measuring it: watching neurons over training</h4>
+<div class="eq-block">$$\text{share}_{j,g}(t)=\frac{\big|D^{+}_j(k;\theta_t)\cap G_g\big|}{k},\qquad \text{locality}(t)=\min_{u\in D_j^+(k;\theta_{t-1})} d\big(u_{\text{new}},u\big)\ \ \text{vs}\ \ d\big(u_{\text{new}},\bar u_{\text{seed}}\big)$$</div>
+<p>The essay tracks the same coordinate across checkpoints of a retrained network. For InceptionV1 neuron 338 at epochs 0.7, 1.5, 3 and 12, image groups $G_g$ shift from rapeseed fields and valleys toward tennis balls, terriers and broccoli. ConvNeXt neuron 399 stays rapeseed. InceptionV1 mixed5a:178 is tracked at steps 0 to 30,000. The plotted "grey band behind each row is its share of the neuron's strongest images", which is $\text{share}_{j,g}(t)$. <span class="ours">The locality statistic is our proposal. Recursive generalization predicts that new members are near some existing member even when they are far from the seed's centroid. Superposition predicts new members far from all existing members.</span> The squeeze experiments are the static counterpart. With mixed3b cut from 480 to 10 channels (48×) and no bypass, the neurons become "coarser" ("one 'curves &amp; loops' neuron instead of ten curve detectors"), not mixed: "Fewer neurons make generalizing neurons coarser, never fractured."</p>
+<p class="src">Source: essay "Recursive Generalization" figure, appendix "Watching Neurons Develop", "What Neurons Do Under Pressure".</p>
+
+<h3>6.8 SwiGLU and the double-negative regime</h3>
+<div class="eq-block">$$h=\mathrm{SiLU}(W_g x)\odot(W_v x),\qquad \text{out}=W_o h,\qquad a=\mathrm{SiLU}(g)\cdot v,\qquad \mathrm{SiLU}(g)=g\,\sigma(g)\ge -0.278$$</div>
+<div class="eq-block">$$a=\underbrace{a\,\mathbf 1[g\gt 0,v\gt 0]}_{(+,+)}+\underbrace{a\,\mathbf 1[g\lt 0,v\lt 0]}_{(-,-)\ \text{double negative}}+\underbrace{a\,\mathbf 1[g\gt 0,v\lt 0]}_{(+,-)}+\underbrace{a\,\mathbf 1[g\lt 0,v\gt 0]}_{(-,+)},\qquad (-,-):\ 0\lt a\le 0.278\,|v|$$</div>
+<p>The essay: "When both are negative, the output is positive, so a neuron can fire for two quite different reasons." "A negative gate leaves a small negative factor. Multiplying it by a negative value produces a positive activation." The double-negative "echo" "usually look[s] like the negative pole". "Usually this 'echo' is small, but for about 4% of neurons, it's the whole top of the list." Ablating these across the whole network "ups most benchmarks, but lowers some reasoning ones". In the Qwen3-32B L1/N20736 example, every top-list firing has the gate closed, "a small sign-flipped leak of the value, under 8% of the neuron's peak". With the leak separated, the neuron's job is "the token that completes 'Russia' or 'Russian,' in any script". In vision SwiGLU, "the value tends to learn broader things, and gate more specific things". <span class="ours">The bound $a\le 0.278|v|$ in the $(-,-)$ regime follows from $\min\mathrm{SiLU}=-0.278$ (at $g\approx-1.28$). Why it fools top-$k$ dashboards: when $|v|$ is large on the value's negative side, $0.278|v|$ can exceed the $(+,+)$ responses of a sparse, narrow gate. The fix the essay uses is to report poles per regime, $D^{+}_{j}$ restricted to $\mathbf 1[g\gt 0]$.</span></p>
+<p class="src">Source: Shazeer 2020 (GLU variants); essay "Exploring Language Models" (SwiGLU paragraph), appendix "Separating the Sign Regimes" (Qwen3.6-35B-A3B L36/E206/N103, 750 quantile-stratified examples, 626 retained routing) (https://already-clean.goodfire.com/).</p>
+
+<h4>6.8.1 Mixture-of-experts as "anti-superposition" (essay argument)</h4>
+<div class="eq-block">$$p(e\mid x)=\mathrm{softmax}(W_r x)_e,\qquad \text{neuron } j\in e\ \text{fires only if } e\in\operatorname{TopK}_e\,p(e\mid x)$$</div>
+<p>The essay argues that "the router would have to recognize all ten thousand to know when to send a token there, and the router is just one small linear layer". <span class="ours">Formally, an expert receives the token set $\{x: w_e^\top x\ge \max_{e'\ne e}w_{e'}^\top x\}$ (for top-1), which is a convex polyhedral cone. Packing many unrelated, semantically scattered items into one expert requires them to lie in one such cone, while the related items that are not packed must lie outside it. A linear router makes that unlikely.</span></p>
+<p class="src">Source: essay "Exploring Language Models" (expert specialization paragraph).</p>
+
+  <h3>References</h3>
+  <ul class="refs">
+    <li>Cammarata, <a href="https://already-clean.goodfire.com/">Neural Networks Are Already Clean</a> (Goodfire, 2026)</li>
+    <li>Liu et al., <a href="https://arxiv.org/abs/2201.03545">A ConvNet for the 2020s</a> (ConvNeXt, 2022)</li>
+    <li>Olah, Mordvintsev, Schubert, <a href="https://distill.pub/2017/feature-visualization/">Feature Visualization</a> (2017); Olah et al., <a href="https://distill.pub/2018/building-blocks/">Building Blocks</a> (2018)</li>
+    <li>Olah, Cammarata et al., <a href="https://distill.pub/2020/circuits/zoom-in/">Zoom In</a> (2020); Cammarata et al., <a href="https://distill.pub/2020/circuits/curve-detectors/">Curve Detectors</a> (2020); Goh, Cammarata et al., <a href="https://distill.pub/2021/multimodal-neurons/">Multimodal Neurons</a> (2021)</li>
+    <li>Elhage et al., <a href="https://transformer-circuits.pub/2022/toy_model/index.html">Toy Models of Superposition</a> (2022); Gao et al., <a href="https://arxiv.org/abs/2406.04341">Scaling and Evaluating Sparse Autoencoders</a> (2024)</li>
+    <li>Cranmer et al., <a href="https://arxiv.org/abs/2006.11287">Discovering Symbolic Models from Deep Learning with Inductive Biases</a> (2020)</li>
+    <li>Battaglia et al., <a href="https://arxiv.org/abs/1612.00222">Interaction Networks</a> (2016); Locatello et al., <a href="https://arxiv.org/abs/2006.15055">Slot Attention</a> (2020)</li>
+    <li>Assran et al., <a href="https://arxiv.org/abs/2506.09985">V-JEPA 2</a> (2025); Garrido et al., <a href="https://arxiv.org/abs/2502.11831">Intuitive physics understanding emerges from self-supervised pretraining on natural videos</a> (2025)</li>
+    <li>Tong et al., <a href="https://arxiv.org/abs/2203.12602">VideoMAE</a> (2022); Siméoni et al., <a href="https://arxiv.org/abs/2508.10104">DINOv3</a> (2025); Khirodkar et al., <a href="https://arxiv.org/abs/2408.12569">Sapiens</a> (2024)</li>
+    <li>Greff et al., <a href="https://arxiv.org/abs/2203.03570">Kubric</a> (2022); Bear et al., <a href="https://arxiv.org/abs/2106.08261">Physion</a> (2021); Yi et al., <a href="https://arxiv.org/abs/1910.01442">CLEVRER</a> (2019)</li>
+    <li>Tooling: <a href="https://nnsight.net/">nnsight</a>, <a href="https://github.com/TransformerLensOrg/TransformerLens">TransformerLens</a>, <a href="https://github.com/ml-explore/mlx">MLX</a>, <a href="https://mujoco.org/">MuJoCo</a></li>
+  </ul>
+</main>

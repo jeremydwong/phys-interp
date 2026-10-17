@@ -31,8 +31,10 @@ ground-truth gravity torque, interaction torque, contact force, acceleration and
   Code is in `models/` and `analysis/`, figures in `reports/figs/<prefix>_*.png`, write-ups in
   `reports/results/<prefix>.md` and `.json`.
 - `reports/research/cammarata_math*`: the sourced math of the interpretability improvements (KaTeX).
-- Report 1 (overview, published artifact): https://claude.ai/artifact/QR2538YtzPNDj91di8ETvy
-  (source in the Mac session's scratchpad: `physics-neurons.html`).
+- Report 1 (overview + math + frames): https://claude.ai/artifact/QR2538YtzPNDj91di8ETvy, source `reports/report1_physics_neurons.html`.
+- Report 2 (findings): https://claude.ai/artifact/QgfWBPBnXPVxt8cG6cEtGp, source `reports/report2_physics_neurons.html`
+  (figures referenced as `figs/*.png`, published from `reports/figs`). Section 5 (VLM) is a placeholder until `reports/results/vlm.md` lands.
+- Levine note: https://claude.ai/artifact/RHPx1U1gZtgsjWADDi7RWY (`reports/research/levine_interpretability.md`).
 
 ## State as of 2026-10-16
 - Simulator and datasets are done and verified.
