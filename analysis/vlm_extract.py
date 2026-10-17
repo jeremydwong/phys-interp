@@ -30,7 +30,7 @@ from analysis.vlm_common import (GRID, GROUPS, LLM_LAYERS, RES, VDIR, VIS_LAYERS
                                  group_index, load_model, build_video_inputs, build_image_inputs,
                                  vision_patch_to_grid, renderer)
 
-from analysis.vlm_common import get_device  # noqa: E402
+from analysis.vlm_common import BS, free_memory, get_device  # noqa: E402
 DEV = get_device()
 NP = GRID * GRID   # 400 patches per temporal group
 
@@ -91,7 +91,8 @@ def vis_group_view(x, n_items, n_groups):
     return out
 
 
-def run_video(mode="video", bs=4, limit=None):
+def run_video(mode="video", bs=None, limit=None):
+    bs = bs or BS
     st = load_states()
     ci, gi = clip_index(), group_index()
     NC, NG = len(ci), len(gi)
@@ -99,6 +100,8 @@ def run_video(mode="video", bs=4, limit=None):
     if mode == "randvis":
         from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLVisionModel
         torch.manual_seed(0)
+        model.model.visual = None
+        free_memory()
         rv = Qwen3VLVisionModel._from_config(model.config.vision_config, dtype=model.dtype)
         rv.apply(model._init_weights)
         model.model.visual = rv.to(DEV).eval()
@@ -153,16 +156,28 @@ def run_video(mode="video", bs=4, limit=None):
         rec.store.clear()
         done[rows] = True
         if (bi // bs) % 25 == 0:
+            for v in out.values():
+                v[0].flush(); v[1].flush()
+            vres.flush()
+            if mode != "randvis":
+                lres.flush(); llast.flush()
             np.save(donep, done)
             el = time.time() - t0
             print(f"{mode} {bi + B}/{len(todo)}  {el / (bi + B):.2f}s/clip", flush=True)
-    np.save(donep, done)
     for v in out.values():
         v[0].flush(); v[1].flush()
+    vres.flush()
+    if mode != "randvis":
+        lres.flush(); llast.flush()
+    np.save(donep, done)
+    rec.remove()
+    del model
+    free_memory()
     print("done", mode)
 
 
-def run_image(bs=16, limit=None):
+def run_image(bs=None, limit=None):
+    bs = bs or 4 * BS
     """Single frame (the aligned midpoint frame of each temporal group) as an image input.
     Qwen duplicates a still image across the temporal patch, so each image = 1 group of 400 patches."""
     st = load_states()
@@ -198,9 +213,18 @@ def run_image(bs=16, limit=None):
         rec.store.clear()
         done[rows] = True
         if (bi // bs) % 25 == 0:
+            for v in out.values():
+                v[0].flush(); v[1].flush()
+            vres.flush(); lres.flush()
             np.save(donep, done)
             print(f"image {bi + B}/{len(todo)} {(time.time() - t0) / (bi + B):.3f}s/img", flush=True)
+    for v in out.values():
+        v[0].flush(); v[1].flush()
+    vres.flush(); lres.flush()
     np.save(donep, done)
+    rec.remove()
+    del model
+    free_memory()
     print("done image")
 
 

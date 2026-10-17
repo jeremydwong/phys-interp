@@ -20,7 +20,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from analysis.common import load_states, savefig, setup_style, INK2, MUTED, SERIES  # noqa: E402
-from analysis.vlm_common import VDIR, renderer, load_model, build_video_inputs  # noqa: E402
+from analysis.vlm_common import BS, VDIR, renderer, load_model, build_video_inputs  # noqa: E402
 
 N_PER_CLASS = 150
 SUFFIX = " Answer with one word."
@@ -113,10 +113,11 @@ def parse(ans, options):
     return -1
 
 
-def collect(bs=4):
+def collect(bs=None):
     import torch
     st = load_states()
     sets = sample_sets(st)
+    bs = bs or BS
     model, proc = load_model()
     tok = proc.tokenizer
     vres = {}

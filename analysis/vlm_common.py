@@ -102,9 +102,29 @@ def load_model(device=None):
     device = device or get_device()
     DEV = device
     from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
-    model = Qwen3VLForConditionalGeneration.from_pretrained(MODEL_ID, dtype=torch.bfloat16 if device != "cpu" else torch.float32).to(device).eval()
+    dtype = torch.bfloat16 if device != "cpu" else torch.float32
+    if device == "cuda":
+        # load shards straight onto the GPU: the full bf16 model (~9 GB) never sits in CPU RAM
+        # (the msi has 31 GB shared with the page cache and the activation memmaps)
+        model = Qwen3VLForConditionalGeneration.from_pretrained(MODEL_ID, dtype=dtype, device_map="cuda",
+                                                                low_cpu_mem_usage=True).eval()
+    else:
+        model = Qwen3VLForConditionalGeneration.from_pretrained(MODEL_ID, dtype=dtype,
+                                                                low_cpu_mem_usage=True).to(device).eval()
     proc = AutoProcessor.from_pretrained(MODEL_ID)
     return model, proc
+
+
+BS = int(os.environ.get("VLM_BS", 2))     # clips per forward pass (VLM_BS env overrides)
+
+
+def free_memory():
+    """Release Python garbage and cached GPU blocks between stages."""
+    import gc
+    import torch
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 def build_video_inputs(proc, clips: list[np.ndarray], prompt: str = PROMPT, add_generation_prompt=True):

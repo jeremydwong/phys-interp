@@ -9,14 +9,15 @@ import numpy as np
 import torch
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from analysis.vlm_common import GRID, GROUPS, TOK, build_video_inputs  # noqa: E402
+from analysis.vlm_common import BS, GRID, GROUPS, TOK, build_video_inputs  # noqa: E402
 from analysis.vlm_extract import vis_group_view  # noqa: E402
 
 
-def capture(model, proc, clips, units, res_layers=(), bs=4, prompt=None):
+def capture(model, proc, clips, units, res_layers=(), bs=None, prompt=None):
     """clips: list of uint8 [8,H,W,3]; units: list of (part 'vision'|'LM', layer, unit_idx).
     Returns maps: list per unit of array [n_clips, 4, h, w] (vision 20x20, LM 10x10),
     and res: dict layer-> [n_clips, 4, D] mean-pooled residuals ('V{l}' / 'L{l}')."""
+    bs = bs or BS
     store = {}
     hooks = []
     vis = model.model.visual
