@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Levine on Robot Interpretability</title><style>
+:root{--bg:#fbfaf7;--fg:#1d1d1f;--muted:#5d5d63;--rule:#e2dfd8;--card:#ffffff;--accent:#2f5d8a;--code:#f1efea;
+--said:#1f6f43;--said-bg:#e3f2e8;--lab:#2f5d8a;--lab-bg:#e3ecf6;--ext:#7a4b00;--ext-bg:#f7ecd6;--syn:#6b3e8a;--syn-bg:#efe6f6;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141517;--fg:#e8e6e1;--muted:#a3a19c;--rule:#2d2f33;--card:#1b1d20;--accent:#8db8e3;--code:#23262a;
+--said:#8fd6a9;--said-bg:#1d3326;--lab:#9cc3ea;--lab-bg:#1c2a3a;--ext:#e8c27d;--ext-bg:#3a2d16;--syn:#cfa8ea;--syn-bg:#2f2238;}}
+:root[data-theme="dark"]{--bg:#141517;--fg:#e8e6e1;--muted:#a3a19c;--rule:#2d2f33;--card:#1b1d20;--accent:#8db8e3;--code:#23262a;
+--said:#8fd6a9;--said-bg:#1d3326;--lab:#9cc3ea;--lab-bg:#1c2a3a;--ext:#e8c27d;--ext-bg:#3a2d16;--syn:#cfa8ea;--syn-bg:#2f2238;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 Georgia,"Iowan Old Style","Palatino Linotype",serif;-webkit-text-size-adjust:100%}
+main{max-width:860px;margin:0 auto;padding:32px 16px 80px}
+header h1{font:700 2.1rem/1.15 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;margin:0 0 8px;letter-spacing:-.01em}
+header p{color:var(--muted);margin:0 0 24px;font-size:.98rem}
+h2{font:700 1.45rem/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;margin:2.6em 0 .6em;padding-top:.6em;border-top:1px solid var(--rule)}
+h3{font:600 1.1rem/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;margin:1.8em 0 .5em}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px;overflow-wrap:anywhere}
+li{margin:.35em 0}
+code{background:var(--code);padding:.08em .35em;border-radius:4px;font:.85em ui-monospace,SFMono-Regular,Menlo,monospace}
+.tw{overflow-x:auto;margin:1em 0;border:1px solid var(--rule);border-radius:8px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font:.86rem/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:9px 11px;border-bottom:1px solid var(--rule)}
+th{background:var(--code);font-weight:600}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;font:700 .66rem/1 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;letter-spacing:.06em;padding:3px 6px;border-radius:4px;vertical-align:.12em}
+.said{color:var(--said);background:var(--said-bg)}.lab{color:var(--lab);background:var(--lab-bg)}
+.ext{color:var(--ext);background:var(--ext-bg)}.syn{color:var(--syn);background:var(--syn-bg)}
+@media (max-width:600px){body{font-size:16px}header h1{font-size:1.65rem}}
+</style></head>
+<body><main><header><h1>Levine on Robot Interpretability</h1><p>Research note, compiled 2026-10-16 for the phys-interp project. It covers what Sergey Levine (UC Berkeley RAIL; co-founder of Physical Intelligence) has said about interpreting robot controllers and robot foundation models, what his lab's work does that bears on interpretability, what outside groups have found inside his lab's models, and what this means for neuron-level interpretability of dynamics models.</p></header>
+
+<p><strong>Evidence labels used throughout.</strong> <span class="tag said">SAID</span> is Levine's own words, quoted and dated. <span class="tag lab">LAB</span> is what a paper or blog post from RAIL or Physical Intelligence (PI) does or claims; Levine is a co-author but the claim is the paper's. <span class="tag ext">EXT</span> is work by other groups. <span class="tag syn">SYNTH</span> is my interpretation. Quotes are short verbatim excerpts. I pulled them with a page-reading tool, so check the linked sources before citing them in print.</p>
+<h2>1. Summary</h2>
+<ul>
+<li><strong>I found no essay, talk or interview where Levine treats mechanistic or neuron-level interpretability as a research direction.</strong> The word "interpretability" appears in his lab's papers (mainly ECoT) but not as a topic in his Substack essays or in the podcast transcripts I checked (Dwarkesh 2025; developing.dev 2026). He doesn't argue against it either. As far as I can tell, he has not taken a position. <span class="tag syn">SYNTH</span></li>
+<li><strong>For him, interpretability is a byproduct of making the model emit things people can read and act on</strong>: language subtasks, reasoning chains, value estimates. These are mainly levers for <em>correction, steering and data</em>, and only secondarily windows into the model. In 2022 he wrote that one can "examine the resulting value functions to see what the agent thinks each token in an utterance will do." <span class="tag said">SAID</span></li>
+<li><strong>His lab's own evidence says these readable outputs are not faithful explanations.</strong> In Chen et al. (2025, with Levine), most of the benefit of embodied chain-of-thought comes from <em>better representations learned by training to produce reasoning</em>. Their figures show reasoning traces with "incorrect or hallucinated features (though they still lead to task successes)." This is the strongest reason to look at activations rather than trust the text. <span class="tag lab">LAB</span></li>
+<li><strong>The one place PI looked inside a model was at the representation level, not the neuron level.</strong> In the human-to-robot transfer work (Dec 2025), t-SNE of mean-pooled final-layer VLM embeddings shows human and robot data merging as pre-training grows more diverse. Levine described the result as "they just line up perfectly" (Aug 2026). <span class="tag said">SAID</span> <span class="tag lab">LAB</span></li>
+<li><strong>On world models, he is sceptical of predicting "everything."</strong> Text "already" carries abstracted representations, while video prediction must choose what to model (Plato's Cave essay, Jun 2025; Dwarkesh, Sep 2025). He prefers representations that capture "what you really need to achieve your goal," and treats value functions and simulators as interchangeable ways to "consider counterfactuals." <span class="tag said">SAID</span> For a dynamics-interpretability researcher, this predicts that VLAs will encode task-relevant physical variables, not a complete physics state. <span class="tag syn">SYNTH</span></li>
+<li><strong>His "bitter lesson" view ("any component that is not learned … will eventually become the bottleneck," Jul 2025) cuts against hand-built interpretable structure.</strong> His recent view of language as a "scaffold" for prior knowledge (Aug 2026) partly offsets this. <span class="tag said">SAID</span></li>
+<li><strong>Outside groups have started opening up his lab's open models</strong> (OpenVLA, π0, π0-FAST, π0.5). They find FFN directions for speed and height that can be steered (Häon et al., CoRL 2025), SAE features in π0.5 that are mostly memorization but partly general and causally steerable (Swann et al., 2026), linear world-state probes in OpenVLA (Molinari et al., 2025; Lu et al., 2025), and failure-predictive probes in π0.5 (Yang and Mokalla, ICML 2026). <span class="tag ext">EXT</span></li>
+<li><strong>I found no published work that probes these models for force, torque or contact.</strong> Every probe so far targets symbolic state, end-effector kinematics, gripper state, or the dynamics of the embedding. LIBERO and SimplerEnv run on physics engines that log contact forces, so this is an open niche that fits this project directly. <span class="tag syn">SYNTH</span></li>
+</ul>
+<h2>2. What Levine has said</h2>
+<h3>Essays (Substack, "Learning and Control", <a href="https://sergeylevine.substack.com/archive">sergeylevine.substack.com</a>)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Piece</th>
+<th>What bears on interpretability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021-10-26</td>
+<td><a href="https://sergeylevine.substack.com/p/understanding-the-world-through-action-rl-as-a-foundation-for-scalable-self-supervised-learning-636e4e243001">Understanding the World Through Action</a></td>
+<td>He argues that agents trained to <em>control</em> must form "an understanding of their environment that is causal and generalizable." He writes that "solving such goal-conditioned RL problems corresponds to learning a kind of dynamics model," and contrasts this with model-based RL, "where the model objective is largely disconnected from actually bringing about desired outcomes." So he expects dynamics knowledge to show up <em>implicitly</em> inside policies and value functions.</td>
+</tr>
+<tr>
+<td>2022-12-04</td>
+<td><a href="https://sergeylevine.substack.com/p/offline-rl-and-large-language-models">Offline RL and Large Language Models</a></td>
+<td>His most explicit interpretability-style statement. Value functions are "really just another kind of predictive model," and "the advantage function tells us how much better (or worse) the agent thinks a given token is … we can examine the resulting value functions to see what the agent thinks each token in an utterance will do." In his toxicity example, words like "censor" get low advantage values.</td>
+</tr>
+<tr>
+<td>2024-10-06</td>
+<td><a href="https://sergeylevine.substack.com/p/the-promise-of-generalist-robotic">The Promise of Generalist Robotic Policies</a></td>
+<td>He describes VLMs "trained to generate intermediate inferences (e.g., positions of objects, substeps in a plan)," and robots that "take human speech, turn it into corrections." He says internet-scale pre-training doesn't cover "the nitty-gritty details of physical grippers, contact forces, and joint angles," and that "Internet-scale training is not enough by itself."</td>
+</tr>
+<tr>
+<td>2025-06-08</td>
+<td><a href="https://sergeylevine.substack.com/p/language-models-in-platos-cave">Language Models in Plato's Cave</a></td>
+<td>LLMs "skip the neurons all together and reconstruct the mind from the shadow it casts on the Internet". They "copy some aspects of human mental representations." Video models "have so far not yielded the same results." The field still needs "a way to autonomously acquire representations from physical experience." He doesn't discuss interpretability methods, but this is a claim about <em>what the representations are</em>.</td>
+</tr>
+<tr>
+<td>2025-07-21</td>
+<td><a href="https://sergeylevine.substack.com/p/sporks-of-agi">Sporks of AGI</a></td>
+<td>His bitter-lesson corollary: "any component that is not learned but instead designed by hand will eventually become the bottleneck to its performance." Hand-designed inductive biases "require us to build in how we think we think."</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Talks and interviews</h3>
+<ul>
+<li><strong>Dwarkesh Patel podcast, 2025-09-12</strong> (<a href="https://www.dwarkesh.com/p/sergey-levine">transcript</a>). <span class="tag said">SAID</span><ul>
+<li>On video world models: "If you want to predict everything that'll happen in the future, you can do so in many different ways." On text: "The representations are already there." On goal-relevant state: "Representing your context in the right form, that captures what you really need to achieve your goal."</li>
+<li>On value functions versus simulators: "Optimal decision making at its core, regardless of how you do it, requires considering counterfactuals," whether "by using a value function or something" else.</li>
+<li>On reasoning: the model "could involve outputting intermediate steps," and "learning for these systems is not just learning from raw actions, it's also learning from words."</li>
+<li>On emergence he can't explain: "You just have this kind of compositionality that emerges when you do learning at scale," and, about the unexpected T-shirt behaviour, "We didn't know it would do that."</li>
+<li>I found no explicit discussion of interpretability or inspecting internals in the transcript.</li>
+</ul>
+</li>
+<li><strong>developing.dev interview, 2026-08-24</strong> (<a href="https://www.developing.dev/p/sergey-levine-current-state-of-humanoid">page</a>). <span class="tag said">SAID</span><ul>
+<li>On representation analysis by PI colleagues (Suraj Nair and Simar Kareer): "they looked at the representations inside the model." With enough robot pre-training, "it's all task identity and minimal sensitivity to embodiment," and "they just line up perfectly."</li>
+<li>On multimodal reasoning: "you can have a model that does some intermediate thinking, and that thinking can be done in different modalities." He gives the example of imagined subgoal images that let a UR5 fold shirts.</li>
+<li>On language: "what's important is not language, it's prior knowledge that you can put in as a scaffold on your learning process."</li>
+<li>On failure modes: π0.5's "mistakes are sort of semantically sensible."</li>
+</ul>
+</li>
+<li><strong>X/Twitter, July 2024</strong> (<a href="https://x.com/svlevine/status/1811623922405630242">ECoT thread</a>). He announced ECoT, saying it distils Gemini and Grounding DINO into reasoning data and can take in human corrections through the chain of thought. I only saw this through search snippets.</li>
+<li><strong>ICLR 2026 invited talk</strong>, "Robotic Learning with Autonomous Data" (<a href="https://iclr.cc/virtual/2026/10021470">listing</a>), and a <strong>CoLM 2026 talk</strong> titled roughly "Someday, ALL AI will be Built on Physical Interaction" (known only from a third-party link roundup). I found no transcripts for either.</li>
+</ul>
+<p><strong>Gaps I could not fill.</strong> I found no Levine statement on mechanistic interpretability, sparse autoencoders, probing, circuits, or the "Mechanistic interpretability for steering VLAs" line of work. I didn't check TWIML, Robot Brains or Gradient Dissent episodes in full. Search found only The Gradient (2021), Eye on AI and Automate podcasts, and their descriptions didn't mention interpretability.</p>
+<h2>3. What his lab's work does that bears on interpretability</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Work</th>
+<th>Mechanism</th>
+<th>What is inspectable</th>
+<th>Caveat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ECoT</strong>, Zawalski, Chen, Pertsch, Mees, Finn, Levine, CoRL 2024 (<a href="https://arxiv.org/abs/2407.08693">arXiv 2407.08693</a>, <a href="https://embodied-cot.github.io/">site</a>)</td>
+<td>OpenVLA is fine-tuned to generate text before each action: task, plan, subtask, move primitive, gripper pixel position, and object bounding boxes.</td>
+<td>The authors say it helps humans "interpret a policy's failures," for example by "misidentifying relevant scene objects," and lets operators correct the policy by editing the reasoning. It gave +28% absolute success over OpenVLA on generalization tasks.</td>
+<td>The text is generated by the policy, so nothing guarantees it is causal.</td>
+</tr>
+<tr>
+<td><strong>Training Strategies for Efficient Embodied Reasoning</strong>, Chen, Belkhale, Mirchandani, Mees, Driess, Pertsch, Levine, CoRL 2025 (<a href="https://arxiv.org/abs/2505.08243">arXiv 2505.08243</a>)</td>
+<td>Tests <em>why</em> reasoning helps. Is it representation learning, curriculum, or expressivity?</td>
+<td>Finds "learning to generate reasonings does lead to better VLA representations" and "the main benefit … is not increased policy expressivity." Fig. 6 shows "incorrect or hallucinated features (though they still lead to task successes)."</td>
+<td>This is direct evidence from Levine's own group that reasoning traces are unfaithful. It argues for looking at internals.</td>
+</tr>
+<tr>
+<td><strong>Hi Robot</strong>, PI, Feb 2025 (<a href="https://www.pi.website/research/hirobot">post</a>)</td>
+<td>A high-level VLM "whispers" language commands to π0.</td>
+<td>Because the commands are language, "we can inspect them." Users can correct them in real time ("that's not trash").</td>
+<td>The commands are a designed bottleneck, so they explain the high-level choice, not the motor control.</td>
+</tr>
+<tr>
+<td><strong>π0.5</strong>, PI, Apr 2025 (<a href="https://www.pi.website/blog/pi05">post</a>)</td>
+<td>One model predicts a text subtask, "analogously to chain-of-thought inference," and then actions.</td>
+<td>The subtask string, for example "pick up the pillow."</td>
+<td>Same caveat as Hi Robot. Below the subtask, the flow-matching action expert is opaque.</td>
+</tr>
+<tr>
+<td><strong>Knowledge Insulation</strong>, Driess et al. with Levine, NeurIPS 2025 (<a href="https://arxiv.org/abs/2505.23705">arXiv 2505.23705</a>, <a href="https://www.pi.website/research/knowledge_insulation">post</a>)</td>
+<td>Stops action-expert gradients from reaching the VLM backbone, which is trained on discrete FAST tokens instead.</td>
+<td>Shows that action-expert gradients make the backbone "lose some of the knowledge acquired during web-scale pre-training."</td>
+<td>This gives a hypothesis about where things live: semantic knowledge sits in the backbone, continuous motor detail in the action expert. It hasn't been tested mechanistically.</td>
+</tr>
+<tr>
+<td><strong>π*0.6 / Recap</strong>, PI, Nov 2025 (<a href="https://www.pi.website/blog/pistar06">post</a>, <a href="https://arxiv.org/abs/2511.14759">arXiv 2511.14759</a>)</td>
+<td>A learned value function (the negative number of steps to completion) gives advantages, and the policy is conditioned on those advantages.</td>
+<td>The post plots value over an episode. It "increases when the robot makes progress, and stays flat when there is little progress."</td>
+<td>The value plot is a scalar progress readout used for credit assignment, not an explanation. The post doesn't frame it as interpretability.</td>
+</tr>
+<tr>
+<td><strong>V-GPS</strong>, Nakamoto, Mees, Kumar, Levine, CoRL 2024 (<a href="https://arxiv.org/abs/2410.13816">arXiv 2410.13816</a>)</td>
+<td>An offline-RL value function re-ranks actions sampled from Octo, OpenVLA and similar policies, without touching their weights.</td>
+<td>A separate value model makes a score per action that people can inspect.</td>
+<td>It steers from outside the policy and doesn't look inside it.</td>
+</tr>
+<tr>
+<td><strong>Human-to-robot transfer</strong>, Kareer et al., PI, Dec 2025 (<a href="https://arxiv.org/abs/2512.22414">arXiv 2512.22414</a>, <a href="https://www.pi.website/research/human_to_robot">post</a>)</td>
+<td>t-SNE of mean-pooled final-layer VLM tokens for human versus robot data.</td>
+<td>Representations go from "disjoint" to overlapping as pre-training diversity grows, and the overlap tracks transfer.</td>
+<td>This is representation geometry, with no neurons, no causal tests, and t-SNE only.</td>
+</tr>
+<tr>
+<td><strong>RL Token</strong>, PI, Mar 2026 (<a href="https://www.pi.website/research/rlt">post</a>)</td>
+<td>An encoder-decoder compresses VLA embeddings into one "RL token" for a small actor-critic.</td>
+<td>It gives a bottleneck summary that could in principle be probed.</td>
+<td>The post doesn't analyse what the token encodes.</td>
+</tr>
+<tr>
+<td><strong>π0.7</strong>, PI, Apr 2026 (<a href="https://www.pi.website/blog/pi07">post</a>)</td>
+<td>"Steerable" through multimodal prompts: speed and quality metadata, visual subgoal images (possibly from a world model), and language coaching.</td>
+<td>The prompt fields are human-set control dimensions.</td>
+<td>The post concedes it is "hard to track down the precise episodes that informed this behavior." Weights are not public as far as I found.</td>
+</tr>
+<tr>
+<td><strong>Older RAIL work on value-function representations</strong> (for example Kumar, Agarwal, Ghosh, Levine, <em>Implicit Under-Parameterization</em>, ICLR 2021; Eysenbach et al., <em>Contrastive RL</em>, NeurIPS 2022)</td>
+<td>Feature-rank collapse in deep Q-networks. In contrastive RL, representation inner products <em>are</em> goal-conditioned values.</td>
+<td>Representation-level diagnostics, plus a geometry where dot products have a defined meaning.</td>
+<td>This is the closest thing to "representation analysis" in his RL work. It is for training stability, not for explanation.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Pattern.</strong> <span class="tag syn">SYNTH</span> Every lab mechanism is <em>interpretability by interface</em>. The model is built to emit a readable intermediate (text, subgoal image, value), and that intermediate is then used for control, correction or data. None of the papers checks whether the readable channel is faithful to the computation, except Chen et al. 2025, and their answer is that it often is not.</p>
+<h2>4. External mechanistic and probing work on his lab's models</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Paper</th>
+<th>Model(s)</th>
+<th>Method</th>
+<th>Finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Häon, Stocking, Chuang, Tomlin (Berkeley, Tomlin lab), <em>Mechanistic Interpretability for Steering VLAs</em>, CoRL 2025 (<a href="https://arxiv.org/abs/2509.00328">arXiv 2509.00328</a>)</td>
+<td>OpenVLA (Llama-2-7B), π0 / π0-FAST (PaliGemma)</td>
+<td>They project FFN value vectors through the LM head to tokens, cluster them (fast/slow/up/low/high/safe/risk), and overwrite their activations at inference.</td>
+<td>Zero-shot control of speed and height in LIBERO and on a real UR5. The steering beat prompt changes. They studied no force or contact.</td>
+</tr>
+<tr>
+<td>Swann, McGranahan, Buurmeijer, Kennedy, Schwager (Stanford), <em>SAEs Reveal Interpretable and Steerable Features in VLA Models</em>, 2026 (<a href="https://arxiv.org/abs/2603.19183">arXiv 2603.19183</a>)</td>
+<td>π0.5 (PaliGemma layers), on LIBERO and DROID hardware</td>
+<td>SAEs on hidden activations, plus a metric that separates general features from memorization features.</td>
+<td>Most features are episode-specific memorization. A smaller set of general motion and semantic features can be steered causally, including in directions prompting can't reach.</td>
+</tr>
+<tr>
+<td>Molinari, Nevali, Navani, Younis, <em>Emergent World Representations in OpenVLA</em>, 2025 (<a href="https://arxiv.org/abs/2509.24559">arXiv 2509.24559</a>)</td>
+<td>OpenVLA (and the v01 checkpoint)</td>
+<td>Lasso and MLP probes on layers 7/15/22/30 predict the embedding change Δe over K steps, with permutation tests.</td>
+<td>Activations beat an embedding baseline, peaking in middle layers. Evidence is weaker for the early checkpoint and for LIBERO-only fine-tuning. Linear probes beat MLPs.</td>
+</tr>
+<tr>
+<td>Lu, Li, Shahani, Herbers, Scheutz (Tufts), <em>Probing a VLA for Symbolic States</em>, 2025 (<a href="https://arxiv.org/abs/2502.04558">arXiv 2502.04558</a>)</td>
+<td>OpenVLA, 33 layers</td>
+<td>Linear probes for object and action predicates.</td>
+<td>Accuracy above 0.9 at most layers, with no clear layer ordering.</td>
+</tr>
+<tr>
+<td>Yang and Mokalla, <em>Interpretable Signals Reveal Failure-Relevant Representations in VLAs</em>, ICML 2026 (<a href="https://icml.cc/virtual/2026/79411">page</a>)</td>
+<td>π0.5 action expert plus attention</td>
+<td>Probes for action direction and gripper state, plus attention summaries.</td>
+<td>Confidence in the action-direction probe predicts failure best. Gripper-state probes are weaker.</td>
+</tr>
+<tr>
+<td>Zhang et al. (Leicester/Birmingham), <em>Embodied Interpretability</em>, 2026 (<a href="https://arxiv.org/abs/2605.00321">arXiv 2605.00321</a>)</td>
+<td>π0.5 fine-tuned</td>
+<td>An interventional saliency score from masks, and a "nuisance mass ratio."</td>
+<td>Reliance on nuisance regions correlates with failure (r ≈ −0.77).</td>
+</tr>
+<tr>
+<td><em>Robotic Steering</em>, 2025 (<a href="https://arxiv.org/abs/2511.22697">arXiv 2511.22697</a>)</td>
+<td>VLAs on a Franka arm</td>
+<td>Picks task-relevant attention heads for fine-tuning.</td>
+<td>Reported to beat LoRA.</td>
+</tr>
+<tr>
+<td>Foutter et al. (Stanford/NVIDIA), <em>Do VLAs Mean What They Say?</em>, 2026 (<a href="https://arxiv.org/abs/2607.04681">arXiv 2607.04681</a>)</td>
+<td>Alpamayo (driving), not Levine models</td>
+<td>A faithfulness critic used as an RL reward.</td>
+<td>Functional reasoning and faithful reasoning come apart. It builds on the ECoT paradigm.</td>
+</tr>
+<tr>
+<td>Wulff et al., <em>Latent Cluster Analysis for VLAs</em>, 2026 (<a href="https://arxiv.org/abs/2609.02634">arXiv 2609.02634</a>)</td>
+<td>GR00T N1.5 (NVIDIA), included for contrast</td>
+<td>Clusters diffusion-decoder embeddings.</td>
+<td>Middle layers separate spatiotemporal and kinematic features. No force.</td>
+</tr>
+</tbody>
+</table></div>
+<p>None of these papers involves Levine as an author, and none quotes a response from him. They cite his models only as objects of study.</p>
+<h2>5. Relevance to neuron-level interpretability of dynamics models</h2>
+<h3>How his thinking maps onto this project</h3>
+<ul>
+<li><strong>Prediction to test.</strong> <span class="tag syn">SYNTH</span> Levine's position is that action-trained representations capture what you need for the goal, not everything. Applied to the two-link arm, that predicts VLA and policy units will track <strong>variables you need for control</strong> (contact onset, progress, end-effector velocity) more cleanly than <strong>variables you don't</strong> (gravity torque or Coriolis terms that a position-controlled robot never has to compensate). The repo's 32 shared targets let you test this directly by comparing binned R² for each family between action-trained models and the next-frame predictors (<code>state_</code>, <code>video_</code>).</li>
+<li><strong>Faithfulness.</strong> <span class="tag lab">LAB</span> Chen et al. 2025 show that reasoning text can be wrong while the action is right. The <code>vlm_</code> study already plans "verbal vs probe accuracy." The same comparison on ECoT, where the stated gripper position or move primitive is compared with a probe on hidden state and with ground truth, would be the first faithfulness test of embodied reasoning on Levine's own models.</li>
+<li><strong>Where to look.</strong> <span class="tag lab">LAB</span> Knowledge Insulation implies a split: semantics in the PaliGemma backbone, continuous motor detail in the action expert. Contact and force, if they are represented at all, should sit in the action expert and the proprioceptive pathway. Häon et al. and Swann et al. looked mainly at the backbone.</li>
+</ul>
+<h3>Experiments that fit a 12 GB GPU (RTX 5070 Ti laptop)</h3>
+<p>Memory notes: Octo-small and Octo-base are 27M and 93M parameters, so trivial. OpenVLA-7B needs 16.8 GB in bf16 but <strong>7.0 GB in int4, with the same Bridge success rate</strong> (OpenVLA paper, Table 2). openpi π0/π0.5 inference needs more than 8 GB and LoRA fine-tuning more than 22.5 GB (openpi README), so plan for inference and activation caching only, using the PyTorch port for hooks. The ECoT checkpoints are OpenVLA-based, so the same int4 path should apply (I haven't verified this).</p>
+<ol>
+<li><strong>Contact-force census in LIBERO (π0.5-LIBERO or OpenVLA-LIBERO).</strong> Roll out the released LIBERO checkpoints in robosuite/MuJoCo. Log <code>cfrc_ext</code>, contact normal forces from <code>mj_contactForce</code>, <code>qfrc_actuator</code> and gripper finger forces on every step, using the same logging approach as <code>sim/arm.py</code>. Cache action-expert and backbone activations with forward hooks. Run the project's per-unit census (binned R², top-k examples) against force magnitude, contact onset and slip. Then ablate or clamp the top units and measure the change in commanded gripper closure and in contact force. This is the most direct transfer of the arm methodology, and no one has done it yet.</li>
+<li><strong>Force-direction steering à la Häon.</strong> In OpenVLA int4, project FFN value vectors to tokens and look for clusters around <em>press, push, squeeze, gentle, hard, tight</em>. Inject them in LIBERO and measure <strong>contact force</strong> (not just displacement) during grasp and insertion. If no force-semantic cluster steers force, that supports the prediction above that position-trained VLAs encode kinematics, not dynamics.</li>
+<li><strong>Implicit dynamics in Octo.</strong> Octo is small enough for exhaustive neuron work. Use OXE subsets that log force/torque (for example the Stanford Kuka multimodal dataset; RH20T outside OXE). Check that a given subset has F/T before relying on it. Probe Octo's readout and transformer units for measured wrist F/T, which Octo never receives as input. A positive result means vision-based inference of force. Compare against a shuffled-label control.</li>
+<li><strong>ECoT faithfulness test.</strong> Run the ECoT OpenVLA-Bridge checkpoint in SimplerEnv (WidowX, SAPIEN physics, which exposes contacts) or open-loop on Bridge frames. Compare three things for gripper position and move direction: (a) what the text says, (b) a linear probe on the token before the text, and (c) ground truth. Then edit the text, for example "move down" to "move up," and measure the change in action. This is the intervention test Foutter et al. call impractical, and here it is cheap.</li>
+<li><strong>Value-function units (Recap-style).</strong> On frozen π0.5 or Octo features, train a small steps-to-completion value head as in π*0.6. Find units whose activity drops at failed grasps or slips, using contact logs from experiment 1, and check whether those units are the same ones that encode contact. This tests Levine's 2022 claim that value functions can be read to see "what the agent thinks."</li>
+<li><strong>Embodiment-invariance on the toy arm.</strong> Feed the repo's rendered two-link-arm clips to the SigLIP vision tower of π0/π0.5 and to OpenVLA's DINOv2+SigLIP. Rerun the <code>vlm_</code> census and compare it with Qwen3-VL-4B and V-JEPA 2. PI's human-to-robot result predicts task-level, embodiment-agnostic features in late layers. The arm data tests whether low-level dynamics features survive in robot-pretrained vision towers.</li>
+</ol>
+<h2>6. Open questions</h2>
+<ol>
+<li>Does any open VLA represent contact force or torque at all, given that its inputs are images and joint positions and its outputs are positions or deltas? Or is "force" only gripper state plus timing?</li>
+<li>Is the subtask text in π0.5 or ECoT causally upstream of the actions, or is it a parallel readout? (Chen et al. suggest it is partly decorative at test time.)</li>
+<li>Do monosemantic "dynamics neurons" appear in flow-matching action experts, or does the denoising-time variable mix everything? Activations probably need to be indexed by flow time τ as well as by environment step.</li>
+<li>Does knowledge insulation produce a cleaner split between semantic units (backbone) and motor units (action expert) than standard co-training does?</li>
+<li>Do value functions trained on robot data (Recap, V-GPS) have units that line up with physical failure causes like slip, collision or missed contact? Or do they only encode progress?</li>
+<li>Would Levine see neuron-level interpretability as a "spork," a hand-designed structure, or as a tool for finding where learned components bottleneck? He hasn't said, and it would be worth asking him directly.</li>
+<li>Is the "memorization versus general feature" split that Swann et al. found in π0.5 also present in small dynamics models trained on simulated physics, like the ones in this repo? If so, does it shrink with data diversity, as PI's human-to-robot result would suggest?</li>
+</ol>
+<h2>7. References</h2>
+<p><strong>Levine, primary</strong></p>
+<ul>
+<li>Levine, S. "Understanding the World Through Action." Substack, 2021-10-26. <a href="https://sergeylevine.substack.com/p/understanding-the-world-through-action-rl-as-a-foundation-for-scalable-self-supervised-learning-636e4e243001">https://sergeylevine.substack.com/p/understanding-the-world-through-action-rl-as-a-foundation-for-scalable-self-supervised-learning-636e4e243001</a></li>
+<li>Levine, S. "Offline RL and Large Language Models." Substack, 2022-12-04. <a href="https://sergeylevine.substack.com/p/offline-rl-and-large-language-models">https://sergeylevine.substack.com/p/offline-rl-and-large-language-models</a></li>
+<li>Levine, S. "The Promise of Generalist Robotic Policies." Substack, 2024-10-06. <a href="https://sergeylevine.substack.com/p/the-promise-of-generalist-robotic">https://sergeylevine.substack.com/p/the-promise-of-generalist-robotic</a></li>
+<li>Levine, S. "Language Models in Plato's Cave." Substack, 2025-06-08. <a href="https://sergeylevine.substack.com/p/language-models-in-platos-cave">https://sergeylevine.substack.com/p/language-models-in-platos-cave</a></li>
+<li>Levine, S. "Sporks of AGI." Substack, 2025-07-21. <a href="https://sergeylevine.substack.com/p/sporks-of-agi">https://sergeylevine.substack.com/p/sporks-of-agi</a></li>
+<li>Dwarkesh Patel podcast with Levine, "Fully autonomous robots are much closer than you think," 2025-09-12. <a href="https://www.dwarkesh.com/p/sergey-levine">https://www.dwarkesh.com/p/sergey-levine</a></li>
+<li>developing.dev interview, "Sergey Levine: Current State of Humanoid Robotics, China &amp; Future Predictions," 2026-08-24. <a href="https://www.developing.dev/p/sergey-levine-current-state-of-humanoid">https://www.developing.dev/p/sergey-levine-current-state-of-humanoid</a></li>
+<li>Levine on X, ECoT announcement, July 2024. <a href="https://x.com/svlevine/status/1811623922405630242">https://x.com/svlevine/status/1811623922405630242</a></li>
+<li>ICLR 2026 invited talk listing. <a href="https://iclr.cc/virtual/2026/10021470">https://iclr.cc/virtual/2026/10021470</a></li>
+</ul>
+<p><strong>RAIL / Physical Intelligence</strong></p>
+<ul>
+<li>Zawalski et al. "Robotic Control via Embodied Chain-of-Thought Reasoning." CoRL 2024. <a href="https://arxiv.org/abs/2407.08693">https://arxiv.org/abs/2407.08693</a> · <a href="https://embodied-cot.github.io/">https://embodied-cot.github.io/</a></li>
+<li>Chen et al. "Training Strategies for Efficient Embodied Reasoning." CoRL 2025. <a href="https://arxiv.org/abs/2505.08243">https://arxiv.org/abs/2505.08243</a></li>
+<li>Nakamoto, Mees, Kumar, Levine. "Steering Your Generalists (V-GPS)." CoRL 2024. <a href="https://arxiv.org/abs/2410.13816">https://arxiv.org/abs/2410.13816</a></li>
+<li>Kim et al. "OpenVLA." 2024. <a href="https://arxiv.org/abs/2406.09246">https://arxiv.org/abs/2406.09246</a> · <a href="https://github.com/openvla/openvla">https://github.com/openvla/openvla</a></li>
+<li>Octo Model Team et al. "Octo: An Open-Source Generalist Robot Policy." 2024. <a href="https://octo-models.github.io/">https://octo-models.github.io/</a></li>
+<li>PI. "Hi Robot." 2025-02-26. <a href="https://www.pi.website/research/hirobot">https://www.pi.website/research/hirobot</a></li>
+<li>PI. "π0.5." 2025-04-22. <a href="https://www.pi.website/blog/pi05">https://www.pi.website/blog/pi05</a></li>
+<li>Driess et al. "Knowledge Insulating VLA Models." NeurIPS 2025. <a href="https://arxiv.org/abs/2505.23705">https://arxiv.org/abs/2505.23705</a> · <a href="https://www.pi.website/research/knowledge_insulation">https://www.pi.website/research/knowledge_insulation</a></li>
+<li>PI. "π*0.6: a VLA That Learns From Experience." 2025-11-17. <a href="https://www.pi.website/blog/pistar06">https://www.pi.website/blog/pistar06</a> · <a href="https://arxiv.org/abs/2511.14759">https://arxiv.org/abs/2511.14759</a></li>
+<li>Kareer et al. "Emergence of Human to Robot Transfer in VLAs." 2025-12. <a href="https://arxiv.org/abs/2512.22414">https://arxiv.org/abs/2512.22414</a> · <a href="https://www.pi.website/research/human_to_robot">https://www.pi.website/research/human_to_robot</a></li>
+<li>PI. "Precise Manipulation with Efficient Online RL (RL Token)." 2026-03-19. <a href="https://www.pi.website/research/rlt">https://www.pi.website/research/rlt</a></li>
+<li>PI. "π0.7: a Steerable Model with Emergent Capabilities." 2026-04-16. <a href="https://www.pi.website/blog/pi07">https://www.pi.website/blog/pi07</a></li>
+<li>openpi repository (π0, π0-FAST, π0.5 weights). <a href="https://github.com/Physical-Intelligence/openpi">https://github.com/Physical-Intelligence/openpi</a></li>
+</ul>
+<p><strong>External interpretability work</strong></p>
+<ul>
+<li>Häon, Stocking, Chuang, Tomlin. "Mechanistic Interpretability for Steering VLA Models." CoRL 2025. <a href="https://arxiv.org/abs/2509.00328">https://arxiv.org/abs/2509.00328</a></li>
+<li>Swann et al. "Sparse Autoencoders Reveal Interpretable and Steerable Features in VLA Models." 2026. <a href="https://arxiv.org/abs/2603.19183">https://arxiv.org/abs/2603.19183</a></li>
+<li>Molinari et al. "Emergent World Representations in OpenVLA." 2025. <a href="https://arxiv.org/abs/2509.24559">https://arxiv.org/abs/2509.24559</a></li>
+<li>Lu et al. "Probing a VLA Model for Symbolic States and Integration into a Cognitive Architecture." 2025. <a href="https://arxiv.org/abs/2502.04558">https://arxiv.org/abs/2502.04558</a></li>
+<li>Yang and Mokalla. "Interpretable Signals Reveal Failure-Relevant Representations in VLAs." ICML 2026. <a href="https://icml.cc/virtual/2026/79411">https://icml.cc/virtual/2026/79411</a></li>
+<li>Zhang et al. "Embodied Interpretability." 2026. <a href="https://arxiv.org/abs/2605.00321">https://arxiv.org/abs/2605.00321</a></li>
+<li>"Mechanistic Finetuning of VLAs via Few-Shot Demonstrations (Robotic Steering)." 2025. <a href="https://arxiv.org/abs/2511.22697">https://arxiv.org/abs/2511.22697</a></li>
+<li>Foutter et al. "Do VLAs Mean What They Say?" 2026. <a href="https://arxiv.org/abs/2607.04681">https://arxiv.org/abs/2607.04681</a></li>
+<li>Wulff et al. "Latent Cluster Analysis for VLA Models." 2026. <a href="https://arxiv.org/abs/2609.02634">https://arxiv.org/abs/2609.02634</a></li>
+<li>"TA-VLA: Elucidating the Design Space of Torque-aware VLA Models." 2025. <a href="https://arxiv.org/abs/2509.07962">https://arxiv.org/abs/2509.07962</a></li>
+</ul>
+</main></body></html>
