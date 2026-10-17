@@ -86,7 +86,7 @@ def main():
     ax.set_xticks(x, [vs[names.index(v)].label for v in vv], rotation=35, ha="right", fontsize=6.5)
     for i, v in enumerate(vv):
         ax.get_xticklabels()[i].set_color(FAMILIES[vs[names.index(v)].family][0])
-    ax.set_ylabel("held-out R²"); ax.set_ylim(0, 1.05)
+    ax.set_ylabel("held-out R²"); ax.set_ylim(0, 1.25); ax.set_yticks(np.arange(0, 1.01, 0.2))
     ax.legend(fontsize=5.8, ncol=2, loc="upper right")
     ax.set_title("Decoding acceleration and torques", fontsize=9)
     ax.grid(axis="x", visible=False)

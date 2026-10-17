@@ -146,7 +146,7 @@ def main():
     print(json.dumps({k: v for k, v in res.items() if not k.startswith("psth")}, indent=1))
 
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(2, 3, figsize=(7.2, 4.0), sharex=True)
+    fig, axes = plt.subplots(2, 3, figsize=(7.2, 4.4), sharex=True)
     for j in range(len(units)):
         ax = axes.flat[j]
         for k, col, ls in [("floor", FAMILIES["contact"][0], "-"), ("wall", SERIES[3], "-"),
@@ -162,8 +162,8 @@ def main():
         ax.axvline(0, color=INK2, lw=0.7)
         ax.axvline(-1, color=MUTED, lw=0.5, ls="--")
         u = units[j]
-        ax.set_title(f"{unit_names[j]} · {vs[int(c['best'][u])].label} ({c['best_r2'][u]:.2f})", fontsize=7)
-        ax.text(0.02, 0.95, f"AUC, contact at t+1: {aucs[j]:.2f}", transform=ax.transAxes, fontsize=6, color=INK2, va="top")
+        ax.set_title(f"{unit_names[j]} · {vs[int(c['best'][u])].label} ({c['best_r2'][u]:.2f})\n"
+                     f"AUC for contact at t+1: {aucs[j]:.2f}", fontsize=7)
         if j % 3 == 0:
             ax.set_ylabel("activation (z)")
     h, l = axes.flat[0].get_legend_handles_labels()

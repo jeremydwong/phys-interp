@@ -136,8 +136,9 @@ def setup_style():
     mpl.rcParams.update({
         "figure.facecolor": SURFACE, "axes.facecolor": SURFACE, "savefig.facecolor": SURFACE,
         "figure.dpi": 110, "savefig.dpi": 200, "savefig.bbox": "tight",
-        "font.family": "sans-serif",
-        "font.sans-serif": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+        # listed in font.family (not behind the sans-serif alias) so matplotlib falls back per glyph:
+        # Arial (Windows) has no subscript digits, DejaVu Sans supplies q₁, q₂.
+        "font.family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
         "font.size": 9, "axes.titlesize": 10, "axes.titleweight": "bold", "axes.titlelocation": "left",
         "axes.labelsize": 9, "axes.labelcolor": INK2, "axes.edgecolor": AXIS, "axes.linewidth": 0.8,
         "axes.spines.top": False, "axes.spines.right": False,

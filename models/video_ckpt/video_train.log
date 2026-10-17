@@ -1,42 +1,226 @@
-/Users/jeremy/Git/phys-interp/models/video_train.py:101: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:219.)
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+device: cuda, bf16 autocast: True
+C:\Git\phys-interp\models\video_train.py:114: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\utils\tensor_numpy.cpp:219.)
   train = torch.from_numpy(np.ascontiguousarray(fr[:2000])).to(dev)
-loaded frames in 9s
+loaded frames in 2s
 1.75M params
-[val] step 0 model=0.00133 copy=0.00133 linear=0.00199 model_arm=0.02301 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00214 copy_t2=0.00214 time=16.95463
-step 0 loss 0.01899 lr 1.50e-06 48s
-[val] step 100 model=0.00137 copy=0.00133 linear=0.00199 model_arm=0.02176 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00228 copy_t2=0.00214 time=142.93676
-[val] step 151 model=0.00131 copy=0.00133 linear=0.00199 model_arm=0.02076 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00210 copy_t2=0.00214 time=198.08350
-step 200 loss 0.01422 lr 3.01e-04 251s
-[val] step 227 model=0.00117 copy=0.00133 linear=0.00199 model_arm=0.01894 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00183 copy_t2=0.00214 time=269.97876
-[val] step 342 model=0.00095 copy=0.00133 linear=0.00199 model_arm=0.01567 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00145 copy_t2=0.00214 time=378.59887
-step 400 loss 0.01065 lr 6.00e-04 440s
-[val] step 500 model_arm=0.01314 copy_arm=0.02301
-[val] step 515 model=0.00077 copy=0.00133 linear=0.00199 model_arm=0.01257 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00133 copy_t2=0.00214 time=558.75155
-step 600 loss 0.00889 lr 5.95e-04 645s
-[val] step 776 model=0.00060 copy=0.00133 linear=0.00199 model_arm=0.01013 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00105 copy_t2=0.00214 time=784.71115
-step 800 loss 0.00779 lr 5.82e-04 806s
-step 1000 loss 0.00706 lr 5.60e-04 954s
-[val] step 1000 model_arm=0.00909 copy_arm=0.02301
-[val] step 1170 model=0.00051 copy=0.00133 linear=0.00199 model_arm=0.00865 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00091 copy_t2=0.00214 time=1099.11545
-step 1200 loss 0.00637 lr 5.30e-04 1123s
-step 1400 loss 0.00601 lr 4.93e-04 1266s
-[val] step 1500 model_arm=0.00798 copy_arm=0.02301
-step 1600 loss 0.00580 lr 4.50e-04 1412s
-[val] step 1762 model=0.00042 copy=0.00133 linear=0.00199 model_arm=0.00714 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00081 copy_t2=0.00214 time=1515.19273
-step 1800 loss 0.00519 lr 4.03e-04 1535s
-step 2000 loss 0.00545 lr 3.52e-04 1627s
-[val] step 2000 model_arm=0.00683 copy_arm=0.02301
-step 2200 loss 0.00514 lr 3.00e-04 1724s
-step 2400 loss 0.00488 lr 2.48e-04 1804s
-[val] step 2500 model_arm=0.00633 copy_arm=0.02301
-step 2600 loss 0.00478 lr 1.97e-04 1904s
-[val] step 2655 model=0.00036 copy=0.00133 linear=0.00199 model_arm=0.00617 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00070 copy_t2=0.00214 time=1944.63557
-step 2800 loss 0.00469 lr 1.50e-04 2009s
-step 3000 loss 0.00451 lr 1.07e-04 2104s
-[val] step 3000 model_arm=0.00610 copy_arm=0.02301
-step 3200 loss 0.00444 lr 7.02e-05 2288s
-step 3400 loss 0.00443 lr 4.02e-05 2457s
-[val] step 3500 model_arm=0.00581 copy_arm=0.02301
-step 3600 loss 0.00435 lr 1.81e-05 2600s
-step 3800 loss 0.00423 lr 4.56e-06 2768s
-[val] step 4000 model=0.00034 copy=0.00133 linear=0.00199 model_arm=0.00574 copy_arm=0.02301 linear_arm=0.03449 model_t2=0.00066 copy_t2=0.00214 time=2922.20015
+[val] step 0 model=0.00133 copy=0.00133 linear=0.00199 model_arm=0.02305 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00215 copy_t2=0.00215 time=1.64212
+step 0 loss 0.01769 lr 8.00e-07 3s
+[val] step 100 model=0.00145 copy=0.00133 linear=0.00199 model_arm=0.02226 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00241 copy_t2=0.00215 time=19.46599
+[val] step 188 model=0.00129 copy=0.00133 linear=0.00199 model_arm=0.02065 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00205 copy_t2=0.00215 time=34.29264
+step 200 loss 0.01480 lr 1.61e-04 36s
+[val] step 355 model=0.00103 copy=0.00133 linear=0.00199 model_arm=0.01669 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00163 copy_t2=0.00215 time=61.57909
+step 400 loss 0.01164 lr 3.21e-04 69s
+[val] step 500 model_arm=0.01403 copy_arm=0.02305
+step 600 loss 0.00949 lr 4.81e-04 101s
+[val] step 669 model=0.00071 copy=0.00133 linear=0.00199 model_arm=0.01185 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00118 copy_t2=0.00215 time=113.41661
+step 800 loss 0.00802 lr 6.41e-04 135s
+step 1000 loss 0.00723 lr 8.00e-04 198s
+[val] step 1000 model_arm=0.00968 copy_arm=0.02305
+step 1200 loss 0.00659 lr 8.00e-04 234s
+[val] step 1262 model=0.00049 copy=0.00133 linear=0.00199 model_arm=0.00831 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00087 copy_t2=0.00215 time=245.66417
+step 1400 loss 0.00585 lr 8.00e-04 269s
+[val] step 1500 model_arm=0.00740 copy_arm=0.02305
+step 1600 loss 0.00544 lr 7.99e-04 315s
+step 1800 loss 0.00521 lr 7.98e-04 367s
+step 2000 loss 0.00490 lr 7.98e-04 418s
+[val] step 2000 model_arm=0.00647 copy_arm=0.02305
+step 2200 loss 0.00460 lr 7.97e-04 473s
+[val] step 2378 model=0.00036 copy=0.00133 linear=0.00199 model_arm=0.00606 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00072 copy_t2=0.00215 time=518.14605
+step 2400 loss 0.00460 lr 7.95e-04 523s
+[val] step 2500 model_arm=0.00572 copy_arm=0.02305
+step 2600 loss 0.00429 lr 7.94e-04 571s
+step 2800 loss 0.00413 lr 7.92e-04 613s
+step 3000 loss 0.00405 lr 7.91e-04 672s
+[val] step 3000 model_arm=0.00516 copy_arm=0.02305
+step 3200 loss 0.00390 lr 7.89e-04 708s
+step 3400 loss 0.00382 lr 7.87e-04 741s
+[val] step 3500 model_arm=0.00472 copy_arm=0.02305
+step 3600 loss 0.00362 lr 7.84e-04 775s
+step 3800 loss 0.00361 lr 7.82e-04 808s
+step 4000 loss 0.00354 lr 7.79e-04 841s
+[val] step 4000 model_arm=0.00460 copy_arm=0.02305
+step 4200 loss 0.00335 lr 7.76e-04 876s
+step 4400 loss 0.00332 lr 7.73e-04 909s
+[val] step 4481 model=0.00025 copy=0.00133 linear=0.00199 model_arm=0.00433 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00049 copy_t2=0.00215 time=923.44881
+[val] step 4500 model_arm=0.00431 copy_arm=0.02305
+step 4600 loss 0.00329 lr 7.70e-04 945s
+step 4800 loss 0.00320 lr 7.67e-04 978s
+step 5000 loss 0.00316 lr 7.63e-04 1011s
+[val] step 5000 model_arm=0.00412 copy_arm=0.02305
+step 5200 loss 0.00312 lr 7.59e-04 1045s
+step 5400 loss 0.00305 lr 7.55e-04 1078s
+[val] step 5500 model_arm=0.00415 copy_arm=0.02305
+step 5600 loss 0.00303 lr 7.51e-04 1113s
+step 5800 loss 0.00298 lr 7.47e-04 1147s
+step 6000 loss 0.00293 lr 7.43e-04 1181s
+[val] step 6000 model_arm=0.00382 copy_arm=0.02305
+step 6200 loss 0.00290 lr 7.38e-04 1215s
+step 6400 loss 0.00287 lr 7.33e-04 1249s
+[val] step 6500 model_arm=0.00366 copy_arm=0.02305
+step 6600 loss 0.00277 lr 7.29e-04 1285s
+step 6800 loss 0.00278 lr 7.24e-04 1319s
+step 7000 loss 0.00269 lr 7.18e-04 1353s
+[val] step 7000 model_arm=0.00342 copy_arm=0.02305
+step 7200 loss 0.00268 lr 7.13e-04 1388s
+step 7400 loss 0.00258 lr 7.08e-04 1423s
+[val] step 7500 model_arm=0.00337 copy_arm=0.02305
+step 7600 loss 0.00268 lr 7.02e-04 1459s
+step 7800 loss 0.00253 lr 6.96e-04 1494s
+step 8000 loss 0.00255 lr 6.90e-04 1528s
+[val] step 8000 model_arm=0.00332 copy_arm=0.02305
+step 8200 loss 0.00251 lr 6.84e-04 1564s
+step 8400 loss 0.00251 lr 6.78e-04 1599s
+[val] step 8446 model=0.00019 copy=0.00133 linear=0.00199 model_arm=0.00321 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00038 copy_t2=0.00215 time=1607.79758
+[val] step 8500 model_arm=0.00328 copy_arm=0.02305
+step 8600 loss 0.00250 lr 6.72e-04 1636s
+step 8800 loss 0.00249 lr 6.65e-04 1671s
+step 9000 loss 0.00238 lr 6.59e-04 1705s
+[val] step 9000 model_arm=0.00321 copy_arm=0.02305
+step 9200 loss 0.00241 lr 6.52e-04 1740s
+step 9400 loss 0.00244 lr 6.46e-04 1775s
+[val] step 9500 model_arm=0.00305 copy_arm=0.02305
+step 9600 loss 0.00239 lr 6.39e-04 1811s
+step 9800 loss 0.00236 lr 6.32e-04 1846s
+step 10000 loss 0.00230 lr 6.24e-04 1880s
+[val] step 10000 model_arm=0.00300 copy_arm=0.02305
+step 10200 loss 0.00228 lr 6.17e-04 1916s
+step 10400 loss 0.00230 lr 6.10e-04 1951s
+[val] step 10500 model_arm=0.00299 copy_arm=0.02305
+step 10600 loss 0.00225 lr 6.02e-04 1987s
+step 10800 loss 0.00228 lr 5.95e-04 2022s
+step 11000 loss 0.00220 lr 5.87e-04 2057s
+[val] step 11000 model_arm=0.00289 copy_arm=0.02305
+step 11200 loss 0.00220 lr 5.80e-04 2093s
+step 11400 loss 0.00221 lr 5.72e-04 2127s
+[val] step 11500 model_arm=0.00280 copy_arm=0.02305
+step 11600 loss 0.00217 lr 5.64e-04 2164s
+step 11800 loss 0.00218 lr 5.56e-04 2199s
+step 12000 loss 0.00214 lr 5.48e-04 2234s
+[val] step 12000 model_arm=0.00273 copy_arm=0.02305
+step 12200 loss 0.00211 lr 5.40e-04 2271s
+step 12400 loss 0.00210 lr 5.32e-04 2306s
+[val] step 12500 model_arm=0.00282 copy_arm=0.02305
+step 12600 loss 0.00208 lr 5.24e-04 2342s
+step 12800 loss 0.00209 lr 5.15e-04 2377s
+step 13000 loss 0.00207 lr 5.07e-04 2411s
+[val] step 13000 model_arm=0.00276 copy_arm=0.02305
+step 13200 loss 0.00206 lr 4.99e-04 2448s
+step 13400 loss 0.00201 lr 4.90e-04 2482s
+[val] step 13500 model_arm=0.00264 copy_arm=0.02305
+step 13600 loss 0.00204 lr 4.82e-04 2519s
+step 13800 loss 0.00204 lr 4.73e-04 2554s
+step 14000 loss 0.00201 lr 4.65e-04 2589s
+[val] step 14000 model_arm=0.00264 copy_arm=0.02305
+step 14200 loss 0.00198 lr 4.56e-04 2626s
+step 14400 loss 0.00197 lr 4.48e-04 2661s
+[val] step 14500 model_arm=0.00256 copy_arm=0.02305
+step 14600 loss 0.00195 lr 4.39e-04 2698s
+step 14800 loss 0.00193 lr 4.30e-04 2733s
+step 15000 loss 0.00195 lr 4.22e-04 2768s
+[val] step 15000 model_arm=0.00256 copy_arm=0.02305
+step 15200 loss 0.00193 lr 4.13e-04 2804s
+step 15400 loss 0.00190 lr 4.04e-04 2840s
+[val] step 15500 model_arm=0.00242 copy_arm=0.02305
+step 15600 loss 0.00189 lr 3.96e-04 2876s
+step 15800 loss 0.00187 lr 3.87e-04 2911s
+[val] step 15918 model=0.00014 copy=0.00133 linear=0.00199 model_arm=0.00244 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00030 copy_t2=0.00215 time=2932.08539
+step 16000 loss 0.00187 lr 3.78e-04 2947s
+[val] step 16000 model_arm=0.00241 copy_arm=0.02305
+step 16200 loss 0.00186 lr 3.70e-04 2984s
+step 16400 loss 0.00184 lr 3.61e-04 3019s
+[val] step 16500 model_arm=0.00238 copy_arm=0.02305
+step 16600 loss 0.00179 lr 3.52e-04 3055s
+step 16800 loss 0.00179 lr 3.44e-04 3090s
+step 17000 loss 0.00184 lr 3.35e-04 3126s
+[val] step 17000 model_arm=0.00240 copy_arm=0.02305
+step 17200 loss 0.00182 lr 3.27e-04 3162s
+step 17400 loss 0.00179 lr 3.18e-04 3198s
+[val] step 17500 model_arm=0.00234 copy_arm=0.02305
+step 17600 loss 0.00180 lr 3.10e-04 3234s
+step 17800 loss 0.00176 lr 3.01e-04 3270s
+step 18000 loss 0.00173 lr 2.93e-04 3305s
+[val] step 18000 model_arm=0.00227 copy_arm=0.02305
+step 18200 loss 0.00175 lr 2.85e-04 3342s
+step 18400 loss 0.00173 lr 2.76e-04 3377s
+[val] step 18500 model_arm=0.00226 copy_arm=0.02305
+step 18600 loss 0.00174 lr 2.68e-04 3413s
+step 18800 loss 0.00170 lr 2.60e-04 3448s
+step 19000 loss 0.00168 lr 2.52e-04 3484s
+[val] step 19000 model_arm=0.00227 copy_arm=0.02305
+step 19200 loss 0.00170 lr 2.44e-04 3520s
+step 19400 loss 0.00165 lr 2.36e-04 3555s
+[val] step 19500 model_arm=0.00219 copy_arm=0.02305
+step 19600 loss 0.00166 lr 2.28e-04 3593s
+step 19800 loss 0.00165 lr 2.20e-04 3628s
+step 20000 loss 0.00163 lr 2.13e-04 3663s
+[val] step 20000 model_arm=0.00222 copy_arm=0.02305
+step 20200 loss 0.00162 lr 2.05e-04 3700s
+step 20400 loss 0.00163 lr 1.98e-04 3735s
+[val] step 20500 model_arm=0.00216 copy_arm=0.02305
+step 20600 loss 0.00160 lr 1.90e-04 3772s
+step 20800 loss 0.00159 lr 1.83e-04 3807s
+step 21000 loss 0.00161 lr 1.76e-04 3842s
+[val] step 21000 model_arm=0.00214 copy_arm=0.02305
+step 21200 loss 0.00159 lr 1.68e-04 3878s
+step 21400 loss 0.00157 lr 1.61e-04 3914s
+[val] step 21500 model_arm=0.00212 copy_arm=0.02305
+step 21600 loss 0.00155 lr 1.54e-04 3952s
+step 21800 loss 0.00157 lr 1.48e-04 3989s
+step 22000 loss 0.00157 lr 1.41e-04 4025s
+[val] step 22000 model_arm=0.00210 copy_arm=0.02305
+step 22200 loss 0.00153 lr 1.35e-04 4063s
+step 22400 loss 0.00152 lr 1.28e-04 4099s
+[val] step 22500 model_arm=0.00204 copy_arm=0.02305
+step 22600 loss 0.00155 lr 1.22e-04 4137s
+step 22800 loss 0.00150 lr 1.16e-04 4173s
+step 23000 loss 0.00152 lr 1.10e-04 4209s
+[val] step 23000 model_arm=0.00204 copy_arm=0.02305
+step 23200 loss 0.00151 lr 1.04e-04 4246s
+step 23400 loss 0.00149 lr 9.80e-05 4282s
+[val] step 23500 model_arm=0.00198 copy_arm=0.02305
+step 23600 loss 0.00152 lr 9.23e-05 4319s
+step 23800 loss 0.00151 lr 8.69e-05 4354s
+step 24000 loss 0.00149 lr 8.16e-05 4390s
+[val] step 24000 model_arm=0.00200 copy_arm=0.02305
+step 24200 loss 0.00151 lr 7.64e-05 4427s
+step 24400 loss 0.00145 lr 7.14e-05 4463s
+[val] step 24500 model_arm=0.00197 copy_arm=0.02305
+step 24600 loss 0.00143 lr 6.65e-05 4500s
+step 24800 loss 0.00147 lr 6.18e-05 4536s
+step 25000 loss 0.00143 lr 5.73e-05 4572s
+[val] step 25000 model_arm=0.00194 copy_arm=0.02305
+step 25200 loss 0.00145 lr 5.29e-05 4608s
+step 25400 loss 0.00143 lr 4.86e-05 4644s
+[val] step 25500 model_arm=0.00194 copy_arm=0.02305
+step 25600 loss 0.00142 lr 4.46e-05 4680s
+step 25800 loss 0.00142 lr 4.07e-05 4716s
+step 26000 loss 0.00144 lr 3.70e-05 4751s
+[val] step 26000 model_arm=0.00194 copy_arm=0.02305
+step 26200 loss 0.00142 lr 3.34e-05 4787s
+step 26400 loss 0.00140 lr 3.00e-05 4823s
+[val] step 26500 model_arm=0.00192 copy_arm=0.02305
+step 26600 loss 0.00141 lr 2.68e-05 4860s
+step 26800 loss 0.00142 lr 2.38e-05 4896s
+step 27000 loss 0.00142 lr 2.09e-05 4932s
+[val] step 27000 model_arm=0.00191 copy_arm=0.02305
+step 27200 loss 0.00142 lr 1.83e-05 4969s
+step 27400 loss 0.00143 lr 1.58e-05 5004s
+[val] step 27500 model_arm=0.00190 copy_arm=0.02305
+step 27600 loss 0.00143 lr 1.34e-05 5042s
+step 27800 loss 0.00141 lr 1.13e-05 5077s
+step 28000 loss 0.00138 lr 9.35e-06 5113s
+[val] step 28000 model_arm=0.00191 copy_arm=0.02305
+step 28200 loss 0.00140 lr 7.58e-06 5150s
+step 28400 loss 0.00141 lr 5.99e-06 5185s
+[val] step 28500 model_arm=0.00189 copy_arm=0.02305
+step 28600 loss 0.00141 lr 4.59e-06 5222s
+step 28800 loss 0.00142 lr 3.38e-06 5258s
+step 29000 loss 0.00140 lr 2.34e-06 5293s
+[val] step 29000 model_arm=0.00189 copy_arm=0.02305
+step 29200 loss 0.00139 lr 1.50e-06 5330s
+step 29400 loss 0.00140 lr 8.45e-07 5365s
+[val] step 29500 model_arm=0.00189 copy_arm=0.02305
+step 29600 loss 0.00140 lr 3.75e-07 5402s
+step 29800 loss 0.00140 lr 9.39e-08 5438s
+[val] step 30000 model=0.00011 copy=0.00133 linear=0.00199 model_arm=0.00189 copy_arm=0.02305 linear_arm=0.03452 model_t2=0.00023 copy_t2=0.00215 time=5474.01613

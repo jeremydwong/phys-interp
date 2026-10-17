@@ -75,7 +75,8 @@ def steer_basis(pp, mode="encode", rng=None):
     if mode == "random":
         R, _ = np.linalg.qr(rng.standard_normal(B.shape))
         B = R * np.linalg.norm(B, axis=0, keepdims=True)
-    dev = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    from analysis.device import get_device
+    dev = get_device()
     f = lambda a: torch.tensor(a, dtype=torch.float32, device=dev)  # noqa: E731
     return dict(B=f(B), Bi=f(np.linalg.pinv(B)), mu=f(pp["mu"]), frame=pp["frame"], dev=dev)
 

@@ -77,7 +77,7 @@ def main():
         print(s, row["clean"], flush=True)
 
     # (a)+(b) figure
-    fig, axes = plt.subplots(1, 1 + len(pick), figsize=(7.2, 2.4), gridspec_kw=dict(width_ratios=[1.4] + [1] * len(pick)))
+    fig, axes = plt.subplots(1, 1 + len(pick), figsize=(7.2, 2.9), gridspec_kw=dict(width_ratios=[1.4] + [1] * len(pick)))
     xs = np.array([max(s, 1) for s in steps])
     ax = axes[0]
     bottom = np.zeros(len(steps))
@@ -99,7 +99,7 @@ def main():
             ax.plot(xs, R3[:, j], "-o", ms=2.5, lw=1.3, color=SERIES[j], label=vs[names.index(v)].label)
         ax.set_xscale("log"); ax.set_ylim(0, 1)
         ax.set_title(d["name"], fontsize=8)
-        ax.legend(fontsize=4.8, loc="upper left")
+        ax.legend(fontsize=4.8, loc="upper center", bbox_to_anchor=(0.5, -0.3))
         ax.set_xlabel("step")
     axes[1].set_ylabel("binned R²")
     fig.tight_layout()
@@ -108,8 +108,8 @@ def main():
     # clips per checkpoint for tracked units
     show = [s for s in steps if s > 0]
     show = [show[i] for i in np.linspace(0, len(show) - 1, 5).round().astype(int)]
-    fig = plt.figure(figsize=(7.2, 1.0 * len(pick) + 0.3))
-    gs = fig.add_gridspec(len(pick), len(show) * 3 + (len(show) - 1), wspace=0.04, hspace=0.25,
+    fig = plt.figure(figsize=(7.2, 0.62 * len(pick) + 0.35))
+    gs = fig.add_gridspec(len(pick), len(show) * 3 + (len(show) - 1), wspace=0.04, hspace=0.45,
                           width_ratios=([1, 1, 1, 0.3] * len(show))[:-1], left=0.01, right=0.99, top=0.92, bottom=0.02)
     for r, d in enumerate(pick):
         u = d["unit"]
@@ -151,7 +151,8 @@ def main():
             rin = binned_r2_matrix(Yt[sel], a[sel, None], bins=10)[0] if sel.sum() > 50 else np.full(len(names), np.nan)
             rows.append({"band": f"{lo}-{hi}", "n": int(sel.sum()),
                          "top_shift": [(names[j], float(shift[j])) for j in top],
-                         "within_best_var": names[int(np.nanargmax(rin))], "within_best_r2": float(np.nanmax(rin)),
+                         "within_best_var": names[int(np.nanargmax(rin))] if np.isfinite(rin).any() else None,
+                         "within_best_r2": float(np.nanmax(rin)) if np.isfinite(rin).any() else None,
                          "within_r2_of_overall_best": float(rin[bv])})
         bands[d["name"]] = rows
         # plot: standardized mean of the unit's top-3 overall variables per band

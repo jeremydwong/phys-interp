@@ -1,0 +1,82 @@
+[
+ {
+  "unit": "tmp0.500",
+  "best_var": "cos_q1",
+  "best_r2": 0.8811124563217163,
+  "pos": [
+   2,
+   12
+  ],
+  "dataset_max_at_pos": 3.014395236968994,
+  "naive_act": 7.599172592163086,
+  "fourier_act": 6.490420341491699,
+  "robust_act": 3.560326099395752,
+  "naive_act_shift2px": 2.596742630004883,
+  "fourier_act_shift2px": 5.501644611358643,
+  "robust_act_shift2px": 3.5569233894348145
+ },
+ {
+  "unit": "tmp3.406",
+  "best_var": "qd1",
+  "best_r2": 0.9004255533218384,
+  "pos": [
+   7,
+   8
+  ],
+  "dataset_max_at_pos": 4.823864459991455,
+  "naive_act": 11.883149147033691,
+  "fourier_act": -9.272330498788506e-05,
+  "robust_act": 4.762358665466309,
+  "naive_act_shift2px": 3.0039706230163574,
+  "fourier_act_shift2px": -0.00021178832685109228,
+  "robust_act_shift2px": 6.850683212280273
+ },
+ {
+  "unit": "tmp3.48",
+  "best_var": "ctq1",
+  "best_r2": 0.5954740047454834,
+  "pos": [
+   13,
+   7
+  ],
+  "dataset_max_at_pos": 4.482583999633789,
+  "naive_act": 10.521095275878906,
+  "fourier_act": 8.716978073120117,
+  "robust_act": 5.758703231811523,
+  "naive_act_shift2px": 2.24499249458313,
+  "fourier_act_shift2px": 7.434175491333008,
+  "robust_act_shift2px": 6.1143059730529785
+ },
+ {
+  "unit": "tmp3.286",
+  "best_var": "cor2",
+  "best_r2": 0.7481573820114136,
+  "pos": [
+   12,
+   9
+  ],
+  "dataset_max_at_pos": 3.0099565982818604,
+  "naive_act": -3.862282937916461e-06,
+  "fourier_act": -9.862862498266622e-06,
+  "robust_act": 4.635042190551758,
+  "naive_act_shift2px": -0.0006589475669898093,
+  "fourier_act_shift2px": -0.00013779175060335547,
+  "robust_act_shift2px": 5.108615398406982
+ },
+ {
+  "unit": "enc3.401",
+  "best_var": "grav1",
+  "best_r2": 0.8563547134399414,
+  "pos": [
+   3,
+   12
+  ],
+  "dataset_max_at_pos": 4.569339275360107,
+  "naive_act": -0.0,
+  "fourier_act": -0.0,
+  "robust_act": 6.874209403991699,
+  "naive_act_shift2px": -2.112426227540709e-05,
+  "fourier_act_shift2px": -1.9701522191439835e-08,
+  "robust_act_shift2px": 6.605724334716797
+ }
+]
