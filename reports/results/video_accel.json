@@ -72,9 +72,9 @@
  "si_frac_elbow_selective(<-0.5)": 0.041666666666666664,
  "si_frac_mixed": 0.6833333333333333,
  "si_by_family": {
-  "interaction": 101,
+  "gravity": 360,
   "contact": 19,
-  "gravity": 360
+  "interaction": 101
  },
  "enc3_vs_tmp3": {
   "qdd1": {

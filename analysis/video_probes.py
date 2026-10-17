@@ -179,7 +179,7 @@ def plot(R, align, mlp, vs):
 
     # layer curves for physics quantities
     ix = {v.name: i for i, v in enumerate(vs)}
-    fig, axes = plt.subplots(1, 3, figsize=(7.2, 2.6), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(7.2, 3.1), sharey=True)
     groups = [("State", ["sin_q1", "sin_q2", "qd1", "qd2"]),
               ("Acceleration & gravity", ["qdd1", "qdd2", "grav1", "grav2"]),
               ("Interaction & contact", ["int1", "int2", "c_floor", "ctq2"])]
@@ -193,10 +193,10 @@ def plot(R, align, mlp, vs):
         ax.axvline(3.5, color=INK2, lw=0.8, ls=":")
         ax.set_xticks(x, LAYERS, rotation=60, fontsize=6.5)
         ax.set_title(title, fontsize=9)
-        ax.legend(fontsize=5.5, loc="lower right")
+        ax.legend(fontsize=5.5, loc="upper center", bbox_to_anchor=(0.5, -0.3), ncol=2)
         ax.set_ylim(-0.02, 1.02)
     axes[0].set_ylabel("held-out R²")
-    fig.text(0.5, -0.06, "solid: trained · dotted: random init · dashed: ridge on raw pixels (4 frames)",
+    fig.text(0.5, -0.1, "solid: trained · dotted: random init · dashed: ridge on raw pixels (4 frames)",
              ha="center", fontsize=7, color=MUTED)
     fig.tight_layout()
     savefig(fig, "video_probe_layers.png")

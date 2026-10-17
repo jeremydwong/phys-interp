@@ -110,7 +110,9 @@ def draw(units, c, acts, model, vs, fname, title):
         ax = fig.add_subplot(gs[r, 0]); clean(ax, False)
         ax.text(0.0, 0.92, f"{layer}.{ch}", fontsize=8, fontweight="bold", color=INK, transform=ax.transAxes, va="top")
         lab = v.label if c["status"][u] != "unexplained" else f"(best: {v.label})"
-        ax.text(0.0, 0.62, lab, fontsize=5.8, color=col, transform=ax.transAxes, va="top", wrap=True)
+        import textwrap
+        ax.text(0.0, 0.66, textwrap.fill(lab, 22), fontsize=5.8, color=col, transform=ax.transAxes, va="top",
+                linespacing=1.1)
         tag = c["status"][u] + (" · conj." if c["conj"][u] else "")
         ax.text(0.0, 0.30, f"R² = {c['best_r2'][u]:.2f}", fontsize=6, color=INK2, transform=ax.transAxes, va="top")
         ax.text(0.0, 0.12, tag, fontsize=5.5, color=MUTED, transform=ax.transAxes, va="top")
