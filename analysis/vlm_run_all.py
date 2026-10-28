@@ -23,6 +23,7 @@ STAGES = {
     "extract": [["vlm_extract", "video"], ["vlm_extract", "image"], ["vlm_extract", "randvis"]],
     "census": [["vlm_census"], ["vlm_census", "fig"]],
     "probe": [["vlm_probe"], ["vlm_probe", "fig"]],
+    "probe_mlp": [["vlm_probe", "mlp"]],          # max-pooled unit probes + figures only (resume after "probe" main)
     "gallery": [["vlm_gallery"], ["vlm_gallery", "maps"]],
     "contact": [["vlm_contact"]],
     "behaviour": [["vlm_behaviour", "collect"], ["vlm_behaviour", "analyze"]],

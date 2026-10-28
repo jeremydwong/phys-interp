@@ -28,6 +28,7 @@ from analysis.common import FAMILIES, load_states, savefig, setup_style, targets
 from analysis.vlm_common import VDIR, group_index, clip_index, renderer, GROUPS, n_used  # noqa: E402
 
 ALPHAS = np.logspace(-1, 5, 7)
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DYN = ["qdd1", "qdd2", "int1", "int2", "tau1", "tau2", "contact", "c_floor", "c_wall", "c_fore", "ctq1", "ctq2",
        "grav1", "grav2", "cor1", "cor2", "ke", "pe"]
 
@@ -78,14 +79,21 @@ def folds(groups, k=5):
     return np.array([fid[g] for g in groups])
 
 
-def ridge_cv(X, Y, fold, alphas=ALPHAS, return_pred=False):
-    """Returns R2 [n_alpha, V] (pooled out-of-fold) and optionally OOF predictions at best alpha per target."""
-    X = torch.as_tensor(np.asarray(X, np.float32), dtype=torch.float64)
-    Y = torch.as_tensor(np.asarray(Y, np.float32), dtype=torch.float64)
-    preds = torch.zeros((len(alphas),) + Y.shape, dtype=torch.float64)
+def ridge_cv(X, Y, fold, alphas=ALPHAS, return_pred=False, device="cpu", dtype=torch.float64, std_floor=False):
+    """Returns R2 [n_alpha, V] (pooled out-of-fold) and optionally OOF predictions at best alpha per target.
+
+    device/dtype: the wide max-pooled unit probes run on the GPU in float32 (float64 copies of a
+    10800 x 19456 matrix on the CPU exhausted the msi's RAM). std_floor: floor each feature's
+    train-fold std at 10% of the median std, so a unit that is almost never active in the training
+    fold cannot blow up when standardised on the test fold."""
+    X = torch.as_tensor(np.asarray(X, np.float32), dtype=dtype, device=device)
+    Y = torch.as_tensor(np.asarray(Y, np.float32), dtype=dtype, device=device)
+    preds = torch.zeros((len(alphas),) + Y.shape, dtype=dtype, device=device)
     for k in np.unique(fold):
-        tr, te = torch.as_tensor(fold != k), torch.as_tensor(fold == k)
+        tr, te = torch.as_tensor(fold != k, device=device), torch.as_tensor(fold == k, device=device)
         mx, sx = X[tr].mean(0), X[tr].std(0) + 1e-6
+        if std_floor:
+            sx = torch.clamp(sx, min=0.1 * sx.median())
         my = Y[tr].mean(0)
         Xtr, Xte = (X[tr] - mx) / sx, (X[te] - mx) / sx
         Ytr = Y[tr] - my
@@ -104,10 +112,10 @@ def ridge_cv(X, Y, fold, alphas=ALPHAS, return_pred=False):
                 preds[ai][te] = K @ (UtY / (evals[:, None]+ a)) + my
     ss = ((Y - Y.mean(0)) ** 2).sum(0)
     r2 = 1 - ((preds - Y[None]) ** 2).sum(1) / ss
-    r2 = r2.numpy()
+    r2 = r2.cpu().numpy()
     if return_pred:
         best = r2.argmax(0)
-        P = np.stack([preds[best[j], :, j].numpy() for j in range(Y.shape[1])], 1)
+        P = np.stack([preds[best[j], :, j].cpu().numpy() for j in range(Y.shape[1])], 1)
         return r2, P
     return r2
 
@@ -216,9 +224,15 @@ def mlp_probes():
             Z = np.load(os.path.join(VDIR, tmpl.format(l)), mmap_mode="r")[:NG]
             X = np.concatenate([np.asarray(Z[:, 0], np.float32), np.asarray(Z[:, 1], np.float32)], 1) if part == "L" \
                 else np.asarray(Z[:, 0], np.float32)
-            X = X[:, X.std(0) > 1e-4]
-            r2 = ridge_cv(X, Y, fold, alphas=np.logspace(1, 5, 5)).max(0)
-            r2p = ridge_cv(X, R[:, dyn_idx], fold, alphas=np.logspace(1, 5, 5)).max(0)
+            # drop near-constant and very sparse units (active away from their median in <1% of groups)
+            keep = (X.std(0) > 1e-4) & (np.mean(np.abs(X - np.median(X, 0)) > 1e-3, 0) > 0.01)
+            X = X[:, keep]
+            kw = dict(alphas=np.logspace(1, 5, 5), device=DEVICE, dtype=torch.float32, std_floor=True)
+            r2 = ridge_cv(X, Y, fold, **kw).max(0)
+            r2p = ridge_cv(X, R[:, dyn_idx], fold, **kw).max(0)
+            del X, Z
+            if DEVICE == "cuda":
+                torch.cuda.empty_cache()
             res["mlp_max"][f"{part}{l}"] = dict(r2=r2.tolist(), r2_partial=r2p.tolist())
             print("mlp", part, l, "sin_q1 %.2f qd1 %.2f qd2 %.2f ee_vx %.2f qdd1 %.2f contact %.2f ke %.2f" %
                   tuple(r2[[0, 9, 10, 11, 14, 24, 30]]), flush=True)

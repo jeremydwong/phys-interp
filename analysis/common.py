@@ -130,6 +130,13 @@ DIVERGING = ["#1c5cab", "#5598e7", "#9ec5f4", "#f0efec", "#f2a7a6", "#e66767", "
 SEQUENTIAL = ["#f0efec", "#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
 
 
+def _installed_fonts(names):
+    """Keep only installed families (avoids a findfont warning per text element)."""
+    from matplotlib import font_manager
+    have = {f.name for f in font_manager.fontManager.ttflist}
+    return [n for n in names if n in have] or ["DejaVu Sans"]
+
+
 def setup_style():
     import matplotlib as mpl
     from matplotlib.colors import LinearSegmentedColormap
@@ -138,7 +145,7 @@ def setup_style():
         "figure.dpi": 110, "savefig.dpi": 200, "savefig.bbox": "tight",
         # listed in font.family (not behind the sans-serif alias) so matplotlib falls back per glyph:
         # Arial (Windows) has no subscript digits, DejaVu Sans supplies q₁, q₂.
-        "font.family": ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"],
+        "font.family": _installed_fonts(["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"]),
         "font.size": 9, "axes.titlesize": 10, "axes.titleweight": "bold", "axes.titlelocation": "left",
         "axes.labelsize": 9, "axes.labelcolor": INK2, "axes.edgecolor": AXIS, "axes.linewidth": 0.8,
         "axes.spines.top": False, "axes.spines.right": False,
