@@ -1441,6 +1441,166 @@
    }
   }
  ],
+ "gallery_spec": [
+  {
+   "key": "video_vision_L8_pos",
+   "unit": 2591,
+   "var": "ee_z",
+   "fam": "posture",
+   "r2": 0.8836804164757917,
+   "conj": false,
+   "part": "vision",
+   "layer": 8,
+   "pole": "+",
+   "bands": true
+  },
+  {
+   "key": "video_vision_L3_pos",
+   "unit": 1493,
+   "var": "qd1",
+   "fam": "velocity",
+   "r2": 0.7172611100530087,
+   "conj": false,
+   "part": "vision",
+   "layer": 3,
+   "pole": "+",
+   "bands": true
+  },
+  {
+   "key": "video_vision_L3_pos",
+   "unit": 2792,
+   "var": "qdd1",
+   "fam": "accel",
+   "r2": 0.1830507514985277,
+   "conj": false,
+   "part": "vision",
+   "layer": 3,
+   "pole": "+"
+  },
+  {
+   "key": "video_vision_L8_pos",
+   "unit": 160,
+   "var": "grav1",
+   "fam": "gravity",
+   "r2": 0.7901778862709755,
+   "conj": false,
+   "part": "vision",
+   "layer": 8,
+   "pole": "+",
+   "bands": true
+  },
+  {
+   "key": "video_vision_L8_pos",
+   "unit": 2386,
+   "var": "cor2",
+   "fam": "interaction",
+   "r2": 0.5525726018264958,
+   "conj": false,
+   "part": "vision",
+   "layer": 8,
+   "pole": "+"
+  },
+  {
+   "key": "video_vision_L18_pos",
+   "unit": 4014,
+   "var": "ctq1",
+   "fam": "contact",
+   "r2": 0.5492542672953338,
+   "conj": false,
+   "part": "vision",
+   "layer": 18,
+   "pole": "+",
+   "bands": true
+  },
+  {
+   "key": "video_vision_L8_pos",
+   "unit": 1726,
+   "var": "pe",
+   "fam": "energy",
+   "r2": 0.8878034407239933,
+   "conj": false,
+   "part": "vision",
+   "layer": 8,
+   "pole": "+"
+  },
+  {
+   "key": "video_LM_L2_neg",
+   "unit": 1848,
+   "var": "sin_q1",
+   "fam": "posture",
+   "r2": 0.7378879221283478,
+   "conj": false,
+   "part": "LM",
+   "layer": 2,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L8_neg",
+   "unit": 4747,
+   "var": "ee_vz",
+   "fam": "velocity",
+   "r2": 0.6537227333419473,
+   "conj": false,
+   "part": "LM",
+   "layer": 8,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L16_neg",
+   "unit": 6072,
+   "var": "qdd2",
+   "fam": "accel",
+   "r2": 0.34535659236725513,
+   "conj": false,
+   "part": "LM",
+   "layer": 16,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L2_neg",
+   "unit": 789,
+   "var": "grav1",
+   "fam": "gravity",
+   "r2": 0.6548767788526901,
+   "conj": false,
+   "part": "LM",
+   "layer": 2,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L8_neg",
+   "unit": 7671,
+   "var": "cor2",
+   "fam": "interaction",
+   "r2": 0.49993337876806293,
+   "conj": false,
+   "part": "LM",
+   "layer": 8,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L2_neg",
+   "unit": 8960,
+   "var": "ctq1",
+   "fam": "contact",
+   "r2": 0.45469668284006703,
+   "conj": false,
+   "part": "LM",
+   "layer": 2,
+   "pole": "\u2212"
+  },
+  {
+   "key": "video_LM_L2_pos",
+   "unit": 9169,
+   "var": "pe",
+   "fam": "energy",
+   "r2": 0.6835529880339632,
+   "conj": false,
+   "part": "LM",
+   "layer": 2,
+   "pole": "+"
+  }
+ ],
  "probe_results": {
   "targets": [
    "sin_q1",

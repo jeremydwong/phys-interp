@@ -57,6 +57,34 @@ def select_units(z, summ, names, fams, n=12):
     return cands
 
 
+BAND_FAMS = ["posture", "velocity", "gravity", "contact"]
+
+
+def load_spec(names, fams):
+    """data/vlm/gallery_spec.json; if missing, build it: best vision and best LM unit per family
+    (binned R² ≥ 0.1), with the quantile-band flag on the best unit of each BAND_FAMS family."""
+    path = os.path.join(VDIR, "gallery_spec.json")
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    z, summ = load_census()
+    cands = select_units(z, summ, names, fams)
+    spec = []
+    for part in ["vision", "LM"]:
+        for f in ["posture", "velocity", "accel", "gravity", "interaction", "contact", "applied", "energy"]:
+            c = [d for d in cands if d["part"] == part and d["fam"] == f and d["r2"] >= 0.1]
+            if c:
+                spec.append(max(c, key=lambda d: d["r2"]))
+    for f in BAND_FAMS:
+        c = [d for d in spec if d["fam"] == f]
+        if c:
+            max(c, key=lambda d: d["r2"])["bands"] = True
+    with open(path, "w") as fh:
+        json.dump(spec, fh, indent=1)
+    print(f"wrote {path}: {len(spec)} units", flush=True)
+    return spec
+
+
 def trail_image(frames, upto):
     """frames [8,H,W,3]; composite of frames[:upto+1] with fading trail."""
     base = frames[upto].astype(np.float32)
@@ -120,8 +148,7 @@ def main_cache(spec=None):
     gi = group_index()[:NG]
     Y = Yall[gi[:, 0], gi[:, 3]]
     if spec is None:
-        with open(os.path.join(VDIR, "gallery_spec.json")) as f:
-            spec = json.load(f)
+        spec = load_spec(names, fams)
     rows = []
     for sp in spec:
         (part, l, pole), pos, neg = unit_values(sp["key"], sp["unit"], NG)
@@ -165,8 +192,7 @@ def main(spec=None):
     Y = Yall[gi[:, 0], gi[:, 3]]
     z, summ = load_census()
     if spec is None:
-        with open(os.path.join(VDIR, "gallery_spec.json")) as f:
-            spec = json.load(f)
+        spec = load_spec(names, fams)
     model, proc = load_model()
     rows = []
     for sp in spec:
