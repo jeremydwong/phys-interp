@@ -264,7 +264,8 @@ def figures():
     ax.set_yticks(np.arange(0, 61, 4), [rows[i] for i in range(0, 61, 4)], fontsize=6.5)
     ax.set_xticks(range(V), labels, rotation=90, fontsize=6.5)
     ax.axhline(23.5, color=INK2, lw=1.0)
-    ax.text(V - 0.4, 23.0, "vision encoder ↑   language model ↓", ha="right", va="bottom", fontsize=7, color=INK2)
+    ax.text(0.5, 23.5, "vision encoder (above)  |  language model (below)", ha="left", va="center", fontsize=6.5, color=INK2,
+            bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.9))
     ax.grid(False)
     ax.set_ylabel("layer (V = vision block output, L = LM hidden state at visual tokens)")
     axf = fig.add_subplot(gs[0, 0], sharex=ax)
@@ -326,8 +327,12 @@ def figures():
     ax.set_xticks(x, [labels[i] for i in di], rotation=40, ha="right", fontsize=7)
     ax.set_ylabel("R²")
     ax.set_ylim(0, 1)
-    ax.set_title("Dynamics beyond kinematics: probing y − E[y | posture, velocity]")
-    ax.legend(fontsize=7, loc="upper right")
+    ax.set_title("Dynamics beyond kinematics: probing y − E[y | posture, velocity]", pad=34)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=MUTED, label="explained by true posture+velocity (GBM)"),
+                       Patch(color=INK2, label="probe on residual, video (best layer; family colour)"),
+                       Patch(color=INK2, alpha=0.4, label="probe on residual, single image (light)")],
+              fontsize=6.5, loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2, borderaxespad=0.2)
     ax.grid(axis="x", visible=False)
     savefig(fig, "vlm_probe_partial.png")
 

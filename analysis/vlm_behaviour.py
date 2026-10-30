@@ -193,12 +193,20 @@ def analyze():
         print(name, json.dumps({k: v for k, v in res[name].items() if k != "probe_acc_by_layer"}, indent=None))
     with open(os.path.join(VDIR, "behaviour_results.json"), "w") as f:
         json.dump(res, f, indent=1)
+    figure(res)
 
+
+def figure(res=None):
+    setup_style()
+    import matplotlib.pyplot as plt
+    if res is None:
+        with open(os.path.join(VDIR, "behaviour_results.json")) as f:
+            res = json.load(f)
     # figure: verbal vs logit vs probe
     names = list(QUESTIONS)
-    labels = {"contact": "touching\nfloor/wall?", "floor_wall": "floor or\nwall?", "speed": "speeding up or\nslowing down?",
-              "segment": "blue or orange\nrotating faster?", "anticipate": "will it hit\nnext?"}
-    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.9), gridspec_kw=dict(width_ratios=[1.35, 1]))
+    labels = {"contact": "touching\nsurface?", "floor_wall": "floor or\nwall?", "speed": "speeding\nup?",
+              "segment": "blue/orange\nfaster?", "anticipate": "will hit\nnext?"}
+    fig, axes = plt.subplots(1, 2, figsize=(7.0, 3.4), gridspec_kw=dict(width_ratios=[1.35, 1]))
     ax = axes[0]
     x = np.arange(len(names))
     w = 0.2
@@ -208,13 +216,12 @@ def analyze():
     cols = [MUTED, "#b5b3ab", SERIES[2], SERIES[0]]
     for i, (v, l, c) in enumerate(zip(vals, labs, cols)):
         ax.bar(x + (i - 1.5) * w, v, w, label=l, color=c)
-    ax.axhline(0.5, color=INK2, lw=0.8, ls="--")
-    ax.text(len(names) - 0.5, 0.51, "chance", ha="right", va="bottom", fontsize=7, color=INK2)
+    ax.axhline(0.5, color=INK2, lw=0.8, ls="--", label="chance")
     ax.set_xticks(x, [labels[n] for n in names], fontsize=7)
     ax.set_ylim(0.3, 1.0)
     ax.set_ylabel("accuracy / AUC")
-    ax.set_title("A  What the VLM says vs. what it encodes")
-    ax.legend(fontsize=6.5, loc="upper left", ncol=2, bbox_to_anchor=(0, 1.0))
+    ax.set_title("A  What the VLM says vs. what it encodes", pad=32)
+    ax.legend(fontsize=6.3, loc="lower left", ncol=2, bbox_to_anchor=(0, 1.0), borderaxespad=0.2)
     ax.grid(axis="x", visible=False)
     ax = axes[1]
     for i, n in enumerate(names):
@@ -223,11 +230,11 @@ def analyze():
     ax.set_xlabel("LM layer (residual at last prompt token)")
     ax.set_ylabel("probe accuracy (5-fold)")
     ax.set_ylim(0.3, 1.02)
-    ax.set_title("B  Probe accuracy by depth")
-    ax.legend(fontsize=6, loc="lower right")
+    ax.set_title("B  Probe accuracy by depth", pad=32)
+    ax.legend(fontsize=6, loc="lower left", ncol=2, bbox_to_anchor=(0, 1.0), borderaxespad=0.2)
     fig.tight_layout()
     savefig(fig, "vlm_behaviour.png")
 
 
 if __name__ == "__main__":
-    {"collect": collect, "analyze": analyze}[sys.argv[1]]()
+    {"collect": collect, "analyze": analyze, "fig": figure}[sys.argv[1]]()

@@ -81,7 +81,7 @@ def census_layer(A, Y, R, fams, names):
     return dict(live=live, B=B, best=best, bestr=bestr, cls=cls, conj=conj, second=second, partial=P)
 
 
-def main():
+def main(only_randvis=False):
     Y, vs, gi, st = aligned_targets()
     names, fams = [v.name for v in vs], [v.family for v in vs]
     R, _ = residualise(Y, vs, st, gi)
@@ -95,8 +95,19 @@ def main():
 
     layers = [("vision", l, "video", "+", f"video_vis_mlp_L{l}.npy") for l in VIS_LAYERS] + \
              [("vision", l, "image", "+", f"image_vis_mlp_L{l}.npy") for l in VIS_LAYERS] + \
-             [("LM", l, "video", s, f"video_llm_mlp_L{l}.npy") for l in LLM_LAYERS for s in "+−"]
+             [("LM", l, "video", s, f"video_llm_mlp_L{l}.npy") for l in LLM_LAYERS for s in "+−"] + \
+             [("vision", l, "randvis", "+", f"randvis_vis_mlp_L{l}.npy") for l in VIS_LAYERS]
     summary, units = [], {}
+    if only_randvis:
+        # random-init control only: append to the existing census (keeps the trained-model entries)
+        layers = [x for x in layers if x[2] == "randvis"]
+        with open(os.path.join(VDIR, "census.json")) as f:
+            summary = [s for s in json.load(f) if s["mode"] != "randvis"]
+        z = np.load(os.path.join(VDIR, "census_units.npz"))
+        for k in z.files:
+            key, kk = k.split("__")
+            if not key.startswith("randvis"):
+                units.setdefault(key, {})[kk] = z[k]
     for part, l, mode, pole, fn in layers:
         p = os.path.join(VDIR, fn)
         if not os.path.exists(p):
@@ -138,10 +149,12 @@ def figure(summary=None):
             summary = json.load(f)
     fam_order = ["posture", "velocity", "accel", "gravity", "interaction", "contact", "applied", "energy"]
     groups = [("Vision MLP, video", [s for s in summary if s["part"] == "vision" and s["mode"] == "video"]),
+              ("Vision MLP, random init", [s for s in summary if s["part"] == "vision" and s["mode"] == "randvis"]),
               ("Vision MLP, single image", [s for s in summary if s["part"] == "vision" and s["mode"] == "image"]),
               ("LM MLP (+ pole), video", [s for s in summary if s["part"] == "LM" and s["pole"] == "+"]),
               ("LM MLP (− pole), video", [s for s in summary if s["part"] == "LM" and s["pole"] == "−"])]
-    fig, axes = plt.subplots(1, 4, figsize=(7.0, 3.0), sharey=True)
+    groups = [g for g in groups if g[1]]
+    fig, axes = plt.subplots(1, len(groups), figsize=(7.0, 3.0), sharey=True)
     for ax, (title, ss) in zip(axes, groups):
         for i, s in enumerate(ss):
             bottom = 0.0
@@ -156,7 +169,7 @@ def figure(summary=None):
                 bottom += pa / s["n_live"]
             ax.bar(i, 1 - bottom, bottom=bottom, color=FAMILIES["none"][0], alpha=0.5, width=0.75)
         ax.set_xticks(range(len(ss)), [f"{'V' if s['part'] == 'vision' else 'L'}{s['layer']}" for s in ss], fontsize=7)
-        ax.set_title(title, fontsize=8)
+        ax.set_title(title.replace(", ", ",\n", 1), fontsize=7.5)
         ax.set_ylim(0, 1)
         ax.grid(axis="x", visible=False)
     axes[0].set_ylabel("fraction of live units")
@@ -173,5 +186,7 @@ def figure(summary=None):
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "fig":
         figure()
+    elif len(sys.argv) > 1 and sys.argv[1] == "randvis":
+        main(only_randvis=True)
     else:
         main()

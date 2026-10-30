@@ -236,8 +236,9 @@ def draw(rows, gi, Y, names, fams, labels):
             lname = ("V" if part == "vision" else "L") + L[1:]
             ax.text(0, 0.95, f"{lname} #{sp['unit']}" + (" (−)" if pole == "neg" else ""), fontsize=8, fontweight="bold",
                     va="top", transform=ax.transAxes, color=INK)
-            ax.text(0, 0.66, sp.get("title", labels[names.index(sp["var"])]), fontsize=6.6, va="top", color=col,
-                    transform=ax.transAxes, wrap=True)
+            import textwrap
+            ax.text(0, 0.66, textwrap.fill(sp.get("title", labels[names.index(sp["var"])]), 20), fontsize=6.6, va="top",
+                    color=col, transform=ax.transAxes, linespacing=1.0)
             ax.text(0, 0.22, f"binned R² {sp['r2']:.2f}" + ("\nconjunction" if sp.get("conj") else ""), fontsize=6,
                     va="top", color=INK2, transform=ax.transAxes)
             sign = 1 if pole == "pos" else -1
@@ -273,7 +274,8 @@ def draw(rows, gi, Y, names, fams, labels):
             my = [a[bi == b].mean() for b in range(20) if (bi == b).any()]
             ax.plot(mx, my, color=INK, lw=1.2)
             ax.tick_params(labelsize=5, length=2, pad=1)
-            ax.set_xlabel(sp["var"], fontsize=6, labelpad=1)
+            ax.text(0.03, 0.97, sp["var"], transform=ax.transAxes, fontsize=6, va="top", color=INK2,
+                    bbox=dict(boxstyle="round,pad=0.1", fc="white", ec="none", alpha=0.8))
             ax.yaxis.tick_right()
             if ri == 0:
                 ax.set_title("tuning (all groups)", fontsize=7, loc="left", fontweight="normal", color=INK2)
@@ -281,7 +283,32 @@ def draw(rows, gi, Y, names, fams, labels):
         savefig(fig, fname)
 
 
+def main_redraw():
+    """Redraw the gallery from data/vlm/gallery_cache.npz (spatial maps captured by main()); no GPU."""
+    setup_style()
+    st = load_states()
+    Yall, vs = targets(st)
+    names, fams, labels = [v.name for v in vs], [v.family for v in vs], [v.label for v in vs]
+    NG, _ = n_used("video")
+    gi = group_index()[:NG]
+    Y = Yall[gi[:, 0], gi[:, 3]]
+    spec = load_spec(names, fams)
+    z = np.load(os.path.join(VDIR, "gallery_cache.npz"))
+    rows = []
+    for i, sp in enumerate(spec):
+        (part, l, pole), pos, neg = unit_values(sp["key"], sp["unit"], NG)
+        a = pos if pole == "+" else -neg
+        ex = z[f"r{i}_ex"]
+        _, stat = pick_examples(a, pos, neg, pole, part, gi)
+        clips = [renderer()(st["q"][gi[j, 0]][clip_frames(gi[j, 4] - 4 * gi[j, 2])]) for j in ex]
+        rows.append(dict(sp=sp, a=a, pos=pos, neg=neg, ex=ex, clips=clips, maps=z[f"r{i}_maps"], raw=(pos, neg), stat=stat))
+    draw(rows, gi, Y, names, fams, labels)
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "redraw":
+        main_redraw()
+        sys.exit()
     # default: cache-only gallery (argmax-token outline). "maps" re-runs the model for full spatial maps.
     if len(sys.argv) > 1 and sys.argv[1] == "maps":
         main()

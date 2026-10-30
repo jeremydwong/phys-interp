@@ -12,7 +12,7 @@ inputs and readers, steering), and only then names it. Probes and censuses come 
 work so far is census and probe first. So the order below is: fix the tools (E), read units
 openly (B), then test explanations so they can lose (D), then re-score the census (C).
 
-## 0. Close out the first pass (no new GPU work)
+## 0. Close out the first pass (no new GPU work) — DONE (vlm.md §0)
 
 - Open every `reports/figs/vlm_*.png`; fix overlapping labels, clipped titles, unreadable ticks.
 - Write `reports/results/vlm.md` and `vlm.json` from `data/vlm/*_results.json`, `census.json`,

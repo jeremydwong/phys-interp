@@ -86,7 +86,8 @@ def main():
     for k, fn, pole, idx, r in best_picks[:4]:
         Z = np.load(os.path.join(VDIR, fn), mmap_mode="r")
         a = np.asarray(Z[:NG, 0, idx[0]] if pole == "+" else -Z[:NG, 1, idx[0]], np.float32)
-        sig[f"unit {k.replace('video_', '')}#{idx[0]} (R²={r[0]:.2f})"] = a
+        _p, _l = k.split('_')[1:3]
+        sig[f"unit {'V' if _p == 'vision' else 'L'}{_l[1:]}{'−' if pole != '+' else ''}#{idx[0]} (contact R²={r[0]:.2f})"] = a
     clr = np.array([clearance(st, e, f) for e, f in zip(gi[:, 0], gi[:, 3])])
     gt = Y[:, ci]
     # index groups by (episode, aligned frame)
@@ -153,7 +154,10 @@ def main():
         ax.set_xlabel("lag from contact onset (sim frames, 20 ms)")
         if col == 0:
             ax.set_ylabel("activation (z)")
-        ax.legend(fontsize=5.5, loc="upper left")
+        if col == 1:
+            lo_, hi_ = ax.get_ylim()
+            ax.set_ylim(lo_, hi_ + 0.4 * (hi_ - lo_))
+        ax.legend(fontsize=6, loc="lower left" if col == 0 else "upper left")
         # anticipation stats
         for name, x in sig.items():
             resid = x - clr_model(x)

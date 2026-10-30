@@ -264,18 +264,18 @@
    "top": [
     [
      "sin_q1",
-     1.0
+     null
     ],
     [
      "cos_q1",
-     1.0
+     null
     ],
     [
      "sin_q2",
-     1.0
+     null
     ]
    ],
-   "r2_best_var": 1.0,
+   "r2_best_var": null,
    "mean_best_var": 0.1390828937292099,
    "mean_act": 0.0
   },
@@ -285,18 +285,18 @@
    "top": [
     [
      "sin_q1",
-     1.0
+     null
     ],
     [
      "cos_q1",
-     1.0
+     null
     ],
     [
      "sin_q2",
-     1.0
+     null
     ]
    ],
-   "r2_best_var": 1.0,
+   "r2_best_var": null,
    "mean_best_var": 0.2488812506198883,
    "mean_act": 0.0
   },

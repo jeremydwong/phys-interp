@@ -32,7 +32,7 @@
     "post_0_8_z": 0.3671350667385127
    }
   },
-  "unit vision_L13_pos#917 (R\u00b2=0.53)": {
+  "unit V13#917 (contact R\u00b2=0.53)": {
    "floor": {
     "pre_minus_base_raw_z": 0.23847949504852295,
     "pre_minus_base_after_clearance_z": 0.25755491852760315,
@@ -46,7 +46,7 @@
     "post_0_8_z": -0.044027335941791534
    }
   },
-  "unit vision_L8_pos#1004 (R\u00b2=0.53)": {
+  "unit V8#1004 (contact R\u00b2=0.53)": {
    "floor": {
     "pre_minus_base_raw_z": 0.14153775572776794,
     "pre_minus_base_after_clearance_z": 0.1691097617149353,
@@ -60,7 +60,7 @@
     "post_0_8_z": -0.17932641506195068
    }
   },
-  "unit vision_L3_pos#623 (R\u00b2=0.53)": {
+  "unit V3#623 (contact R\u00b2=0.53)": {
    "floor": {
     "pre_minus_base_raw_z": 0.18034124374389648,
     "pre_minus_base_after_clearance_z": 0.20608358085155487,
@@ -74,7 +74,7 @@
     "post_0_8_z": -0.34207138419151306
    }
   },
-  "unit vision_L18_pos#3771 (R\u00b2=0.50)": {
+  "unit V18#3771 (contact R\u00b2=0.50)": {
    "floor": {
     "pre_minus_base_raw_z": 0.17338623106479645,
     "pre_minus_base_after_clearance_z": 0.1968594491481781,

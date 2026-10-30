@@ -188,12 +188,12 @@
     "mean_act_ratio": 7.2190842628479
    },
    "noobst": {
-    "tuning_r2": 1.0,
+    "tuning_r2": NaN,
     "corr_with_original": NaN,
     "mean_act_ratio": 0.0
    },
    "cartoon": {
-    "tuning_r2": 1.0,
+    "tuning_r2": NaN,
     "corr_with_original": NaN,
     "mean_act_ratio": 0.0
    }

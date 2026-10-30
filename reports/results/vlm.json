@@ -265,18 +265,18 @@
     "top": [
      [
       "sin_q1",
-      1.0
+      null
      ],
      [
       "cos_q1",
-      1.0
+      null
      ],
      [
       "sin_q2",
-      1.0
+      null
      ]
     ],
-    "r2_best_var": 1.0,
+    "r2_best_var": null,
     "mean_best_var": 0.1390828937292099,
     "mean_act": 0.0
    },
@@ -286,18 +286,18 @@
     "top": [
      [
       "sin_q1",
-      1.0
+      null
      ],
      [
       "cos_q1",
-      1.0
+      null
      ],
      [
       "sin_q2",
-      1.0
+      null
      ]
     ],
-    "r2_best_var": 1.0,
+    "r2_best_var": null,
     "mean_best_var": 0.2488812506198883,
     "mean_act": 0.0
    },
@@ -2102,6 +2102,366 @@
     "ke": 0.009149152785539627,
     "pe": 0.006810718681663275
    }
+  },
+  {
+   "key": "randvis_vision_L3_pos",
+   "part": "vision",
+   "layer": 3,
+   "mode": "randvis",
+   "pole": "+",
+   "n_units": 4096,
+   "n_live": 4096,
+   "n_clean": 133,
+   "n_partial": 938,
+   "n_unexplained": 3025,
+   "n_conj": 0,
+   "by_family_clean_partial": {
+    "posture": [
+     127,
+     800
+    ],
+    "velocity": [
+     2,
+     55
+    ],
+    "accel": [
+     0,
+     0
+    ],
+    "gravity": [
+     0,
+     23
+    ],
+    "interaction": [
+     0,
+     1
+    ],
+    "contact": [
+     0,
+     5
+    ],
+    "applied": [
+     0,
+     0
+    ],
+    "energy": [
+     4,
+     54
+    ]
+   },
+   "partial_dyn_max": 0.01959432289004326,
+   "partial_dyn_null_999": 0.003291499335318804,
+   "n_partial_dyn_above_0p1": 0,
+   "n_partial_dyn_above_null": 258,
+   "partial_dyn_best_target": "c_wall",
+   "partial_dyn_max_by_target": {
+    "qdd1": 0.0028010744135826826,
+    "qdd2": 0.006964196916669607,
+    "int1": 0.004847961012274027,
+    "int2": 0.003606159007176757,
+    "tau1": 0.004316013306379318,
+    "tau2": 0.008094962686300278,
+    "contact": 0.0035132241901010275,
+    "c_floor": 0.008273473009467125,
+    "c_wall": 0.01959432289004326,
+    "c_fore": 0.005489361938089132,
+    "ctq1": 0.005988197401165962,
+    "ctq2": 0.005001029931008816,
+    "grav1": 0.004251027479767799,
+    "grav2": 0.007899968884885311,
+    "cor1": 0.0038040976505726576,
+    "cor2": 0.005400944501161575,
+    "ke": 0.0035772533155977726,
+    "pe": 0.00252427882514894
+   }
+  },
+  {
+   "key": "randvis_vision_L8_pos",
+   "part": "vision",
+   "layer": 8,
+   "mode": "randvis",
+   "pole": "+",
+   "n_units": 4096,
+   "n_live": 4089,
+   "n_clean": 97,
+   "n_partial": 894,
+   "n_unexplained": 3098,
+   "n_conj": 6,
+   "by_family_clean_partial": {
+    "posture": [
+     95,
+     758
+    ],
+    "velocity": [
+     1,
+     51
+    ],
+    "accel": [
+     0,
+     0
+    ],
+    "gravity": [
+     0,
+     23
+    ],
+    "interaction": [
+     0,
+     7
+    ],
+    "contact": [
+     0,
+     1
+    ],
+    "applied": [
+     0,
+     0
+    ],
+    "energy": [
+     1,
+     54
+    ]
+   },
+   "partial_dyn_max": 0.013610719703137875,
+   "partial_dyn_null_999": 0.0034809675998985767,
+   "n_partial_dyn_above_0p1": 0,
+   "n_partial_dyn_above_null": 194,
+   "partial_dyn_best_target": "c_wall",
+   "partial_dyn_max_by_target": {
+    "qdd1": 0.0027450756169855595,
+    "qdd2": 0.004980247933417559,
+    "int1": 0.003722419496625662,
+    "int2": 0.004370138980448246,
+    "tau1": 0.0037801964208483696,
+    "tau2": 0.008497982285916805,
+    "contact": 0.004235842265188694,
+    "c_floor": 0.008003048598766327,
+    "c_wall": 0.013610719703137875,
+    "c_fore": 0.005415899679064751,
+    "ctq1": 0.00785781815648079,
+    "ctq2": 0.0062803360633552074,
+    "grav1": 0.004216507542878389,
+    "grav2": 0.009318503551185131,
+    "cor1": 0.005302002653479576,
+    "cor2": 0.004368152469396591,
+    "ke": 0.003770604031160474,
+    "pe": 0.005864911247044802
+   }
+  },
+  {
+   "key": "randvis_vision_L13_pos",
+   "part": "vision",
+   "layer": 13,
+   "mode": "randvis",
+   "pole": "+",
+   "n_units": 4096,
+   "n_live": 4093,
+   "n_clean": 100,
+   "n_partial": 882,
+   "n_unexplained": 3111,
+   "n_conj": 2,
+   "by_family_clean_partial": {
+    "posture": [
+     97,
+     741
+    ],
+    "velocity": [
+     2,
+     44
+    ],
+    "accel": [
+     0,
+     0
+    ],
+    "gravity": [
+     1,
+     21
+    ],
+    "interaction": [
+     0,
+     3
+    ],
+    "contact": [
+     0,
+     5
+    ],
+    "applied": [
+     0,
+     0
+    ],
+    "energy": [
+     0,
+     68
+    ]
+   },
+   "partial_dyn_max": 0.01601581647992134,
+   "partial_dyn_null_999": 0.0035455559846013784,
+   "n_partial_dyn_above_0p1": 0,
+   "n_partial_dyn_above_null": 194,
+   "partial_dyn_best_target": "c_wall",
+   "partial_dyn_max_by_target": {
+    "qdd1": 0.0037196604534983635,
+    "qdd2": 0.00929804053157568,
+    "int1": 0.007928148843348026,
+    "int2": 0.004422344267368317,
+    "tau1": 0.005344629753381014,
+    "tau2": 0.0056937262415885925,
+    "contact": 0.003954912070184946,
+    "c_floor": 0.007868732325732708,
+    "c_wall": 0.01601581647992134,
+    "c_fore": 0.005113392602652311,
+    "ctq1": 0.00659146485850215,
+    "ctq2": 0.004577015060931444,
+    "grav1": 0.005896666087210178,
+    "grav2": 0.0074111237190663815,
+    "cor1": 0.004570981487631798,
+    "cor2": 0.004335148725658655,
+    "ke": 0.0025844466872513294,
+    "pe": 0.002265116898342967
+   }
+  },
+  {
+   "key": "randvis_vision_L18_pos",
+   "part": "vision",
+   "layer": 18,
+   "mode": "randvis",
+   "pole": "+",
+   "n_units": 4096,
+   "n_live": 4092,
+   "n_clean": 116,
+   "n_partial": 853,
+   "n_unexplained": 3123,
+   "n_conj": 2,
+   "by_family_clean_partial": {
+    "posture": [
+     108,
+     703
+    ],
+    "velocity": [
+     3,
+     55
+    ],
+    "accel": [
+     0,
+     0
+    ],
+    "gravity": [
+     1,
+     19
+    ],
+    "interaction": [
+     0,
+     6
+    ],
+    "contact": [
+     0,
+     5
+    ],
+    "applied": [
+     0,
+     0
+    ],
+    "energy": [
+     4,
+     65
+    ]
+   },
+   "partial_dyn_max": 0.009233241900801659,
+   "partial_dyn_null_999": 0.003436789382249117,
+   "n_partial_dyn_above_0p1": 0,
+   "n_partial_dyn_above_null": 195,
+   "partial_dyn_best_target": "c_wall",
+   "partial_dyn_max_by_target": {
+    "qdd1": 0.0025874068960547447,
+    "qdd2": 0.004463050048798323,
+    "int1": 0.0038619013503193855,
+    "int2": 0.0031302920542657375,
+    "tau1": 0.0038632024079561234,
+    "tau2": 0.006555334199219942,
+    "contact": 0.004402866121381521,
+    "c_floor": 0.0056390101090073586,
+    "c_wall": 0.009233241900801659,
+    "c_fore": 0.0051068468019366264,
+    "ctq1": 0.007047154475003481,
+    "ctq2": 0.004163974896073341,
+    "grav1": 0.005502768326550722,
+    "grav2": 0.00801458302885294,
+    "cor1": 0.007003793492913246,
+    "cor2": 0.006229780148714781,
+    "ke": 0.0031437785364687443,
+    "pe": 0.0037575436290353537
+   }
+  },
+  {
+   "key": "randvis_vision_L23_pos",
+   "part": "vision",
+   "layer": 23,
+   "mode": "randvis",
+   "pole": "+",
+   "n_units": 4096,
+   "n_live": 4092,
+   "n_clean": 114,
+   "n_partial": 932,
+   "n_unexplained": 3046,
+   "n_conj": 2,
+   "by_family_clean_partial": {
+    "posture": [
+     109,
+     773
+    ],
+    "velocity": [
+     0,
+     67
+    ],
+    "accel": [
+     0,
+     0
+    ],
+    "gravity": [
+     0,
+     25
+    ],
+    "interaction": [
+     0,
+     5
+    ],
+    "contact": [
+     0,
+     5
+    ],
+    "applied": [
+     0,
+     0
+    ],
+    "energy": [
+     5,
+     57
+    ]
+   },
+   "partial_dyn_max": 0.013238154351711273,
+   "partial_dyn_null_999": 0.003100590081885457,
+   "n_partial_dyn_above_0p1": 0,
+   "n_partial_dyn_above_null": 256,
+   "partial_dyn_best_target": "c_wall",
+   "partial_dyn_max_by_target": {
+    "qdd1": 0.0031862498726695776,
+    "qdd2": 0.004570469725877047,
+    "int1": 0.004908381495624781,
+    "int2": 0.004250045400112867,
+    "tau1": 0.0055611627176404,
+    "tau2": 0.007088507525622845,
+    "contact": 0.003251204965636134,
+    "c_floor": 0.008971910923719406,
+    "c_wall": 0.013238154351711273,
+    "c_fore": 0.0052477153949439526,
+    "ctq1": 0.007474029436707497,
+    "ctq2": 0.006386608816683292,
+    "grav1": 0.004073295276612043,
+    "grav2": 0.010592514649033546,
+    "cor1": 0.0049611786380410194,
+    "cor2": 0.004651564173400402,
+    "ke": 0.002510940423235297,
+    "pe": 0.0030815100762993097
+   }
   }
  ],
  "contact_results": {
@@ -2138,7 +2498,7 @@
      "post_0_8_z": 0.3671350667385127
     }
    },
-   "unit vision_L13_pos#917 (R\u00b2=0.53)": {
+   "unit V13#917 (contact R\u00b2=0.53)": {
     "floor": {
      "pre_minus_base_raw_z": 0.23847949504852295,
      "pre_minus_base_after_clearance_z": 0.25755491852760315,
@@ -2152,7 +2512,7 @@
      "post_0_8_z": -0.044027335941791534
     }
    },
-   "unit vision_L8_pos#1004 (R\u00b2=0.53)": {
+   "unit V8#1004 (contact R\u00b2=0.53)": {
     "floor": {
      "pre_minus_base_raw_z": 0.14153775572776794,
      "pre_minus_base_after_clearance_z": 0.1691097617149353,
@@ -2166,7 +2526,7 @@
      "post_0_8_z": -0.17932641506195068
     }
    },
-   "unit vision_L3_pos#623 (R\u00b2=0.53)": {
+   "unit V3#623 (contact R\u00b2=0.53)": {
     "floor": {
      "pre_minus_base_raw_z": 0.18034124374389648,
      "pre_minus_base_after_clearance_z": 0.20608358085155487,
@@ -2180,7 +2540,7 @@
      "post_0_8_z": -0.34207138419151306
     }
    },
-   "unit vision_L18_pos#3771 (R\u00b2=0.50)": {
+   "unit V18#3771 (contact R\u00b2=0.50)": {
     "floor": {
      "pre_minus_base_raw_z": 0.17338623106479645,
      "pre_minus_base_after_clearance_z": 0.1968594491481781,
@@ -2546,12 +2906,12 @@
      "mean_act_ratio": 7.2190842628479
     },
     "noobst": {
-     "tuning_r2": 1.0,
+     "tuning_r2": NaN,
      "corr_with_original": NaN,
      "mean_act_ratio": 0.0
     },
     "cartoon": {
-     "tuning_r2": 1.0,
+     "tuning_r2": NaN,
      "corr_with_original": NaN,
      "mean_act_ratio": 0.0
     }
