@@ -1,0 +1,600 @@
+{
+ "summary": {
+  "n": 40,
+  "judged_by": "the main agent, after the descriptions were written and saved blind (ours)",
+  "counts": {
+   "different, description better (extreme/conjunction of our variables)": 13,
+   "same": 9,
+   "different, description better (not expressible in our 32 variables)": 3,
+   "no pattern in description": 13,
+   "more general": 1,
+   "different, undecided": 1
+  },
+  "census_class_counts": {
+   "clean": 3,
+   "partial": 15,
+   "unexplained": 22
+  },
+  "unexplained_with_clear_description": [
+   "U01",
+   "U06",
+   "U07",
+   "U14",
+   "U15",
+   "U16",
+   "U26",
+   "U30",
+   "U32",
+   "U33",
+   "U39",
+   "U40"
+  ],
+  "census_beats_description": [
+   "U28",
+   "U31",
+   "U36"
+  ]
+ },
+ "units": {
+  "U01": {
+   "part": "LM",
+   "layer": 2,
+   "unit": 3218,
+   "census_best": "qd1",
+   "census_r2": 0.2196427731735643,
+   "census_class": "unexplained",
+   "description": "Fires where the hand approaches the floor-wall corner, and goes negative at a fixed empty spot on the left edge whatever the arm is doing.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U02": {
+   "part": "LM",
+   "layer": 32,
+   "unit": 9307,
+   "census_best": "grav1",
+   "census_r2": 0.10203278137661087,
+   "census_class": "unexplained",
+   "description": "Goes strongly negative on the patch above the floor under a still arm whose forearm points right toward the wall; no clear positive pole.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U03": {
+   "part": "vision",
+   "layer": 3,
+   "unit": 3537,
+   "census_best": "ke",
+   "census_r2": 0.324975412803005,
+   "census_class": "partial",
+   "description": "Constant positive at a fixed corner patch (likely a position/register artifact), negative on the joint of a still arm whose forearm slants down-right toward the corner.",
+   "strength": [
+    "none",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U04": {
+   "part": "vision",
+   "layer": 23,
+   "unit": 3384,
+   "census_best": "cos_q1",
+   "census_r2": 0.12929222573795862,
+   "census_class": "unexplained",
+   "description": "Weakly prefers an arm held out right with the forearm hanging down, otherwise a generic strongly negative background response.",
+   "strength": [
+    "weak",
+    "none"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U05": {
+   "part": "vision",
+   "layer": 23,
+   "unit": 484,
+   "census_best": "cos_q1",
+   "census_r2": 0.16756579499068547,
+   "census_class": "unexplained",
+   "description": "Positive on empty background and negative on the arm itself: roughly distinguishes 'arm present here' vs 'empty space', with no pose selectivity.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U06": {
+   "part": "LM",
+   "layer": 24,
+   "unit": 2918,
+   "census_best": "ee_z",
+   "census_r2": 0.046041914675067463,
+   "census_class": "unexplained",
+   "description": "Goes negative at the top-right wall patch when the still hand rests down toward the floor-wall corner; positive weakly on background beside a hanging arm.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U07": {
+   "part": "LM",
+   "layer": 16,
+   "unit": 4353,
+   "census_best": "cos_q1",
+   "census_r2": 0.11215519288548637,
+   "census_class": "unexplained",
+   "description": "Forearm hanging straight down and still vs forearm raised or swinging, read out at fixed background patches.",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U08": {
+   "part": "LM",
+   "layer": 8,
+   "unit": 2633,
+   "census_best": "pe",
+   "census_r2": 0.34214411310663995,
+   "census_class": "partial",
+   "description": "Arm hanging down at rest with the hand near the floor by the wall vs arm raised or moving.",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "more general"
+  },
+  "U09": {
+   "part": "vision",
+   "layer": 8,
+   "unit": 3405,
+   "census_best": "ee_x",
+   "census_r2": 0.3746497132682519,
+   "census_class": "partial",
+   "description": "Fires on a forearm lying low just above the floor; the negative pole is a fixed corner patch with near-constant value.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U10": {
+   "part": "vision",
+   "layer": 18,
+   "unit": 3956,
+   "census_best": "ee_x",
+   "census_r2": 0.1345113029887005,
+   "census_class": "unexplained",
+   "description": "Most negative when the elbow is folded shut with the arm held horizontal; otherwise uninformative.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U11": {
+   "part": "vision",
+   "layer": 13,
+   "unit": 2678,
+   "census_best": "cos_q1",
+   "census_r2": 0.39302033197727315,
+   "census_class": "partial",
+   "description": "Positive on empty space to the left of the hand, negative on the arm body near the elbow (especially with the forearm raised).",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U12": {
+   "part": "vision",
+   "layer": 8,
+   "unit": 1464,
+   "census_best": "ke",
+   "census_r2": 0.2703959666203549,
+   "census_class": "partial",
+   "description": "Positive on the shoulder region; negative at a fixed wall-side patch when the two links are lined up in a straight diagonal.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, undecided"
+  },
+  "U13": {
+   "part": "vision",
+   "layer": 8,
+   "unit": 1525,
+   "census_best": "cos_q1",
+   "census_r2": 0.2832143221068052,
+   "census_class": "partial",
+   "description": "A hand detector whose sign flips with context: positive for a hand out in open space, negative for a hand raised up against the wall.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (not expressible in our 32 variables)"
+  },
+  "U14": {
+   "part": "LM",
+   "layer": 2,
+   "unit": 1615,
+   "census_best": "sin_q1",
+   "census_r2": 0.11703942205383511,
+   "census_class": "unexplained",
+   "description": "Goes negative on the shoulder when the arm swings up above it.",
+   "strength": [
+    "none",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U15": {
+   "part": "LM",
+   "layer": 24,
+   "unit": 4233,
+   "census_best": "grav1",
+   "census_r2": 0.08171484445391963,
+   "census_class": "unexplained",
+   "description": "Negative on the floor patch under the arm when the hand comes down to the floor, weakly positive when the forearm is held level.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U16": {
+   "part": "LM",
+   "layer": 24,
+   "unit": 3175,
+   "census_best": "ee_z",
+   "census_r2": 0.1131177138049414,
+   "census_class": "unexplained",
+   "description": "Arm moving toward the wall/corner vs arm hanging still, read at fixed wall and top-left patches.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U17": {
+   "part": "vision",
+   "layer": 23,
+   "unit": 2641,
+   "census_best": "qd1",
+   "census_r2": 0.1855788138054273,
+   "census_class": "unexplained",
+   "description": "Weakly marks the wall surface itself; no arm-related pattern.",
+   "strength": [
+    "weak",
+    "none"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U18": {
+   "part": "vision",
+   "layer": 3,
+   "unit": 97,
+   "census_best": "cos_q1",
+   "census_r2": 0.42273015018279647,
+   "census_class": "partial",
+   "description": "Fires on the forearm when it hangs pressed along the wall; negative pole is a fixed floor patch.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (not expressible in our 32 variables)"
+  },
+  "U19": {
+   "part": "LM",
+   "layer": 32,
+   "unit": 7756,
+   "census_best": "cos_q1",
+   "census_r2": 0.09835377370837606,
+   "census_class": "unexplained",
+   "description": "Goes strongly negative when the hand comes down to the floor; no positive pattern.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U20": {
+   "part": "LM",
+   "layer": 8,
+   "unit": 6451,
+   "census_best": "grav1",
+   "census_r2": 0.2833452379724287,
+   "census_class": "partial",
+   "description": "Arm raised toward the wall vs arm hanging down into the corner.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U21": {
+   "part": "vision",
+   "layer": 13,
+   "unit": 2951,
+   "census_best": "pe",
+   "census_r2": 0.5727515002096282,
+   "census_class": "clean",
+   "description": "Negative at a fixed wall patch when the arm hangs still with the hand near the floor.",
+   "strength": [
+    "none",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U22": {
+   "part": "LM",
+   "layer": 32,
+   "unit": 8505,
+   "census_best": "int2",
+   "census_r2": 0.07861396096162498,
+   "census_class": "unexplained",
+   "description": "Background-near-arm responses with no clear pose distinction.",
+   "strength": [
+    "weak",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U23": {
+   "part": "vision",
+   "layer": 18,
+   "unit": 3760,
+   "census_best": "ee_vx",
+   "census_r2": 0.12833224810716826,
+   "census_class": "unexplained",
+   "description": "A mostly-negative unit with a fixed top-centre negative patch; no clear arm selectivity.",
+   "strength": [
+    "weak",
+    "none"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U24": {
+   "part": "vision",
+   "layer": 3,
+   "unit": 2683,
+   "census_best": "ee_x",
+   "census_r2": 0.31093514633199615,
+   "census_class": "partial",
+   "description": "Positive on the shoulder, negative on a hand pressing into the wall.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U25": {
+   "part": "vision",
+   "layer": 3,
+   "unit": 761,
+   "census_best": "cos_q1",
+   "census_r2": 0.31971283753930246,
+   "census_class": "partial",
+   "description": "Forearm-vs-shoulder part detector: positive on the forearm, negative on the shoulder.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (not expressible in our 32 variables)"
+  },
+  "U26": {
+   "part": "LM",
+   "layer": 16,
+   "unit": 3552,
+   "census_best": "ee_z",
+   "census_r2": 0.06981502527814154,
+   "census_class": "unexplained",
+   "description": "Forearm pointing up vs forearm pointing down into the corner, read out at fixed wall-side patches.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U27": {
+   "part": "LM",
+   "layer": 2,
+   "unit": 1708,
+   "census_best": "sin_q1",
+   "census_r2": 0.2617304210937762,
+   "census_class": "partial",
+   "description": "Forearm lying flat on the floor pointing left vs arm reaching right with the forearm hanging by the wall.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U28": {
+   "part": "vision",
+   "layer": 13,
+   "unit": 3521,
+   "census_best": "sin_q1",
+   "census_r2": 0.41273371724861796,
+   "census_class": "partial",
+   "description": "Narrow, nearly constant responses with no clear arm selectivity.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U29": {
+   "part": "LM",
+   "layer": 2,
+   "unit": 2700,
+   "census_best": "ee_z",
+   "census_r2": 0.5008498571241793,
+   "census_class": "clean",
+   "description": "Negative at the floor spot where the hand comes down onto it.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "same"
+  },
+  "U30": {
+   "part": "LM",
+   "layer": 16,
+   "unit": 1607,
+   "census_best": "pe",
+   "census_r2": 0.20031380920429342,
+   "census_class": "unexplained",
+   "description": "Arm hanging down under the shoulder vs arm reaching out right toward the wall.",
+   "strength": [
+    "clear",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U31": {
+   "part": "vision",
+   "layer": 18,
+   "unit": 2982,
+   "census_best": "qd1",
+   "census_r2": 0.3431422153013729,
+   "census_class": "partial",
+   "description": "Weakly: arm raised vs hand tucked into the floor-wall corner.",
+   "strength": [
+    "weak",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U32": {
+   "part": "vision",
+   "layer": 18,
+   "unit": 1181,
+   "census_best": "sin_q1",
+   "census_r2": 0.16301265323258352,
+   "census_class": "unexplained",
+   "description": "Arm reaching left vs arm hanging down and swinging low.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U33": {
+   "part": "LM",
+   "layer": 8,
+   "unit": 4191,
+   "census_best": "grav1",
+   "census_r2": 0.18468842487808235,
+   "census_class": "unexplained",
+   "description": "Fixed-patch unit whose negative pole is a still hand resting toward the floor-wall corner.",
+   "strength": [
+    "weak",
+    "clear"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U34": {
+   "part": "vision",
+   "layer": 13,
+   "unit": 726,
+   "census_best": "grav1",
+   "census_r2": 0.3904614519056705,
+   "census_class": "partial",
+   "description": "Fires on the left-edge patch when the hand reaches out to the left.",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "same"
+  },
+  "U35": {
+   "part": "vision",
+   "layer": 23,
+   "unit": 2105,
+   "census_best": "sin_q1",
+   "census_r2": 0.15839809457231302,
+   "census_class": "unexplained",
+   "description": "Arm raised with forearm pointing left vs arm hanging with forearm pointing right along the floor.",
+   "strength": [
+    "weak",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U36": {
+   "part": "LM",
+   "layer": 8,
+   "unit": 890,
+   "census_best": "ee_z",
+   "census_r2": 0.41073762101994493,
+   "census_class": "partial",
+   "description": "No visible pattern.",
+   "strength": [
+    "none",
+    "none"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U37": {
+   "part": "vision",
+   "layer": 8,
+   "unit": 2630,
+   "census_best": "grav1",
+   "census_r2": 0.5471354949213589,
+   "census_class": "clean",
+   "description": "Positive on the arm when it is slanted, negative when it stands vertical (or at the wall).",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "same"
+  },
+  "U38": {
+   "part": "LM",
+   "layer": 24,
+   "unit": 6451,
+   "census_best": "cos_q1",
+   "census_r2": 0.051040670776138164,
+   "census_class": "unexplained",
+   "description": "Weak background unit with no clear arm selectivity.",
+   "strength": [
+    "none",
+    "weak"
+   ],
+   "judgement": "no pattern in description"
+  },
+  "U39": {
+   "part": "LM",
+   "layer": 16,
+   "unit": 9635,
+   "census_best": "sin_q12",
+   "census_r2": 0.116110378218229,
+   "census_class": "unexplained",
+   "description": "Hand down on the floor vs arm held up level.",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  },
+  "U40": {
+   "part": "LM",
+   "layer": 32,
+   "unit": 5143,
+   "census_best": "ee_z",
+   "census_r2": 0.051118443368691535,
+   "census_class": "unexplained",
+   "description": "Hand resting on the floor vs arm held out level.",
+   "strength": [
+    "clear",
+    "weak"
+   ],
+   "judgement": "different, description better (extreme/conjunction of our variables)"
+  }
+ }
+}

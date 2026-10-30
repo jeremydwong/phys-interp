@@ -1,0 +1,2123 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+{
+ "U01": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 3218,
+  "description": {
+   "positive": "Hand/forearm reaching toward the floor-wall corner or the lower right of the arm; the marked spot sits on or just beyond the forearm tip, low and to the right. Mixed still and moving clips.",
+   "negative": "Same empty background spot at the far left edge, mid-low height, regardless of arm pose. The arm itself varies (mostly still, assorted poses).",
+   "marked_location": "Positive: on/near the hand, lower-right quadrant toward the corner (moderately consistent). Negative: fixed empty background patch at the left edge (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Fires where the hand approaches the floor-wall corner, and goes negative at a fixed empty spot on the left edge whatever the arm is doing."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.14944321125165694,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.14944321125165694
+     ],
+     [
+      "cos_q12",
+      0.145252944910918
+     ],
+     [
+      "grav2",
+      0.145252944910918
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "qd1",
+    "r2": 0.2196427731735643,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "qd1",
+      0.2196427731735643
+     ],
+     [
+      "ke",
+      0.21287564868250308
+     ],
+     [
+      "cor2",
+      0.2091546000967014
+     ]
+    ]
+   }
+  }
+ },
+ "U02": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 9307,
+  "description": {
+   "positive": "No consistent arm property; marked spot on empty background at varied places (near floor, upper middle, beside wall). Some fast swings, some still.",
+   "negative": "Arm still, blue link pointing down/up-right with the forearm held roughly horizontal pointing right toward the wall, hand off the floor; marked spot on empty background low and below/left of the arm, near the floor.",
+   "marked_location": "Positive: scattered background. Negative: background just above the floor below the arm (fairly consistent).",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Goes strongly negative on the patch above the floor under a still arm whose forearm points right toward the wall; no clear positive pole."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.030454409903012514,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.030454409903012514
+     ],
+     [
+      "sin_q1",
+      0.02973275411075882
+     ],
+     [
+      "elbow_z",
+      0.02973275411075882
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "grav1",
+    "r2": 0.10203278137661087,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.10203278137661087
+     ],
+     [
+      "ee_z",
+      0.08858401056157983
+     ],
+     [
+      "ee_x",
+      0.0848863128856383
+     ]
+    ]
+   }
+  }
+ },
+ "U03": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 3537,
+  "description": {
+   "positive": "Identical value (+8.25) at the bottom-left floor corner patch in every tile; the arms in these clips are mostly swinging fast (long trails), but the histogram shows the maximum is a constant, so this looks like a fixed-position artifact token rather than a selective response.",
+   "negative": "Still arm with the blue link vertical and the forearm angled down-right toward the floor-wall corner; marked spot on the joint/shoulder region at the image centre.",
+   "marked_location": "Positive: fixed bottom-left corner on the floor (100% consistent). Negative: on the arm at the joint near the image centre (very consistent).",
+   "strength_positive": "none",
+   "strength_negative": "clear",
+   "one_line": "Constant positive at a fixed corner patch (likely a position/register artifact), negative on the joint of a still arm whose forearm slants down-right toward the corner."
+  },
+  "census": {
+   "+": {
+    "best": "pe",
+    "r2": 0.26079440092758266,
+    "cls": "partial",
+    "top3": [
+     [
+      "pe",
+      0.26079440092758266
+     ],
+     [
+      "ke",
+      0.26076215620928056
+     ],
+     [
+      "cor2",
+      0.2586402746076826
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ke",
+    "r2": 0.324975412803005,
+    "cls": "partial",
+    "top3": [
+     [
+      "ke",
+      0.324975412803005
+     ],
+     [
+      "cor1",
+      0.29440058318852136
+     ],
+     [
+      "qd1",
+      0.29022036993339884
+     ]
+    ]
+   }
+  }
+ },
+ "U04": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 3384,
+  "description": {
+   "positive": "Arm with the blue link roughly horizontal pointing right and the forearm hanging straight down (right-angle elbow), mostly still; marked spot on floor below the arm or background near the wall.",
+   "negative": "Strong negative almost everywhere (histogram minima all around -15 to -22); top tiles show varied, often swinging arms with the marked spot on empty background upper area. No arm property shared.",
+   "marked_location": "Positive: floor patch beneath the arm or background beside the wall (mixed). Negative: scattered empty background, mostly upper half.",
+   "strength_positive": "weak",
+   "strength_negative": "none",
+   "one_line": "Weakly prefers an arm held out right with the forearm hanging down, otherwise a generic strongly negative background response."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.12221351195076091,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.12221351195076091
+     ],
+     [
+      "sin_q1",
+      0.10594088723396189
+     ],
+     [
+      "elbow_z",
+      0.10594088723396189
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.12929222573795862,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.12929222573795862
+     ],
+     [
+      "sin_q1",
+      0.12676217939980083
+     ],
+     [
+      "elbow_z",
+      0.12676217939980083
+     ]
+    ]
+   }
+  }
+ },
+ "U05": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 484,
+  "description": {
+   "positive": "Marked spot on empty background at scattered places (top-left, top-right, near wall, near floor); arm poses varied. No shared arm property.",
+   "negative": "Marked spot usually on or right next to the arm (shoulder/upper-arm region) or low-left background; many clips moving. Values nearly constant (~ -19).",
+   "marked_location": "Positive: empty background, inconsistent. Negative: on the arm near the shoulder in about half, left background in others.",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Positive on empty background and negative on the arm itself: roughly distinguishes 'arm present here' vs 'empty space', with no pose selectivity."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.16756579499068547,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.16756579499068547
+     ],
+     [
+      "grav1",
+      0.140123920272342
+     ],
+     [
+      "pe",
+      0.13510031015002344
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.14973792071450098,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.14973792071450098
+     ],
+     [
+      "sin_q1",
+      0.12545473552553477
+     ],
+     [
+      "elbow_z",
+      0.12545473552553477
+     ]
+    ]
+   }
+  }
+ },
+ "U06": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 2918,
+  "description": {
+   "positive": "Mostly still arm hanging below the shoulder with the hand down near the floor; marked spot on empty background beside the arm (left or between arm and wall).",
+   "negative": "Still arm with the hand down near the floor-wall corner (forearm slanting down-right into the corner); marked spot fixed at the top right, at/behind the top of the wall.",
+   "marked_location": "Positive: background next to the arm at mid height (variable side). Negative: top-right edge at the wall (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Goes negative at the top-right wall patch when the still hand rests down toward the floor-wall corner; positive weakly on background beside a hanging arm."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.046041914675067463,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.046041914675067463
+     ],
+     [
+      "pe",
+      0.04299091306096692
+     ],
+     [
+      "cos_q2",
+      0.04101291978537458
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_z",
+    "r2": 0.024103142728130855,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.024103142728130855
+     ],
+     [
+      "pe",
+      0.020329399392846725
+     ],
+     [
+      "elbow_z",
+      0.019829653699178662
+     ]
+    ]
+   }
+  }
+ },
+ "U07": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 4353,
+  "description": {
+   "positive": "Still arm with the blue link slanting down-right and the forearm hanging vertically down toward the floor; marked spot fixed at the top-left background.",
+   "negative": "Forearm raised or swinging (trails), often pointing up/left near the wall; marked spot on background at upper right near the wall.",
+   "marked_location": "Positive: top-left empty corner (very consistent). Negative: upper-right background near the wall (fairly consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Forearm hanging straight down and still vs forearm raised or swinging, read out at fixed background patches."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.11215519288548637,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.11215519288548637
+     ],
+     [
+      "pe",
+      0.0940517532541082
+     ],
+     [
+      "elbow_z",
+      0.0933231068098016
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "pe",
+    "r2": 0.03380684875242801,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "pe",
+      0.03380684875242801
+     ],
+     [
+      "sin_q1",
+      0.033505440781433915
+     ],
+     [
+      "elbow_z",
+      0.033505440781433915
+     ]
+    ]
+   }
+  }
+ },
+ "U08": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 2633,
+  "description": {
+   "positive": "Still arm with the upper arm slanting down-right and the forearm dropping down toward the floor, hand near the floor close to the wall; marked spot fixed behind the wall at mid height.",
+   "negative": "Marked spot on the arm or background near the shoulder/beside the arm; arm raised, extended or swinging, hand away from the floor.",
+   "marked_location": "Positive: right edge behind the wall, mid height (very consistent). Negative: near the arm, variable.",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Arm hanging down at rest with the hand near the floor by the wall vs arm raised or moving."
+  },
+  "census": {
+   "+": {
+    "best": "cor2",
+    "r2": 0.33787035316086045,
+    "cls": "partial",
+    "top3": [
+     [
+      "cor2",
+      0.33787035316086045
+     ],
+     [
+      "ctq2",
+      0.3021974688987922
+     ],
+     [
+      "ee_z",
+      0.29856941254912994
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "pe",
+    "r2": 0.34214411310663995,
+    "cls": "partial",
+    "top3": [
+     [
+      "pe",
+      0.34214411310663995
+     ],
+     [
+      "sin_q12",
+      0.26531046039814
+     ],
+     [
+      "elbow_z",
+      0.25960777888846054
+     ]
+    ]
+   }
+  }
+ },
+ "U09": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 3405,
+  "description": {
+   "positive": "Forearm low and near-horizontal just above the floor, marked spot on the forearm/hand close to the floor; mostly still.",
+   "negative": "Constant value (~ -3.06) at a fixed patch at the floor-wall corner (just right of the wall at floor level); arms often swinging toward the corner. Looks positional.",
+   "marked_location": "Positive: on the forearm/hand near the floor (consistent). Negative: fixed floor-wall corner patch (100% consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Fires on a forearm lying low just above the floor; the negative pole is a fixed corner patch with near-constant value."
+  },
+  "census": {
+   "+": {
+    "best": "pe",
+    "r2": 0.31265322364855896,
+    "cls": "partial",
+    "top3": [
+     [
+      "pe",
+      0.31265322364855896
+     ],
+     [
+      "ee_z",
+      0.2460107722195357
+     ],
+     [
+      "elbow_z",
+      0.24227675935231552
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_x",
+    "r2": 0.3746497132682519,
+    "cls": "partial",
+    "top3": [
+     [
+      "ee_x",
+      0.3746497132682519
+     ],
+     [
+      "grav1",
+      0.3270072449974819
+     ],
+     [
+      "cos_q1",
+      0.20195758930356222
+     ]
+    ]
+   }
+  }
+ },
+ "U10": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 3956,
+  "description": {
+   "positive": "Marked spot on background near the arm at varied places; poses varied. No shared property.",
+   "negative": "Elbow folded tight so the forearm doubles back along the upper arm, arm held around horizontal (raised off the floor); marked spot on background beside the arm or at the hand near the wall. Whole unit is strongly negative almost everywhere.",
+   "marked_location": "Positive: scattered background. Negative: background or hand near the arm, variable.",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Most negative when the elbow is folded shut with the arm held horizontal; otherwise uninformative."
+  },
+  "census": {
+   "+": {
+    "best": "cor2",
+    "r2": 0.008541844073243876,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cor2",
+      0.008541844073243876
+     ],
+     [
+      "cos_q1",
+      0.007375669348403835
+     ],
+     [
+      "pe",
+      0.0068353683434624335
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_x",
+    "r2": 0.1345113029887005,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_x",
+      0.1345113029887005
+     ],
+     [
+      "pe",
+      0.1054122192684942
+     ],
+     [
+      "elbow_z",
+      0.07864126782049774
+     ]
+    ]
+   }
+  }
+ },
+ "U11": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 2678,
+  "description": {
+   "positive": "Marked spot on background left of the arm, often near the hand when the forearm points left/down-left; some swinging.",
+   "negative": "Marked spot on the arm itself (around the elbow/upper arm), often with the forearm raised pointing up.",
+   "marked_location": "Positive: left background near the hand (moderately consistent). Negative: on the arm near the elbow (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Positive on empty space to the left of the hand, negative on the arm body near the elbow (especially with the forearm raised)."
+  },
+  "census": {
+   "+": {
+    "best": "sin_q12",
+    "r2": 0.38684305008795805,
+    "cls": "partial",
+    "top3": [
+     [
+      "sin_q12",
+      0.38684305008795805
+     ],
+     [
+      "ee_z",
+      0.38594784538035587
+     ],
+     [
+      "pe",
+      0.326319871919896
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.39302033197727315,
+    "cls": "partial",
+    "top3": [
+     [
+      "cos_q1",
+      0.39302033197727315
+     ],
+     [
+      "ee_z",
+      0.3735429177508326
+     ],
+     [
+      "grav1",
+      0.35489446386711354
+     ]
+    ]
+   }
+  }
+ },
+ "U12": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 1464,
+  "description": {
+   "positive": "Marked spot on the arm near the shoulder/upper arm; poses varied.",
+   "negative": "Two links lined up nearly in one straight line (straight or fully folded) on a diagonal, often moving; marked spot fixed behind the wall at mid height.",
+   "marked_location": "Positive: on the arm near the shoulder (consistent). Negative: fixed right edge behind the wall (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Positive on the shoulder region; negative at a fixed wall-side patch when the two links are lined up in a straight diagonal."
+  },
+  "census": {
+   "+": {
+    "best": "sin_q1",
+    "r2": 0.19808637673995866,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.19808637673995866
+     ],
+     [
+      "elbow_z",
+      0.19808637673995866
+     ],
+     [
+      "cos_q1",
+      0.1896854942720798
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ke",
+    "r2": 0.2703959666203549,
+    "cls": "partial",
+    "top3": [
+     [
+      "ke",
+      0.2703959666203549
+     ],
+     [
+      "ee_vx",
+      0.26975865483776496
+     ],
+     [
+      "cor2",
+      0.26539707813561886
+     ]
+    ]
+   }
+  }
+ },
+ "U13": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 1525,
+  "description": {
+   "positive": "Marked spot right on the hand (tip of the forearm), typically forearm pointing left or down-left, hand away from the wall.",
+   "negative": "Upper arm pointing right toward the wall and forearm raised vertically up beside the wall; marked spot at the hand/forearm against the wall.",
+   "marked_location": "Positive: on the hand (very consistent). Negative: on the hand at the wall (very consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "A hand detector whose sign flips with context: positive for a hand out in open space, negative for a hand raised up against the wall."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.13189005426107103,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.13189005426107103
+     ],
+     [
+      "cos_q1",
+      0.12584578942902347
+     ],
+     [
+      "pe",
+      0.12485990799567948
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.2832143221068052,
+    "cls": "partial",
+    "top3": [
+     [
+      "cos_q1",
+      0.2832143221068052
+     ],
+     [
+      "ee_vz",
+      0.2649598195405426
+     ],
+     [
+      "grav1",
+      0.2644211700559309
+     ]
+    ]
+   }
+  }
+ },
+ "U14": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 1615,
+  "description": {
+   "positive": "Marked spot on background near the wall or between arm and wall; arms varied. No clear shared property.",
+   "negative": "Arm raised upward (forearm pointing up above the shoulder), usually swinging; marked spot on the shoulder/upper-arm region at image centre.",
+   "marked_location": "Positive: variable background, often right side. Negative: on the arm near the shoulder (consistent).",
+   "strength_positive": "none",
+   "strength_negative": "clear",
+   "one_line": "Goes negative on the shoulder when the arm swings up above it."
+  },
+  "census": {
+   "+": {
+    "best": "ee_x",
+    "r2": 0.051533667402115735,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_x",
+      0.051533667402115735
+     ],
+     [
+      "grav1",
+      0.04656975100578986
+     ],
+     [
+      "cos_q1",
+      0.04415942837252995
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q1",
+    "r2": 0.11703942205383511,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.11703942205383511
+     ],
+     [
+      "elbow_z",
+      0.11703942205383511
+     ],
+     [
+      "cos_q1",
+      0.0923884389616706
+     ]
+    ]
+   }
+  }
+ },
+ "U15": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 4233,
+  "description": {
+   "positive": "Marked spot on background left of the arm or upper right; arm with the forearm held roughly horizontal pointing right, hand off the floor. Weak.",
+   "negative": "Forearm hanging down with the hand at or near the floor; marked spot on the floor directly below the shoulder.",
+   "marked_location": "Positive: background, variable. Negative: floor below centre (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Negative on the floor patch under the arm when the hand comes down to the floor, weakly positive when the forearm is held level."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.08171484445391963,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.08171484445391963
+     ],
+     [
+      "cos_q1",
+      0.07901556232190876
+     ],
+     [
+      "pe",
+      0.05373745485720327
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q12",
+    "r2": 0.03047863364410064,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q12",
+      0.03047863364410064
+     ],
+     [
+      "cos_q2",
+      0.02753498455532799
+     ],
+     [
+      "ee_z",
+      0.026344523970524225
+     ]
+    ]
+   }
+  }
+ },
+ "U16": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 3175,
+  "description": {
+   "positive": "Marked spot near the wall or the floor-wall corner; arms often moving toward the wall. Weak.",
+   "negative": "Still arm hanging below the shoulder with the elbow bent and the forearm pointing right/down-right toward the wall; marked spot fixed at top-left background.",
+   "marked_location": "Positive: wall or floor-wall corner (moderately consistent). Negative: top-left empty corner (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Arm moving toward the wall/corner vs arm hanging still, read at fixed wall and top-left patches."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.1131177138049414,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.1131177138049414
+     ],
+     [
+      "pe",
+      0.1081869233676882
+     ],
+     [
+      "cos_q1",
+      0.09252642893832419
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_z",
+    "r2": 0.08130216177671512,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.08130216177671512
+     ],
+     [
+      "cos_q1",
+      0.06311833248899523
+     ],
+     [
+      "sin_q1",
+      0.06218796046247155
+     ]
+    ]
+   }
+  }
+ },
+ "U17": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 2641,
+  "description": {
+   "positive": "Marked spot on or just at the wall face at mid height in about half the clips, elsewhere on background; arm poses varied.",
+   "negative": "Marked spot on background between the arm and the wall; arm poses varied. Very negative baseline everywhere.",
+   "marked_location": "Positive: on the wall face, mid height (partly consistent). Negative: background right of the arm near the wall.",
+   "strength_positive": "weak",
+   "strength_negative": "none",
+   "one_line": "Weakly marks the wall surface itself; no arm-related pattern."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.13585791796986402,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.13585791796986402
+     ],
+     [
+      "grav1",
+      0.10263248335157926
+     ],
+     [
+      "sin_q2",
+      0.07778490978286001
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "qd1",
+    "r2": 0.1855788138054273,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "qd1",
+      0.1855788138054273
+     ],
+     [
+      "cos_q1",
+      0.183890671776747
+     ],
+     [
+      "cor2",
+      0.17973149056453608
+     ]
+    ]
+   }
+  }
+ },
+ "U18": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 97,
+  "description": {
+   "positive": "Upper arm pointing right toward the wall with the forearm hanging down along the wall face; marked spot on the forearm/hand touching the wall.",
+   "negative": "Constant value (~ -2.94) at a fixed floor patch below the arm; arm poses varied, mostly still.",
+   "marked_location": "Positive: on the forearm against the wall (very consistent). Negative: fixed floor patch at bottom centre (very consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Fires on the forearm when it hangs pressed along the wall; negative pole is a fixed floor patch."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.2273968120411881,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.2273968120411881
+     ],
+     [
+      "ee_x",
+      0.22687392209772217
+     ],
+     [
+      "grav2",
+      0.1572299932932072
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.42273015018279647,
+    "cls": "partial",
+    "top3": [
+     [
+      "cos_q1",
+      0.42273015018279647
+     ],
+     [
+      "grav1",
+      0.3663897146160062
+     ],
+     [
+      "ctq1",
+      0.20447743007559938
+     ]
+    ]
+   }
+  }
+ },
+ "U19": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 7756,
+  "description": {
+   "positive": "Marked spot on empty background in varied places; arms varied. No shared property.",
+   "negative": "Forearm dropped down with the hand at or near the floor; marked spot on the floor under the arm or background near it. Long negative tail.",
+   "marked_location": "Positive: scattered background. Negative: floor under the arm or nearby background (moderately consistent).",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Goes strongly negative when the hand comes down to the floor; no positive pattern."
+  },
+  "census": {
+   "+": {
+    "best": "ee_x",
+    "r2": 0.045246611854862895,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_x",
+      0.045246611854862895
+     ],
+     [
+      "cos_q1",
+      0.04025754016265137
+     ],
+     [
+      "pe",
+      0.03921350688422387
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.09835377370837606,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.09835377370837606
+     ],
+     [
+      "pe",
+      0.09379555282628615
+     ],
+     [
+      "elbow_z",
+      0.08103251332411698
+     ]
+    ]
+   }
+  }
+ },
+ "U20": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 6451,
+  "description": {
+   "positive": "Arm raised near horizontal toward the wall, often moving; marked spot on background right of the arm near the wall.",
+   "negative": "Arm hanging down-right with the hand down toward the floor-wall corner, mostly still; marked spot fixed at top-left background.",
+   "marked_location": "Positive: right background near the wall (moderately consistent). Negative: top-left empty area (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Arm raised toward the wall vs arm hanging down into the corner."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.12648203767696176,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.12648203767696176
+     ],
+     [
+      "cos_q1",
+      0.12329906746620656
+     ],
+     [
+      "cos_q12",
+      0.12265303371347247
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "grav1",
+    "r2": 0.2833452379724287,
+    "cls": "partial",
+    "top3": [
+     [
+      "grav1",
+      0.2833452379724287
+     ],
+     [
+      "pe",
+      0.2716506954083152
+     ],
+     [
+      "cos_q1",
+      0.25813145826085127
+     ]
+    ]
+   }
+  }
+ },
+ "U21": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 2951,
+  "description": {
+   "positive": "Marked spot scattered (sometimes on the hand, sometimes left background); arms often moving. Weak or none.",
+   "negative": "Still arm hanging down with the forearm slanting down-right and the hand near the floor; marked spot fixed on the wall at mid height.",
+   "marked_location": "Positive: variable. Negative: on the wall, mid height (very consistent).",
+   "strength_positive": "none",
+   "strength_negative": "clear",
+   "one_line": "Negative at a fixed wall patch when the arm hangs still with the hand near the floor."
+  },
+  "census": {
+   "+": {
+    "best": "ke",
+    "r2": 0.1513287258752043,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ke",
+      0.1513287258752043
+     ],
+     [
+      "ee_vx",
+      0.1376431939382503
+     ],
+     [
+      "qd2_sq",
+      0.1372327766097684
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "pe",
+    "r2": 0.5727515002096282,
+    "cls": "clean",
+    "top3": [
+     [
+      "pe",
+      0.5727515002096282
+     ],
+     [
+      "sin_q1",
+      0.5542429060802485
+     ],
+     [
+      "elbow_z",
+      0.5542429060802485
+     ]
+    ]
+   }
+  }
+ },
+ "U22": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 8505,
+  "description": {
+   "positive": "Mostly still arm, marked spot on background close to the arm (between arm and wall or below-left).",
+   "negative": "Marked spot on background to the left of the arm; several clips have the upper arm pointing right and the forearm hanging down (L shape).",
+   "marked_location": "Positive: background near the arm. Negative: background left of the arm.",
+   "strength_positive": "weak",
+   "strength_negative": "weak",
+   "one_line": "Background-near-arm responses with no clear pose distinction."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.039243030580405236,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.039243030580405236
+     ],
+     [
+      "sin_q1",
+      0.03797221459546385
+     ],
+     [
+      "elbow_z",
+      0.03797221459546385
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "int2",
+    "r2": 0.07861396096162498,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "int2",
+      0.07861396096162498
+     ],
+     [
+      "int1",
+      0.07838911352502898
+     ],
+     [
+      "ee_vx",
+      0.07703545351277619
+     ]
+    ]
+   }
+  }
+ },
+ "U23": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 3760,
+  "description": {
+   "positive": "Even the top values are near zero or negative; marked spot on the arm near the shoulder or on left background; arms often moving.",
+   "negative": "Marked spot fixed on top-centre background above the arm; arm poses varied.",
+   "marked_location": "Positive: near shoulder/left background. Negative: top-centre background (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "none",
+   "one_line": "A mostly-negative unit with a fixed top-centre negative patch; no clear arm selectivity."
+  },
+  "census": {
+   "+": {
+    "best": "qdd2",
+    "r2": 0.003600532508069132,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "qdd2",
+      0.003600532508069132
+     ],
+     [
+      "qdd1",
+      0.00360053250806891
+     ],
+     [
+      "qd2",
+      0.0030786785598428956
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_vx",
+    "r2": 0.12833224810716826,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_vx",
+      0.12833224810716826
+     ],
+     [
+      "int1",
+      0.1206574993479348
+     ],
+     [
+      "cor2",
+      0.11021076649064687
+     ]
+    ]
+   }
+  }
+ },
+ "U24": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 2683,
+  "description": {
+   "positive": "Marked spot on the shoulder at image centre (where the upper arm starts), arm poses varied and often moving.",
+   "negative": "Hand/forearm pushed against the wall, forearm horizontal pointing right into the wall at low-mid height; marked spot on the hand at the wall.",
+   "marked_location": "Positive: shoulder (very consistent). Negative: hand at the wall (very consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Positive on the shoulder, negative on a hand pressing into the wall."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.010783011965013745,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.010783011965013745
+     ],
+     [
+      "cos_q1",
+      0.008800473840089085
+     ],
+     [
+      "ee_z",
+      0.008084587639899943
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_x",
+    "r2": 0.31093514633199615,
+    "cls": "partial",
+    "top3": [
+     [
+      "ee_x",
+      0.31093514633199615
+     ],
+     [
+      "cos_q12",
+      0.19488081242224398
+     ],
+     [
+      "grav2",
+      0.19488081242224398
+     ]
+    ]
+   }
+  }
+ },
+ "U25": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 761,
+  "description": {
+   "positive": "Marked spot on the forearm (orange link) midsection, forearm usually pointing left or level, often swinging.",
+   "negative": "Marked spot on the shoulder/upper arm near image centre, forearm pointing down toward the floor, often moving.",
+   "marked_location": "Positive: on the forearm (consistent). Negative: on the shoulder/upper arm (consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Forearm-vs-shoulder part detector: positive on the forearm, negative on the shoulder."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q12",
+    "r2": 0.08818892829053437,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q12",
+      0.08818892829053437
+     ],
+     [
+      "grav2",
+      0.08818892829053437
+     ],
+     [
+      "ee_z",
+      0.08494451237511325
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.31971283753930246,
+    "cls": "partial",
+    "top3": [
+     [
+      "cos_q1",
+      0.31971283753930246
+     ],
+     [
+      "sin_q1",
+      0.3118693219131169
+     ],
+     [
+      "elbow_z",
+      0.3118693219131169
+     ]
+    ]
+   }
+  }
+ },
+ "U26": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 3552,
+  "description": {
+   "positive": "Still arm in a check/V shape: upper arm slanting down-right, forearm pointing up-right toward the wall; marked spot fixed at the top of the wall.",
+   "negative": "Still arm with the forearm pointing down-right so the hand is near the floor-wall corner; marked spot fixed behind the wall at upper-mid height.",
+   "marked_location": "Positive: top of the wall (100% consistent). Negative: right edge behind the wall (100% consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Forearm pointing up vs forearm pointing down into the corner, read out at fixed wall-side patches."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.06981502527814154,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.06981502527814154
+     ],
+     [
+      "cos_q1",
+      0.05575830201795684
+     ],
+     [
+      "sin_q1",
+      0.051425398348220575
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q2",
+    "r2": 0.056882734193519524,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q2",
+      0.056882734193519524
+     ],
+     [
+      "qd1",
+      0.04893392079532333
+     ],
+     [
+      "ee_z",
+      0.047001793256297275
+     ]
+    ]
+   }
+  }
+ },
+ "U27": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 1708,
+  "description": {
+   "positive": "Upper arm hanging straight down and the forearm lying horizontal along the floor pointing left; marked spot on background above or right of the arm.",
+   "negative": "Upper arm pointing right toward the wall with the forearm hanging down next to the wall; marked spot on background inside the bend below the arm.",
+   "marked_location": "Positive: background near the arm, upper. Negative: background under the arm near its elbow (consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Forearm lying flat on the floor pointing left vs arm reaching right with the forearm hanging by the wall."
+  },
+  "census": {
+   "+": {
+    "best": "sin_q1",
+    "r2": 0.2617304210937762,
+    "cls": "partial",
+    "top3": [
+     [
+      "sin_q1",
+      0.2617304210937762
+     ],
+     [
+      "elbow_z",
+      0.2617304210937762
+     ],
+     [
+      "ee_z",
+      0.2405146934556488
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q2",
+    "r2": 0.06681631153174028,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q2",
+      0.06681631153174028
+     ],
+     [
+      "grav1",
+      0.06052510663993349
+     ],
+     [
+      "cos_q1",
+      0.05449531349962855
+     ]
+    ]
+   }
+  }
+ },
+ "U28": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 3521,
+  "description": {
+   "positive": "Marked spot on background in varied places; arms often swinging. Nearly constant value.",
+   "negative": "Marked spot on background above-left of the arm; arms varied, several with the forearm hanging near the wall. Nearly constant value.",
+   "marked_location": "Background, variable on both poles.",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Narrow, nearly constant responses with no clear arm selectivity."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.2093582930903407,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.2093582930903407
+     ],
+     [
+      "sin_q1",
+      0.17695318045391362
+     ],
+     [
+      "elbow_z",
+      0.17695318045391362
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q1",
+    "r2": 0.41273371724861796,
+    "cls": "partial",
+    "top3": [
+     [
+      "sin_q1",
+      0.41273371724861796
+     ],
+     [
+      "elbow_z",
+      0.41273371724861796
+     ],
+     [
+      "pe",
+      0.3164619876978938
+     ]
+    ]
+   }
+  }
+ },
+ "U29": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 2700,
+  "description": {
+   "positive": "Marked spot on background above-left or on the floor below a still arm; weak.",
+   "negative": "Forearm coming down with the hand at or near the floor, often swinging; marked spot on the floor right under the hand.",
+   "marked_location": "Positive: variable. Negative: floor under the hand (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Negative at the floor spot where the hand comes down onto it."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.10315136240237954,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.10315136240237954
+     ],
+     [
+      "pe",
+      0.09359295059237738
+     ],
+     [
+      "elbow_z",
+      0.08869406291989423
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_z",
+    "r2": 0.5008498571241793,
+    "cls": "clean",
+    "top3": [
+     [
+      "ee_z",
+      0.5008498571241793
+     ],
+     [
+      "pe",
+      0.3589238731264359
+     ],
+     [
+      "c_floor",
+      0.3415050813881445
+     ]
+    ]
+   }
+  }
+ },
+ "U30": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 1607,
+  "description": {
+   "positive": "Still arm hanging below the shoulder in a '<' shape with the forearm slanting down-right to the floor; marked spot fixed just right of the shoulder.",
+   "negative": "Upper arm pointing right toward the wall with the forearm hanging down by the wall, often moving; marked spot fixed at left background.",
+   "marked_location": "Positive: background right of the shoulder (very consistent). Negative: left background (very consistent).",
+   "strength_positive": "clear",
+   "strength_negative": "clear",
+   "one_line": "Arm hanging down under the shoulder vs arm reaching out right toward the wall."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.13301787352394268,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.13301787352394268
+     ],
+     [
+      "pe",
+      0.1284758318454987
+     ],
+     [
+      "ee_z",
+      0.10642644006259538
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "pe",
+    "r2": 0.20031380920429342,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "pe",
+      0.20031380920429342
+     ],
+     [
+      "ee_z",
+      0.1910769680713117
+     ],
+     [
+      "elbow_z",
+      0.18362596547431675
+     ]
+    ]
+   }
+  }
+ },
+ "U31": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 2982,
+  "description": {
+   "positive": "Marked spot on background below the arm; arms raised horizontally toward the wall in several. Weak.",
+   "negative": "Arm hanging down-right with the hand in the floor-wall corner (about half), marked spot at the corner; others near the hand elsewhere.",
+   "marked_location": "Positive: background below the arm. Negative: floor-wall corner in about half.",
+   "strength_positive": "weak",
+   "strength_negative": "weak",
+   "one_line": "Weakly: arm raised vs hand tucked into the floor-wall corner."
+  },
+  "census": {
+   "+": {
+    "best": "sin_q1",
+    "r2": 0.008153376065357154,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.008153376065357154
+     ],
+     [
+      "elbow_z",
+      0.008153376065357154
+     ],
+     [
+      "grav1",
+      0.00797245339423791
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "qd1",
+    "r2": 0.3431422153013729,
+    "cls": "partial",
+    "top3": [
+     [
+      "qd1",
+      0.3431422153013729
+     ],
+     [
+      "cor2",
+      0.3413565345367171
+     ],
+     [
+      "ke",
+      0.3396838296179828
+     ]
+    ]
+   }
+  }
+ },
+ "U32": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 1181,
+  "description": {
+   "positive": "Forearm pointing left, arm reaching to the left side; marked spot on background near the hand on the left/lower side.",
+   "negative": "Upper arm hanging straight down, forearm swinging low near the floor (trails); marked spot fixed at right background just left of the wall.",
+   "marked_location": "Positive: near the hand on the left (moderate). Negative: right background at mid height (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Arm reaching left vs arm hanging down and swinging low."
+  },
+  "census": {
+   "+": {
+    "best": "qd2",
+    "r2": 0.005561823973148194,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "qd2",
+      0.005561823973148194
+     ],
+     [
+      "sin_q12",
+      0.004882591011812321
+     ],
+     [
+      "ee_vz",
+      0.004292404919418957
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q1",
+    "r2": 0.16301265323258352,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.16301265323258352
+     ],
+     [
+      "elbow_z",
+      0.16301265323258352
+     ],
+     [
+      "ke",
+      0.1456718248807033
+     ]
+    ]
+   }
+  }
+ },
+ "U33": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 4191,
+  "description": {
+   "positive": "Arm with the hand near the wall or forearm hanging toward the floor by the wall, often moving; marked spot fixed at upper right at the wall.",
+   "negative": "Mostly still arm with the forearm slanting down-right so the hand lies near the floor-wall corner; marked spot fixed at far left background.",
+   "marked_location": "Positive: top-right at the wall (very consistent). Negative: left background (very consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "clear",
+   "one_line": "Fixed-patch unit whose negative pole is a still hand resting toward the floor-wall corner."
+  },
+  "census": {
+   "+": {
+    "best": "sin_q1",
+    "r2": 0.14863528883961763,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.14863528883961763
+     ],
+     [
+      "elbow_z",
+      0.14863528883961763
+     ],
+     [
+      "pe",
+      0.14706411498273408
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "grav1",
+    "r2": 0.18468842487808235,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.18468842487808235
+     ],
+     [
+      "cos_q1",
+      0.13585568570003526
+     ],
+     [
+      "grav2",
+      0.13154150903876882
+     ]
+    ]
+   }
+  }
+ },
+ "U34": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 726,
+  "description": {
+   "positive": "Arm extended to the left (forearm pointing left/up-left), marked spot at the left edge near the hand.",
+   "negative": "Marked spot on background near the wall or left; arm compact/folded in various orientations. Weak.",
+   "marked_location": "Positive: left edge background at the hand (consistent). Negative: variable background.",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Fires on the left-edge patch when the hand reaches out to the left."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.3904614519056705,
+    "cls": "partial",
+    "top3": [
+     [
+      "grav1",
+      0.3904614519056705
+     ],
+     [
+      "cos_q1",
+      0.33587673741529445
+     ],
+     [
+      "pe",
+      0.2758779156731217
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.13504291555118808,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.13504291555118808
+     ],
+     [
+      "ctq1",
+      0.1258607819923926
+     ],
+     [
+      "sin_q2",
+      0.10975834487442626
+     ]
+    ]
+   }
+  }
+ },
+ "U35": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 2105,
+  "description": {
+   "positive": "Arm raised with the forearm pointing left/up-left; marked spot on background below or beside the arm.",
+   "negative": "Upper arm hanging down with the forearm horizontal pointing right just above the floor (L shape), mostly still; marked spot fixed at left background.",
+   "marked_location": "Positive: background near the arm (variable). Negative: left background (consistent).",
+   "strength_positive": "weak",
+   "strength_negative": "weak",
+   "one_line": "Arm raised with forearm pointing left vs arm hanging with forearm pointing right along the floor."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.15237207688797927,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.15237207688797927
+     ],
+     [
+      "sin_q1",
+      0.1500078455367414
+     ],
+     [
+      "elbow_z",
+      0.1500078455367414
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q1",
+    "r2": 0.15839809457231302,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q1",
+      0.15839809457231302
+     ],
+     [
+      "elbow_z",
+      0.15839809457231302
+     ],
+     [
+      "sin_q2",
+      0.15031528627750268
+     ]
+    ]
+   }
+  }
+ },
+ "U36": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 890,
+  "description": {
+   "positive": "Marked spot scattered (top background, floor-wall corner); arm poses varied.",
+   "negative": "Marked spot on background left of the arm or near the elbow; arms often moving at mid height.",
+   "marked_location": "Variable background on both poles.",
+   "strength_positive": "none",
+   "strength_negative": "none",
+   "one_line": "No visible pattern."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.41073762101994493,
+    "cls": "partial",
+    "top3": [
+     [
+      "ee_z",
+      0.41073762101994493
+     ],
+     [
+      "sin_q1",
+      0.3967838336420335
+     ],
+     [
+      "elbow_z",
+      0.3967838336420335
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ee_x",
+    "r2": 0.09063744806584961,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_x",
+      0.09063744806584961
+     ],
+     [
+      "sin_q1",
+      0.07937852925617006
+     ],
+     [
+      "elbow_z",
+      0.07937852925617006
+     ]
+    ]
+   }
+  }
+ },
+ "U37": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 2630,
+  "description": {
+   "positive": "Marked spot on the arm (elbow or hand) wherever it is, often with the arm diagonal and raised.",
+   "negative": "Either the arm pointing straight up/vertical with the marked spot on it, or the marked spot on background beside the wall.",
+   "marked_location": "Positive: on the arm (consistent). Negative: on a vertical arm or near the wall (mixed).",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Positive on the arm when it is slanted, negative when it stands vertical (or at the wall)."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q12",
+    "r2": 0.18059134643319874,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q12",
+      0.18059134643319874
+     ],
+     [
+      "grav2",
+      0.18059134643319874
+     ],
+     [
+      "sin_q12",
+      0.15528252067284753
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "grav1",
+    "r2": 0.5471354949213589,
+    "cls": "clean",
+    "top3": [
+     [
+      "grav1",
+      0.5471354949213589
+     ],
+     [
+      "cos_q1",
+      0.5250480434499754
+     ],
+     [
+      "ee_x",
+      0.37082028455382876
+     ]
+    ]
+   }
+  }
+ },
+ "U38": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 6451,
+  "description": {
+   "positive": "Marked spot on empty background away from the arm; arms often swinging.",
+   "negative": "Marked spot on background, often near the wall; arms hanging with the forearm down.",
+   "marked_location": "Background on both poles, variable.",
+   "strength_positive": "none",
+   "strength_negative": "weak",
+   "one_line": "Weak background unit with no clear arm selectivity."
+  },
+  "census": {
+   "+": {
+    "best": "grav1",
+    "r2": 0.029981698061019135,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "grav1",
+      0.029981698061019135
+     ],
+     [
+      "cos_q1",
+      0.02541432489217621
+     ],
+     [
+      "ctq1",
+      0.023744034945992643
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "cos_q1",
+    "r2": 0.051040670776138164,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.051040670776138164
+     ],
+     [
+      "grav1",
+      0.044785605321665756
+     ],
+     [
+      "pe",
+      0.033603174273716285
+     ]
+    ]
+   }
+  }
+ },
+ "U39": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 9635,
+  "description": {
+   "positive": "Forearm hanging down so the hand rests on or near the floor; marked spot on the floor right below the hand.",
+   "negative": "Arm raised with the forearm roughly horizontal and the hand well off the floor; marked spot on top-middle background or near the hand.",
+   "marked_location": "Positive: floor beneath the hand (consistent). Negative: upper background or near the hand (variable).",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Hand down on the floor vs arm held up level."
+  },
+  "census": {
+   "+": {
+    "best": "cos_q1",
+    "r2": 0.08358240811115325,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "cos_q1",
+      0.08358240811115325
+     ],
+     [
+      "grav1",
+      0.07522760833932551
+     ],
+     [
+      "ee_z",
+      0.07329849710693903
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "sin_q12",
+    "r2": 0.116110378218229,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "sin_q12",
+      0.116110378218229
+     ],
+     [
+      "cos_q12",
+      0.11557630069495195
+     ],
+     [
+      "grav2",
+      0.11557630069495195
+     ]
+    ]
+   }
+  }
+ },
+ "U40": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 5143,
+  "description": {
+   "positive": "Forearm hanging vertically with the hand resting on the floor (small swings), upper arm slanting up; marked spot on background to the right of the arm at mid height.",
+   "negative": "Arm held out roughly horizontal with the hand off the floor; marked spot on background above or below the arm.",
+   "marked_location": "Positive: background right of the arm (consistent). Negative: background above/below the arm (variable).",
+   "strength_positive": "clear",
+   "strength_negative": "weak",
+   "one_line": "Hand resting on the floor vs arm held out level."
+  },
+  "census": {
+   "+": {
+    "best": "ee_z",
+    "r2": 0.051118443368691535,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ee_z",
+      0.051118443368691535
+     ],
+     [
+      "grav1",
+      0.04331923114654557
+     ],
+     [
+      "ee_x",
+      0.038467123087886135
+     ]
+    ]
+   },
+   "\u2212": {
+    "best": "ctq2",
+    "r2": 0.020231175559273007,
+    "cls": "unexplained",
+    "top3": [
+     [
+      "ctq2",
+      0.020231175559273007
+     ],
+     [
+      "grav1",
+      0.016266041477566273
+     ],
+     [
+      "cos_q1",
+      0.014577085935044476
+     ]
+    ]
+   }
+  }
+ }
+}
