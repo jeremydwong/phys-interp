@@ -1,0 +1,3907 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+=== probe: vlm_probe 
+using 10800 groups / 2700 clips
+pixels [1.   1.   0.42 0.97 0.98 0.93 0.97 0.99 1.   0.11 0.02 0.33 0.3  0.07
+ 0.03 0.01 1.   0.93 0.02 0.02 0.   0.01 0.04 0.07 0.62 0.64 0.49 0.51
+ 0.22 0.11 0.14 1.  ]
+video_vis 0 R2 sin_q1 0.98 qd1 0.07 qdd1 0.04 contact 0.80
+video_vis 1 R2 sin_q1 0.99 qd1 0.10 qdd1 0.05 contact 0.81
+video_vis 2 R2 sin_q1 0.99 qd1 0.10 qdd1 0.06 contact 0.81
+video_vis 3 R2 sin_q1 0.99 qd1 0.12 qdd1 0.07 contact 0.82
+video_vis 4 R2 sin_q1 0.99 qd1 0.15 qdd1 0.08 contact 0.82
+video_vis 5 R2 sin_q1 0.99 qd1 0.16 qdd1 0.09 contact 0.82
+video_vis 6 R2 sin_q1 1.00 qd1 0.17 qdd1 0.09 contact 0.82
+video_vis 7 R2 sin_q1 1.00 qd1 0.19 qdd1 0.10 contact 0.82
+video_vis 8 R2 sin_q1 1.00 qd1 0.20 qdd1 0.10 contact 0.82
+video_vis 9 R2 sin_q1 1.00 qd1 0.18 qdd1 0.11 contact 0.82
+video_vis 10 R2 sin_q1 1.00 qd1 0.19 qdd1 0.10 contact 0.82
+video_vis 11 R2 sin_q1 1.00 qd1 0.17 qdd1 0.10 contact 0.82
+video_vis 12 R2 sin_q1 1.00 qd1 0.17 qdd1 0.10 contact 0.81
+video_vis 13 R2 sin_q1 1.00 qd1 0.15 qdd1 0.10 contact 0.81
+video_vis 14 R2 sin_q1 1.00 qd1 0.12 qdd1 0.09 contact 0.81
+video_vis 15 R2 sin_q1 0.99 qd1 0.11 qdd1 0.09 contact 0.81
+video_vis 16 R2 sin_q1 0.99 qd1 0.11 qdd1 0.09 contact 0.81
+video_vis 17 R2 sin_q1 0.99 qd1 0.11 qdd1 0.09 contact 0.81
+video_vis 18 R2 sin_q1 0.99 qd1 0.09 qdd1 0.09 contact 0.81
+video_vis 19 R2 sin_q1 0.99 qd1 0.10 qdd1 0.08 contact 0.81
+video_vis 20 R2 sin_q1 0.99 qd1 0.09 qdd1 0.08 contact 0.81
+video_vis 21 R2 sin_q1 0.99 qd1 0.09 qdd1 0.09 contact 0.81
+video_vis 22 R2 sin_q1 0.99 qd1 0.09 qdd1 0.09 contact 0.80
+video_vis 23 R2 sin_q1 0.99 qd1 0.10 qdd1 0.08 contact 0.80
+video_llm 0 R2 sin_q1 0.99 qd1 0.10 qdd1 0.08 contact 0.80
+video_llm 1 R2 sin_q1 0.99 qd1 0.10 qdd1 0.08 contact 0.80
+video_llm 2 R2 sin_q1 0.99 qd1 0.12 qdd1 0.09 contact 0.81
+video_llm 3 R2 sin_q1 1.00 qd1 0.14 qdd1 0.11 contact 0.81
+video_llm 4 R2 sin_q1 1.00 qd1 0.14 qdd1 0.12 contact 0.81
+video_llm 5 R2 sin_q1 1.00 qd1 0.16 qdd1 0.12 contact 0.81
+video_llm 6 R2 sin_q1 1.00 qd1 0.16 qdd1 0.12 contact 0.81
+video_llm 7 R2 sin_q1 1.00 qd1 0.16 qdd1 0.12 contact 0.81
+video_llm 8 R2 sin_q1 1.00 qd1 0.17 qdd1 0.12 contact 0.81
+video_llm 9 R2 sin_q1 1.00 qd1 0.15 qdd1 0.11 contact 0.81
+video_llm 10 R2 sin_q1 1.00 qd1 0.15 qdd1 0.10 contact 0.81
+video_llm 11 R2 sin_q1 0.99 qd1 0.15 qdd1 0.11 contact 0.80
+video_llm 12 R2 sin_q1 0.99 qd1 0.17 qdd1 0.10 contact 0.80
+video_llm 13 R2 sin_q1 0.99 qd1 0.17 qdd1 0.10 contact 0.80
+video_llm 14 R2 sin_q1 0.99 qd1 0.19 qdd1 0.09 contact 0.80
+video_llm 15 R2 sin_q1 0.99 qd1 0.23 qdd1 0.09 contact 0.79
+video_llm 16 R2 sin_q1 0.99 qd1 0.23 qdd1 0.09 contact 0.79
+video_llm 17 R2 sin_q1 0.99 qd1 0.23 qdd1 0.08 contact 0.79
+video_llm 18 R2 sin_q1 0.99 qd1 0.21 qdd1 0.07 contact 0.78
+video_llm 19 R2 sin_q1 0.98 qd1 0.21 qdd1 0.08 contact 0.78
+video_llm 20 R2 sin_q1 0.98 qd1 0.22 qdd1 0.07 contact 0.78
+video_llm 21 R2 sin_q1 0.98 qd1 0.21 qdd1 0.06 contact 0.77
+video_llm 22 R2 sin_q1 0.98 qd1 0.20 qdd1 0.06 contact 0.77
+video_llm 23 R2 sin_q1 0.98 qd1 0.19 qdd1 0.06 contact 0.77
+video_llm 24 R2 sin_q1 0.98 qd1 0.18 qdd1 0.05 contact 0.77
+video_llm 25 R2 sin_q1 0.97 qd1 0.17 qdd1 0.05 contact 0.77
+video_llm 26 R2 sin_q1 0.97 qd1 0.17 qdd1 0.05 contact 0.77
+video_llm 27 R2 sin_q1 0.97 qd1 0.15 qdd1 0.05 contact 0.76
+video_llm 28 R2 sin_q1 0.97 qd1 0.15 qdd1 0.05 contact 0.76
+video_llm 29 R2 sin_q1 0.97 qd1 0.14 qdd1 0.05 contact 0.76
+video_llm 30 R2 sin_q1 0.96 qd1 0.13 qdd1 0.05 contact 0.76
+video_llm 31 R2 sin_q1 0.96 qd1 0.12 qdd1 0.04 contact 0.76
+video_llm 32 R2 sin_q1 0.96 qd1 0.12 qdd1 0.05 contact 0.75
+video_llm 33 R2 sin_q1 0.96 qd1 0.12 qdd1 0.04 contact 0.75
+video_llm 34 R2 sin_q1 0.95 qd1 0.11 qdd1 0.04 contact 0.75
+video_llm 35 R2 sin_q1 0.95 qd1 0.11 qdd1 0.04 contact 0.75
+video_llm 36 R2 sin_q1 0.96 qd1 0.11 qdd1 0.04 contact 0.75
+image_vis 0 R2 sin_q1 0.98 qd1 0.01 qdd1 0.04 contact 0.69
+image_vis 1 R2 sin_q1 0.99 qd1 0.01 qdd1 0.04 contact 0.70
+image_vis 2 R2 sin_q1 0.99 qd1 0.02 qdd1 0.06 contact 0.70
+image_vis 3 R2 sin_q1 0.99 qd1 0.02 qdd1 0.06 contact 0.72
+image_vis 4 R2 sin_q1 0.99 qd1 0.02 qdd1 0.07 contact 0.71
+image_vis 5 R2 sin_q1 1.00 qd1 0.02 qdd1 0.08 contact 0.71
+image_vis 6 R2 sin_q1 1.00 qd1 0.02 qdd1 0.08 contact 0.71
+image_vis 7 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.70
+image_vis 8 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.70
+image_vis 9 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.70
+image_vis 10 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.70
+image_vis 11 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 12 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 13 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 14 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 15 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 16 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.69
+image_vis 17 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_vis 18 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_vis 19 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.67
+image_vis 20 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_vis 21 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.67
+image_vis 22 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_vis 23 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.66
+image_llm 0 R2 sin_q1 1.00 qd1 0.01 qdd1 0.09 contact 0.65
+image_llm 1 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_llm 2 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.67
+image_llm 3 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 4 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 5 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 6 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 7 R2 sin_q1 1.00 qd1 0.02 qdd1 0.11 contact 0.68
+image_llm 8 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 9 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.68
+image_llm 10 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.67
+image_llm 11 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.67
+image_llm 12 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_llm 13 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_llm 14 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.66
+image_llm 15 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.65
+image_llm 16 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.65
+image_llm 17 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.65
+image_llm 18 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.65
+image_llm 19 R2 sin_q1 1.00 qd1 0.02 qdd1 0.10 contact 0.64
+image_llm 20 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 21 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 22 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 23 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 24 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 25 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 26 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.64
+image_llm 27 R2 sin_q1 1.00 qd1 0.02 qdd1 0.09 contact 0.63
+image_llm 28 R2 sin_q1 1.00 qd1 0.02 qdd1 0.08 contact 0.63
+image_llm 29 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.63
+image_llm 30 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.63
+image_llm 31 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.63
+image_llm 32 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.63
+image_llm 33 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.62
+image_llm 34 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.62
+image_llm 35 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.61
+image_llm 36 R2 sin_q1 0.99 qd1 0.02 qdd1 0.08 contact 0.61
+randvis_vis 0 R2 sin_q1 0.96 qd1 0.16 qdd1 0.03 contact 0.73
+randvis_vis 1 R2 sin_q1 0.96 qd1 0.17 qdd1 0.03 contact 0.74
+randvis_vis 2 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.74
+randvis_vis 3 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.74
+randvis_vis 4 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.74
+randvis_vis 5 R2 sin_q1 0.97 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 6 R2 sin_q1 0.97 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 7 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 8 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 9 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 10 R2 sin_q1 0.97 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 11 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 12 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 13 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 14 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 15 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 16 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 17 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 18 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 19 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 20 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+randvis_vis 21 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 22 R2 sin_q1 0.96 qd1 0.19 qdd1 0.03 contact 0.73
+randvis_vis 23 R2 sin_q1 0.96 qd1 0.20 qdd1 0.03 contact 0.73
+saved
+mlp V 3 sin_q1 -1.63 qd1 -2.22 qd2 -0.80 ee_vx -0.37 qdd1 -4.75 contact -0.48 ke -6.83
+mlp V 8 sin_q1 0.40 qd1 -0.12 qd2 -0.31 ee_vx 0.04 qdd1 -0.09 contact 0.11 ke 0.30
+mlp V 13 sin_q1 0.99 qd1 0.06 qd2 0.02 ee_vx 0.08 qdd1 0.07 contact 0.76 ke 0.66
+mlp V 18 sin_q1 0.78 qd1 0.03 qd2 0.00 ee_vx 0.01 qdd1 0.04 contact 0.67 ke 0.50
+mlp V 23 sin_q1 0.98 qd1 0.08 qd2 0.02 ee_vx 0.07 qdd1 0.06 contact 0.78 ke 0.71
+mlp L 2 sin_q1 1.00 qd1 0.25 qd2 0.06 ee_vx 0.35 qdd1 0.14 contact 0.82 ke 0.77
+mlp L 8 sin_q1 1.00 qd1 0.31 qd2 0.07 ee_vx 0.37 qdd1 0.15 contact 0.82 ke 0.79
+mlp L 16 sin_q1 0.99 qd1 0.32 qd2 0.06 ee_vx 0.34 qdd1 0.09 contact 0.79 ke 0.73
+mlp L 24 sin_q1 0.97 qd1 0.18 qd2 0.03 ee_vx 0.24 qdd1 0.07 contact 0.77 ke 0.67
+mlp L 32 sin_q1 0.94 qd1 0.09 qd2 0.01 ee_vx 0.13 qdd1 0.05 contact 0.74 ke 0.60
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+findfont: Font family 'Helvetica Neue' not found.
+findfont: Font family 'Helvetica' not found.
+=== probe: vlm_probe fig
+Traceback (most recent call last):
+  File "C:\Git\phys-interp\analysis\vlm_run_all.py", line 57, in <module>
+    if __name__ == "__main__":
+        ^^^^^^
+  File "C:\Git\phys-interp\analysis\vlm_run_all.py", line 50, in main
+    print(f"=== {st}: {script} {' '.join(args)}", flush=True)
+  File "C:\Users\wongj\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['C:\\Git\\phys-interp\\.venv\\Scripts\\python.exe', 'C:\\Git\\phys-interp\\analysis\\vlm_probe.py', 'fig']' returned non-zero exit status 3221225794.
