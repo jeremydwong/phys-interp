@@ -406,8 +406,57 @@ Both contact-torque labels lose: an arm resting on the floor with +1 to +7.6 N·
 does not drive V18#4014 at all (f = 0 for every clip) and drives L2−#8960 about as much as the same
 pose held off the floor. L2#9169 "potential energy" fires more for a horizontal arm than for a
 raised one, so the label is wrong in the direction it claims. L2−#789 fires for its positive-torque
-poses but also at 70th percentile for the mirrored poses, so "shoulder gravity torque" is broader
-than the label (it fires for the arm out sideways on either side, more on one).
+poses, but its mirrored near misses still sit at the 70th corpus percentile (median f 0.22, just above
+the rejection line), so it is only partly sign-specific, unlike V8#160.
 Caveats: 8 + 8 clips per unit; a single corpus maximum can be an outlier (which makes "f ≥ 0.5"
 strict); the written clips are short and mostly slow, which is not the corpus distribution.
+
+## 4. Re-score: strong-activation census (C1)
+
+**Method** (`vlm_strong.py`; **figure `vlm_strong.png`**; `vlm_strong.json`). For a seeded sample of
+up to 1,000 live units per census key (video vision, LM both poles, and the random-init vision
+control), binned R² (10 quantile bins) against the 32 targets on (a) all groups, (b) the "strong
+half" (a ≥ median + 0.5·(max − median); ours, because many units have a large offset, so "above half
+the max" would include almost every group), (c) the top 1% (108 groups). Units with < 30 strong
+groups are "too sparse". Each unit also gets a shuffled-target null on the same subset.
+
+| key | all: clean / partial | strong half: clean / partial / too sparse | top 1%: clean / partial | null (top 1%): clean+partial |
+|---|---|---|---|---|
+| vision V3 | 8% / 34% | 6% / 22% / 21% | 10% / 45% | 2% |
+| vision V8 | 12% / 43% | 3% / 22% / 26% | 5% / 42% | 3% |
+| vision V13 | 9% / 45% | 4% / 22% / 23% | 6% / 39% | 2% |
+| vision V18 | 1% / 9% | 1% / 11% / 66% | 4% / 46% | 2% |
+| vision V23 | 2% / 19% | 1% / 17% / 27% | 3% / 39% | 2% |
+| random-init vision (5 blocks) | 2–3% / 21–22% | 4–5% / 28–30% / 14–17% | 6–7% / 44–47% | 1–3% |
+| LM L2 (+ / −) | 1–2% / 41% | 2% / 19–24% / 17–20% | 3–4% / 41–44% | 1–2% |
+| LM L8 (+ / −) | 1% / 25% | 1–2% / 20–21% / 25–28% | 2–3% / 41–42% | 2% |
+| LM L16 (+ / −) | 0% / 1–3% | 0% / 12–13% / 20–21% | 1% / 23–24% | 2% |
+| LM L24 (+ / −) | 0% / 1% | 0% / 10–11% / 37% | 0–1% / 20% | 2–3% |
+| LM L32 (+ / −) | 0% / 0–1% | 0% / 9–11% / 46% | 0–1% / 18–19% | 2% |
+
+Results.
+- **Restricting to strong activations does not make the units clean.** Clean rates stay at 0–10% in
+  every layer; nothing like the essay's "closer to 97% non-arbitrary". What rises is the *partial*
+  rate in the top 1% of the deep LM layers (L16–L32: 18–24% vs ≤ 3% on all groups; null 2%): the
+  strongest activations of late-layer units are more physical than their weak range.
+- The strong-subset question is different from the all-data one: it asks what orders the strong
+  activations among themselves, so the best variable there is rarely the census variable (2–8% of
+  units) or even its family (14–40%).
+- The random-init encoder scores the same as the trained one in the top 1% (6–7% clean, 44–47%
+  partial vs 3–10% / 39–46%). On this testbed a strong-activation R² against posture-like variables is
+  not evidence of learned structure without that control.
+- The "described, not one of our 32 variables" bucket (from B3, 40 random units, §2.1):
+
+| B3 sample (40 units) | n |
+|---|---|
+| labelled by the all-data census (clean or partial) | 18 (3 clean, 15 partial) |
+| census unexplained, but clearly described by the blind reader | 12 |
+| … of which the description is an extreme or a conjunction of our variables (e.g. "hand resting on the floor", "arm hanging straight down", "hand in the floor–wall corner") | 12 |
+| census label present, but a description outside the 32 variables is better (U13, U18, U25) | 3 |
+| neither a census label nor a clear description | 10 |
+
+So with blind reading added, 30 of 40 random units (75%) have either a label or a clear
+description, against 18 of 40 (45%) by census alone; the remaining 25% have no pattern either way.
+Most of the gain comes from detectors of extreme states that an all-groups simulation score misses,
+not from concepts outside our variable set.
 
