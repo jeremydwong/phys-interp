@@ -217,3 +217,39 @@ Their labels describe what v carries while the unit is off, not an open-gate res
 re-labelled "gate-closed (echo)". L8−#4747 (hand vz) and L16−#6072 (q̈₂) are regular (+×−). Whether
 a closed-gate signal of this size is read downstream is tested by steering in §3.2.
 
+### 1.2 E2: residual "sink" coordinates
+
+**Method.** In the same recapture pass we summed x² per residual coordinate over every vision token
+(24 block outputs) and over every LM visual token and every LM token (37 hidden states), and counted
+per token which coordinate is largest and whether it holds > 50% / > 10% of that token's x²
+(`sink_stats.npz`). Coordinates holding > 10% of a layer's energy are the "sinks" removed below.
+Then (`vlm_sink.py`) we re-ran (a) the standardised ridge probes of §0.3 and (b) a PCA probe (ours:
+PCA-64 of the raw, unstandardised mean-pooled residual, then ridge on the 64 PCs) with and without
+the sink coordinates. **Figure `vlm_sink.png`**, numbers in `vlm_sink.json`.
+
+| stream | layers | sink coordinate | share of the layer's Σx² | tokens where it holds > 50% |
+|---|---|---|---|---|
+| vision | V0–V9 | none (largest coordinate ≤ 4%) | – | – |
+| vision | V10–V22 | 62 | 45–58% at V10–V16 (> 50% at V11–V13), 25–40% at V17–V22 | 1–2% |
+| vision | V23 (last block) | 201 | **92%** | **96%** |
+| LM, visual tokens | L4–L16 | 0 | 14–37% | 0–18% (coordinate 0 is the largest coordinate in ~100% of tokens) |
+| LM, visual tokens | L17–L34 | 4 | **78–96%** | 0.5–1.6% |
+| LM, all tokens | L7–L34 | 4 | 85–94% | 0.6–19% |
+| LM | L36 (after final norm) | none | 4% | 0% |
+
+So Qwen3-VL has the essay's ConvNeXt pathology in both towers: the last vision block puts 92% of
+its energy into coordinate 201 on almost every token, and from layer 17 on the LM puts 95% of the
+visual tokens' energy into coordinate 4. In the LM the coordinate-4 energy sits in a few tokens with
+massive values (it is the top coordinate of only ~1% of tokens), the familiar "massive activation"
+pattern; coordinate 0 is a mild sink present on every token. In the mean-pooled cache coordinate 4
+still holds 51–68% of the energy, and PC1 of the raw residual is the sink (PC1 explains 88–98% of
+raw variance at L20–L32 with 96–97% of its loading on coordinate 4; without it PC1 drops to
+31–54%). Vision V23: PC1 97% → 70% without coordinate 201.
+
+**Effect on our results: none.** Removing the sink coordinates changes the mean probe R² (32
+targets) by < 0.005 at every tested layer, for the standardised ridge (as expected, since
+standardisation already puts each coordinate on equal footing) and also for the PCA-64 probe (the
+sink takes one of 64 components). Any analysis that uses raw residual geometry (PC1, distances,
+cosine maps) would be dominated by the sinks; we have none in the VLM study, but anyone adding one
+should drop coordinates 201 (vision) and 4 and 0 (LM) first.
+
