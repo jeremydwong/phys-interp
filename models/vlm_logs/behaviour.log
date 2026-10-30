@@ -1,0 +1,760 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+=== behaviour: vlm_behaviour collect
+Loading weights:   0%|          | 0/713 [00:00<?, ?it/s]Loading weights:   1%|▏         | 9/713 [00:00<00:10, 70.12it/s]Loading weights:   2%|▏         | 17/713 [00:00<00:09, 73.33it/s]Loading weights:   4%|▎         | 25/713 [00:00<00:14, 47.68it/s]Loading weights:   4%|▍         | 31/713 [00:00<00:14, 47.36it/s]Loading weights:   5%|▌         | 37/713 [00:00<00:16, 41.80it/s]Loading weights:   6%|▌         | 43/713 [00:00<00:14, 45.22it/s]Loading weights:   7%|▋         | 48/713 [00:01<00:15, 42.13it/s]Loading weights:   7%|▋         | 53/713 [00:01<00:20, 32.68it/s]Loading weights:   9%|▉         | 63/713 [00:01<00:17, 37.75it/s]Loading weights:  10%|▉         | 71/713 [00:01<00:14, 45.06it/s]Loading weights:  11%|█         | 77/713 [00:01<00:15, 41.22it/s]Loading weights:  12%|█▏        | 82/713 [00:01<00:15, 39.80it/s]Loading weights:  12%|█▏        | 87/713 [00:02<00:17, 35.09it/s]Loading weights:  13%|█▎        | 93/713 [00:02<00:15, 39.34it/s]Loading weights:  14%|█▎        | 98/713 [00:02<00:15, 40.75it/s]Loading weights:  14%|█▍        | 103/713 [00:02<00:17, 34.47it/s]Loading weights:  15%|█▌        | 109/713 [00:02<00:21, 28.35it/s]Loading weights:  17%|█▋        | 118/713 [00:02<00:15, 39.30it/s]Loading weights:  17%|█▋        | 123/713 [00:03<00:17, 32.93it/s]Loading weights:  18%|█▊        | 128/713 [00:03<00:18, 31.88it/s]Loading weights:  19%|█▊        | 132/713 [00:03<00:19, 30.35it/s]Loading weights:  20%|█▉        | 142/713 [00:03<00:14, 40.62it/s]Loading weights:  21%|██        | 147/713 [00:03<00:17, 32.88it/s]Loading weights:  21%|██▏       | 152/713 [00:04<00:20, 27.61it/s]Loading weights:  23%|██▎       | 163/713 [00:04<00:14, 38.40it/s]Loading weights:  24%|██▎       | 168/713 [00:04<00:16, 33.52it/s]Loading weights:  24%|██▍       | 174/713 [00:04<00:17, 30.06it/s]Loading weights:  25%|██▌       | 179/713 [00:04<00:19, 27.07it/s]Loading weights:  27%|██▋       | 191/713 [00:05<00:13, 39.61it/s]Loading weights:  27%|██▋       | 196/713 [00:05<00:17, 30.08it/s]Loading weights:  28%|██▊       | 202/713 [00:05<00:15, 33.91it/s]Loading weights:  29%|██▉       | 208/713 [00:05<00:15, 31.64it/s]Loading weights:  30%|███       | 216/713 [00:05<00:12, 39.73it/s]Loading weights:  31%|███       | 221/713 [00:06<00:15, 32.53it/s]Loading weights:  32%|███▏      | 226/713 [00:06<00:13, 35.06it/s]Loading weights:  32%|███▏      | 231/713 [00:06<00:16, 28.58it/s]Loading weights:  33%|███▎      | 236/713 [00:06<00:14, 32.01it/s]Loading weights:  34%|███▍      | 241/713 [00:06<00:15, 30.45it/s]Loading weights:  34%|███▍      | 245/713 [00:06<00:14, 31.88it/s]Loading weights:  35%|███▍      | 249/713 [00:07<00:15, 29.62it/s]Loading weights:  35%|███▌      | 253/713 [00:07<00:14, 31.31it/s]Loading weights:  36%|███▌      | 257/713 [00:07<00:13, 32.78it/s]Loading weights:  37%|███▋      | 262/713 [00:07<00:19, 23.35it/s]Loading weights:  38%|███▊      | 269/713 [00:07<00:14, 30.24it/s]Loading weights:  39%|███▊      | 275/713 [00:07<00:15, 28.52it/s]Loading weights:  40%|███▉      | 285/713 [00:08<00:12, 33.30it/s]Loading weights:  41%|████      | 289/713 [00:08<00:14, 29.75it/s]Loading weights:  41%|████      | 294/713 [00:08<00:14, 29.69it/s]Loading weights:  42%|████▏     | 298/713 [00:08<00:14, 28.52it/s]Loading weights:  43%|████▎     | 306/713 [00:08<00:10, 38.25it/s]Loading weights:  44%|████▎     | 311/713 [00:09<00:12, 31.83it/s]Loading weights:  44%|████▍     | 316/713 [00:09<00:11, 35.22it/s]Loading weights:  45%|████▌     | 321/713 [00:09<00:13, 29.78it/s]Loading weights:  46%|████▌     | 325/713 [00:09<00:12, 31.66it/s]Loading weights:  46%|████▌     | 329/713 [00:09<00:14, 27.08it/s]Loading weights:  47%|████▋     | 335/713 [00:09<00:11, 32.34it/s]Loading weights:  48%|████▊     | 340/713 [00:09<00:10, 35.77it/s]Loading weights:  48%|████▊     | 345/713 [00:10<00:11, 32.17it/s]Loading weights:  49%|████▉     | 349/713 [00:10<00:11, 31.57it/s]Loading weights:  50%|████▉     | 353/713 [00:10<00:15, 23.72it/s]Loading weights:  51%|█████     | 363/713 [00:10<00:11, 29.57it/s]Loading weights:  51%|█████▏    | 367/713 [00:10<00:11, 29.69it/s]Loading weights:  52%|█████▏    | 373/713 [00:11<00:12, 27.87it/s]Loading weights:  54%|█████▎    | 382/713 [00:11<00:08, 38.70it/s]Loading weights:  54%|█████▍    | 387/713 [00:11<00:10, 31.91it/s]Loading weights:  55%|█████▍    | 391/713 [00:11<00:10, 32.03it/s]Loading weights:  58%|█████▊    | 414/713 [00:11<00:04, 71.39it/s]Loading weights:  61%|██████▏   | 438/713 [00:11<00:02, 108.46it/s]Loading weights:  65%|██████▍   | 460/713 [00:11<00:01, 132.87it/s]Loading weights:  68%|██████▊   | 484/713 [00:12<00:01, 158.08it/s]Loading weights:  71%|███████   | 508/713 [00:12<00:01, 174.79it/s]Loading weights:  75%|███████▍  | 532/713 [00:12<00:00, 187.85it/s]Loading weights:  78%|███████▊  | 553/713 [00:12<00:00, 188.95it/s]Loading weights:  81%|████████  | 579/713 [00:12<00:00, 205.87it/s]Loading weights:  85%|████████▍ | 603/713 [00:12<00:00, 211.60it/s]Loading weights:  88%|████████▊ | 625/713 [00:12<00:00, 204.84it/s]Loading weights:  91%|█████████ | 646/713 [00:12<00:00, 199.68it/s]Loading weights:  94%|█████████▎| 667/713 [00:12<00:00, 200.43it/s]Loading weights:  96%|█████████▋| 688/713 [00:13<00:00, 170.19it/s]Loading weights:  99%|█████████▉| 706/713 [00:13<00:00, 110.41it/s]Loading weights: 100%|██████████| 713/713 [00:13<00:00, 53.05it/s] 
+contact 2 no
+contact 4 no
+contact 6 no
+contact 8 no
+contact 10 no
+contact 12 no
+contact 14 no
+contact 16 no
+contact 18 no
+contact 20 no
+contact 22 no
+contact 24 no
+contact 26 no
+contact 28 no
+contact 30 no
+contact 32 no
+contact 34 no
+contact 36 no
+contact 38 no
+contact 40 no
+contact 42 no
+contact 44 no
+contact 46 no
+contact 48 yes
+contact 50 no
+contact 52 no
+contact 54 no
+contact 56 no
+contact 58 no
+contact 60 no
+contact 62 no
+contact 64 no
+contact 66 no
+contact 68 no
+contact 70 no
+contact 72 no
+contact 74 no
+contact 76 no
+contact 78 no
+contact 80 no
+contact 82 no
+contact 84 no
+contact 86 no
+contact 88 no
+contact 90 no
+contact 92 no
+contact 94 no
+contact 96 no
+contact 98 no
+contact 100 no
+contact 102 no
+contact 104 no
+contact 106 no
+contact 108 no
+contact 110 no
+contact 112 no
+contact 114 no
+contact 116 no
+contact 118 no
+contact 120 no
+contact 122 no
+contact 124 no
+contact 126 no
+contact 128 no
+contact 130 no
+contact 132 no
+contact 134 no
+contact 136 no
+contact 138 no
+contact 140 no
+contact 142 no
+contact 144 no
+contact 146 no
+contact 148 no
+contact 150 no
+contact 152 no
+contact 154 no
+contact 156 no
+contact 158 no
+contact 160 no
+contact 162 no
+contact 164 no
+contact 166 no
+contact 168 no
+contact 170 no
+contact 172 no
+contact 174 no
+contact 176 no
+contact 178 no
+contact 180 no
+contact 182 no
+contact 184 no
+contact 186 no
+contact 188 no
+contact 190 no
+contact 192 no
+contact 194 no
+contact 196 no
+contact 198 no
+contact 200 no
+contact 202 no
+contact 204 no
+contact 206 no
+contact 208 no
+contact 210 no
+contact 212 no
+contact 214 no
+contact 216 no
+contact 218 no
+contact 220 no
+contact 222 no
+contact 224 no
+contact 226 no
+contact 228 no
+contact 230 no
+contact 232 no
+contact 234 no
+contact 236 no
+contact 238 no
+contact 240 no
+contact 242 no
+contact 244 no
+contact 246 no
+contact 248 no
+contact 250 no
+contact 252 no
+contact 254 no
+contact 256 no
+contact 258 no
+contact 260 no
+contact 262 no
+contact 264 no
+contact 266 no
+contact 268 no
+contact 270 no
+contact 272 no
+contact 274 no
+contact 276 no
+contact 278 no
+contact 280 no
+contact 282 no
+contact 284 no
+contact 286 no
+contact 288 no
+contact 290 no
+contact 292 no
+contact 294 no
+contact 296 no
+contact 298 no
+contact 300 no
+floor_wall 2 floor
+floor_wall 4 floor
+floor_wall 6 floor
+floor_wall 8 floor
+floor_wall 10 floor
+floor_wall 12 floor
+floor_wall 14 floor
+floor_wall 16 floor
+floor_wall 18 floor
+floor_wall 20 floor
+floor_wall 22 floor
+floor_wall 24 floor
+floor_wall 26 floor
+floor_wall 28 floor
+floor_wall 30 floor
+floor_wall 32 floor
+floor_wall 34 floor
+floor_wall 36 floor
+floor_wall 38 floor
+floor_wall 40 floor
+floor_wall 42 floor
+floor_wall 44 floor
+floor_wall 46 floor
+floor_wall 48 floor
+floor_wall 50 floor
+floor_wall 52 floor
+floor_wall 54 floor
+floor_wall 56 floor
+floor_wall 58 floor
+floor_wall 60 floor
+floor_wall 62 floor
+floor_wall 64 floor
+floor_wall 66 floor
+floor_wall 68 floor
+floor_wall 70 floor
+floor_wall 72 floor
+floor_wall 74 floor
+floor_wall 76 floor
+floor_wall 78 floor
+floor_wall 80 floor
+floor_wall 82 floor
+floor_wall 84 floor
+floor_wall 86 floor
+floor_wall 88 floor
+floor_wall 90 floor
+floor_wall 92 floor
+floor_wall 94 floor
+floor_wall 96 floor
+floor_wall 98 floor
+floor_wall 100 floor
+floor_wall 102 floor
+floor_wall 104 floor
+floor_wall 106 floor
+floor_wall 108 floor
+floor_wall 110 floor
+floor_wall 112 floor
+floor_wall 114 floor
+floor_wall 116 floor
+floor_wall 118 floor
+floor_wall 120 floor
+floor_wall 122 floor
+floor_wall 124 floor
+floor_wall 126 floor
+floor_wall 128 floor
+floor_wall 130 floor
+floor_wall 132 floor
+floor_wall 134 floor
+floor_wall 136 floor
+floor_wall 138 floor
+floor_wall 140 floor
+floor_wall 142 floor
+floor_wall 144 floor
+floor_wall 146 floor
+floor_wall 148 floor
+floor_wall 150 floor
+floor_wall 152 wall
+floor_wall 154 floor
+floor_wall 156 wall
+floor_wall 158 wall
+floor_wall 160 wall
+floor_wall 162 wall
+floor_wall 164 wall
+floor_wall 166 floor
+floor_wall 168 wall
+floor_wall 170 floor
+floor_wall 172 wall
+floor_wall 174 wall
+floor_wall 176 wall
+floor_wall 178 wall
+floor_wall 180 wall
+floor_wall 182 floor
+floor_wall 184 wall
+floor_wall 186 wall
+floor_wall 188 wall
+floor_wall 190 floor
+floor_wall 192 wall
+floor_wall 194 wall
+floor_wall 196 wall
+floor_wall 198 wall
+floor_wall 200 wall
+floor_wall 202 floor
+floor_wall 204 floor
+floor_wall 206 wall
+floor_wall 208 floor
+floor_wall 210 wall
+floor_wall 212 wall
+floor_wall 214 floor
+floor_wall 216 wall
+floor_wall 218 wall
+floor_wall 220 floor
+floor_wall 222 wall
+floor_wall 224 floor
+floor_wall 226 floor
+floor_wall 228 floor
+floor_wall 230 wall
+floor_wall 232 wall
+floor_wall 234 wall
+floor_wall 236 wall
+floor_wall 238 wall
+floor_wall 240 wall
+floor_wall 242 wall
+floor_wall 244 wall
+floor_wall 246 wall
+floor_wall 248 wall
+floor_wall 250 floor
+floor_wall 252 wall
+floor_wall 254 wall
+floor_wall 256 wall
+floor_wall 258 wall
+floor_wall 260 wall
+floor_wall 262 wall
+floor_wall 264 wall
+floor_wall 266 wall
+floor_wall 268 wall
+floor_wall 270 wall
+floor_wall 272 wall
+floor_wall 274 wall
+floor_wall 276 wall
+floor_wall 278 wall
+floor_wall 280 floor
+floor_wall 282 wall
+floor_wall 284 wall
+floor_wall 286 floor
+floor_wall 288 wall
+floor_wall 290 floor
+floor_wall 292 wall
+floor_wall 294 wall
+floor_wall 296 wall
+floor_wall 298 floor
+floor_wall 300 wall
+speed 2 faster
+speed 4 faster
+speed 6 slower
+speed 8 faster
+speed 10 faster
+speed 12 slower
+speed 14 faster
+speed 16 faster
+speed 18 faster
+speed 20 faster
+speed 22 faster
+speed 24 faster
+speed 26 slower
+speed 28 faster
+speed 30 faster
+speed 32 slower
+speed 34 slower
+speed 36 faster
+speed 38 faster
+speed 40 faster
+speed 42 faster
+speed 44 slower
+speed 46 faster
+speed 48 faster
+speed 50 faster
+speed 52 faster
+speed 54 slower
+speed 56 faster
+speed 58 faster
+speed 60 faster
+speed 62 faster
+speed 64 faster
+speed 66 faster
+speed 68 slower
+speed 70 faster
+speed 72 faster
+speed 74 slower
+speed 76 faster
+speed 78 faster
+speed 80 slower
+speed 82 faster
+speed 84 slower
+speed 86 slower
+speed 88 slower
+speed 90 faster
+speed 92 faster
+speed 94 faster
+speed 96 faster
+speed 98 slower
+speed 100 faster
+speed 102 faster
+speed 104 slower
+speed 106 faster
+speed 108 faster
+speed 110 faster
+speed 112 faster
+speed 114 slower
+speed 116 slower
+speed 118 slower
+speed 120 slower
+speed 122 faster
+speed 124 faster
+speed 126 slower
+speed 128 faster
+speed 130 slower
+speed 132 faster
+speed 134 faster
+speed 136 slower
+speed 138 faster
+speed 140 slower
+speed 142 faster
+speed 144 faster
+speed 146 faster
+speed 148 faster
+speed 150 faster
+speed 152 slower
+speed 154 faster
+speed 156 faster
+speed 158 slower
+speed 160 faster
+speed 162 faster
+speed 164 slower
+speed 166 slower
+speed 168 faster
+speed 170 faster
+speed 172 faster
+speed 174 slower
+speed 176 slower
+speed 178 faster
+speed 180 faster
+speed 182 faster
+speed 184 slower
+speed 186 faster
+speed 188 slower
+speed 190 slower
+speed 192 faster
+speed 194 slower
+speed 196 faster
+speed 198 slower
+speed 200 faster
+speed 202 faster
+speed 204 slower
+speed 206 slower
+speed 208 faster
+speed 210 slower
+speed 212 faster
+speed 214 faster
+speed 216 faster
+speed 218 faster
+speed 220 faster
+speed 222 faster
+speed 224 faster
+speed 226 slower
+speed 228 slower
+speed 230 slower
+speed 232 faster
+speed 234 slower
+speed 236 faster
+speed 238 slower
+speed 240 faster
+speed 242 faster
+speed 244 faster
+speed 246 faster
+speed 248 slower
+speed 250 slower
+speed 252 slower
+speed 254 slower
+speed 256 slower
+speed 258 faster
+speed 260 faster
+speed 262 slower
+speed 264 slower
+speed 266 faster
+speed 268 faster
+speed 270 faster
+speed 272 slower
+speed 274 slower
+speed 276 slower
+speed 278 slower
+speed 280 faster
+speed 282 faster
+speed 284 slower
+speed 286 faster
+speed 288 faster
+speed 290 faster
+speed 292 slower
+speed 294 slower
+speed 296 faster
+speed 298 faster
+speed 300 slower
+segment 2 blue
+segment 4 blue
+segment 6 blue
+segment 8 blue
+segment 10 blue
+segment 12 blue
+segment 14 blue
+segment 16 blue
+segment 18 blue
+segment 20 blue
+segment 22 blue
+segment 24 blue
+segment 26 blue
+segment 28 blue
+segment 30 blue
+segment 32 blue
+segment 34 blue
+segment 36 blue
+segment 38 blue
+segment 40 blue
+segment 42 blue
+segment 44 blue
+segment 46 blue
+segment 48 blue
+segment 50 blue
+segment 52 blue
+segment 54 blue
+segment 56 blue
+segment 58 blue
+segment 60 blue
+segment 62 blue
+segment 64 blue
+segment 66 blue
+segment 68 blue
+segment 70 blue
+segment 72 blue
+segment 74 blue
+segment 76 blue
+segment 78 blue
+segment 80 blue
+segment 82 blue
+segment 84 blue
+segment 86 blue
+segment 88 blue
+segment 90 blue
+segment 92 blue
+segment 94 blue
+segment 96 blue
+segment 98 blue
+segment 100 blue
+segment 102 blue
+segment 104 blue
+segment 106 blue
+segment 108 blue
+segment 110 blue
+segment 112 blue
+segment 114 blue
+segment 116 blue
+segment 118 blue
+segment 120 blue
+segment 122 blue
+segment 124 blue
+segment 126 blue
+segment 128 blue
+segment 130 blue
+segment 132 blue
+segment 134 blue
+segment 136 blue
+segment 138 blue
+segment 140 blue
+segment 142 blue
+segment 144 blue
+segment 146 blue
+segment 148 blue
+segment 150 blue
+segment 152 blue
+segment 154 blue
+segment 156 blue
+segment 158 blue
+segment 160 blue
+segment 162 blue
+segment 164 blue
+segment 166 blue
+segment 168 blue
+segment 170 orange
+segment 172 blue
+segment 174 blue
+segment 176 blue
+segment 178 orange
+segment 180 blue
+segment 182 blue
+segment 184 blue
+segment 186 blue
+segment 188 blue
+segment 190 blue
+segment 192 blue
+segment 194 blue
+segment 196 blue
+segment 198 blue
+segment 200 blue
+segment 202 blue
+segment 204 blue
+segment 206 blue
+segment 208 blue
+segment 210 blue
+segment 212 blue
+segment 214 blue
+segment 216 blue
+segment 218 blue
+segment 220 blue
+segment 222 blue
+segment 224 blue
+segment 226 blue
+segment 228 blue
+segment 230 blue
+segment 232 blue
+segment 234 blue
+segment 236 blue
+segment 238 blue
+segment 240 blue
+segment 242 blue
+segment 244 blue
+segment 246 blue
+segment 248 blue
+segment 250 blue
+segment 252 blue
+segment 254 blue
+segment 256 blue
+segment 258 blue
+segment 260 blue
+segment 262 blue
+segment 264 blue
+segment 266 blue
+segment 268 blue
+segment 270 blue
+segment 272 orange
+segment 274 blue
+segment 276 blue
+segment 278 blue
+segment 280 blue
+segment 282 blue
+segment 284 blue
+segment 286 blue
+segment 288 orange
+segment 290 blue
+segment 292 blue
+segment 294 blue
+segment 296 blue
+segment 298 blue
+segment 300 blue
+anticipate 2 no
+anticipate 4 no
+anticipate 6 no
+anticipate 8 no
+anticipate 10 no
+anticipate 12 no
+anticipate 14 no
+anticipate 16 no
+anticipate 18 no
+anticipate 20 no
+anticipate 22 no
+anticipate 24 no
+anticipate 26 no
+anticipate 28 no
+anticipate 30 no
+anticipate 32 no
+anticipate 34 no
+anticipate 36 no
+anticipate 38 no
+anticipate 40 no
+anticipate 42 no
+anticipate 44 no
+anticipate 46 no
+anticipate 48 no
+anticipate 50 no
+anticipate 52 no
+anticipate 54 no
+anticipate 56 no
+anticipate 58 no
+anticipate 60 no
+anticipate 62 no
+anticipate 64 no
+anticipate 66 no
+anticipate 68 no
+anticipate 70 no
+anticipate 72 no
+anticipate 74 no
+anticipate 76 no
+anticipate 78 no
+anticipate 80 no
+anticipate 82 no
+anticipate 84 no
+anticipate 86 yes
+anticipate 88 no
+anticipate 90 no
+anticipate 92 no
+anticipate 94 no
+anticipate 96 no
+anticipate 98 no
+anticipate 100 no
+anticipate 102 no
+anticipate 104 no
+anticipate 106 no
+anticipate 108 no
+anticipate 110 no
+anticipate 112 no
+anticipate 114 no
+anticipate 116 no
+anticipate 118 no
+anticipate 120 no
+anticipate 122 no
+anticipate 124 no
+anticipate 126 no
+anticipate 128 no
+anticipate 130 yes
+anticipate 132 no
+anticipate 134 no
+anticipate 136 no
+anticipate 138 no
+anticipate 140 no
+anticipate 142 no
+anticipate 144 no
+anticipate 146 no
+anticipate 148 no
+anticipate 150 no
+anticipate 152 no
+anticipate 154 no
+anticipate 156 no
+anticipate 158 no
+anticipate 160 no
+anticipate 162 no
+anticipate 164 no
+anticipate 166 no
+anticipate 168 no
+anticipate 170 no
+anticipate 172 no
+anticipate 174 no
+anticipate 176 no
+anticipate 178 no
+anticipate 180 no
+anticipate 182 no
+anticipate 184 no
+anticipate 186 no
+anticipate 188 no
+anticipate 190 no
+anticipate 192 no
+anticipate 194 no
+anticipate 196 no
+anticipate 198 no
+anticipate 200 no
+anticipate 202 no
+anticipate 204 no
+anticipate 206 no
+anticipate 208 no
+anticipate 210 no
+anticipate 212 no
+anticipate 214 no
+anticipate 216 no
+anticipate 218 no
+anticipate 220 no
+anticipate 222 no
+anticipate 224 no
+anticipate 226 no
+anticipate 228 no
+anticipate 230 no
+anticipate 232 no
+anticipate 234 no
+anticipate 236 no
+anticipate 238 no
+anticipate 240 no
+anticipate 242 no
+anticipate 244 no
+anticipate 246 no
+anticipate 248 no
+anticipate 250 no
+anticipate 252 no
+anticipate 254 no
+anticipate 256 no
+anticipate 258 no
+anticipate 260 no
+anticipate 262 no
+anticipate 264 no
+anticipate 266 no
+anticipate 268 no
+anticipate 270 no
+anticipate 272 no
+anticipate 274 no
+anticipate 276 no
+anticipate 278 no
+anticipate 280 no
+anticipate 282 no
+anticipate 284 no
+anticipate 286 no
+anticipate 288 no
+anticipate 290 no
+anticipate 292 no
+anticipate 294 no
+anticipate 296 no
+anticipate 298 no
+anticipate 300 no
+=== behaviour: vlm_behaviour analyze
+contact {"prompt": "Is the arm touching the floor or the wall at any point in this video? Answer yes or no.", "ground_truth": "positive: contact in >=3 of the 8 shown frames; negative: no contact in any sim frame of the clip", "n": 300, "n_candidates": [7749, 6554], "chance": 0.5, "verbal_acc": 0.49666666666666665, "verbal_balanced_acc": 0.4966666666666667, "frac_unparsed": 0.0, "frac_answer_option0": 0.01, "logit_auc": 0.6426666666666667, "probe_best_layer": 8, "probe_best_acc": 0.96, "probe_layer18_acc": 0.94, "vision_probe_acc": 0.9433333333333334, "shuffled_label_probe_acc": 0.5006666666666666, "answer_examples": ["no", "yes"]}
+floor_wall {"prompt": "The arm touches a surface in this video. Is it touching the floor or the wall? Answer with one word: floor or wall.", "ground_truth": "clips with contact in >=3 shown frames; positive=only floor contact, negative=only wall contact", "n": 300, "n_candidates": [5856, 1848], "chance": 0.5, "verbal_acc": 0.8833333333333333, "verbal_balanced_acc": 0.8833333333333333, "frac_unparsed": 0.0, "frac_answer_option0": 0.61, "logit_auc": 0.9513777777777778, "probe_best_layer": 1, "probe_best_acc": 1.0, "probe_layer18_acc": 0.9933333333333333, "vision_probe_acc": 0.9966666666666667, "shuffled_label_probe_acc": 0.5033333333333333, "answer_examples": ["floor", "wall"]}
+speed {"prompt": "Is the arm speeding up or slowing down during this video? Answer with one word: faster or slower.", "ground_truth": "kinetic energy at last shown frame > 2x first (speeding) or < 0.5x (slowing); max KE > 0.5 J", "n": 300, "n_candidates": [4052, 4728], "chance": 0.5, "verbal_acc": 0.59, "verbal_balanced_acc": 0.59, "frac_unparsed": 0.0, "frac_answer_option0": 0.6633333333333333, "logit_auc": 0.6731555555555555, "probe_best_layer": 25, "probe_best_acc": 0.88, "probe_layer18_acc": 0.8666666666666667, "vision_probe_acc": 0.7366666666666667, "shuffled_label_probe_acc": 0.5046666666666667, "answer_examples": ["faster", "slower"]}
+segment {"prompt": "Which part of the arm is rotating faster: the blue part or the orange part? Answer with one word: blue or orange.", "ground_truth": "mean |q1dot| (blue) vs mean |q1dot+q2dot| (orange, world-frame rotation) over clip, ratio > 2, faster > 1.5 rad/s", "n": 300, "n_candidates": [628, 3937], "chance": 0.5, "verbal_acc": 0.5333333333333333, "verbal_balanced_acc": 0.5333333333333333, "frac_unparsed": 0.0, "frac_answer_option0": 0.9666666666666667, "logit_auc": 0.8127333333333334, "probe_best_layer": 22, "probe_best_acc": 0.91, "probe_layer18_acc": 0.8766666666666667, "vision_probe_acc": 0.7133333333333334, "shuffled_label_probe_acc": 0.488, "answer_examples": ["blue", "orange"]}
+anticipate {"prompt": "Will the arm hit the floor or the wall right after this video ends? Answer yes or no.", "ground_truth": "no contact in clip; positive: contact onset within 10 sim frames (0.2 s) after the last shown frame; negative: no contact in the next 30 frames", "n": 300, "n_candidates": [1572, 2016], "chance": 0.5, "verbal_acc": 0.51, "verbal_balanced_acc": 0.51, "frac_unparsed": 0.0, "frac_answer_option0": 0.01, "logit_auc": 0.6047111111111111, "probe_best_layer": 17, "probe_best_acc": 0.66, "probe_layer18_acc": 0.6166666666666667, "vision_probe_acc": 0.6466666666666666, "shuffled_label_probe_acc": 0.4693333333333333, "answer_examples": ["no", "yes"]}
+=== stage behaviour done
