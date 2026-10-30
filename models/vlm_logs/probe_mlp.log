@@ -1,0 +1,13 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+=== probe_mlp: vlm_probe mlp
+mlp V 3 sin_q1 0.99 qd1 0.13 qd2 0.02 ee_vx 0.21 qdd1 0.08 contact 0.81 ke 0.71
+mlp V 8 sin_q1 1.00 qd1 0.17 qd2 0.04 ee_vx 0.27 qdd1 0.13 contact 0.82 ke 0.78
+mlp V 13 sin_q1 1.00 qd1 0.18 qd2 0.04 ee_vx 0.24 qdd1 0.12 contact 0.82 ke 0.80
+mlp V 18 sin_q1 0.97 qd1 0.07 qd2 0.01 ee_vx 0.07 qdd1 0.08 contact 0.77 ke 0.68
+mlp V 23 sin_q1 0.99 qd1 0.11 qd2 0.02 ee_vx 0.12 qdd1 0.09 contact 0.80 ke 0.72
+mlp L 2 sin_q1 1.00 qd1 0.25 qd2 0.07 ee_vx 0.35 qdd1 0.15 contact 0.82 ke 0.78
+mlp L 8 sin_q1 1.00 qd1 0.31 qd2 0.07 ee_vx 0.37 qdd1 0.15 contact 0.82 ke 0.79
+mlp L 16 sin_q1 0.99 qd1 0.32 qd2 0.06 ee_vx 0.34 qdd1 0.09 contact 0.79 ke 0.73
+mlp L 24 sin_q1 0.97 qd1 0.18 qd2 0.03 ee_vx 0.24 qdd1 0.07 contact 0.77 ke 0.67
+mlp L 32 sin_q1 0.94 qd1 0.09 qd2 0.01 ee_vx 0.13 qdd1 0.05 contact 0.74 ke 0.60
+=== stage probe_mlp done
