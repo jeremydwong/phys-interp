@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essay Fixes To-Do</title>
+<style>
+:root{
+  --bg:#fbfaf7; --panel:#ffffff; --ink:#1d1d1f; --ink2:#55555c; --muted:#8a8a92; --rule:#e4e2dc;
+  --link:#1f5fbf; --done:#1f7a4a; --done-bg:#e3f3ea; --part:#9a6200; --part-bg:#fbf0d9;
+  --todo:#b0263c; --todo-bg:#fae4e7; --tag-bg:#eeecf6; --tag:#4a3f8a; --quote:#f3f1ea;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16161a; --panel:#1f1f24; --ink:#ececf0; --ink2:#b4b4bc; --muted:#85858f; --rule:#33333b;
+    --link:#7fb0ff; --done:#6fd39c; --done-bg:#16352a; --part:#f0c060; --part-bg:#3a2e12;
+    --todo:#ff8a9a; --todo-bg:#3d1a21; --tag-bg:#2a2840; --tag:#c3b8ff; --quote:#26262c;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16161a; --panel:#1f1f24; --ink:#ececf0; --ink2:#b4b4bc; --muted:#85858f; --rule:#33333b;
+  --link:#7fb0ff; --done:#6fd39c; --done-bg:#16352a; --part:#f0c060; --part-bg:#3a2e12;
+  --todo:#ff8a9a; --todo-bg:#3d1a21; --tag-bg:#2a2840; --tag:#c3b8ff; --quote:#26262c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 80px}
+h1{font-size:1.9rem;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:1.3rem;margin:44px 0 10px;padding-top:8px;border-top:1px solid var(--rule)}
+h3{font-size:1.05rem;margin:0 0 6px}
+p{margin:.5em 0}
+a{color:var(--link)}
+code{font:13.5px/1.4 ui-monospace,Consolas,monospace;background:var(--quote);padding:1px 4px;border-radius:3px;word-break:break-word}
+.meta{color:var(--ink2);font-size:.92rem}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px 18px;margin:14px 0;scroll-margin-top:12px}
+.card:target{outline:2px solid var(--link)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.id{font-weight:700;color:var(--muted);margin-right:4px}
+.badge{font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.done{color:var(--done);background:var(--done-bg)} .part{color:var(--part);background:var(--part-bg)} .todo{color:var(--todo);background:var(--todo-bg)}
+.tag{font-size:.75rem;padding:2px 8px;border-radius:10px;color:var(--tag);background:var(--tag-bg);white-space:nowrap}
+.lbl{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:12px 0 2px}
+blockquote{margin:6px 0;padding:6px 12px;background:var(--quote);border-left:3px solid var(--rule);color:var(--ink2);font-size:.95rem}
+ul{margin:.3em 0;padding-left:1.25em} li{margin:.2em 0}
+.todo-list li::marker{content:"☐  "}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--ink2);font-weight:600}
+.tablewrap{overflow-x:auto}
+.toc{columns:2;column-gap:28px;font-size:.93rem;padding-left:1.1em}
+@media (max-width:620px){.toc{columns:1}}
+.callout{background:var(--part-bg);border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin:16px 0}
+</style>
+</head>
+<body>
+<main>
+
+<h1>From the essay's fixes to a to-do list</h1>
+<p class="meta">phys-interp · 2026-10-30 · branch <code>msi/first-pass</code> · written from the msi session</p>
+
+<p>This report goes through the interpretability fixes in Nick Cammarata's essay <a href="https://already-clean.goodfire.com/">“Neural Networks Are Already Clean”</a> (Goodfire, 2026). For each fix it says what the essay recommends, with a link to that place in the essay, what this repo does about it, and what is left to do. I read the essay as it was published on 2026-10-30. Its footnote 3 says it was revised that same day, so later edits may have moved the anchors. All quotes are from the essay.</p>
+
+<p><b>Provenance.</b> The Mac session wrote most of the analysis code. I ran and fixed it on CUDA. The maths notes in <code>reports/research/cammarata_math.md</code> are also from the Mac session. That file uses the class <code>hyp</code> to mark formalizations the essay doesn't state.</p>
+
+<p><b>Tags:</b>
+<span class="tag">essay</span> the essay describes the method well enough to copy;
+<span class="tag">paper/code</span> built from a paper or codebase the essay cites, or that we looked up;
+<span class="tag">ours</span> our guess or formalization, which the essay doesn't specify;
+<span class="badge done">done</span> <span class="badge part">partial</span> <span class="badge todo">not started</span>.</p>
+
+<div class="callout">
+<p><b>The main mismatch.</b> Our main tool is a census: binned R² of every unit against 32 predefined physics variables. The essay works the other way round. It starts from what the neuron does: its top examples at <em>both</em> poles, its inputs and readers, its steering effects, and its growth over training. Only then does it name the neuron. It is explicit that tools built on predefined questions come last:</p>
+<blockquote>“Probes push the first risk further: they can only answer a question we already had, so they can't teach us which questions to ask. … Higher-level structures like probes and sparse dictionaries can still be useful, but they belong at the end, not the start.” <a href="https://already-clean.goodfire.com/#a-city-vs-a-knot">A City vs a Knot</a></blockquote>
+<p>Our census is a probe in this sense, and it is also a simulation-style score (see <a href="#C2">C2</a>). Ground truth is still what makes this testbed useful. But many of our "unexplained" units (only 24.6% of video units are clean) may be units we never asked the right question about. The open-ended reading in section B should come before the census, not after it.</p>
+</div>
+
+<p><b>Contents.</b></p>
+<ul class="toc">
+<li><a href="#A">A. Microscope (feature visualization)</a></li>
+<li><a href="#B">B. Reading a neuron in context</a></li>
+<li><a href="#C">C. Measuring cleanliness</a></li>
+<li><a href="#D">D. Causal tests and tests of explanations</a></li>
+<li><a href="#E">E. Tool bugs the essay found</a></li>
+<li><a href="#F">F. Architecture and capacity</a></li>
+<li><a href="#G">G. Watching neurons grow</a></li>
+<li><a href="#H">H. Rare things and memorization</a></li>
+<li><a href="#plan">Suggested order</a></li>
+</ul>
+
+<!-- ============================================================ A -->
+<h2 id="A">A. Microscope: feature visualization</h2>
+
+<div class="card" id="A1">
+<div class="row"><span class="id">A1</span><h3>Transformation robustness and the 2009 → 2017 → 2026 settings</h3>
+<span class="badge part">partial</span><span class="tag">paper/code</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>Early feature visualizations looked bad because the method “was missing transformation robustness. Once researchers added it, the same neurons came out crisp.” Late layers then broke again because of reward hacking and “regularizations that weren't quite right”. The fix was “a few subtle tweaks to reasonable settings”. The essay shows the same two InceptionV1 neurons rendered with 2009-style, 2017 and 2026 settings. It does <em>not</em> give the 2026 settings.
+<a href="https://already-clean.goodfire.com/#better-microscopes">A History of Microscope Errors</a> · <a href="https://already-clean.goodfire.com/#microscope-timeline">timeline figure</a></p>
+<div class="lbl">Here</div>
+<ul>
+<li><code>analysis/video_featvis.py</code> renders five video-model units under three settings. <b>"2009"</b>: plain pixel gradient ascent. <b>"2017"</b>: Fourier parameterization with 1/f scaling, colour decorrelation and ±1 px jitter. We took this from Lucid's <code>fft_image</code> and <code>color_correlation_svd_sqrt</code> <span class="tag">paper/code</span>. <b>"2026"</b>: jitter ±3 px, scale 0.92–1.08 and a scene-palette prior (static background plus two arm-coloured alpha masks). <b>All of the "2026" settings are our guess</b> <span class="tag">ours</span>. The script's docstring says the palette prior is not from the essay.</li>
+<li><code>analysis/state_featvis.py</code> optimizes the state model's inputs (angles, velocities, torques) with 64 restarts. It has no image, so transformation robustness doesn't apply.</li>
+<li>Reruns differ by about 5% in activation (<code>video.md</code> caveats). Nothing has been done for the Qwen vision tower.</li>
+</ul>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Fix the seeds and report the spread over N runs, so the "2017 vs 2026" comparison is above run-to-run noise.</li>
+<li>Run the three settings on the 14 VLM gallery units (<code>data/vlm/gallery_spec.json</code>). The input is an 8-frame clip, optimized through the processor's patching.</li>
+<li>Run the palette prior on/off as an ablation, so we know how much of the "2026" crispness comes from our prior rather than from robustness.</li>
+</ul>
+</div>
+
+<div class="card" id="A2">
+<div class="row"><span class="id">A2</span><h3>Path-guided feature visualization (the "dog basin")</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>Free optimization in late layers “takes the easiest path, which in InceptionV1 often means dogs”. The fix was to bias it toward the routes that real top images take: “We took the neuron's top dataset examples, traced the paths they take, and gave the optimization an incentive to follow those paths, often only for the first 64 steps … We tried this a bunch of ways and don't have a canonical best one.” The squeeze appendix uses “the strongest 60 examples”, and scales the path weight “to each unit's activation range”.
+<a href="https://already-clean.goodfire.com/#late-layer-feature-visualization">Feature Visualization in Later Layers</a> · <a href="https://already-clean.goodfire.com/#superposition-circuit">car-circuit figure</a></p>
+<div class="lbl">Here</div>
+<p>Only the equation exists, in <code>cammarata_math.md</code>: cosine to the mean incoming attribution of the top-K examples, gated to 64 steps and scaled by the activation range. The notes mark it as our formalization <span class="tag">ours</span>. It hasn't been coded.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Implement it for the video model's late space-time units, which is where our feature vis is least crisp. The "path" is the attribution vector from the previous block's units on the top 60 clips. Add a loss term for its cosine during the first 64 steps.</li>
+<li>Check whether free optimization here falls into our own "basin". A likely candidate is the "stillness" pattern that dominates our clean velocity and energy units (<code>video.md</code>).</li>
+</ul>
+</div>
+
+<div class="card" id="A3">
+<div class="row"><span class="id">A3</span><h3>Generic feature visualization: render what a neuron's inputs share</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>For 4e:55, the "cat and car" neuron: “I clustered the items coming in, feature visualized their intersection, and it showed a pointy shape.” Footnote 4: “Visualizing the intersection and differences between groups of inputs to a neuron became a helpful general tool for understanding shared patterns.” The method isn't specified beyond this.
+<a href="https://already-clean.goodfire.com/#fn-4">footnote 4</a> · <a href="https://already-clean.goodfire.com/#v-figure">V-neuron figure</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>This needs B1 (inputs) first. Then cluster a unit's strongest input units and optimize for the sum of a cluster's activations. Compare that render with the unit's own render.</li>
+</ul>
+</div>
+
+<!-- ============================================================ B -->
+<h2 id="B">B. Reading a neuron in context</h2>
+
+<div class="card" id="B1">
+<div class="row"><span class="id">B1</span><h3>Inputs and readers: look upstream and downstream</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>This is the essay's main workflow: “You look upstream at how it's built and downstream at what it does, and both line up.” A neuron is “less about what it sees than about what it does to the flow coming in, and often its job is to gate a region of the network.” The worked example follows one sports car through the last five blocks, taking at each step the neuron that contributes most to the next.
+<a href="https://already-clean.goodfire.com/#a-note">The Short Version</a> · <a href="https://already-clean.goodfire.com/#how-i-think-about-neurons">How I Think About Neurons</a> · <a href="https://already-clean.goodfire.com/#car-path-distinctions">car-path figure</a> · <a href="https://already-clean.goodfire.com/#late-layers">Late Circuits</a> · <a href="https://already-clean.goodfire.com/#edge-circuits">Edge Featurizers</a></p>
+<div class="lbl">Here</div>
+<p>No attribution, weight-tracing or circuit code exists anywhere in the repo.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li><b>State model first.</b> It is the cheapest: 4 residual ReLU blocks of 1,024 units. Compute unit → unit attribution (activation × gradient, or direct weight through <code>W_out·W_in</code> with LN frozen) on held-out frames. Then follow the chain into the predicted acceleration, as in the car-path figure.</li>
+<li>For each clean gravity or contact unit, list its top 5 inputs and top 5 readers. Ask whether the readers split it further, for example shoulder vs elbow, or floor vs wall.</li>
+<li>Then do the video model's space-time stage, which is where velocity first appears (<code>video.md</code>).</li>
+</ul>
+</div>
+
+<div class="card" id="B2">
+<div class="row"><span class="id">B2</span><h3>Negative poles, including in ReLU and GELU networks</h3>
+<span class="badge part">partial</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“The negative side of neurons matters almost as much as positives for understanding them, even in ReLU networks where the negative side is cut off.” The reason is that the votes summed before the nonlinearity are shaped by learning. “The negative side tells us what distinction matters at this point in the circuit, which also makes it a quick check on whether a grouping is real.” In Qwen, removing the 8 neurons whose <em>negative</em> side is about Santa drops P(Santa) to 6%. Removing the 20 neurons labelled Christmas or Santa only drops it to 76%.
+<a href="https://already-clean.goodfire.com/#car-path-distinctions">gate paragraph</a> · <a href="https://already-clean.goodfire.com/#negative-poles">last-layer poles figure</a> · <a href="https://already-clean.goodfire.com/#preeclampsia-circuit">Santa graph</a></p>
+<div class="lbl">Here</div>
+<ul>
+<li>VLM language model (SwiGLU): both poles are read. The + pole is max-pooled and the − pole is −min-pooled (<code>vlm_census.py</code>).</li>
+<li>VLM vision tower (GELU): only the + pole is read, because GELU's negative side is capped at −0.17.</li>
+<li>State model (ReLU) and video model (GELU): the census uses <em>post</em>-activation values, so the negative pole is never seen.</li>
+<li>The galleries show an "opposite pole / weakest" column.</li>
+</ul>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Rerun the state and video census on <b>pre-activations</b>, reading both signs, and label each unit's negative pole. Example question: is a "shoulder gravity +" unit's negative side the opposite torque, or something like "in contact"?</li>
+<li>Do the same for the Qwen vision tower's <code>fc1</code> pre-activations. That needs a new hook in <code>vlm_capture.py</code>.</li>
+</ul>
+</div>
+
+<div class="card" id="B3">
+<div class="row"><span class="id">B3</span><h3>Verbs, not nouns: describe the shared pattern</h3>
+<span class="badge part">partial</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“I can often unblock my understanding of a neuron by asking: if I couldn't use groups of nouns at all, how would I describe this neuron to someone else?” The neuron's job “isn't to name what's in the input but to draw a distinction downstream neurons can use”. The essay also says to treat a neuron with two or three meanings as one neuron with grouped meanings, and to keep the original neuron whole so that tool errors stay visible.
+<a href="https://already-clean.goodfire.com/#pose-everywhere">after the DINOv2 pose figure</a> · <a href="https://already-clean.goodfire.com/#cars-and-animals">Cars and Animals</a></p>
+<div class="lbl">Here</div>
+<p>We keep neurons whole, with no SAE replacement. That part is done. But the census forces each unit onto one of 32 nouns. The closest we came to a "verb" was finding that the clean velocity and energy units in the video model are really "stillness" units (<code>video.md</code>). That was noticed, not systematic.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>For about 50 random units per model, write a free-form description from the top and bottom clips <em>before</em> looking at the census label (blind, by an agent). Then compare: same, more general, or different. Report how often the free description beats the best-variable label.</li>
+</ul>
+</div>
+
+<div class="card" id="B4">
+<div class="row"><span class="id">B4</span><h3>Group top activations by the route that feeds them</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>A planetary-geology neuron's top firings mix lunar crust with Cesium/IDL code. “Grouped by the circuits that feed them, they separate into three facets of one core, planetary surfaces, and one offshoot, the code, which arrives by its own route.” Also: “what fired weakly here may have fired strongly one layer back.”
+<a href="https://already-clean.goodfire.com/#route-split">route-split figure</a> · <a href="https://already-clean.goodfire.com/#do-weak-activations-matter">Do Weak Activations Matter?</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Needs B1. For the top 100 examples of a partial or conjunction unit, cluster the per-example input-attribution vectors. Check whether the clusters line up with physics, for example free motion vs contact, or reach vs passive mode.</li>
+</ul>
+</div>
+
+<!-- ============================================================ C -->
+<h2 id="C">C. Measuring cleanliness</h2>
+
+<div class="card" id="C1">
+<div class="row"><span class="id">C1</span><h3>The census number, and which activations it is about</h3>
+<span class="badge part">partial</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>In Qwen3-32B, “roughly 90% of neuron poles have one main job … ~7% have two related jobs; and only ~2-4% are not yet understood”. The footnote warns that the number depends on “how you set the threshold for counting weak activations”, and that “considering strong activations, it's closer to 97% non-arbitrary”. It is “a broad pointer … rather than something precise”. The labels come from reading top activations and testing them, not from regression.
+<a href="https://already-clean.goodfire.com/#fn-1">footnote 1</a> · <a href="https://already-clean.goodfire.com/#what-i-mean-by-clean">What I Mean by Clean</a> · <a href="https://already-clean.goodfire.com/#near-miss-test">Explanations That Could Lose</a></p>
+<div class="lbl">Here</div>
+<p>Binned R² per unit against 32 targets. Clean is ≥0.5 and partial is 0.25–0.5. A unit is a conjunction if its best pair beats its best single variable by more than 0.15. There is always a random-init control. <b>All of these thresholds and the control are ours</b> <span class="tag">ours</span> (<code>CLAUDE.md</code> conventions). Binned R² is computed over <em>all</em> frames, so it is dominated by the many weak activations. The essay's numbers are about strong activations.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Add a strong-activation census: R² or label agreement restricted to the top 1% of frames, or to frames above half the unit's max, which is the essay's "strong half".</li>
+<li>Report clean, partial and unexplained separately for strong and for all activations.</li>
+<li>Add a "described but not one of our 32 variables" category from B3, so "unexplained" stops meaning "not one of our nouns".</li>
+</ul>
+</div>
+
+<div class="card" id="C2">
+<div class="row"><span class="id">C2</span><h3>Simulation-style scores reward the wrong things</h3>
+<span class="badge part">partial</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>The 2023 tools were “rewarding explanations that could simulate activations rather than ones that were right, which often come apart”. Simulation “rewards fine details of weak activations that matter little for understanding what a neuron does”. “In theory, careful binning could fix some of the fine-detail problems, but neurons differ a lot in their natural thresholds and sparsity.”
+<a href="https://already-clean.goodfire.com/#on-simulation-scores">On Simulation Scores</a></p>
+<div class="lbl">Here</div>
+<p>Binned R² is a simulation score: it predicts activation from one variable. Binning is exactly the partial fix the essay mentions. This is a known limit of our main metric and isn't stated in the results write-ups yet.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Add a caveat paragraph to <code>state.md</code>, <code>video.md</code> and <code>vlm.md</code>.</li>
+<li>Pair every census with the prediction tests in <a href="#D3">D3</a>, which can fail in a way R² can't.</li>
+</ul>
+</div>
+
+<div class="card" id="C3">
+<div class="row"><span class="id">C3</span><h3>Do weak activations matter? The ablation test</h3>
+<span class="badge part">partial</span><span class="tag">essay</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>“You can ablate almost all the weak activations of the network for almost no cost.” Medium ConvNeXt: removing the weakest 75% gives 72% → 71% accuracy, with 1 in 10 answers changing, mostly near-ties. Removing the strongest 7%, at the same total activation, gives 72% → 4%. The exceptions are informative: early layers act “like dials”, and the last LM layer suppresses tokens.
+<a href="https://already-clean.goodfire.com/#do-weak-activations-matter">Do Weak Activations Matter?</a> · <a href="https://already-clean.goodfire.com/#weak-close-calls">near-ties figure</a> · <a href="https://already-clean.goodfire.com/#weak-activation-controls">further measurements</a></p>
+<div class="lbl">Here</div>
+<p>We split each unit's activations into quantile bands (0–50, 50–90, 90–99, 99–100) and ask which variable explains each band. This is in <code>state_dynamics.py</code>, <code>video_dynamics.py</code> and <code>vlm_general.py bands</code>. It is a <b>descriptive substitute we invented</b> <span class="tag">ours</span>, not the essay's ablation. <code>vlm_general.py</code> even calls the bands a "recursive-generalisation lens". That is our framing.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>State and video models: zero each unit's activations below its p-th percentile, for p = 50, 75, 90, 99, in one layer and then in all layers. Separately, zero the top q% at matched total activation. Report the change in prediction error, and which frames change: near contact, or near rest.</li>
+<li>Prediction from the essay's "dials" remark: posture and velocity units are continuous dials, so cutting weak activations should hurt <em>more</em> here than in ImageNet. A physics model could be a real exception, and that is worth reporting either way.</li>
+</ul>
+</div>
+
+<div class="card" id="C4">
+<div class="row"><span class="id">C4</span><h3>Raw activation shape, not percentiles</h3>
+<span class="badge part">partial</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“I've come to think a neuron's raw shape is telling us something. Some neurons hold their meaning far down the range; others drop off a cliff … Percentiles flatten that, and it's often what tells you whether you're looking at a dial, where the middle matters, or a detector, where it mostly doesn't.”
+<a href="https://already-clean.goodfire.com/#percentiles-or-raw-activations">Percentiles or raw activations?</a></p>
+<div class="lbl">Here</div>
+<p>The galleries print raw activations (<code>a=+0.42</code>). The bands in C3 are percentile-based.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Classify each clean unit as a <b>dial</b> or a <b>detector</b> from its raw tuning curve. A dial is roughly linear or monotone over the range. A detector is flat, then fires steeply. We expect posture and gravity units to be dials and contact units to be detectors. Check this against the essay's claim that the shape is informative.</li>
+</ul>
+</div>
+
+<div class="card" id="C5">
+<div class="row"><span class="id">C5</span><h3>Enough data and enough context</h3>
+<span class="badge part">partial</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“At first we didn't include long context, two paragraphs felt like enough. But this accidentally made all the long-context neurons look polysemantic.” A health-SEO neuron became understandable “once we had a sufficiently broad dataset”. The essay lists five sources of apparent polysemanticity: bad tools, bad explanations, bad learning, recursive generalization, and superposition. Superposition should be “the last hypothesis”.
+<a href="https://already-clean.goodfire.com/#superposition-of-the-gaps">Superposition of the Gaps</a> · <a href="https://already-clean.goodfire.com/#context-neuron">context figure</a></p>
+<div class="lbl">Here</div>
+<p>Our data has 3 motion modes (passive, sines, reach) and one scene. The VLM sees 8-frame clips at stride 2 (about 0.3 s, at 25 fps). The video model sees 4 frames. The generalisation renders (recoloured arm, grey links, dark backdrop, no floor or wall, cartoon) are running now in the <code>general</code> stage.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Recheck the VLM's "unexplained" units on longer clips (16 or 32 frames). Some may be integrating over more time than we show them.</li>
+<li>Add a fourth motion mode, for example throwing or impacts at high speed, before calling any unit unexplained.</li>
+</ul>
+</div>
+
+<!-- ============================================================ D -->
+<h2 id="D">D. Causal tests and tests of explanations</h2>
+
+<div class="card" id="D1">
+<div class="row"><span class="id">D1</span><h3>Steering a neuron</h3>
+<span class="badge part">partial</span><span class="tag">essay</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>A “polysemantic comma neuron” turned out to track Colorado: “Steering it made the model want to go hiking.” Real explanations are narrow: “Once you suspect a neuron is a Colorado neuron, steer it and see what it says.”
+<a href="https://already-clean.goodfire.com/#colorado-neuron">Colorado neuron</a> · <a href="https://already-clean.goodfire.com/#superposition-of-the-gaps">Superposition of the Gaps</a></p>
+<div class="lbl">Here</div>
+<ul>
+<li><b>State model</b> (<code>state_causal.py</code>): gravity units are multiplied by a factor s, and the change in predicted acceleration is compared with the physics answer (s−1)M⁻¹τ_g. The control is random units. This is neuron steering, as in the essay <span class="tag">essay</span>.</li>
+<li><b>Gravity model</b> (<code>grav_steer.py</code>): steers a 2-D <em>residual subspace</em>, not neurons, because only 3 of 2,048 units are tuned to gravity. This is our method <span class="tag">ours</span>.</li>
+<li><b>Video model</b>: ablation only. <b>VLM</b>: nothing causal yet.</li>
+</ul>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Steer the VLM's clean gravity and contact units (from the gallery spec) and rerun the <code>vlm_behaviour</code> questions. Does turning up a "contact" unit make Qwen say the arm hit the floor?</li>
+<li>Steer the video model's gravity and posture units and roll the model out. Does the arm fall faster?</li>
+</ul>
+</div>
+
+<div class="card" id="D2">
+<div class="row"><span class="id">D2</span><h3>Ablation with a matched random control</h3>
+<span class="badge done">done</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>Every ablation in the language-model graphs comes with a control: “‘Random’ removes as many neurons from the same layers.”
+<a href="https://already-clean.goodfire.com/#preeclampsia-circuit">The same circuit, in features and in neurons</a></p>
+<div class="lbl">Here</div>
+<p><code>video_causal.py</code> and <code>state_causal.py</code> both use same-layer random controls. Result to follow up: in the video model, ablating contact units hurts <em>less</em> than ablating random units (<code>video.md</code>). This is a negative result.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Use B1 to find which units actually feed the contact prediction, and ablate those instead of the census-chosen ones.</li>
+</ul>
+</div>
+
+<div class="card" id="D3">
+<div class="row"><span class="id">D3</span><h3>Explanations that can lose: blind maximum and near misses</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p><b>Blind maximum:</b> “One agent investigates a neuron and writes a short explanation; a second sees only that explanation and writes an example meant to activate it maximally.” This often beats the best of 10B corpus tokens. For breadth: cluster incoming attribution and run one blind maximum per bundle. <b>Near misses:</b> for 200 neurons, 5 new examples and 5 near misses were written from the explanation alone. The new examples fired 76% of the time and the near misses 11%. A third test, “the most distant concept it could”, fired about 1% of the time.
+<a href="https://already-clean.goodfire.com/#testing-explanations">Explanations That Can Lose</a> · <a href="https://already-clean.goodfire.com/#blind-maximum">blind-maximum figure</a> · <a href="https://already-clean.goodfire.com/#near-miss-test">near-miss appendix</a></p>
+<div class="lbl">Here</div>
+<p><code>state_featvis.py</code> finds superstimuli by optimization, which is not explanation-driven. Nothing else exists.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Our testbed makes this easy, because the "writer" can be the simulator. Take a unit's label, for example "elbow gravity torque, positive". Construct arm states that maximize the labelled variable, plus near misses (same pose with contact, or a mirrored pose). Render them, and measure firing relative to the unit's corpus max.</li>
+<li>Score each explanation as won, tied or lost, as in the appendix. This is the test that can make a census label fail.</li>
+</ul>
+</div>
+
+<div class="card" id="D4">
+<div class="row"><span class="id">D4</span><h3>Detection is not use: probes vs what the model reads</h3>
+<span class="badge part">partial</span><span class="tag">paper/code</span></div>
+<div class="lbl">Essay</div>
+<p>The “Social Security” probe in <a href="https://arxiv.org/abs/2305.01610">Gurnee et al. 2023</a> detects the phrase (held-out AUC 1.00). But removing its three neurons changes the next token by −0.004 nats: “Nothing reads the ‘Social Security’ direction.” Tracing what the model <em>uses</em> found ordinary lexical and domain neurons instead.
+<a href="https://already-clean.goodfire.com/#social-security-appendix">Social Security: Detection and Use</a></p>
+<div class="lbl">Here</div>
+<p>Our ridge probes (<code>vlm_probe.py</code>, <code>video_probes.py</code>, <code>state_probes.py</code>) are detection only. The "state-controlled" residual probes rule out reading the answer off position and velocity, but they don't show the model uses the direction. <code>vlm_behaviour</code> compares Qwen's verbal answers with probe accuracy. That shows whether the information reaches language, not whether the model reads the direction.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>For each decodable variable, project the probe direction out of the residual stream. In the state and video models, measure the change in predicted dynamics. In the VLM, measure the change in verbal answers. Compare against random directions with matched norm.</li>
+</ul>
+</div>
+
+<!-- ============================================================ E -->
+<h2 id="E">E. Tool bugs the essay found</h2>
+
+<div class="card" id="E1">
+<div class="row"><span class="id">E1</span><h3>SwiGLU double negative ("echo")</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>a = SiLU(g)·v. “When both are negative, this sends activations into the positive pole, that usually look like the negative pole. Usually this ‘echo’ is small, but for about 4% of neurons, it's the whole top of the list.” The fix is to show the four sign regimes separately and keep the neuron whole. In one neuron, “131/133 responses in p75–p99 use − × −”, while the strongest tail is + × +.
+<a href="https://already-clean.goodfire.com/#gentle-microscopes">Separating the Sign Regimes</a> · <a href="https://already-clean.goodfire.com/#swiglu-audit">audit figure</a> · <a href="https://already-clean.goodfire.com/#double-negative-example">Colossians example</a></p>
+<div class="lbl">Here</div>
+<p>Qwen3-VL's language-model MLPs are SwiGLU. <code>vlm_extract.py</code> stores only the product (the input to <code>down_proj</code>), so the cache <b>cannot</b> separate the regimes. Some of our LM "+ pole" top examples could be echoes of the − pole. The vision tower is GELU and isn't affected.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>In <code>vlm_capture.py</code>, also hook <code>gate_proj</code> and <code>up_proj</code>. Recapture the gallery units' top and bottom 100 groups and tag each by sign regime.</li>
+<li>Re-label any LM unit whose top list is mostly − × −. This is cheap: one GPU pass over a few thousand clips.</li>
+</ul>
+</div>
+
+<div class="card" id="E2">
+<div class="row"><span class="id">E2</span><h3>Residual-stream "sink" dimension</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“The network was putting almost all of its activation mass into a single unread dimension, which it can change to scale all the other dimensions that are read through LayerNorm.” In ConvNeXt, coordinate 112 holds 94.5% of the raw energy. Removing it from the projection made the residual maps readable. Language models may not need this.
+<a href="https://already-clean.goodfire.com/#residual-organized">The Residual Stream</a> · <a href="https://already-clean.goodfire.com/#residual-stream">Looking at the Residual Stream</a></p>
+<div class="lbl">Here</div>
+<p>The benchmark (<code>msi_bench.md</code>) saw massive outliers in Qwen: absmax 2,224 in the last vision block and 5,920 in LM layer 35. Our residual probes standardize each feature, which limits the damage. Nothing that uses residual geometry (PCA, distances, maps) removes these outliers.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Per layer, find coordinates that hold more than 50% of the energy, in Qwen vision, Qwen LM and the video model.</li>
+<li>Rerun any PCA-based analysis (the <code>pca</code> in <code>vlm_probe.py</code>) with them removed, and report whether results change.</li>
+</ul>
+</div>
+
+<div class="card" id="E3">
+<div class="row"><span class="id">E3</span><h3>Use the unexplained remainder to find tool bugs</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>“When you can see 2% of a network, you can't tell where your tools are broken; when you can see most of it, the unexplained remainder points straight at them.”
+<a href="https://already-clean.goodfire.com/#a-note">The Short Version</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Audit a random 30 unexplained units per model for problems in our own pipeline:
+  <ul>
+  <li>max-pooling over 400 patches, which loses where a unit fires;</li>
+  <li>alignment of each temporal group to its target frame (the group covers 2 frames);</li>
+  <li>rendering aliasing at 320 px;</li>
+  <li>target variables that are missing (see B3).</li>
+  </ul>
+</li>
+</ul>
+</div>
+
+<!-- ============================================================ F -->
+<h2 id="F">F. Architecture and capacity</h2>
+
+<div class="card" id="F1">
+<div class="row"><span class="id">F1</span><h3>Modern architecture (residual connections, LayerNorm)</h3>
+<span class="badge done">done</span><span class="tag">paper/code</span></div>
+<div class="lbl">Essay</div>
+<p>A parameter-matched ConvNeXt with “residual connections, LayerNorm, and a couple other improvements” makes InceptionV1's last layer go from about 5% to about 99% interpretable. Retraining InceptionV1 itself “with more reasonable modern regularization” gives about 70%. The recipe isn't given.
+<a href="https://already-clean.goodfire.com/#better-microscopes">A History of Microscope Errors</a> · <a href="https://already-clean.goodfire.com/#ladybug-figure">ladybug figure</a></p>
+<div class="lbl">Here</div>
+<p>The video model is a ConvNeXt-style encoder (<a href="https://arxiv.org/abs/2201.03545">Liu et al. 2022</a>) plus a pre-LN space-time transformer. The state model is a pre-LN residual MLP. Both already follow the "learn well" advice.</p>
+<div class="lbl">To do (optional)</div>
+<ul class="todo-list">
+<li>A "bad learning" control: train the state model with no residual connections and no LN, and compare census results. This is the essay's InceptionV1 vs ConvNeXt contrast at small scale.</li>
+</ul>
+</div>
+
+<div class="card" id="F2">
+<div class="row"><span class="id">F2</span><h3>Size sweep: smaller models give coarser neurons, not mixed ones</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>Three ConvNeXts “spanning roughly 300× in size”: 92k, 7.06M and 28.6M parameters. “With less room, the network doesn't fold unrelated things together; its neurons just cover coarser-grained concepts.” Bigger models make neurons easier to find: dog-ear neurons “all feed one hanging-ears neuron”.
+<a href="https://already-clean.goodfire.com/#image-models">Exploring Image Models</a> · <a href="https://already-clean.goodfire.com/#source-figure-17">ear family across sizes</a> · <a href="https://already-clean.goodfire.com/#pose-everywhere">pose across sizes</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>State model at hidden widths 64, 256, 1,024 and 4,096. Video model at 0.5×, 1× and 2× width; the 2× variant is in the <code>CLAUDE.md</code> plan.</li>
+<li>Physics makes "coarser" testable. A small model should have one "joint gravity" unit where a large one has separate shoulder and elbow units (use the selectivity index in <code>state_segments.py</code>). It should <em>not</em> have gravity + unrelated-velocity mixtures (use the conjunction test).</li>
+</ul>
+</div>
+
+<div class="card" id="F3">
+<div class="row"><span class="id">F3</span><h3>Squeeze test: crush a layer with no bypass</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>InceptionV1 3b cut from 480 to 10 neurons, with no bypass, and retrained. “If it switched to superposition, we should see overlapping mixtures … But that's not what we see. The neurons stay interpretable and generalized, but coarser.” They repeated it for the ConvNeXt last layer (1,024 → 13) and for the residual stream (down to 46 dimensions).
+<a href="https://already-clean.goodfire.com/#crushing-neurons">What Neurons Do Under Pressure</a> · <a href="https://already-clean.goodfire.com/#c3b-squeeze">curve squeeze</a> · <a href="https://already-clean.goodfire.com/#crushed-last-layer">crushed last layer</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Put a no-bypass bottleneck of k = 4, 8 or 16 units in block 2 of the state model and retrain. Run the census and the conjunction test.</li>
+<li>Prediction: units like "total torque at elbow", not "elbow gravity + shoulder velocity".</li>
+</ul>
+</div>
+
+<div class="card" id="F4">
+<div class="row"><span class="id">F4</span><h3>SAE as a check against the neurons, not a replacement</h3>
+<span class="badge todo">not started</span><span class="tag">paper/code</span></div>
+<div class="lbl">Essay</div>
+<p>“On the last layer, 88% of its activity is near-copies of single neurons, and the rest is faint: removing every dictionary direction that matches no neuron leaves accuracy unchanged.” A rotation search for concentrated activity “land[s] back on the neurons, in every block”. On the squeezed layer, a TopK SAE (640 features, k = 2) explains 82% of the variance, but its features are broad, not curves. The essay also re-reads Gorton 2024's "missing curve" SAE features as about 97–98% made of existing curve neurons.
+<a href="https://already-clean.goodfire.com/#dictionaries">What Dictionaries Learn</a> · <a href="https://already-clean.goodfire.com/#missing-curves">Missing Curves</a></p>
+<div class="lbl">Here</div>
+<p>The maths notes cover TopK SAEs (<a href="https://arxiv.org/abs/2406.04341">Gao et al. 2024</a>). They also contain our own formalizations of "near-copy" (decoder–neuron cosine above κ) and of the rotation objective <span class="tag">ours</span>. None of it is coded.</p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>Train a TopK SAE on the state model's block-2 units. Report the share of SAE activity on near-copies of single neurons, and whether any SAE feature beats every neuron on the census for a physics variable.</li>
+<li>Run the same on the F3 squeezed layer.</li>
+</ul>
+</div>
+
+<!-- ============================================================ G -->
+<h2 id="G">G. Watching neurons grow</h2>
+
+<div class="card" id="G1">
+<div class="row"><span class="id">G1</span><h3>Recursive generalization over training checkpoints</h3>
+<span class="badge part">partial</span><span class="tag">essay</span><span class="tag">ours</span></div>
+<div class="lbl">Essay</div>
+<p>A neuron “started on yellow flowers, in photos that sometimes included a dog. Then it grew along each facet of those photos”. The figure tracks InceptionV1 n338 against ConvNeXt n399 over epochs 0.7 to 12. “The grey band behind each row is its share of the neuron's strongest images.” The test: “generalization should be local, superposition should be non-local”. Recursive generalization “is easy to check if you have training checkpoints”.
+<a href="https://already-clean.goodfire.com/#recursive-growth">Recursive Generalization</a> · <a href="https://already-clean.goodfire.com/#neuron-overflow">neuron-overflow figure</a> · <a href="https://already-clean.goodfire.com/#what-is-superposition">Superposition</a></p>
+<div class="lbl">Here</div>
+<ul>
+<li>Log-spaced checkpoints exist for the state model and for the video model's 30k-step run. <code>state_dynamics.py</code> and <code>video_dynamics.py</code> track 4 units by R² against their top variables, plus the clean fraction per layer over training. The clean fraction plateaus at 24% from 8k steps.</li>
+<li>The essay's measure, the share of each group among a neuron's top examples at each checkpoint, is not computed.</li>
+<li>The "locality" statistic in <code>cammarata_math.md</code> §7.3 is <b>our proposal</b> <span class="tag">ours</span>: new top members should be close to some existing member, not to the seed centroid.</li>
+<li>Qwen is pretrained with no checkpoints, so the VLM can't be studied this way. Its "recursive-generalisation lens" in <code>vlm_general.py</code> is only the percentile bands from C3.</li>
+</ul>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>For every clean unit at the final checkpoint: take the top 100 examples at each checkpoint, group them by motion mode × contact × the bin of the best variable, and plot the share bands as in the essay's figure.</li>
+<li>Compute the locality statistic in state space (q, q̇, τ) and compare it against a shuffled null.</li>
+<li>Save more early checkpoints (steps 0–2k), where the essay says growth starts. "It starts generalizing from the very first step" (<a href="https://already-clean.goodfire.com/#why-networks-generalize">Why Networks Generalize</a>).</li>
+</ul>
+</div>
+
+<!-- ============================================================ H -->
+<h2 id="H">H. Rare things and memorization (optional)</h2>
+
+<div class="card" id="H1">
+<div class="row"><span class="id">H1</span><h3>Teach the model something nonsensical and see which route it uses</h3>
+<span class="badge todo">not started</span><span class="tag">essay</span></div>
+<div class="lbl">Essay</div>
+<p>They taught the 7.06M ConvNeXt that one umbrella photo is a bee. “In nine training steps … The umbrella neurons faded and existing bee neurons came on, nearly all of it in the last three blocks.” Memorization reuses existing routes rather than building an isolated hidden feature. Rare classes are “more consolidated”, not hidden.
+<a href="https://already-clean.goodfire.com/#rare-things">Rare Things and Memorization</a> · <a href="https://already-clean.goodfire.com/#umbrella-bee">umbrella → bee</a></p>
+<div class="lbl">To do</div>
+<ul class="todo-list">
+<li>The physics version: fine-tune the state model on a few episodes with an invisible wall at a new angle. Check whether it learns this by recruiting existing contact units (essay's prediction) or new units.</li>
+</ul>
+</div>
+
+<!-- ============================================================ plan -->
+<h2 id="plan">Suggested order</h2>
+<p>This is grouped by cost. The first group needs no new training.</p>
+<div class="tablewrap">
+<table>
+<tr><th>When</th><th>Items</th><th>Why</th></tr>
+<tr><td>Now, on existing data</td>
+<td><a href="#E1">E1</a> SwiGLU regimes · <a href="#E2">E2</a> sink check · <a href="#C1">C1</a> strong-activation census · <a href="#C3">C3</a> weak-activation ablation · <a href="#B2">B2</a> pre-activation poles · <a href="#G1">G1</a> share bands · <a href="#C2">C2</a> caveats</td>
+<td>These are tool fixes and re-analyses. They could change existing numbers, so they come before writing report 2.</td></tr>
+<tr><td>Next</td>
+<td><a href="#B1">B1</a> inputs and readers (state model first) · <a href="#B3">B3</a> blind descriptions · <a href="#D3">D3</a> simulator-written examples and near misses · <a href="#D1">D1</a> VLM steering · <a href="#D4">D4</a> detection vs use</td>
+<td>This is the essay's core workflow, which we mostly skipped. B1 unlocks A3, B4 and the follow-up in D2.</td></tr>
+<tr><td>New training</td>
+<td><a href="#F2">F2</a> size sweep · <a href="#F3">F3</a> squeeze · <a href="#F4">F4</a> SAE check · <a href="#A2">A2</a> path-guided feature vis · <a href="#H1">H1</a></td>
+<td>These are the essay's headline experiments. The state model makes each one cheap on msi.</td></tr>
+</table>
+</div>
+
+<p class="meta" style="margin-top:28px">Essay: N. Cammarata, “Neural Networks Are Already Clean”, Goodfire, 2026. https://already-clean.goodfire.com/ · Anchor links were checked against the page HTML on 2026-10-30.</p>
+</main>
+</body>
+</html>
