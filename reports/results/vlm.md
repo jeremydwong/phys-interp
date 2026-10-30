@@ -180,3 +180,40 @@ in the galleries, overlapping x labels and legend in `vlm_behaviour.png`, legend
 vision/LM divider in `vlm_probe_heatmap.png`, an empty band in `vlm_generalisation.png`, and the
 R² = 1 artefact for constant units (now n/a) in `vlm_bands.png` and `vlm_generalisation.png`.
 The census figure gained the random-init panel.
+
+## 1. Tool fixes
+
+### 1.1 E1: SwiGLU sign regimes ("echo")
+
+**Method.** One extra GPU pass over all 2,700 clips (`vlm_recapture.py`, 13 min) hooked
+`gate_proj` and `up_proj` of LM layers 2, 8, 16, 24, 32, recomputed a = silu(g)·v at the 100 visual
+tokens of each group, and stored the sign regime (g, v) of the token that gives each group's pooled
+max and pooled min. The recomputed argmax token equals the cached one for 99.2–99.5% of
+(group, unit) pairs (the rest are bf16 ties). Then (`vlm_regimes.py`) each unit pole's top-100 groups
+and the essay's p75–p99 band were tagged. Definitions (ours): for the + pole the regular regime is
++×+ and the echo is −×−; for the − pole the regular regime is +×− and the echo is −×+ (the gate is
+negative in both echoes, so |a| ≤ 0.28·|v|). A pole is re-labelled "echo" if > 50% of its top 100
+is in the echo regime. **Figure `vlm_regimes.png`**, numbers in `vlm_regimes.json`.
+
+| LM layer | + pole: units with echo top-100 | − pole: units with echo top-100 | top 10 entirely echo (+ / −) | gate closed at both poles | regular at both poles |
+|---|---|---|---|---|---|
+| L2 | **98.8%** | **98.6%** | 97.3% / 97.1% | **97.2%** | 0.1% |
+| L8 | 52.5% | 53.5% | 34.4% / 34.5% | 30.2% | 24.1% |
+| L16 | 46.6% | 46.6% | 30.1% / 31.1% | 29.3% | 36.1% |
+| L24 | 39.9% | 39.7% | 19.9% / 19.8% | 20.3% | 40.6% |
+| L32 | 11.0% | 11.6% | 2.9% / 3.2% | 1.8% | 79.3% |
+
+The essay found the echo to be "the whole top of the list" for about 4% of neurons. At Qwen's visual
+tokens it is the rule in the early LM: at L2 almost every unit keeps its gate closed (g < 0) at both
+of its pooled extremes, so its "+ pole" is −×− and its "− pole" is −×+: the two census poles are the
+two signs of the up-projection v read through a closed gate, not two features. This is why the L2
++ and − censuses in §0.2 are nearly identical. The distribution is bimodal at every layer (a unit is
+almost always entirely regular or entirely echo), and the share falls with depth (11% at L32).
+
+Gallery re-labelling. Five of the seven gallery LM units are gate-closed (echo) on their census pole,
+at every rank band and in p75–p99: L2−#1848 (sin q₁), L2−#789 (shoulder gravity torque),
+L2−#8960 (shoulder contact torque), L2+#9169 (potential energy) and L8−#7671 (elbow Coriolis).
+Their labels describe what v carries while the unit is off, not an open-gate response; they are
+re-labelled "gate-closed (echo)". L8−#4747 (hand vz) and L16−#6072 (q̈₂) are regular (+×−). Whether
+a closed-gate signal of this size is read downstream is tested by steering in §3.2.
+

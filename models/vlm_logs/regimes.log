@@ -1,0 +1,18 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+2 + {'n_live': 7001, 'frac_units_echo_majority': 0.9875732038280246, 'frac_units_echo_whole_top10': 0.9730038565919155, 'mean_echo_frac': 0.9873075274960719, 'mean_regime_frac_top100': {'+×+': 0.00994286530495644, '+×−': 0.0, '−×+': 0.0027496071989715756, '−×−': 0.9873075274960703}}
+2 − {'n_live': 6976, 'frac_units_echo_majority': 0.9859518348623854, 'frac_units_echo_whole_top10': 0.9711869266055045, 'mean_echo_frac': 0.9851648509174312, 'mean_regime_frac_top100': {'+×+': 0.0, '+×−': 0.01160263761467891, '−×+': 0.9851648509174298, '−×−': 0.003232511467889908}}
+L2−#1848 sin_q1 echo 1.0
+L2−#789 grav1 echo 1.0
+L2−#8960 ctq1 echo 1.0
+L2+#9169 pe echo 1.0
+8 + {'n_live': 9728, 'frac_units_echo_majority': 0.5254934210526315, 'frac_units_echo_whole_top10': 0.3443667763157895, 'mean_echo_frac': 0.516953125, 'mean_regime_frac_top100': {'+×+': 0.48304687500000465, '+×−': 0.0, '−×+': 0.0, '−×−': 0.5169531249999947}}
+8 − {'n_live': 9728, 'frac_units_echo_majority': 0.5354646381578947, 'frac_units_echo_whole_top10': 0.3451891447368421, 'mean_echo_frac': 0.5264000822368421, 'mean_regime_frac_top100': {'+×+': 0.0, '+×−': 0.4735690789473717, '−×+': 0.526400082236836, '−×−': 3.0838815789473685e-05}}
+L8−#4747 ee_vz echo 0.0
+L8−#7671 cor2 echo 1.0
+16 + {'n_live': 9728, 'frac_units_echo_majority': 0.4661800986842105, 'frac_units_echo_whole_top10': 0.30098684210526316, 'mean_echo_frac': 0.4573303865131579, 'mean_regime_frac_top100': {'+×+': 0.5426696134868453, '+×−': 0.0, '−×+': 0.0, '−×−': 0.4573303865131539}}
+16 − {'n_live': 9728, 'frac_units_echo_majority': 0.4663856907894737, 'frac_units_echo_whole_top10': 0.3106496710526316, 'mean_echo_frac': 0.4573180509868421, 'mean_regime_frac_top100': {'+×+': 0.0, '+×−': 0.5426819490131602, '−×+': 0.4573180509868393, '−×−': 0.0}}
+L16−#6072 qdd2 echo 0.0
+24 + {'n_live': 9728, 'frac_units_echo_majority': 0.39936266447368424, 'frac_units_echo_whole_top10': 0.19932154605263158, 'mean_echo_frac': 0.3874722450657895, 'mean_regime_frac_top100': {'+×+': 0.6123334703947442, '+×−': 0.0, '−×+': 0.0001942845394736842, '−×−': 0.38747224506578637}}
+24 − {'n_live': 9728, 'frac_units_echo_majority': 0.39679276315789475, 'frac_units_echo_whole_top10': 0.19788240131578946, 'mean_echo_frac': 0.38661389802631574, 'mean_regime_frac_top100': {'+×+': 2.055921052631579e-06, '+×−': 0.6130633223684284, '−×+': 0.3866138980263135, '−×−': 0.00032072368421052626}}
+32 + {'n_live': 9728, 'frac_units_echo_majority': 0.10978618421052631, 'frac_units_echo_whole_top10': 0.028988486842105265, 'mean_echo_frac': 0.10791735197368423, 'mean_regime_frac_top100': {'+×+': 0.8917423930921046, '+×−': 5.653782894736843e-05, '−×+': 0.0002837171052631579, '−×−': 0.10791735197368385}}
+32 − {'n_live': 9728, 'frac_units_echo_majority': 0.11595394736842106, 'frac_units_echo_whole_top10': 0.032380756578947366, 'mean_echo_frac': 0.11457134046052633, 'mean_regime_frac_top100': {'+×+': 0.0, '+×−': 0.8853464226973695, '−×+': 0.11457134046052646, '−×−': 8.223684210526316e-05}}
