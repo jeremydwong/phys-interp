@@ -1,0 +1,15 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+V8#2591 won hit 0.625 rej 1.0 f_pos med 0.53 near med -0.04 var pos -0.81 near -0.60
+V3#1493 lost hit 0.0 rej 1.0 f_pos med 0.22 near med -0.00 var pos 0.00 near 0.00
+V3#2792 lost hit 0.125 rej 1.0 f_pos med 0.00 near med 0.00 var pos -0.01 near 0.06
+V8#160 won hit 0.875 rej 1.0 f_pos med 0.60 near med -0.04 var pos -9.78 near 9.78
+V8#2386 won hit 0.5 rej 0.75 f_pos med 0.47 near med 0.03 var pos 1.17 near 0.00
+V18#4014 lost hit 0.0 rej 1.0 f_pos med 0.00 near med 0.00 var pos 4.92 near 0.00
+V8#1726 lost hit 0.125 rej 1.0 f_pos med 0.46 near med -0.03 var pos 13.23 near -0.63
+L2−#1848 won hit 0.875 rej 1.0 f_pos med 0.76 near med -0.07 var pos -1.00 near -0.73
+L8−#4747 lost hit 0.0 rej 0.875 f_pos med 0.08 near med -0.02 var pos 0.05 near -0.04
+L16−#6072 lost hit 0.0 rej 0.875 f_pos med 0.04 near med 0.10 var pos 0.02 near 9.84
+L2−#789 tied hit 0.875 rej 0.25 f_pos med 0.76 near med 0.22 var pos 10.19 near -10.19
+L8−#7671 lost hit 0.125 rej 0.75 f_pos med 0.20 near med 0.01 var pos -0.00 near -3.37
+L2−#8960 lost hit 0.25 rej 0.5 f_pos med 0.44 near med 0.30 var pos 4.21 near 0.00
+L2#9169 lost hit 0.0 rej 0.0 f_pos med 0.24 near med 0.55 var pos 13.16 near 0.73

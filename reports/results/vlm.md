@@ -288,6 +288,51 @@ per group: max, min and mean over the 400 patches. `vlm_negpole.py` runs the cen
 
 ## 2. Reading units openly
 
+### 2.1 B3: blind, free-form descriptions of 40 random units
+
+**Method.** `vlm_blind.py strips` drew 40 live units at random (seed 2026; 4 per hooked layer: 20
+vision, 20 LM; not chosen by the census) and wrote one image per unit,
+`reports/figs/vlm_blind/U01.png … U40.png`: the 12 strongest positive and 12 strongest negative
+groups (distinct episodes; vision units on the pre-GELU fc1 output, LM units on silu(g)·v), each tile
+showing the frame with its motion trail, the strongest patch/token outlined and the raw activation,
+plus a histogram of the raw pooled activations. The images carry no unit id, layer, label or ground
+truth; the key is in `data/vlm/blind_key.json`. A separate agent, told to open only those 40
+images, wrote a verb-style description of each pole and a strength rating (clear / weak / none) to
+`reports/results/vlm_blind_descriptions.json`. Only after that file was saved did `vlm_blind.py
+join` attach the census labels (binned R², both poles), and I compared each description with the
+better-scoring pole's label (`vlm_blind.json`, `vlm_blind_compare.json`; the comparison categories
+and judgements are ours).
+
+The describer found a clear pattern on at least one pole for 27 of 40 units (positive poles: 14
+clear, 16 weak, 10 none; negative poles: 21 clear, 15 weak, 4 none). Recurring themes in its own
+words: many poles are read out at a fixed background patch (a corner, the left edge, behind the wall,
+the floor under the shoulder) whatever the arm does, some with a near-constant value (e.g. U03 is
++8.25 at the bottom-left corner in every tile, likely a position/register artefact), but the arm pose
+still differs between the poles; "hand down on the floor vs hand held up" is the most common
+distinction; others are hand at the wall or in the floor–wall corner, body-part detectors (hand,
+forearm vs shoulder), swinging vs still, and specific shapes (elbow folded shut, links in a straight
+line).
+
+| judgement (ours) | units | n |
+|---|---|---|
+| same as the census label | U03, U09, U11, U20, U21, U24, U29, U34, U37 | 9 |
+| more general than the label | U08 ("arm hanging at rest, hand near the floor" vs cor₂/pe) | 1 |
+| different, description better: an extreme or a conjunction of our variables that the all-data label missed | U01, U06, U07, U14, U15, U16, U26, U27, U30, U32, U33, U39, U40 | 13 |
+| different, description better: not expressible in our 32 variables | U13 (hand detector whose sign flips when the hand is against the wall), U18 (forearm pressed along the wall face; its label is cos q₁), U25 (forearm-vs-shoulder part detector) | 3 |
+| different, undecided | U12 ("links in a straight line" vs ke) | 1 |
+| no pattern in the description (weak/none on both poles) | U02, U04, U05, U10, U17, U19, U22, U23, U28, U31, U35, U36, U38 | 13 |
+
+**The free description beats the census label for 16 of 40 units (40%)**; the label is better for 3
+(U28, U31, U36: partial labels where the describer saw no pattern); the two agree for 10. Census
+classes of the same 40 units: 3 clean, 15 partial, 22 unexplained. Of the 22 "unexplained" units,
+12 got a clear description. Most of those descriptions are still about our variables, but about one
+extreme of them ("hand resting on the floor", "arm hanging straight down", "hand in the floor–wall
+corner"): detectors of a rare state that an all-groups binned R² scores poorly (§0.7, §4). Only 3
+descriptions need a concept outside the 32 targets, and all three involve where on the image the unit
+fires (part identity, contact with the wall face). Caveats: one describer, 40 units, judgements by one
+reader who had seen the census for other units; the fixed-background-patch readout means "where the
+unit fires" is often not where the arm is, which is a property of max-pooling (E3), not of the unit.
+
 ### 2.2 C4: dial vs detector (raw tuning shape)
 
 **Method.** For the 14 gallery units, the mean raw activation in 30 equal-width bins of the unit's
@@ -312,4 +357,57 @@ variable: they respond to the arm being still, not to a signed rate. Their censu
 vz, q̈₁, q̈₂, cor₂) name a variable they are not tuned along; the shared description is "stillness".
 V18#4014 is silent (exactly 0) in 90% of groups and fires on a few contact-torque values near
 +3 N·m, which is a very sparse detector rather than a tuning.
+
+## 3. Explanations that can lose
+
+### 3.1 D3: simulator-written examples and near misses
+
+**Method** (`vlm_nearmiss.py`; **figure `vlm_nearmiss.png`**; `vlm_nearmiss.json`). The essay's test
+writes new examples from an explanation alone and checks that they fire, and near misses that
+should not. Here the writer is the simulator. Each gallery unit's explanation is its census label
+plus the direction read off its tuning curve (e.g. "V8#2591 hand height: fires when the hand is at
+floor level"). For each unit, 8 clips put the labelled variable at its firing extreme with
+everything the label does not constrain randomised (pose, other joint's velocity, side), and 8 near
+misses change only the labelled variable (hand 21 cm higher; q̇₁ = ±4 rad/s; q̈ = ±40 rad/s²; the
+mirrored pose for signed gravity torque; the same pose held 6 cm above the floor for contact
+torque; arm horizontal instead of raised for potential energy). Clips are MuJoCo trajectories of
+`sim/arm.py` (computed-torque tracking of q₀ + v t + a t²/2, or a passive drop onto the floor for the
+contact clips), rendered and fed to Qwen exactly as the corpus; all 32 targets are logged, so we
+checked that the writer hit the labelled variable (e.g. positives ee_z = −0.81, near misses −0.60;
+grav₁ = ∓9.8; contact torque +1 to +7.6 N·m vs 0). Response = the unit's census pole, max over the
+4 groups, as f = (a − corpus median)/(corpus max − corpus median) (ours; many units have a large
+offset). Scoring (ours, with the spec's thresholds): a positive hits if f ≥ 0.5, a near miss is
+rejected if f < 0.2; WON = ≥ 50% hits and ≥ 50% rejections, TIED = hits but near misses also fire,
+LOST = < 50% hits.
+
+| unit | label (explanation) | hits | near misses rejected | median positive (corpus pct.) | median near miss (corpus pct.) | verdict |
+|---|---|---|---|---|---|---|
+| V8#2591 | hand height: hand at floor level | 5/8 | 8/8 | 88 | 45 | **won** |
+| V8#160 | shoulder gravity torque ≤ −9 N·m | 7/8 | 8/8 | 73 | 46 | **won** |
+| V8#2386 | elbow Coriolis large (fast shoulder, bent elbow) | 4/8 | 6/8 | 95 | 56 | **won** (borderline) |
+| L2−#1848 | upper arm straight down | 7/8 | 8/8 | 99 | 37 | **won** |
+| L2−#789 | shoulder gravity torque ≥ +9 N·m | 7/8 | 2/8 | 99 | 70 | tied |
+| V3#1493 | shoulder not rotating (q̇₁ ≈ 0) | 0/8 | 8/8 | 71 | 49 | lost |
+| V3#2792 | no shoulder acceleration | 1/8 | 8/8 | 73 | 73 | lost |
+| V18#4014 | shoulder contact torque ≈ +3 N·m (arm resting on the floor) | 0/8 | 8/8 | 0 | 0 | lost |
+| V8#1726 | potential energy: arm raised | 1/8 | 8/8 | 91 | 28 | lost (near: median f 0.46) |
+| L8−#4747 | hand vertical velocity ≈ 0 | 0/8 | 7/8 | 56 | 48 | lost |
+| L16−#6072 | no elbow acceleration | 0/8 | 7/8 | 64 | 74 | lost |
+| L8−#7671 | no elbow Coriolis torque | 1/8 | 6/8 | 74 | 51 | lost |
+| L2−#8960 | shoulder contact torque large (arm resting on the floor) | 2/8 | 4/8 | 90 | 82 | lost |
+| L2#9169 | potential energy: arm raised | 0/8 | 0/8 | 72 | 96 | lost (near misses fire more) |
+
+**4 won, 1 tied, 9 lost.** The explanations that survive are the detector-like posture and gravity
+labels (hand at the floor, upper arm down, arm held out to one side), and they also reject their
+near misses (including the mirrored pose: V8#160 is specific to the sign of the torque). The
+"stillness" units all lose: still clips written by the simulator, even with zero kinetic energy,
+only reach f ≈ 0–0.45, so whatever makes their corpus top examples fire is more than "q̇ = 0".
+Both contact-torque labels lose: an arm resting on the floor with +1 to +7.6 N·m of contact torque
+does not drive V18#4014 at all (f = 0 for every clip) and drives L2−#8960 about as much as the same
+pose held off the floor. L2#9169 "potential energy" fires more for a horizontal arm than for a
+raised one, so the label is wrong in the direction it claims. L2−#789 fires for its positive-torque
+poses but also at 70th percentile for the mirrored poses, so "shoulder gravity torque" is broader
+than the label (it fires for the arm out sideways on either side, more on one).
+Caveats: 8 + 8 clips per unit; a single corpus maximum can be an outlier (which makes "f ≥ 0.5"
+strict); the written clips are short and mostly slow, which is not the corpus distribution.
 
