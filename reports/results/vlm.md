@@ -285,3 +285,31 @@ per group: max, min and mean over the 400 patches. `vlm_negpole.py` runs the cen
   "free" 0.81), against + pole AUCs up to 0.91 (V3#1493 fires when the arm is still, which in this
   data mostly means resting on the floor). So the answer to the spec's question is no.
 
+
+## 2. Reading units openly
+
+### 2.2 C4: dial vs detector (raw tuning shape)
+
+**Method.** For the 14 gallery units, the mean raw activation in 30 equal-width bins of the unit's
+best variable (1st–99th percentile range, all 10,800 groups), classified by a rule that is ours
+(the essay gives none): *tuned* if the curve peaks (or dips) inside the range; otherwise, from the
+higher end, the width w over which the curve falls from 75% to 25% decides *detector* (w < 0.25 of
+the range, with ≥ 40% of the range flat beyond it), *dial* (w ≥ 0.3) or *intermediate*.
+`vlm_tuning.py`, **figure `vlm_tuning.png`**, `vlm_tuning.json`.
+
+| class | units |
+|---|---|
+| dial (2) | V8#1726 potential energy; L2−#8960 shoulder contact torque (noisy) |
+| detector (4) | V8#2591 hand height (fires only with the hand at floor level, ee_z ≈ −0.82); V8#160 and L2−#789 shoulder gravity torque (opposite signs; step at ≈ ±7 N·m); L2−#1848 sin q₁ (fires only with the upper arm pointing straight down) |
+| tuned (7) | V3#1493 q̇₁, L8−#4747 hand vz, V3#2792 q̈₁, L16−#6072 q̈₂, V8#2386 and L8−#7671 elbow Coriolis, V18#4014 shoulder contact torque |
+| intermediate (1) | L2#9169 potential energy (rises, then saturates over most of the range) |
+
+The essay expected posture and gravity units to be dials and contact units detectors. Here it is
+mostly the other way round: the posture and gravity units are detectors of one extreme pose (hand on
+the floor, upper arm straight down, arm held out sideways), and only potential energy is a dial. All
+seven "tuned" units peak (or, for V8#2386, dip) at **zero** of a velocity, acceleration or Coriolis
+variable: they respond to the arm being still, not to a signed rate. Their census labels (q̇₁, hand
+vz, q̈₁, q̈₂, cor₂) name a variable they are not tuned along; the shared description is "stillness".
+V18#4014 is silent (exactly 0) in 90% of groups and fires on a few contact-torque values near
++3 N·m, which is a very sparse detector rather than a tuning.
+
