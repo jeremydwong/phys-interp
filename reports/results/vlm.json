@@ -1441,6 +1441,98 @@
    }
   }
  ],
+ "contact_results": {
+  "n_onsets": {
+   "floor": 402,
+   "wall": 244
+  },
+  "signals": {
+   "probe: LM L6": {
+    "floor": {
+     "pre_minus_base_raw_z": -0.10128487485769434,
+     "pre_minus_base_after_clearance_z": -0.11943723067905315,
+     "se": 0.015289308432281655,
+     "post_0_8_z": 0.6869303235495388
+    },
+    "wall": {
+     "pre_minus_base_raw_z": -0.1409460278975418,
+     "pre_minus_base_after_clearance_z": -0.13470500788132847,
+     "se": 0.021262014312514486,
+     "post_0_8_z": 0.40575390796297134
+    }
+   },
+   "probe: vision V23": {
+    "floor": {
+     "pre_minus_base_raw_z": -0.09752451510618582,
+     "pre_minus_base_after_clearance_z": -0.11922858636076082,
+     "se": 0.01567847555657089,
+     "post_0_8_z": 0.6588622322287504
+    },
+    "wall": {
+     "pre_minus_base_raw_z": -0.13451166855752425,
+     "pre_minus_base_after_clearance_z": -0.13259394653754392,
+     "se": 0.021922676949038766,
+     "post_0_8_z": 0.3671350667385127
+    }
+   },
+   "unit vision_L13_pos#917 (R\u00b2=0.53)": {
+    "floor": {
+     "pre_minus_base_raw_z": 0.23847949504852295,
+     "pre_minus_base_after_clearance_z": 0.25755491852760315,
+     "se": 0.0368785560131073,
+     "post_0_8_z": -0.5574186444282532
+    },
+    "wall": {
+     "pre_minus_base_raw_z": 0.3086491525173187,
+     "pre_minus_base_after_clearance_z": 0.34791117906570435,
+     "se": 0.04778126999735832,
+     "post_0_8_z": -0.044027335941791534
+    }
+   },
+   "unit vision_L8_pos#1004 (R\u00b2=0.53)": {
+    "floor": {
+     "pre_minus_base_raw_z": 0.14153775572776794,
+     "pre_minus_base_after_clearance_z": 0.1691097617149353,
+     "se": 0.033623382449150085,
+     "post_0_8_z": -0.6471986770629883
+    },
+    "wall": {
+     "pre_minus_base_raw_z": 0.291043758392334,
+     "pre_minus_base_after_clearance_z": 0.37484094500541687,
+     "se": 0.04385323449969292,
+     "post_0_8_z": -0.17932641506195068
+    }
+   },
+   "unit vision_L3_pos#623 (R\u00b2=0.53)": {
+    "floor": {
+     "pre_minus_base_raw_z": 0.18034124374389648,
+     "pre_minus_base_after_clearance_z": 0.20608358085155487,
+     "se": 0.035697199404239655,
+     "post_0_8_z": -0.7899256944656372
+    },
+    "wall": {
+     "pre_minus_base_raw_z": 0.383405476808548,
+     "pre_minus_base_after_clearance_z": 0.4546860158443451,
+     "se": 0.04643093794584274,
+     "post_0_8_z": -0.34207138419151306
+    }
+   },
+   "unit vision_L18_pos#3771 (R\u00b2=0.50)": {
+    "floor": {
+     "pre_minus_base_raw_z": 0.17338623106479645,
+     "pre_minus_base_after_clearance_z": 0.1968594491481781,
+     "se": 0.03600870445370674,
+     "post_0_8_z": -0.6480799913406372
+    },
+    "wall": {
+     "pre_minus_base_raw_z": 0.3867492377758026,
+     "pre_minus_base_after_clearance_z": 0.4152219593524933,
+     "se": 0.0467391312122345,
+     "post_0_8_z": -0.04261691868305206
+    }
+   }
+  }
+ },
  "gallery_spec": [
   {
    "key": "video_vision_L8_pos",
