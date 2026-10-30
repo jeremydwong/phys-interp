@@ -22,7 +22,7 @@ openly (B), then test explanations so they can lose (D), then re-score the censu
 - Add the C2 caveat: binned R² is a simulation-style score; the essay says such scores reward
   weak-activation detail.
 
-## 1. Tool fixes (E1, E2, B2)
+## 1. Tool fixes (E1, E2, B2) — DONE (vlm.md §1)
 
 - **E1 SwiGLU sign regimes.** In `vlm_capture.py` also hook `gate_proj` and `up_proj` outputs
   for the LM layers. For each LM gallery unit, recapture top/bottom 100 clips and tag each by

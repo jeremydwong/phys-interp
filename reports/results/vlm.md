@@ -253,3 +253,35 @@ sink takes one of 64 components). Any analysis that uses raw residual geometry (
 cosine maps) would be dominated by the sinks; we have none in the VLM study, but anyone adding one
 should drop coordinates 201 (vision) and 4 and 0 (LM) first.
 
+### 1.3 B2: the negative pole of the vision units (pre-GELU)
+
+**Method.** The recapture pass also stored the vision blocks' `linear_fc1` output (pre-GELU) pooled
+per group: max, min and mean over the 400 patches. `vlm_negpole.py` runs the census on the − pole
+(−min of the pre-activation) and on the + pole (max of the pre-activation) of every unit, and for the
+7 gallery vision units compares the poles. **Figure `vlm_negpole.png`**, numbers in
+`vlm_negpole.json`.
+
+| block | live units (pre-act) | + pole clean / partial | − pole clean / partial | both poles ≥ partial | … with different best family | − pole partial, + pole not |
+|---|---|---|---|---|---|---|
+| V3 | 3,886 | 267 / 1,521 | 217 / 1,426 | 777 | 325 | 856 |
+| V8 | 4,096 | 546 / 2,210 | 613 / 2,378 | 1,996 | 1,029 | 995 |
+| V13 | 4,096 | 437 / 2,258 | 229 / 2,029 | 1,502 | 789 | 756 |
+| V18 | 4,096 | 99 / 1,518 | 90 / 1,754 | 765 | 436 | 1,079 |
+| V23 | 4,096 | 49 / 1,043 | 11 / 835 | 228 | 138 | 618 |
+
+- Reading before the GELU revives units: every unit is live on its pre-activation (vs 2,219–4,060 live
+  after GELU), and the + pole census is cleaner (V8: 546 clean vs 361).
+- The − pole is about as often labelled as the + pole in V3–V18, and for 600–1,100 units per block it
+  is the only labelled pole. "Different best family" is mostly posture vs potential energy or gravity
+  torque, which are themselves functions of posture, so it rarely means a new distinction.
+- For the gallery units the − pole is weaker and mostly not a physical distinction: V3#1493
+  ("q̇₁", really a stillness unit) has a − pole at R² 0.19; V8#160 (shoulder gravity torque) has the
+  same variable at both poles (0.79 / 0.40); V8#1726 (potential energy) too (0.89 / 0.75). The
+  strongest-negative patch is usually on the background or the floor (outlined in the figure), so the
+  pooled min mostly reports what the unit does on empty image regions, which shifts with the global
+  arm configuration. Max/min pooling over 400 patches is the limiting tool here (essay item E3).
+- Contact vs free: no gallery unit's − pole separates contact from free motion better than its + pole.
+  The best − pole contact AUC is 0.19 for V18#4014 (i.e. its − pole is larger in free motion; AUC of
+  "free" 0.81), against + pole AUCs up to 0.91 (V3#1493 fires when the arm is still, which in this
+  data mostly means resting on the floor). So the answer to the spec's question is no.
+
