@@ -40,6 +40,7 @@ The verification command gives `True NVIDIA GeForce RTX 5070 Ti Laptop GPU (12, 
   - `uv sync` failed once mid-download. Retrying with `UV_HTTP_TIMEOUT=900 UV_HTTP_RETRIES=10` worked.
   - `huggingface_hub` Xet downloads stalled at 0 bytes. Plain HTTP (`HF_HUB_DISABLE_XET=1`) resumed only within one call. A process-level retry restarted from zero and lost ~3 GB.
   - Fix: large LFS files were fetched with `curl -C - --retry` straight into the default cache path (`~/.cache/huggingface/hub/models--*/blobs/<sha256>`), sha256-verified, then `snapshot_download` was run to create the snapshot. Downloads are throttled per connection, so one process per model raised total throughput.
+  - `snapshot_download(repo, revision=<sha>)` does not write `refs/main`, so loading with `HF_HUB_OFFLINE=1` failed until `refs/main` was written by hand with the commit sha. Symlinks are unsupported on this machine (no Developer Mode), so the hub cache stores files as copies.
 - The repo directory is owned by BUILTIN\Administrators, so git reports "dubious ownership". The global git config was not changed; commands use `git -c safe.directory=C:/Git/phys-interp`. To make it permanent, run `git config --global --add safe.directory C:/Git/phys-interp`.
 - The Windows console is cp1252, so scripts that print `−` or `²` crash. Run the analysis scripts with `PYTHONUTF8=1`.
 - Arial (the matplotlib fallback on Windows) has no subscript digits, so q₁ rendered as boxes. On `msi/first-pass`, `common.setup_style()` now lists the fonts in `font.family`, which makes matplotlib fall back per glyph to DejaVu Sans.
@@ -63,7 +64,7 @@ The Mac's values were not recorded in the repo, so the comparison has to be done
 |---|---|---|---|
 | Qwen3-VL-4B-Instruct | `Qwen/Qwen3-VL-4B-Instruct` | 8.9 GB (2 shards, bf16) | downloaded, sha256-verified |
 | V-JEPA 2 ViT-L | `facebook/vjepa2-vitl-fpc64-256` (hub id confirmed) | 1.3 GB | downloaded (`original/model.pth`, the 4.8 GB raw checkpoint, skipped; not needed by transformers) |
-| Qwen3-VL-8B-Instruct | `Qwen/Qwen3-VL-8B-Instruct` | 17.5 GB (4 shards) | **download in progress** at ~0.5 MB/s; nf4 test pending (see below) |
+| Qwen3-VL-8B-Instruct | `Qwen/Qwen3-VL-8B-Instruct` | 17.5 GB (4 shards, bf16 on disk) | downloaded 2026-10-30, sha256-verified (curl resume, ~0.5 MB/s) |
 
 ## 4. Inference benchmark
 
@@ -73,7 +74,7 @@ The Mac's values were not recorded in the repo, so the comparison has to be done
 |---|---|---|---|---|---|---|
 | Qwen3-VL-4B-Instruct | bf16 | 23 s | 8.32 GiB | **8.83 GiB** | **9.2 clips/s** | `video_grid_thw` [4, 14, 14]: 8 frames → 4 temporal groups (temporal patch 2) of 14×14 patches (16 px) → 49 LM tokens per group after 2×2 merge; 245 tokens per prompt |
 | V-JEPA 2 ViT-L | bf16 | 5 s | 0.61 GiB | **0.78 GiB** | **18.3 clips/s** | resized to 256 px: 8 frames → 4 tubelets × 16×16 = 1,024 tokens |
-| Qwen3-VL-8B-Instruct (nf4) | – | – | – | – | – | pending download |
+| Qwen3-VL-8B-Instruct | nf4 (bitsandbytes, bf16 compute) | 37 s | 6.29 GiB | **6.78 GiB** | **5.3 clips/s** | same as 4B: `video_grid_thw` [4, 14, 14], 245 tokens per prompt |
 
 **Activations (last batch).**
 
@@ -92,6 +93,17 @@ Qwen3-VL-4B, LM MLP outputs:
 | layer 0 | 4 × 245 × 2560 | 0.22 | 5.9 |
 | layer 18 | 4 × 245 × 2560 | 0.33 | 29.8 |
 | layer 35 | 4 × 245 × 2560 | 11.2 | 5,920 |
+
+Qwen3-VL-8B (nf4), MLP outputs (benchmarked 2026-10-30):
+
+| layer | shape | std | absmax |
+|---|---|---|---|
+| vision block 0 | 3136 × 1152 | 0.58 | 6.1 |
+| vision block 13 | 3136 × 1152 | 0.28 | 4.3 |
+| vision block 26 | 3136 × 1152 | 152 | 14,656 |
+| LM layer 0 | 4 × 245 × 4096 | 0.37 | 15.4 |
+| LM layer 18 | 4 × 245 × 4096 | 0.39 | 41.0 |
+| LM layer 35 | 4 × 245 × 4096 | 13.1 | 2,320 |
 
 All values are finite. The large maxima in the last vision block and the last LM layer come from a few outlier ("massive activation") channels, which are typical of these models. They are not bf16 overflow.
 
