@@ -1,0 +1,202 @@
+{
+ "U01": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 3218
+ },
+ "U02": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 9307
+ },
+ "U03": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 3537
+ },
+ "U04": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 3384
+ },
+ "U05": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 484
+ },
+ "U06": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 2918
+ },
+ "U07": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 4353
+ },
+ "U08": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 2633
+ },
+ "U09": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 3405
+ },
+ "U10": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 3956
+ },
+ "U11": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 2678
+ },
+ "U12": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 1464
+ },
+ "U13": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 1525
+ },
+ "U14": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 1615
+ },
+ "U15": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 4233
+ },
+ "U16": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 3175
+ },
+ "U17": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 2641
+ },
+ "U18": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 97
+ },
+ "U19": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 7756
+ },
+ "U20": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 6451
+ },
+ "U21": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 2951
+ },
+ "U22": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 8505
+ },
+ "U23": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 3760
+ },
+ "U24": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 2683
+ },
+ "U25": {
+  "part": "vision",
+  "layer": 3,
+  "unit": 761
+ },
+ "U26": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 3552
+ },
+ "U27": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 1708
+ },
+ "U28": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 3521
+ },
+ "U29": {
+  "part": "LM",
+  "layer": 2,
+  "unit": 2700
+ },
+ "U30": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 1607
+ },
+ "U31": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 2982
+ },
+ "U32": {
+  "part": "vision",
+  "layer": 18,
+  "unit": 1181
+ },
+ "U33": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 4191
+ },
+ "U34": {
+  "part": "vision",
+  "layer": 13,
+  "unit": 726
+ },
+ "U35": {
+  "part": "vision",
+  "layer": 23,
+  "unit": 2105
+ },
+ "U36": {
+  "part": "LM",
+  "layer": 8,
+  "unit": 890
+ },
+ "U37": {
+  "part": "vision",
+  "layer": 8,
+  "unit": 2630
+ },
+ "U38": {
+  "part": "LM",
+  "layer": 24,
+  "unit": 6451
+ },
+ "U39": {
+  "part": "LM",
+  "layer": 16,
+  "unit": 9635
+ },
+ "U40": {
+  "part": "LM",
+  "layer": 32,
+  "unit": 5143
+ }
+}

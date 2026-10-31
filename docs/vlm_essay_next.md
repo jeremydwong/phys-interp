@@ -34,7 +34,7 @@ openly (B), then test explanations so they can lose (D), then re-score the censu
 - **B2 vision negative pole.** Hook vision `fc1` pre-activations (before GELU) for the gallery
   vision units; show both poles. Does the − pole carry a distinction (e.g. contact vs free)?
 
-## 2. Read units openly (B3, C4)
+## 2. Read units openly (B3, C4) — DONE (vlm.md §2)
 
 - **B3 blind descriptions.** For ~40 random LM + vision units (not chosen by census), show
   top-12 and bottom-12 clips (frames strip) plus raw activation values, and write a free-form
@@ -44,7 +44,7 @@ openly (B), then test explanations so they can lose (D), then re-score the censu
 - **C4 dial vs detector.** For the 14 gallery units, plot raw activation vs best variable;
   classify dial (monotone across range) vs detector (flat then steep). Figure `vlm_tuning.png`.
 
-## 3. Explanations that can lose (D3, D1)
+## 3. Explanations that can lose (D3, D1) — DONE (vlm.md §3)
 
 - **D3 simulator-written maxima and near misses.** For each labelled gallery unit (e.g. "LM
   contact −pole"), write arm states with `sim/arm.py` that should maximise the labelled
@@ -56,7 +56,7 @@ openly (B), then test explanations so they can lose (D), then re-score the censu
   the `vlm_behaviour` questions on 64 clips. Does turning up a "contact" unit change the verbal
   contact answer? Control: as many random units from the same layer.
 
-## 4. Re-score (C1)
+## 4. Re-score (C1) — DONE (vlm.md §4)
 
 - Strong-activation census: R² restricted to clips above half the unit's max, and to the top
   1%. Report clean/partial/unexplained for "all" vs "strong", plus a "described, not one of our

@@ -1,0 +1,5 @@
+warning: Ignoring invalid `SSL_CERT_FILE`. Path does not exist: .
+  File "C:\Git\phys-interp\analysis\vlm_steer.py", line 222
+    axes[0].legend(fontsize=6, loc="upper left", title="question (grey: 3 random units;
+                                                       ^
+SyntaxError: unterminated string literal (detected at line 222)

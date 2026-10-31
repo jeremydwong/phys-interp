@@ -13,6 +13,33 @@ Item codes (E1, B3, D3 ...) refer to `reports/research/essay_todos_2026-10-30.ht
 Thresholds, controls and scoring rules that the essay does not specify are **ours** and are
 marked as such.
 
+## Summary
+
+- **First pass (§0).** Qwen3-VL-4B encodes the arm's posture everywhere (probe R² ≈ 1, also from raw
+  pixels), speed well (KE 0.84) but signed velocity weakly (q̇₁ 0.2–0.3), and nothing beyond posture
+  and velocity (residual probes ≤ 0.02). Census: ≤ 11% clean vision units (V8), ~1–2% in the early LM,
+  ~0% from L16; the random-init encoder is 2–3% clean, and the trained V18/V23 are *less* clean than
+  it. Contact is encoded (probe 0.96) but the model answers "no" to 99% of contact clips.
+- **E1.** At Qwen's visual tokens the SwiGLU "echo" is the rule early: 97% of L2 units keep the gate
+  closed at both pooled extremes (11% at L32); 5 of 7 gallery LM units are re-labelled gate-closed.
+- **E2.** Sink coordinates exist (vision 201: 92% of V23 energy; LM 4: ~95% from L17) but change no
+  probe result (< 0.005 R²).
+- **B2.** The pre-GELU − pole of vision units is as often labelled as the + pole, but mostly by the
+  same posture variables, read on background patches; no − pole separates contact from free motion.
+- **B3.** A blind reader beats the census label for 16/40 random units, the label wins for 3; 12 of
+  22 census-unexplained units get a clear description, almost all as detectors of an extreme of our
+  own variables (hand on the floor, arm hanging down), 3/40 need a concept outside the 32 targets.
+- **C4.** 2 dials, 4 detectors, 7 "tuned" units; every velocity/acceleration/Coriolis-labelled
+  gallery unit peaks at zero: a stillness unit, not a rate.
+- **D3.** Simulator-written examples and near misses: 4 labels won (hand at floor, upper arm down,
+  shoulder gravity torque ≤ −9 N·m, elbow Coriolis), 1 tied, 9 lost (all stillness, both
+  contact-torque and both potential-energy labels).
+- **D1.** Steering or ablating single gallery LM units (or 16 contact units) moves the answer logits
+  by ≤ 0.16 and flips ≤ 6% of answers, the same as random units: no causal role found.
+- **C1.** Restricting the census to strong activations does not make units clean (0–10% everywhere,
+  random-init similar); with blind descriptions, 75% of a random 40-unit sample has a label or a
+  clear description vs 45% by census alone.
+
 ## 0. First pass
 
 ### 0.1 What the model sees
@@ -411,6 +438,38 @@ the rejection line), so it is only partly sign-specific, unlike V8#160.
 Caveats: 8 + 8 clips per unit; a single corpus maximum can be an outlier (which makes "f ≥ 0.5"
 strict); the written clips are short and mostly slow, which is not the corpus distribution.
 
+### 3.2 D1: steering LM units and asking the questions again
+
+**Method** (`vlm_steer.py`; **figure `vlm_steer.png`**; `vlm_steer.json`, raw logits in
+`vlm_steer_raw.json`). A pre-hook on `down_proj` sets one gallery LM unit at all 400 visual tokens
+to 0 ("ablate") or to 2× its corpus extreme on its census pole ("steer"; for − units a large negative
+value), and the five behaviour questions of §0.4 are asked again on 64 clips each (32 per class).
+Read-out: the first-token logit difference between the two answers, p(option 0) = sigmoid(diff),
+and the fraction of clips whose two-way answer flips. Controls: 3 random units of the same layer
+treated the same way. Group condition (ours): the 16 LM units of L2/L8 with the highest contact
+binned R², steered together, vs 3 sets of 16 random units, on the contact, floor/wall and
+anticipation questions. 7 units × 4 × 2 settings × 5 questions + groups, 66 min on the GPU.
+
+Results: **no steering effect on the answers.**
+- Unsteered first-token answers are as in §0.4 (p("yes") to "touching floor or wall?" 0.27, accuracy
+  0.50; floor/wall 0.80).
+- The largest single-unit change is Δ logit = +0.16 (L16−#6072, q̈₂, on the speed question), i.e.
+  Δp ≈ 0.014; no condition flips more than 6% of answers, the same as the random controls (0–7%).
+- 9 of 35 (unit, question) steer conditions and 13 of 35 ablations exceed all three random controls,
+  but all of these effects are below 0.16 logits. Only L16−#6072 (a regular, gate-open unit) moves
+  every question beyond its controls, by 0.08–0.16 logits in both directions; that is a generic
+  perturbation, not a meaning-specific one (it also moves the segment and floor/wall answers).
+- Turning up the contact units does not make Qwen say the arm touches a surface: L2−#8960 Δ logit
+  +0.01 (controls up to 0.02); the 16-unit contact group Δ logit −0.13, i.e. slightly toward "no",
+  inside its random-group range (up to +0.46).
+- The five gate-closed (echo) units of §1.1 have no effect beyond 0.05 logits.
+
+So single LM MLP units at the visual tokens, including the census's best physics units, are not
+read on the way to these answers, at least not at this dose and not one or 16 at a time. This
+matches the gap of §0.4: the contact information is linearly present (probe 0.96) but the verbal
+answer ignores it, and steering the units that carry it does not change that.
+
+
 ## 4. Re-score: strong-activation census (C1)
 
 **Method** (`vlm_strong.py`; **figure `vlm_strong.png`**; `vlm_strong.json`). For a seeded sample of
@@ -460,3 +519,16 @@ description, against 18 of 40 (45%) by census alone; the remaining 25% have no p
 Most of the gain comes from detectors of extreme states that an all-groups simulation score misses,
 not from concepts outside our variable set.
 
+## Not done / deviations from the spec
+
+- D3 used 8 + 8 clips per unit and our own scoring rule (f relative to corpus median and max); the
+  essay's "won/tied/lost" is defined against corpus maxima of a much larger corpus.
+- D1 steered at the visual tokens only, at one dose (2× the corpus extreme) plus ablation; other
+  doses, other token positions (the prompt tokens) and more units per question were not run.
+- B3: one blind describer (another Claude agent restricted to the 40 images), one judge for the
+  comparison, 40 units instead of the ~50 per model in the to-do report.
+- E2: no PCA-based analysis existed in the VLM pipeline, so the "re-run the residual probe PCA" item
+  was done as a new PCA-64 probe plus the existing standardised probe, each with and without sinks.
+- Deferred as in the spec: C5 longer clips, F2 Qwen3-VL-8B size sweep, D4 projection-out of probe
+  directions, G1 (no checkpoints for Qwen). E3 (auditing max-pooling, which B2 and B3 point at) is
+  the obvious next tool fix.

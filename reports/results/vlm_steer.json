@@ -1,0 +1,2528 @@
+{
+ "baseline_p_option0": {
+  "contact": 0.2699874965382678,
+  "floor_wall": 0.33238466729384275,
+  "speed": 0.2589047259675099,
+  "segment": 0.7453311688437216,
+  "anticipate": 0.3158626161763355
+ },
+ "baseline_acc_first_token": {
+  "contact": 0.5,
+  "floor_wall": 0.796875,
+  "speed": 0.59375,
+  "segment": 0.546875,
+  "anticipate": 0.53125
+ },
+ "conditions": {
+  "L2\u2212#1848|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.00044759985092704077,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#1848|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0007352719496558027,
+   "flip_rate": 0.03125,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#1848|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.00568350171671927,
+   "flip_rate": 0.015625,
+   "d_logit": 0.029296875
+  },
+  "L2\u2212#1848|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.003690478824234059,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L2\u2212#1848|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.0011930339453272113,
+   "flip_rate": 0.03125,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#1848|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.0018790566937320987,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#1848|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0031745083432096607,
+   "flip_rate": 0.046875,
+   "d_logit": -0.013671875
+  },
+  "L2\u2212#1848|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.008130535799838636,
+   "flip_rate": 0.0,
+   "d_logit": 0.05078125
+  },
+  "L2\u2212#1848|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.007403799040647087,
+   "flip_rate": 0.0,
+   "d_logit": 0.041015625
+  },
+  "L2\u2212#1848|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.0012689621317369395,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#1848/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0005394070822570555,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#1848/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0012330171255076538,
+   "flip_rate": 0.03125,
+   "d_logit": -0.0078125
+  },
+  "L2\u2212#1848/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.002672071335720211,
+   "flip_rate": 0.03125,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#1848/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.002284158050021014,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#1848/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0003122892985467705,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2\u2212#1848/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0003185376760213073,
+   "flip_rate": 0.0,
+   "d_logit": -0.001953125
+  },
+  "L2\u2212#1848/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.000306978885331679,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#1848/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.003564111859353702,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#1848/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0016908042313193246,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#1848/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0015060705966386317,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#1848/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0001887315624765453,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#1848/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0014246803285474844,
+   "flip_rate": 0.046875,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#1848/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0026794163065284996,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#1848/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.001780791460517418,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#1848/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.00034581576659191643,
+   "flip_rate": 0.015625,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#1848/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.001086502534940035,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2\u2212#1848/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.002277323632318532,
+   "flip_rate": 0.046875,
+   "d_logit": -0.0078125
+  },
+  "L2\u2212#1848/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.002644402347517863,
+   "flip_rate": 0.015625,
+   "d_logit": 0.021484375
+  },
+  "L2\u2212#1848/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0010864459210779475,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2\u2212#1848/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0007197403012611612,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#1848/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0035944531363690645,
+   "flip_rate": 0.015625,
+   "d_logit": 0.025390625
+  },
+  "L2\u2212#1848/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.001502328869356013,
+   "flip_rate": 0.015625,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#1848/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0021429519186603675,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L2\u2212#1848/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0023165854562914876,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#1848/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.001264733272293506,
+   "flip_rate": 0.0,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#1848/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0106525689769887,
+   "flip_rate": 0.0,
+   "d_logit": -0.052734375
+  },
+  "L2\u2212#1848/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0009565557032821077,
+   "flip_rate": 0.03125,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#1848/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.001650870244902263,
+   "flip_rate": 0.015625,
+   "d_logit": -0.017578125
+  },
+  "L2\u2212#1848/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.005865102030452593,
+   "flip_rate": 0.0,
+   "d_logit": 0.0390625
+  },
+  "L2\u2212#1848/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.003511883499602502,
+   "flip_rate": 0.0,
+   "d_logit": -0.0234375
+  },
+  "L8\u2212#4747|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": 0.00011271589946113686,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#4747|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.0008910046961456851,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L8\u2212#4747|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.003780023411011803,
+   "flip_rate": 0.015625,
+   "d_logit": 0.025390625
+  },
+  "L8\u2212#4747|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.0030311040896434877,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L8\u2212#4747|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.0009875371406957555,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#4747|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": 3.4017003887299455e-05,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L8\u2212#4747|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0058623774718330746,
+   "flip_rate": 0.0625,
+   "d_logit": -0.0234375
+  },
+  "L8\u2212#4747|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": -0.0018540694563300277,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0078125
+  },
+  "L8\u2212#4747|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.00555196872124615,
+   "flip_rate": 0.015625,
+   "d_logit": 0.029296875
+  },
+  "L8\u2212#4747|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.0061397960320448385,
+   "flip_rate": 0.0,
+   "d_logit": -0.02734375
+  },
+  "L8\u2212#4747/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.001361648297112545,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L8\u2212#4747/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0005687377562343991,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0078125
+  },
+  "L8\u2212#4747/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.004656435742302859,
+   "flip_rate": 0.03125,
+   "d_logit": 0.029296875
+  },
+  "L8\u2212#4747/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.005239369805258466,
+   "flip_rate": 0.03125,
+   "d_logit": 0.02734375
+  },
+  "L8\u2212#4747/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0017510027782382477,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0078125
+  },
+  "L8\u2212#4747/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.006848721945137814,
+   "flip_rate": 0.0625,
+   "d_logit": 0.0234375
+  },
+  "L8\u2212#4747/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.019089062733297253,
+   "flip_rate": 0.078125,
+   "d_logit": -0.107421875
+  },
+  "L8\u2212#4747/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.005901867986311338,
+   "flip_rate": 0.03125,
+   "d_logit": 0.044921875
+  },
+  "L8\u2212#4747/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0062070734240067356,
+   "flip_rate": 0.0,
+   "d_logit": 0.03515625
+  },
+  "L8\u2212#4747/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 6.4284209889868896e-06,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L8\u2212#4747/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.00014102820252212913,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#4747/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0005940150119191343,
+   "flip_rate": 0.03125,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#4747/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0037201572856763176,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L8\u2212#4747/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0013360176720185997,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#4747/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0005364683917609022,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L8\u2212#4747/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.02031152296393038,
+   "flip_rate": 0.0,
+   "d_logit": -0.123046875
+  },
+  "L8\u2212#4747/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.01677292675861855,
+   "flip_rate": 0.09375,
+   "d_logit": -0.072265625
+  },
+  "L8\u2212#4747/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.0011910961869587388,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L8\u2212#4747/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.005686418439008616,
+   "flip_rate": 0.0,
+   "d_logit": 0.025390625
+  },
+  "L8\u2212#4747/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.013227271666907122,
+   "flip_rate": 0.015625,
+   "d_logit": -0.064453125
+  },
+  "L8\u2212#4747/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0013946314884617267,
+   "flip_rate": 0.0,
+   "d_logit": 0.01171875
+  },
+  "L8\u2212#4747/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0001100091590459357,
+   "flip_rate": 0.015625,
+   "d_logit": 0.001953125
+  },
+  "L8\u2212#4747/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0027052973258749687,
+   "flip_rate": 0.0,
+   "d_logit": 0.017578125
+  },
+  "L8\u2212#4747/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0011697312838226661,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L8\u2212#4747/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00019524364808821818,
+   "flip_rate": 0.0,
+   "d_logit": 0.001953125
+  },
+  "L8\u2212#4747/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.015397863604349565,
+   "flip_rate": 0.0,
+   "d_logit": -0.125
+  },
+  "L8\u2212#4747/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.01572901140630724,
+   "flip_rate": 0.046875,
+   "d_logit": 0.1015625
+  },
+  "L8\u2212#4747/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.013406356455837468,
+   "flip_rate": 0.015625,
+   "d_logit": -0.07421875
+  },
+  "L8\u2212#4747/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.005170275078079736,
+   "flip_rate": 0.015625,
+   "d_logit": 0.03125
+  },
+  "L8\u2212#4747/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.012710294991961388,
+   "flip_rate": 0.0625,
+   "d_logit": -0.068359375
+  },
+  "L16\u2212#6072|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.0012969609927519004,
+   "flip_rate": 0.0,
+   "d_logit": -0.001953125
+  },
+  "L16\u2212#6072|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0021743601325395333,
+   "flip_rate": 0.046875,
+   "d_logit": -0.00390625
+  },
+  "L16\u2212#6072|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.006526775256165554,
+   "flip_rate": 0.03125,
+   "d_logit": 0.037109375
+  },
+  "L16\u2212#6072|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.00043413506034397156,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L16\u2212#6072|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.001998642974748558,
+   "flip_rate": 0.0,
+   "d_logit": 0.01171875
+  },
+  "L16\u2212#6072|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": 0.01670136439862969,
+   "flip_rate": 0.03125,
+   "d_logit": 0.123046875
+  },
+  "L16\u2212#6072|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.017424881575639678,
+   "flip_rate": 0.046875,
+   "d_logit": 0.095703125
+  },
+  "L16\u2212#6072|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.014217453720113543,
+   "flip_rate": 0.03125,
+   "d_logit": 0.158203125
+  },
+  "L16\u2212#6072|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": -0.015064852798798349,
+   "flip_rate": 0.015625,
+   "d_logit": -0.099609375
+  },
+  "L16\u2212#6072|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.014970038076258716,
+   "flip_rate": 0.03125,
+   "d_logit": 0.080078125
+  },
+  "L16\u2212#6072/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0006323874074041953,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L16\u2212#6072/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -2.6947003544891307e-05,
+   "flip_rate": 0.015625,
+   "d_logit": 0.001953125
+  },
+  "L16\u2212#6072/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0003309599492204942,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L16\u2212#6072/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0006958364549290615,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "L16\u2212#6072/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.002150229937597656,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L16\u2212#6072/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.015341022624831998,
+   "flip_rate": 0.0,
+   "d_logit": -0.1015625
+  },
+  "L16\u2212#6072/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0006905093147844973,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L16\u2212#6072/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.0013927104555026297,
+   "flip_rate": 0.03125,
+   "d_logit": -0.005859375
+  },
+  "L16\u2212#6072/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": -0.001086260177174058,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L16\u2212#6072/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.006466753409313487,
+   "flip_rate": 0.0,
+   "d_logit": -0.03515625
+  },
+  "L16\u2212#6072/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.00077557096966441,
+   "flip_rate": 0.0,
+   "d_logit": -0.00390625
+  },
+  "L16\u2212#6072/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00032067718527801754,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L16\u2212#6072/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0024862043599260825,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L16\u2212#6072/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0008351641125358827,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L16\u2212#6072/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00018534399730648667,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L16\u2212#6072/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.006297415912553021,
+   "flip_rate": 0.0,
+   "d_logit": -0.037109375
+  },
+  "L16\u2212#6072/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0013455277192975326,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0078125
+  },
+  "L16\u2212#6072/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0009906771781295614,
+   "flip_rate": 0.015625,
+   "d_logit": 0.017578125
+  },
+  "L16\u2212#6072/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0014262859784247945,
+   "flip_rate": 0.015625,
+   "d_logit": 0.013671875
+  },
+  "L16\u2212#6072/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.001511918482938357,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L16\u2212#6072/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.00016620415804537354,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L16\u2212#6072/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00038401120695827655,
+   "flip_rate": 0.03125,
+   "d_logit": -0.00390625
+  },
+  "L16\u2212#6072/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.003348594704319306,
+   "flip_rate": 0.0,
+   "d_logit": 0.025390625
+  },
+  "L16\u2212#6072/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.004127745324805306,
+   "flip_rate": 0.0,
+   "d_logit": 0.01953125
+  },
+  "L16\u2212#6072/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00019793606436771245,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L16\u2212#6072/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.013471383324004993,
+   "flip_rate": 0.0,
+   "d_logit": -0.083984375
+  },
+  "L16\u2212#6072/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0053194975511457725,
+   "flip_rate": 0.03125,
+   "d_logit": 0.03515625
+  },
+  "L16\u2212#6072/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0005820260650584829,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L16\u2212#6072/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.002476782082954331,
+   "flip_rate": 0.0,
+   "d_logit": 0.01171875
+  },
+  "L16\u2212#6072/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.003320622935098876,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#789|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": 0.0012537885473529278,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#789|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.002154246156160334,
+   "flip_rate": 0.046875,
+   "d_logit": -0.013671875
+  },
+  "L2\u2212#789|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.0018166539093047941,
+   "flip_rate": 0.0,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#789|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.0013801060821974458,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#789|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.001926150147968443,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#789|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.006251537522230146,
+   "flip_rate": 0.0,
+   "d_logit": -0.03125
+  },
+  "L2\u2212#789|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0009766582869123169,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L2\u2212#789|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.002401349796976444,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0234375
+  },
+  "L2\u2212#789|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.00044410178962489815,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L2\u2212#789|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.001260066727179817,
+   "flip_rate": 0.015625,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#789/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0007600969123838214,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#789/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.002349614844034959,
+   "flip_rate": 0.03125,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#789/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0028253164763092143,
+   "flip_rate": 0.015625,
+   "d_logit": 0.025390625
+  },
+  "L2\u2212#789/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0016164339136757974,
+   "flip_rate": 0.015625,
+   "d_logit": 0.001953125
+  },
+  "L2\u2212#789/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.0023730982229511538,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0078125
+  },
+  "L2\u2212#789/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0012267318752798937,
+   "flip_rate": 0.0,
+   "d_logit": -0.01953125
+  },
+  "L2\u2212#789/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0008957292094168246,
+   "flip_rate": 0.046875,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#789/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.005365465332417493,
+   "flip_rate": 0.0,
+   "d_logit": 0.037109375
+  },
+  "L2\u2212#789/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.002521095947580599,
+   "flip_rate": 0.03125,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#789/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.00046500916152958176,
+   "flip_rate": 0.0,
+   "d_logit": -0.0078125
+  },
+  "L2\u2212#789/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0010206656048824668,
+   "flip_rate": 0.0,
+   "d_logit": 0.001953125
+  },
+  "L2\u2212#789/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 9.043087615892207e-05,
+   "flip_rate": 0.0625,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#789/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.00016974007222168863,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#789/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0020417158068654455,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#789/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0016879578976965442,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#789/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0014352821656239225,
+   "flip_rate": 0.0,
+   "d_logit": -0.009765625
+  },
+  "L2\u2212#789/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.000971139345053138,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L2\u2212#789/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0034882722735291687,
+   "flip_rate": 0.0,
+   "d_logit": 0.025390625
+  },
+  "L2\u2212#789/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.003401979098087712,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#789/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.0013165861459025368,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#789/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0011921297296903551,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#789/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0014329224913714846,
+   "flip_rate": 0.03125,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#789/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0012743962283908675,
+   "flip_rate": 0.0,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#789/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0013014605285040018,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#789/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0014601848795397227,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#789/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.00023840025383701905,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#789/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.002287166192597139,
+   "flip_rate": 0.046875,
+   "d_logit": -0.00390625
+  },
+  "L2\u2212#789/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.001655599925048061,
+   "flip_rate": 0.015625,
+   "d_logit": 0.013671875
+  },
+  "L2\u2212#789/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": -0.00021520106425426504,
+   "flip_rate": 0.03125,
+   "d_logit": -0.001953125
+  },
+  "L2\u2212#789/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0018822878455232446,
+   "flip_rate": 0.0,
+   "d_logit": 0.005859375
+  },
+  "L8\u2212#7671|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": 0.0005107887866736961,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L8\u2212#7671|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0018610878004429567,
+   "flip_rate": 0.0625,
+   "d_logit": -0.00390625
+  },
+  "L8\u2212#7671|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.005169937846734341,
+   "flip_rate": 0.015625,
+   "d_logit": 0.033203125
+  },
+  "L8\u2212#7671|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.004579434483962862,
+   "flip_rate": 0.0,
+   "d_logit": 0.0234375
+  },
+  "L8\u2212#7671|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.0002741191741825514,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L8\u2212#7671|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.002777967370951003,
+   "flip_rate": 0.015625,
+   "d_logit": -0.03125
+  },
+  "L8\u2212#7671|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.001104849527035497,
+   "flip_rate": 0.046875,
+   "d_logit": -0.001953125
+  },
+  "L8\u2212#7671|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": -0.004729024490491631,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0234375
+  },
+  "L8\u2212#7671|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": -0.001572509619167847,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0078125
+  },
+  "L8\u2212#7671|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.0020588141263502766,
+   "flip_rate": 0.015625,
+   "d_logit": -0.013671875
+  },
+  "L8\u2212#7671/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.00014708655262656153,
+   "flip_rate": 0.0,
+   "d_logit": 0.001953125
+  },
+  "L8\u2212#7671/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0011219460284151092,
+   "flip_rate": 0.03125,
+   "d_logit": 0.015625
+  },
+  "L8\u2212#7671/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.005931687161186394,
+   "flip_rate": 0.0,
+   "d_logit": 0.037109375
+  },
+  "L8\u2212#7671/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": -0.0003938704705897687,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L8\u2212#7671/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.001116495030253505,
+   "flip_rate": 0.0,
+   "d_logit": -0.005859375
+  },
+  "L8\u2212#7671/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.007020690950482427,
+   "flip_rate": 0.015625,
+   "d_logit": -0.04296875
+  },
+  "L8\u2212#7671/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0032222536635745486,
+   "flip_rate": 0.03125,
+   "d_logit": -0.015625
+  },
+  "L8\u2212#7671/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.006257020256182466,
+   "flip_rate": 0.0,
+   "d_logit": 0.037109375
+  },
+  "L8\u2212#7671/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0035800505836763724,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L8\u2212#7671/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.004968271959264213,
+   "flip_rate": 0.0,
+   "d_logit": -0.025390625
+  },
+  "L8\u2212#7671/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0022749612234258584,
+   "flip_rate": 0.0,
+   "d_logit": -0.005859375
+  },
+  "L8\u2212#7671/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00020861287198959983,
+   "flip_rate": 0.0625,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#7671/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.002535655345381916,
+   "flip_rate": 0.015625,
+   "d_logit": 0.021484375
+  },
+  "L8\u2212#7671/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": -0.0008062221761091001,
+   "flip_rate": 0.03125,
+   "d_logit": -0.009765625
+  },
+  "L8\u2212#7671/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.0009588456840369489,
+   "flip_rate": 0.0,
+   "d_logit": -0.001953125
+  },
+  "L8\u2212#7671/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0030588380387932507,
+   "flip_rate": 0.015625,
+   "d_logit": -0.01953125
+  },
+  "L8\u2212#7671/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.003212313209074823,
+   "flip_rate": 0.03125,
+   "d_logit": -0.0234375
+  },
+  "L8\u2212#7671/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.001853543404795182,
+   "flip_rate": 0.0,
+   "d_logit": -0.005859375
+  },
+  "L8\u2212#7671/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.004182603616390863,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L8\u2212#7671/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": -0.0010154785781133313,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L8\u2212#7671/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0009531807134054493,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L8\u2212#7671/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0010728648188588763,
+   "flip_rate": 0.0625,
+   "d_logit": -0.0078125
+  },
+  "L8\u2212#7671/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.00021553855431086536,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L8\u2212#7671/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0017698240073154587,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L8\u2212#7671/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0007232028880711928,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L8\u2212#7671/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.00978948253009333,
+   "flip_rate": 0.015625,
+   "d_logit": 0.08984375
+  },
+  "L8\u2212#7671/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0029711972326859053,
+   "flip_rate": 0.03125,
+   "d_logit": -0.01171875
+  },
+  "L8\u2212#7671/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.007882888300681326,
+   "flip_rate": 0.046875,
+   "d_logit": 0.0546875
+  },
+  "L8\u2212#7671/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": -0.007168238625925447,
+   "flip_rate": 0.015625,
+   "d_logit": -0.04296875
+  },
+  "L8\u2212#7671/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.02098715026380958,
+   "flip_rate": 0.015625,
+   "d_logit": 0.115234375
+  },
+  "L2\u2212#8960|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.0021693286223898444,
+   "flip_rate": 0.015625,
+   "d_logit": -0.009765625
+  },
+  "L2\u2212#8960|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.0012299615129768315,
+   "flip_rate": 0.03125,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#8960|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.005552300625612239,
+   "flip_rate": 0.0,
+   "d_logit": 0.041015625
+  },
+  "L2\u2212#8960|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.00032964558988043263,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L2\u2212#8960|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.0018273282593879643,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#8960|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": 0.0015923200250066302,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#8960|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.001291950742612891,
+   "flip_rate": 0.046875,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#8960|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.003167503319213634,
+   "flip_rate": 0.015625,
+   "d_logit": 0.021484375
+  },
+  "L2\u2212#8960|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.004065177669416816,
+   "flip_rate": 0.0,
+   "d_logit": 0.017578125
+  },
+  "L2\u2212#8960|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.0015383360741342078,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#8960/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.002446165688910924,
+   "flip_rate": 0.0,
+   "d_logit": -0.01953125
+  },
+  "L2\u2212#8960/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0006860471438516777,
+   "flip_rate": 0.0625,
+   "d_logit": 0.0
+  },
+  "L2\u2212#8960/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.001512284437709295,
+   "flip_rate": 0.0,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#8960/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0033766716957365443,
+   "flip_rate": 0.015625,
+   "d_logit": 0.017578125
+  },
+  "L2\u2212#8960/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.003509902778768845,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#8960/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0025382021465044343,
+   "flip_rate": 0.015625,
+   "d_logit": 0.021484375
+  },
+  "L2\u2212#8960/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00026618384905893874,
+   "flip_rate": 0.046875,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#8960/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.003358419009884976,
+   "flip_rate": 0.015625,
+   "d_logit": 0.02734375
+  },
+  "L2\u2212#8960/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0013255521816746049,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#8960/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0011413568543971438,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#8960/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.002174652975721989,
+   "flip_rate": 0.015625,
+   "d_logit": -0.005859375
+  },
+  "L2\u2212#8960/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.002397872319193783,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0078125
+  },
+  "L2\u2212#8960/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.001882446609738536,
+   "flip_rate": 0.015625,
+   "d_logit": 0.013671875
+  },
+  "L2\u2212#8960/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.002237067380609502,
+   "flip_rate": 0.0,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#8960/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.000725783857226798,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2\u2212#8960/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0009820248220945259,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L2\u2212#8960/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0012255373383578184,
+   "flip_rate": 0.03125,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#8960/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.002039617362879347,
+   "flip_rate": 0.03125,
+   "d_logit": 0.015625
+  },
+  "L2\u2212#8960/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.002678653018141253,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "L2\u2212#8960/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.0011438387437963432,
+   "flip_rate": 0.0,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#8960/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.00043476055565601726,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2\u2212#8960/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0008238375816279474,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L2\u2212#8960/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0020680653825834653,
+   "flip_rate": 0.0,
+   "d_logit": 0.02734375
+  },
+  "L2\u2212#8960/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.005009631882810796,
+   "flip_rate": 0.03125,
+   "d_logit": 0.025390625
+  },
+  "L2\u2212#8960/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.002853745830062393,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2\u2212#8960/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0029193196727851974,
+   "flip_rate": 0.0,
+   "d_logit": 0.017578125
+  },
+  "L2\u2212#8960/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.0007659901382706408,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L2\u2212#8960/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.0011301519849128163,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "L2\u2212#8960/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0048083858166031055,
+   "flip_rate": 0.03125,
+   "d_logit": 0.025390625
+  },
+  "L2\u2212#8960/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00340487030308164,
+   "flip_rate": 0.0,
+   "d_logit": 0.015625
+  },
+  "L2#9169|ablate|contact": {
+   "kind": "unit",
+   "d_p_option0": -0.0003236805320741029,
+   "flip_rate": 0.0,
+   "d_logit": -0.001953125
+  },
+  "L2#9169|ablate|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": 0.0003457776891180514,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2#9169|ablate|speed": {
+   "kind": "unit",
+   "d_p_option0": 0.0018191406860416381,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "L2#9169|ablate|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.00344786650221826,
+   "flip_rate": 0.0,
+   "d_logit": 0.013671875
+  },
+  "L2#9169|ablate|anticipate": {
+   "kind": "unit",
+   "d_p_option0": 0.0021316927163157425,
+   "flip_rate": 0.0,
+   "d_logit": 0.01171875
+  },
+  "L2#9169|steer|contact": {
+   "kind": "unit",
+   "d_p_option0": 1.5496601607464084e-05,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2#9169|steer|floor_wall": {
+   "kind": "unit",
+   "d_p_option0": -0.0011870724980624578,
+   "flip_rate": 0.03125,
+   "d_logit": -0.001953125
+  },
+  "L2#9169|steer|speed": {
+   "kind": "unit",
+   "d_p_option0": -0.00031372553514527797,
+   "flip_rate": 0.03125,
+   "d_logit": 0.00390625
+  },
+  "L2#9169|steer|segment": {
+   "kind": "unit",
+   "d_p_option0": 0.0015973633799200035,
+   "flip_rate": 0.03125,
+   "d_logit": 0.009765625
+  },
+  "L2#9169|steer|anticipate": {
+   "kind": "unit",
+   "d_p_option0": -0.0016332952359638011,
+   "flip_rate": 0.0,
+   "d_logit": -0.0078125
+  },
+  "L2#9169/rand0|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0004680860029390017,
+   "flip_rate": 0.015625,
+   "d_logit": -0.001953125
+  },
+  "L2#9169/rand0|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.002158485749128418,
+   "flip_rate": 0.03125,
+   "d_logit": -0.00390625
+  },
+  "L2#9169/rand0|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.0017614996664624195,
+   "flip_rate": 0.0,
+   "d_logit": 0.017578125
+  },
+  "L2#9169/rand0|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0007104459120861484,
+   "flip_rate": 0.03125,
+   "d_logit": 0.00390625
+  },
+  "L2#9169/rand0|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00246742932136327,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2#9169/rand0|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0013226646368816638,
+   "flip_rate": 0.0,
+   "d_logit": -0.005859375
+  },
+  "L2#9169/rand0|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00017012092259548152,
+   "flip_rate": 0.0,
+   "d_logit": 0.001953125
+  },
+  "L2#9169/rand0|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.00406109878598674,
+   "flip_rate": 0.015625,
+   "d_logit": 0.033203125
+  },
+  "L2#9169/rand0|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.001800154342963092,
+   "flip_rate": 0.0,
+   "d_logit": 0.0078125
+  },
+  "L2#9169/rand0|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.000963748697026031,
+   "flip_rate": 0.015625,
+   "d_logit": 0.00390625
+  },
+  "L2#9169/rand1|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0022747833644241678,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2#9169/rand1|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0010859354512257765,
+   "flip_rate": 0.046875,
+   "d_logit": 0.009765625
+  },
+  "L2#9169/rand1|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": 0.00024942936543340035,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "L2#9169/rand1|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0003492284120669544,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2#9169/rand1|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.000589724820756458,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "L2#9169/rand1|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.0008236612480884971,
+   "flip_rate": 0.0,
+   "d_logit": -0.001953125
+  },
+  "L2#9169/rand1|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.00411681058858949,
+   "flip_rate": 0.03125,
+   "d_logit": 0.02734375
+  },
+  "L2#9169/rand1|steer|speed": {
+   "kind": "random",
+   "d_p_option0": 0.004787602376865965,
+   "flip_rate": 0.015625,
+   "d_logit": 0.033203125
+  },
+  "L2#9169/rand1|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0026840068657887177,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "L2#9169/rand1|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 8.022268290643368e-05,
+   "flip_rate": 0.0,
+   "d_logit": 0.001953125
+  },
+  "L2#9169/rand2|ablate|contact": {
+   "kind": "random",
+   "d_p_option0": 0.0005135099643495843,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2#9169/rand2|ablate|floor_wall": {
+   "kind": "random",
+   "d_p_option0": -0.00012166336242881444,
+   "flip_rate": 0.03125,
+   "d_logit": 0.0078125
+  },
+  "L2#9169/rand2|ablate|speed": {
+   "kind": "random",
+   "d_p_option0": -0.0007867852382742383,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "L2#9169/rand2|ablate|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0027808372384798084,
+   "flip_rate": 0.015625,
+   "d_logit": 0.015625
+  },
+  "L2#9169/rand2|ablate|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.00047416954279617225,
+   "flip_rate": 0.0,
+   "d_logit": 0.0
+  },
+  "L2#9169/rand2|steer|contact": {
+   "kind": "random",
+   "d_p_option0": -0.006306476313119166,
+   "flip_rate": 0.015625,
+   "d_logit": -0.029296875
+  },
+  "L2#9169/rand2|steer|floor_wall": {
+   "kind": "random",
+   "d_p_option0": 0.0005840511706483662,
+   "flip_rate": 0.03125,
+   "d_logit": 0.009765625
+  },
+  "L2#9169/rand2|steer|speed": {
+   "kind": "random",
+   "d_p_option0": -0.004787591992509438,
+   "flip_rate": 0.015625,
+   "d_logit": -0.033203125
+  },
+  "L2#9169/rand2|steer|segment": {
+   "kind": "random",
+   "d_p_option0": 0.0018831393532786275,
+   "flip_rate": 0.046875,
+   "d_logit": 0.013671875
+  },
+  "L2#9169/rand2|steer|anticipate": {
+   "kind": "random",
+   "d_p_option0": 0.005161125639250987,
+   "flip_rate": 0.0,
+   "d_logit": 0.0234375
+  },
+  "contact group (16)|ablate|contact": {
+   "kind": "group",
+   "d_p_option0": 0.0019694952759978165,
+   "flip_rate": 0.0,
+   "d_logit": 0.013671875
+  },
+  "contact group (16)|ablate|floor_wall": {
+   "kind": "group",
+   "d_p_option0": 0.001099282290672364,
+   "flip_rate": 0.046875,
+   "d_logit": 0.01171875
+  },
+  "contact group (16)|ablate|anticipate": {
+   "kind": "group",
+   "d_p_option0": 0.0018526164790788982,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "contact group (16)|steer|contact": {
+   "kind": "group",
+   "d_p_option0": -0.015570551473464181,
+   "flip_rate": 0.0,
+   "d_logit": -0.130859375
+  },
+  "contact group (16)|steer|floor_wall": {
+   "kind": "group",
+   "d_p_option0": -0.005057383983557455,
+   "flip_rate": 0.015625,
+   "d_logit": -0.0546875
+  },
+  "contact group (16)|steer|anticipate": {
+   "kind": "group",
+   "d_p_option0": -0.0009932399629123166,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0
+  },
+  "contact group (16)/rand0|ablate|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.004084419863847675,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01953125
+  },
+  "contact group (16)/rand0|ablate|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": 0.0008171392494258926,
+   "flip_rate": 0.015625,
+   "d_logit": 0.01171875
+  },
+  "contact group (16)/rand0|ablate|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": -0.00020765932094107885,
+   "flip_rate": 0.015625,
+   "d_logit": 0.001953125
+  },
+  "contact group (16)/rand0|steer|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.05299661489654864,
+   "flip_rate": 0.03125,
+   "d_logit": 0.458984375
+  },
+  "contact group (16)/rand0|steer|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": -0.009093917840116296,
+   "flip_rate": 0.09375,
+   "d_logit": -0.03125
+  },
+  "contact group (16)/rand0|steer|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": 0.018641410109322867,
+   "flip_rate": 0.0625,
+   "d_logit": 0.123046875
+  },
+  "contact group (16)/rand1|ablate|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.0013813835887004841,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "contact group (16)/rand1|ablate|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": 0.0008079088427929221,
+   "flip_rate": 0.03125,
+   "d_logit": 0.009765625
+  },
+  "contact group (16)/rand1|ablate|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": 0.0018101961330999929,
+   "flip_rate": 0.015625,
+   "d_logit": 0.005859375
+  },
+  "contact group (16)/rand1|steer|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.0012827303893442879,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "contact group (16)/rand1|steer|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": 0.017462213573913928,
+   "flip_rate": 0.046875,
+   "d_logit": 0.125
+  },
+  "contact group (16)/rand1|steer|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": 0.006516010889090992,
+   "flip_rate": 0.03125,
+   "d_logit": 0.03515625
+  },
+  "contact group (16)/rand2|ablate|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.00025629042453866036,
+   "flip_rate": 0.015625,
+   "d_logit": 0.0078125
+  },
+  "contact group (16)/rand2|ablate|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": -0.0007213335419647136,
+   "flip_rate": 0.0625,
+   "d_logit": 0.0
+  },
+  "contact group (16)/rand2|ablate|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": 0.0025196134005596492,
+   "flip_rate": 0.015625,
+   "d_logit": 0.009765625
+  },
+  "contact group (16)/rand2|steer|contact": {
+   "kind": "random_group",
+   "d_p_option0": 0.002220033588673678,
+   "flip_rate": 0.03125,
+   "d_logit": 0.025390625
+  },
+  "contact group (16)/rand2|steer|floor_wall": {
+   "kind": "random_group",
+   "d_p_option0": 0.022749504690089725,
+   "flip_rate": 0.03125,
+   "d_logit": 0.11328125
+  },
+  "contact group (16)/rand2|steer|anticipate": {
+   "kind": "random_group",
+   "d_p_option0": 0.018409616576327323,
+   "flip_rate": 0.015625,
+   "d_logit": 0.1015625
+  }
+ },
+ "summary": {
+  "L2\u2212#1848|ablate|contact": {
+   "d_logit": 0.00390625,
+   "d_p": -0.00044759985092704077,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.011067708333333334,
+   "ctrl_d_logit_absmax": 0.025390625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2\u2212#1848|ablate|floor_wall": {
+   "d_logit": -0.00390625,
+   "d_p": -0.0007352719496558027,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": -0.0006510416666666666,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": false
+  },
+  "L2\u2212#1848|ablate|speed": {
+   "d_logit": 0.029296875,
+   "d_p": 0.00568350171671927,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.014973958333333334,
+   "ctrl_d_logit_absmax": 0.01953125,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": true
+  },
+  "L2\u2212#1848|ablate|segment": {
+   "d_logit": 0.01953125,
+   "d_p": 0.003690478824234059,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.010416666666666666,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L2\u2212#1848|ablate|anticipate": {
+   "d_logit": 0.005859375,
+   "d_p": 0.0011930339453272113,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": -0.0032552083333333335,
+   "ctrl_d_logit_absmax": 0.005859375,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L2\u2212#1848|steer|contact": {
+   "d_logit": -0.005859375,
+   "d_p": -0.0018790566937320987,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.018229166666666668,
+   "ctrl_d_logit_absmax": 0.052734375,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": false
+  },
+  "L2\u2212#1848|steer|floor_wall": {
+   "d_logit": -0.013671875,
+   "d_p": -0.0031745083432096607,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": -0.0006510416666666666,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": true
+  },
+  "L2\u2212#1848|steer|speed": {
+   "d_logit": 0.05078125,
+   "d_p": 0.008130535799838636,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.006510416666666667,
+   "ctrl_d_logit_absmax": 0.021484375,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": true
+  },
+  "L2\u2212#1848|steer|segment": {
+   "d_logit": 0.041015625,
+   "d_p": 0.007403799040647087,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.015625,
+   "ctrl_d_logit_absmax": 0.0390625,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L2\u2212#1848|steer|anticipate": {
+   "d_logit": -0.005859375,
+   "d_p": -0.0012689621317369395,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.0026041666666666665,
+   "ctrl_d_logit_absmax": 0.0234375,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|ablate|contact": {
+   "d_logit": 0.00390625,
+   "d_p": 0.00011271589946113686,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.008463541666666666,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|ablate|floor_wall": {
+   "d_logit": 0.01171875,
+   "d_p": 0.0008910046961456851,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.004557291666666667,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.026041666666666668,
+   "exceeds_controls": true
+  },
+  "L8\u2212#4747|ablate|speed": {
+   "d_logit": 0.025390625,
+   "d_p": 0.003780023411011803,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.020833333333333332,
+   "ctrl_d_logit_absmax": 0.029296875,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|ablate|segment": {
+   "d_logit": 0.015625,
+   "d_p": 0.0030311040896434877,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.012369791666666666,
+   "ctrl_d_logit_absmax": 0.02734375,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|ablate|anticipate": {
+   "d_logit": 0.00390625,
+   "d_p": 0.0009875371406957555,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.005208333333333333,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|steer|contact": {
+   "d_logit": 0.005859375,
+   "d_p": 3.4017003887299455e-05,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": -0.07486979166666667,
+   "ctrl_d_logit_absmax": 0.125,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|steer|floor_wall": {
+   "d_logit": -0.0234375,
+   "d_p": -0.0058623774718330746,
+   "flip": 0.0625,
+   "ctrl_d_logit_mean": -0.026041666666666668,
+   "ctrl_d_logit_absmax": 0.107421875,
+   "ctrl_flip_mean": 0.07291666666666667,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|steer|speed": {
+   "d_logit": -0.0078125,
+   "d_p": -0.0018540694563300277,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.01171875,
+   "ctrl_d_logit_absmax": 0.07421875,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|steer|segment": {
+   "d_logit": 0.029296875,
+   "d_p": 0.00555196872124615,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.030598958333333332,
+   "ctrl_d_logit_absmax": 0.03515625,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L8\u2212#4747|steer|anticipate": {
+   "d_logit": -0.02734375,
+   "d_p": -0.0061397960320448385,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": -0.046223958333333336,
+   "ctrl_d_logit_absmax": 0.068359375,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": false
+  },
+  "L16\u2212#6072|ablate|contact": {
+   "d_logit": -0.001953125,
+   "d_p": -0.0012969609927519004,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.00390625,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": false
+  },
+  "L16\u2212#6072|ablate|floor_wall": {
+   "d_logit": -0.00390625,
+   "d_p": -0.0021743601325395333,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": -0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.00390625,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L16\u2212#6072|ablate|speed": {
+   "d_logit": 0.037109375,
+   "d_p": 0.006526775256165554,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.014973958333333334,
+   "ctrl_d_logit_absmax": 0.025390625,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|ablate|segment": {
+   "d_logit": 0.0,
+   "d_p": 0.00043413506034397156,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.009765625,
+   "ctrl_d_logit_absmax": 0.01953125,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L16\u2212#6072|ablate|anticipate": {
+   "d_logit": 0.01171875,
+   "d_p": 0.001998642974748558,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.004557291666666667,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|steer|contact": {
+   "d_logit": 0.123046875,
+   "d_p": 0.01670136439862969,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": -0.07421875,
+   "ctrl_d_logit_absmax": 0.1015625,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|steer|floor_wall": {
+   "d_logit": 0.095703125,
+   "d_p": 0.017424881575639678,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": 0.008463541666666666,
+   "ctrl_d_logit_absmax": 0.03515625,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|steer|speed": {
+   "d_logit": 0.158203125,
+   "d_p": 0.014217453720113543,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.007161458333333333,
+   "ctrl_d_logit_absmax": 0.017578125,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|steer|segment": {
+   "d_logit": -0.099609375,
+   "d_p": -0.015064852798798349,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.006510416666666667,
+   "ctrl_d_logit_absmax": 0.013671875,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L16\u2212#6072|steer|anticipate": {
+   "d_logit": 0.080078125,
+   "d_p": 0.014970038076258716,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": -0.0032552083333333335,
+   "ctrl_d_logit_absmax": 0.03515625,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|ablate|contact": {
+   "d_logit": 0.01171875,
+   "d_p": 0.0012537885473529278,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.007161458333333333,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|ablate|floor_wall": {
+   "d_logit": -0.013671875,
+   "d_p": -0.002154246156160334,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": 0.00390625,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.041666666666666664,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|ablate|speed": {
+   "d_logit": 0.015625,
+   "d_p": 0.0018166539093047941,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.015625,
+   "ctrl_d_logit_absmax": 0.025390625,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L2\u2212#789|ablate|segment": {
+   "d_logit": 0.0078125,
+   "d_p": 0.0013801060821974458,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.004557291666666667,
+   "ctrl_d_logit_absmax": 0.005859375,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|ablate|anticipate": {
+   "d_logit": 0.009765625,
+   "d_p": 0.001926150147968443,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.0026041666666666665,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|steer|contact": {
+   "d_logit": -0.03125,
+   "d_p": -0.006251537522230146,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": -0.01171875,
+   "ctrl_d_logit_absmax": 0.01953125,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": true
+  },
+  "L2\u2212#789|steer|floor_wall": {
+   "d_logit": 0.0,
+   "d_p": -0.0009766582869123169,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.036458333333333336,
+   "exceeds_controls": false
+  },
+  "L2\u2212#789|steer|speed": {
+   "d_logit": 0.0234375,
+   "d_p": 0.002401349796976444,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.025390625,
+   "ctrl_d_logit_absmax": 0.037109375,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L2\u2212#789|steer|segment": {
+   "d_logit": 0.0,
+   "d_p": 0.00044410178962489815,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.0078125,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.026041666666666668,
+   "exceeds_controls": false
+  },
+  "L2\u2212#789|steer|anticipate": {
+   "d_logit": -0.00390625,
+   "d_p": -0.001260066727179817,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.0026041666666666665,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|ablate|contact": {
+   "d_logit": 0.0,
+   "d_p": 0.0005107887866736961,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.005859375,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|ablate|floor_wall": {
+   "d_logit": -0.00390625,
+   "d_p": -0.0018610878004429567,
+   "flip": 0.0625,
+   "ctrl_d_logit_mean": 0.00390625,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.052083333333333336,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|ablate|speed": {
+   "d_logit": 0.033203125,
+   "d_p": 0.005169937846734341,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.020833333333333332,
+   "ctrl_d_logit_absmax": 0.037109375,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|ablate|segment": {
+   "d_logit": 0.0234375,
+   "d_p": 0.004579434483962862,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": -0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": true
+  },
+  "L8\u2212#7671|ablate|anticipate": {
+   "d_logit": 0.0,
+   "d_p": -0.0002741191741825514,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.0,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|steer|contact": {
+   "d_logit": -0.03125,
+   "d_p": -0.002777967370951003,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.009114583333333334,
+   "ctrl_d_logit_absmax": 0.08984375,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|steer|floor_wall": {
+   "d_logit": -0.001953125,
+   "d_p": 0.001104849527035497,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": -0.016927083333333332,
+   "ctrl_d_logit_absmax": 0.0234375,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|steer|speed": {
+   "d_logit": -0.0234375,
+   "d_p": -0.004729024490491631,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.028645833333333332,
+   "ctrl_d_logit_absmax": 0.0546875,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|steer|segment": {
+   "d_logit": -0.0078125,
+   "d_p": -0.001572509619167847,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.04296875,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L8\u2212#7671|steer|anticipate": {
+   "d_logit": -0.013671875,
+   "d_p": -0.0020588141263502766,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.029947916666666668,
+   "ctrl_d_logit_absmax": 0.115234375,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|ablate|contact": {
+   "d_logit": -0.009765625,
+   "d_p": -0.0021693286223898444,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": -0.008463541666666666,
+   "ctrl_d_logit_absmax": 0.01953125,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|ablate|floor_wall": {
+   "d_logit": 0.009765625,
+   "d_p": 0.0012299615129768315,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": -0.0013020833333333333,
+   "ctrl_d_logit_absmax": 0.0078125,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": true
+  },
+  "L2\u2212#8960|ablate|speed": {
+   "d_logit": 0.041015625,
+   "d_p": 0.005552300625612239,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.016927083333333332,
+   "ctrl_d_logit_absmax": 0.02734375,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": true
+  },
+  "L2\u2212#8960|ablate|segment": {
+   "d_logit": 0.0,
+   "d_p": 0.00032964558988043263,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.018229166666666668,
+   "ctrl_d_logit_absmax": 0.025390625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|ablate|anticipate": {
+   "d_logit": 0.0078125,
+   "d_p": 0.0018273282593879643,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.01171875,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|steer|contact": {
+   "d_logit": 0.01171875,
+   "d_p": 0.0015923200250066302,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.013020833333333334,
+   "ctrl_d_logit_absmax": 0.021484375,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|steer|floor_wall": {
+   "d_logit": 0.009765625,
+   "d_p": 0.001291950742612891,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": 0.004557291666666667,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.03125,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|steer|speed": {
+   "d_logit": 0.021484375,
+   "d_p": 0.003167503319213634,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.016276041666666668,
+   "ctrl_d_logit_absmax": 0.02734375,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|steer|segment": {
+   "d_logit": 0.017578125,
+   "d_p": 0.004065177669416816,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.014322916666666666,
+   "ctrl_d_logit_absmax": 0.025390625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2\u2212#8960|steer|anticipate": {
+   "d_logit": 0.0078125,
+   "d_p": 0.0015383360741342078,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.009114583333333334,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.0,
+   "exceeds_controls": false
+  },
+  "L2#9169|ablate|contact": {
+   "d_logit": -0.001953125,
+   "d_p": -0.0003236805320741029,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.005859375,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2#9169|ablate|floor_wall": {
+   "d_logit": 0.0078125,
+   "d_p": 0.0003457776891180514,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.004557291666666667,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.036458333333333336,
+   "exceeds_controls": false
+  },
+  "L2#9169|ablate|speed": {
+   "d_logit": 0.01953125,
+   "d_p": 0.0018191406860416381,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.012369791666666666,
+   "ctrl_d_logit_absmax": 0.017578125,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": true
+  },
+  "L2#9169|ablate|segment": {
+   "d_logit": 0.013671875,
+   "d_p": 0.00344786650221826,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.006510416666666667,
+   "ctrl_d_logit_absmax": 0.015625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2#9169|ablate|anticipate": {
+   "d_logit": 0.01171875,
+   "d_p": 0.0021316927163157425,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.00390625,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.010416666666666666,
+   "exceeds_controls": false
+  },
+  "L2#9169|steer|contact": {
+   "d_logit": 0.0078125,
+   "d_p": 1.5496601607464084e-05,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": -0.012369791666666666,
+   "ctrl_d_logit_absmax": 0.029296875,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "L2#9169|steer|floor_wall": {
+   "d_logit": -0.001953125,
+   "d_p": -0.0011870724980624578,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.013020833333333334,
+   "ctrl_d_logit_absmax": 0.02734375,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L2#9169|steer|speed": {
+   "d_logit": 0.00390625,
+   "d_p": -0.00031372553514527797,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.011067708333333334,
+   "ctrl_d_logit_absmax": 0.033203125,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "L2#9169|steer|segment": {
+   "d_logit": 0.009765625,
+   "d_p": 0.0015973633799200035,
+   "flip": 0.03125,
+   "ctrl_d_logit_mean": 0.009114583333333334,
+   "ctrl_d_logit_absmax": 0.013671875,
+   "ctrl_flip_mean": 0.020833333333333332,
+   "exceeds_controls": false
+  },
+  "L2#9169|steer|anticipate": {
+   "d_logit": -0.0078125,
+   "d_p": -0.0016332952359638011,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.009765625,
+   "ctrl_d_logit_absmax": 0.0234375,
+   "ctrl_flip_mean": 0.005208333333333333,
+   "exceeds_controls": false
+  },
+  "contact group (16)|ablate|contact": {
+   "d_logit": 0.013671875,
+   "d_p": 0.0019694952759978165,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.011067708333333334,
+   "ctrl_d_logit_absmax": 0.01953125,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "contact group (16)|ablate|floor_wall": {
+   "d_logit": 0.01171875,
+   "d_p": 0.001099282290672364,
+   "flip": 0.046875,
+   "ctrl_d_logit_mean": 0.007161458333333333,
+   "ctrl_d_logit_absmax": 0.01171875,
+   "ctrl_flip_mean": 0.036458333333333336,
+   "exceeds_controls": false
+  },
+  "contact group (16)|ablate|anticipate": {
+   "d_logit": 0.009765625,
+   "d_p": 0.0018526164790788982,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.005859375,
+   "ctrl_d_logit_absmax": 0.009765625,
+   "ctrl_flip_mean": 0.015625,
+   "exceeds_controls": false
+  },
+  "contact group (16)|steer|contact": {
+   "d_logit": -0.130859375,
+   "d_p": -0.015570551473464181,
+   "flip": 0.0,
+   "ctrl_d_logit_mean": 0.16471354166666666,
+   "ctrl_d_logit_absmax": 0.458984375,
+   "ctrl_flip_mean": 0.026041666666666668,
+   "exceeds_controls": false
+  },
+  "contact group (16)|steer|floor_wall": {
+   "d_logit": -0.0546875,
+   "d_p": -0.005057383983557455,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.06901041666666667,
+   "ctrl_d_logit_absmax": 0.125,
+   "ctrl_flip_mean": 0.057291666666666664,
+   "exceeds_controls": false
+  },
+  "contact group (16)|steer|anticipate": {
+   "d_logit": 0.0,
+   "d_p": -0.0009932399629123166,
+   "flip": 0.015625,
+   "ctrl_d_logit_mean": 0.08658854166666667,
+   "ctrl_d_logit_absmax": 0.123046875,
+   "ctrl_flip_mean": 0.036458333333333336,
+   "exceeds_controls": false
+  }
+ }
+}
