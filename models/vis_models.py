@@ -123,6 +123,8 @@ class ConvNeXtS(_Base):
                 else:
                     a = F.gelu(z)
                 x = x + (blk.gamma * blk.fc2(a)).permute(0, 3, 1, 2)
+        if "resid" in self.record:          # final residual stream (not a privileged basis; secondary view)
+            self.acts["resid"] = x.detach()
         return self.head(self.norm(x.mean((2, 3))))
 
 

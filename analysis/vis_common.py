@@ -76,6 +76,18 @@ def cached_scores(dname, tag, seed, init=False):
     return sc
 
 
+def cached_resid(dname, tag, seed, init=False):
+    """ConvNeXt only: pole scores of the final residual-stream channels (input to the head), [N, C] each."""
+    fn = os.path.join(CACHE, f"{dname}_{tag}_s{seed}{'_init' if init else ''}_resid.npz")
+    if os.path.exists(fn):
+        z = np.load(fn)
+        return z["pos"], z["neg"]
+    m = load_model(dname, tag, seed, init)
+    sc = pole_scores(m, data(dname)["xte"], layers=["resid"])["resid"]
+    np.savez(fn, pos=sc[0], neg=sc[1])
+    return sc
+
+
 def available(dname, tag):
     return [s for s in SEEDS + [3, 4] if os.path.exists(os.path.join(CKPT, f"{dname}_{tag}_s{s}.pt"))]
 

@@ -158,8 +158,19 @@ def train(args):
     log = dict(name=name, data=args.data, step=args.step, size=args.size, seed=args.seed, epochs=args.epochs,
                params=n_params(model), curve=[])
     t0 = time.time()
-    step = 0
-    for ep in range(args.epochs):
+    step, ep0 = 0, 0
+    rfn = os.path.join(CKPT, name + "_resume.pt")
+    if args.resume and os.path.exists(rfn):          # survive CUDA OOMs on a shared GPU
+        ck = torch.load(rfn, map_location=DEV)
+        model.load_state_dict(ck["model"])
+        opt.load_state_dict(ck["opt"])
+        sched.load_state_dict(ck["sched"])
+        if ema is not None:
+            ema.load_state_dict(ck["ema"])
+        step, ep0, log = ck["step"], ck["epoch"], ck["log"]
+        torch.manual_seed(args.seed + 7919 * ep0)
+        print("resumed", name, "at epoch", ep0, flush=True)
+    for ep in range(ep0, args.epochs):
         model.train()
         perm = torch.randperm(N, device=DEV)
         tl = 0.0
@@ -191,6 +202,9 @@ def train(args):
             acc = evaluate(ema if ema is not None else model, xte, yte)
             log["curve"].append(dict(epoch=ep + 1, test_acc=acc, train_loss=tl / (steps_per_epoch / 20), time=time.time() - t0))
             print(name, log["curve"][-1], flush=True)
+            if args.resume:
+                torch.save(dict(model=model.state_dict(), opt=opt.state_dict(), sched=sched.state_dict(),
+                                ema=ema.state_dict() if ema is not None else None, step=step, epoch=ep + 1, log=log), rfn)
     final = ema if ema is not None else model
     log["test_acc"] = evaluate(final, xte, yte)
     log["train_acc"] = evaluate(final, xtr[:10000], ytr[:10000])
@@ -289,5 +303,6 @@ if __name__ == "__main__":
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--epochs", type=int, default=30)
     ap.add_argument("--suffix", default="", help="appended to the checkpoint tag, e.g. _long")
+    ap.add_argument("--resume", action="store_true", help="checkpoint every 5 epochs and resume from it")
     a = ap.parse_args()
     train_readout(a) if a.step == "readout" else train(a)

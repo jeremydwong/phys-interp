@@ -1,0 +1,20 @@
+{
+ "name": "shapes_arch_s99",
+ "data": "shapes",
+ "step": "arch",
+ "size": "m",
+ "seed": 99,
+ "epochs": 5,
+ "params": 1182392,
+ "curve": [
+  {
+   "epoch": 5,
+   "test_acc": 0.5039,
+   "train_loss": 2.7026149248465514,
+   "time": 26.76768159866333
+  }
+ ],
+ "test_acc": 0.5039,
+ "train_acc": 0.5017,
+ "time_s": 27.582390785217285
+}

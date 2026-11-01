@@ -19,7 +19,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from analysis import clean_tools as ct  # noqa: E402
-from analysis.vis_common import DATASETS, CACHE, PAIR_FACTORS, RESULTS, available, cached_scores, data, depth_groups  # noqa: E402
+from analysis.vis_common import DATASETS, CACHE, PAIR_FACTORS, RESULTS, available, cached_resid, cached_scores, data, depth_groups  # noqa: E402
 
 
 def gelu_np(x):
@@ -33,6 +33,9 @@ def analyse(dname, tag, seed, init):
     sc = cached_scores(dname, tag, seed, init)
     layers = list(sc)
     groups = depth_groups(layers)
+    if tag.startswith("arch"):
+        sc = dict(sc, resid=cached_resid(dname, tag, seed, init))
+        groups["resid"] = "resid"
     act = (lambda x: np.maximum(x, 0)) if tag.startswith(("old", "recipe")) else gelu_np
     out, summ = {}, {}
     for g, layer in groups.items():
@@ -50,7 +53,7 @@ def analyse(dname, tag, seed, init):
                 dd[u], wr[u], _, above[u] = ct.dial_detector(S[:, u], fac[k], kinds[k], c["best_value"][u])
             res[pole] = dict(census=c, pur_pct=pp, pur_raw=pr, dial=dd, weak_r2=wr, above_half=above)
         # old tools: post-activation positive pole, percentile strong set
-        Sold = act(pos)
+        Sold = pos if g == "resid" else act(pos)
         res["old"] = dict(census=ct.census(Sold, fac, kinds, PAIR_FACTORS[dname]),
                           pur_pct=ct.purity(Sold, fac, kinds, mode="pct"))
         if g == "late":

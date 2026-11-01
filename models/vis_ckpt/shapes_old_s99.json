@@ -1,0 +1,20 @@
+{
+ "name": "shapes_old_s99",
+ "data": "shapes",
+ "step": "old",
+ "size": "m",
+ "seed": 99,
+ "epochs": 5,
+ "params": 1179384,
+ "curve": [
+  {
+   "epoch": 5,
+   "test_acc": 1.0,
+   "train_loss": 0.005367344113974235,
+   "time": 6.353006601333618
+  }
+ ],
+ "test_acc": 1.0,
+ "train_acc": 1.0,
+ "time_s": 6.509000301361084
+}

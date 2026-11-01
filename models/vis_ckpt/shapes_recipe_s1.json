@@ -1,0 +1,62 @@
+{
+ "name": "shapes_recipe_s1",
+ "data": "shapes",
+ "step": "recipe",
+ "size": "m",
+ "seed": 1,
+ "epochs": 40,
+ "params": 1179384,
+ "curve": [
+  {
+   "epoch": 5,
+   "test_acc": 1.0,
+   "train_loss": 1.4021195050997612,
+   "time": 18.647828578948975
+  },
+  {
+   "epoch": 10,
+   "test_acc": 1.0,
+   "train_loss": 1.4832684779778504,
+   "time": 44.700109243392944
+  },
+  {
+   "epoch": 15,
+   "test_acc": 1.0,
+   "train_loss": 1.3138911357292762,
+   "time": 78.12349891662598
+  },
+  {
+   "epoch": 20,
+   "test_acc": 1.0,
+   "train_loss": 1.4073834205285096,
+   "time": 116.9350802898407
+  },
+  {
+   "epoch": 25,
+   "test_acc": 1.0,
+   "train_loss": 1.3280160610492413,
+   "time": 155.69120931625366
+  },
+  {
+   "epoch": 30,
+   "test_acc": 1.0,
+   "train_loss": 1.3450674215952556,
+   "time": 195.00025606155396
+  },
+  {
+   "epoch": 35,
+   "test_acc": 1.0,
+   "train_loss": 1.4559814410331922,
+   "time": 219.08475494384766
+  },
+  {
+   "epoch": 40,
+   "test_acc": 1.0,
+   "train_loss": 1.5850291191003263,
+   "time": 239.70089197158813
+  }
+ ],
+ "test_acc": 1.0,
+ "train_acc": 0.9999,
+ "time_s": 239.88261914253235
+}

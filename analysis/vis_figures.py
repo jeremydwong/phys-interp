@@ -215,11 +215,11 @@ def fig_weak():
                 ax.text(j + (k - 1) * 0.27, m + 0.02, f"{100 * m:.0f}", ha="center", fontsize=6.5)
         sf = [mean_ci(collect(dname, t, lambda n: ab[n]["all_strong_frac_removed"]) or [np.nan])[0] for t in ("old", "recipe", "arch")]
         ax.set_xticks(range(3))
-        ax.set_xticklabels([f"{t}\n(strong mask: {100 * f:.0f}% of acts)" for t, f in zip(("old", "recipe", "arch"), sf)], fontsize=7)
-        ax.set_ylim(0, 1.12)
+        ax.set_xticklabels([f"{t}\nstrong mask {100 * f:.0f}%" for t, f in zip(("old", "recipe", "arch"), sf)], fontsize=7)
+        ax.set_ylim(0, 1.3)
         ax.set_ylabel("test accuracy")
         ax.set_title(f"{dname}: masks in every neuron layer")
-    axs[0].legend(fontsize=6.5, loc="lower left")
+    axs[0].legend(fontsize=6, loc="upper left", ncol=3)
     fig.tight_layout()
     return savefig(fig, "vis_weak.png")
 
@@ -227,29 +227,39 @@ def fig_weak():
 def fig_dict():
     import matplotlib.pyplot as plt
     dc, rt = J("vis_dict.json"), J("vis_rotation.json")
-    fig, axs = plt.subplots(1, 2, figsize=(7.2, 2.8))
-    series = [(dc, "near_copy_share", False, "SAE activity in neuron near-copies"),
-              (dc, "near_copy_share", True, "... random-init"),
-              (dc, "rot_near_copy_share", False, "... randomly rotated basis"),
-              (rt, "raw_aligned", False, "rotation search (raw L4): axes on a neuron"),
-              (rt, "ica_aligned", False, "rotation search (whitened / ICA)"),
-              (rt, "ica_aligned", True, "... random-init")]
-    cols = [SERIES[0], SERIES[0], SERIES[7], SERIES[2], SERIES[4], SERIES[4]]
-    alph = [1, 0.45, 0.8, 1, 1, 0.45]
-    w = 0.13
-    for ax, dname in zip(axs, ("shapes", "cifar")):
+    fig, axs = plt.subplots(2, 2, figsize=(7.2, 5.0))
+    centers = np.arange(0.05, 1.0, 0.1)
+    for c, dname in enumerate(("shapes", "cifar")):
+        ax = axs[0, c]
+        for tag in ("old", "recipe", "arch"):
+            for init in (False, True):
+                hs = collect(dname, tag, lambda n: np.asarray(dc[n]["cos_hist"], float) / max(1, sum(dc[n]["cos_hist"])), init)
+                if hs:
+                    ax.plot(centers, np.mean(hs, 0), color=STEP_COL[tag], ls="--" if init else "-", lw=1.0 if init else 1.8,
+                            alpha=0.6 if init else 1, label=f"{tag}{' random-init' if init else ''} (n={len(hs)})")
+        ax.axvline(0.9, color=INK2, lw=0.8, ls=":")
+        ax.text(0.91, 0.95, "near copy", transform=ax.get_xaxis_transform(), fontsize=6.5, color=INK2, va="top")
+        ax.set_xlim(0, 1)
+        ax.set_xlabel("SAE feature: max |cos| with a neuron axis")
+        ax.set_ylabel("share of live features")
+        ax.set_title(f"{dname}: TopK SAE on the last layer")
+        ax.legend(fontsize=6)
+        ax = axs[1, c]
         for j, tag in enumerate(("old", "recipe", "arch")):
-            for k, (src, key, init, lab) in enumerate(series):
-                v = collect(dname, tag, lambda n: src[n][key], init)
+            for k, (key, init) in enumerate((("raw_mean_cos", False), ("ica_mean_cos", False), ("ica_mean_cos", True))):
+                v = collect(dname, tag, lambda n: rt[n][key], init)
                 m, ci = mean_ci(v or [np.nan])
-                ax.bar(j + (k - 2.5) * w, m, w, color=cols[k], alpha=alph[k], yerr=ci, capsize=1.5,
-                       error_kw=dict(lw=0.7), label=lab if j == 0 else None)
+                ax.bar(j + (k - 1) * 0.26, m, 0.26, color=[SERIES[2], SERIES[4], SERIES[4]][k], alpha=[1, 1, 0.4][k],
+                       yerr=ci, capsize=1.5, error_kw=dict(lw=0.7),
+                       label=["raw L4 search", "whitened (ICA) search", "ICA, random-init"][k] if j == 0 else None)
+        ax.axhline(0.19, color=INK2, lw=0.8, ls=":")
+        ax.text(2.45, 0.205, "random direction (d=256)", fontsize=6.5, color=INK2, ha="right")
         ax.set_xticks(range(3))
         ax.set_xticklabels(["M_old", "M_recipe", "M_arch"])
         ax.set_ylim(0, 1.05)
-        ax.set_title(f"{dname}: last layer, dictionaries vs neurons")
-        ax.set_ylabel("share")
-    axs[0].legend(fontsize=6, loc="upper left")
+        ax.set_ylabel("found axis: mean max |cos|\nwith a neuron axis (1 = neuron)")
+        ax.set_title(f"{dname}: rotation search from a random start")
+        ax.legend(fontsize=6, loc="upper left")
     fig.tight_layout()
     return savefig(fig, "vis_dict.png")
 
@@ -375,6 +385,41 @@ def fig_gallery(dname, n_units=2):
     return savefig(fig, f"vis_gallery_{dname}.png")
 
 
+def fig_sweep():
+    """ConvNeXt size sweep (essay: 92k / 7.06M / 28.6M; ours 0.2M / 1.2M / 4.6M)."""
+    import matplotlib.pyplot as plt
+    cen, fv = J("vis_census.json"), J("vis_featvis.json")
+    fig, axs = plt.subplots(1, 2, figsize=(7.2, 2.6))
+    out = {}
+    for ax, dname in zip(axs, ("shapes", "cifar")):
+        tags = [t for t in ("archs", "arch", "archl") if seeds(dname, t)]
+        if not tags:
+            continue
+        P = [train_log(dname, t, seeds(dname, t)[0])["params"] / 1e6 for t in tags]
+        series = [("clean on task factor (census)", lambda n: clean_task(n, "both"), None, SERIES[0]),
+                  ("+ pole one main job (raw strong set)", lambda n: cen[n]["late"]["pos"]["one_job_raw"], None, SERIES[2]),
+                  ("read correctly (fixed tools)", lambda n: fv[n]["verdict"]["fixed_tools_poles"], None, SERIES[1]),
+                  ("test accuracy", None, "acc", INK2)]
+        for lab, f, kind, col in series:
+            ms, cis = [], []
+            for t in tags:
+                v = [train_log(dname, t, s)["test_acc"] for s in seeds(dname, t)] if kind == "acc" else collect(dname, t, f)
+                m, ci = mean_ci(v) if v else (np.nan, 0)
+                ms.append(m)
+                cis.append(ci)
+                out.setdefault(dname, {}).setdefault(t, {})[lab] = (m, ci, len(v))
+            ax.errorbar(P, ms, yerr=cis, marker="o", ms=4, capsize=2, color=col, label=lab, ls="--" if kind else "-")
+        ax.set_xscale("log")
+        ax.set_xticks(P)
+        ax.set_xticklabels([f"{p:.1f}M" for p in P])
+        ax.set_ylim(0, 1.05)
+        ax.set_xlabel("ConvNeXt parameters")
+        ax.set_title(f"{dname}: size sweep, last layer")
+    axs[0].legend(fontsize=6, loc="lower left")
+    fig.tight_layout()
+    return savefig(fig, "vis_sweep.png"), out
+
+
 def fig_examples():
     import matplotlib.pyplot as plt
     D = data("shapes")
@@ -391,7 +436,9 @@ def main():
     L = {d: ladder_metrics(d) for d in ("shapes", "cifar")}
     paths = [fig_ladder(L), fig_census_depth(), fig_jobs(), fig_weak(), fig_dict(), fig_dial(), fig_fv(),
              fig_gallery("shapes"), fig_gallery("cifar"), fig_examples()]
-    out = dict(ladder=L, census=J("vis_census.json"), featvis=J("vis_featvis.json"), ablate=J("vis_ablate.json"),
+    sp, sweep = fig_sweep()
+    paths.append(sp)
+    out = dict(ladder=L, sweep=sweep, census=J("vis_census.json"), featvis=J("vis_featvis.json"), ablate=J("vis_ablate.json"),
                dict=J("vis_dict.json"), rotation=J("vis_rotation.json"), figures=[os.path.relpath(p, os.path.dirname(RESULTS)) for p in paths])
     json.dump(out, open(os.path.join(RESULTS, "vis.json"), "w"), indent=1, default=float)
     for d in L:
