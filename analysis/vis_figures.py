@@ -389,12 +389,13 @@ def fig_sweep():
     """ConvNeXt size sweep (essay: 92k / 7.06M / 28.6M; ours 0.2M / 1.2M / 4.6M)."""
     import matplotlib.pyplot as plt
     cen, fv = J("vis_census.json"), J("vis_featvis.json")
-    fig, axs = plt.subplots(1, 2, figsize=(7.2, 2.6))
+    from matplotlib.ticker import NullFormatter
+    dsets = [d for d in ("shapes", "cifar") if sum(bool(seeds(d, t)) for t in ("archs", "arch", "archl")) >= 2]
+    fig, axs = plt.subplots(1, max(1, len(dsets)), figsize=(3.8 * max(1, len(dsets)), 2.6), squeeze=False)
+    axs = axs[0]
     out = {}
-    for ax, dname in zip(axs, ("shapes", "cifar")):
+    for ax, dname in zip(axs, dsets):
         tags = [t for t in ("archs", "arch", "archl") if seeds(dname, t)]
-        if not tags:
-            continue
         P = [train_log(dname, t, seeds(dname, t)[0])["params"] / 1e6 for t in tags]
         series = [("clean on task factor (census)", lambda n: clean_task(n, "both"), None, SERIES[0]),
                   ("+ pole one main job (raw strong set)", lambda n: cen[n]["late"]["pos"]["one_job_raw"], None, SERIES[2]),
@@ -410,6 +411,8 @@ def fig_sweep():
                 out.setdefault(dname, {}).setdefault(t, {})[lab] = (m, ci, len(v))
             ax.errorbar(P, ms, yerr=cis, marker="o", ms=4, capsize=2, color=col, label=lab, ls="--" if kind else "-")
         ax.set_xscale("log")
+        ax.xaxis.set_minor_formatter(NullFormatter())
+        ax.tick_params(axis="x", which="minor", length=0)
         ax.set_xticks(P)
         ax.set_xticklabels([f"{p:.1f}M" for p in P])
         ax.set_ylim(0, 1.05)

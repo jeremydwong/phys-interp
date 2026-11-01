@@ -159,5 +159,12 @@
   "ica_aligned": 0.03125,
   "ica_mean_cos": 0.649618923664093,
   "dead_frac": 0.0
+ },
+ "cifar_arch_s0_init": {
+  "raw_aligned": 0.0,
+  "raw_mean_cos": 0.2095114787419637,
+  "ica_aligned": 0.0,
+  "ica_mean_cos": 0.6341286698977152,
+  "dead_frac": 0.0
  }
 }

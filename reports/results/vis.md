@@ -198,11 +198,11 @@ from a random start lands "back on the neurons, in every block" ("What Dictionar
 | shapes M_old | 0.99 | **0.0%** (rotated basis 0.0%) | 100% | 4.0% | 100% | 0.25 (0.25) |
 | shapes M_recipe | 0.96 | 0.0% | 99.9% | 4.3% | 99.9% | 0.27 (0.25) |
 | shapes M_arch | 0.99 | 0.9% ± 1.9 | 100% | 76% ± 38 | 100% | **0.43 ± 0.04** (0.31) |
-| CIFAR M_old | CIFAR_OLD_FVE | CIFAR_OLD_NC | CIFAR_OLD_ALL | CIFAR_OLD_NCO | CIFAR_OLD_OTH | CIFAR_OLD_ICA |
-| CIFAR M_recipe | CIFAR_REC_FVE | CIFAR_REC_NC | CIFAR_REC_ALL | CIFAR_REC_NCO | CIFAR_REC_OTH | CIFAR_REC_ICA |
-| CIFAR M_arch | CIFAR_ARCH_FVE | CIFAR_ARCH_NC | CIFAR_ARCH_ALL | CIFAR_ARCH_NCO | CIFAR_ARCH_OTH | CIFAR_ARCH_ICA |
+| CIFAR M_old | 0.94 | 0.0% (rotated 0.0%) | 91.1% | 0.0% (rotated 0.0%)O | 91.1% | 0.23 (0.25) |
+| CIFAR M_recipe | 0.87 | 0.8% | 89.2% | 0.8%O | 89.2% | 0.32 (0.25) |
+| CIFAR M_arch | 0.85 | 0.0% | 87.3% | 0.0%O | 87.3% | 0.65 (0.63) |
 
-(Shapes: 3 seeds. CIFAR: CIFAR_DICT_N. A random direction in 256-d has mean max |cos| 0.19 to the axes.)
+(Shapes: 3 seeds. CIFAR: seed 0 only (M_old SAE: seeds 0-1); seeds 1-2 were stopped because the shared GPU made each SAE take ~20 min. A random direction in 256-d has mean max |cos| 0.19 to the axes.)
 
 - **Near copies: does not reproduce.** In every model almost no SAE feature is within |cos| 0.9 of a neuron;
   the decoder-to-neuron cosines peak at 0.2–0.3 (`vis_dict.png`, top). Spliced back in, the SAE reconstructs
@@ -214,14 +214,27 @@ from a random start lands "back on the neurons, in every block" ("What Dictionar
 - **Rotation search.** On raw activations the L4 search never returns to the neurons (mean max |cos| 0.20,
   = random): the objective is dominated by the few highest-variance directions. After whitening (ICA) the
   plain CNNs still land on random-looking directions (0.23–0.27, the same as their random init), but the
-  **ConvNeXt's** found axes are clearly pulled toward its neurons (shapes 0.43 ± 0.04 vs 0.31 at random init;
-  CIFAR CIFAR_ARCH_ICA_SHORT), though only CIFAR_ARCH_ICA_AL of axes reach |cos| ≥ 0.9. This is the one
-  dictionary-side measurement where the architecture step points the essay's way. Part of the pull comes from
-  the GELU itself (random-init ConvNeXts are already above the 0.19 random baseline).
+  **ConvNeXt's** found axes are pulled toward its neurons (shapes 0.43 ± 0.04, CIFAR 0.65), though at most 3%
+  of axes reach |cos| ≥ 0.9. Most of that pull is already there at random init (shapes 0.31, CIFAR 0.63), so it
+  comes from the architecture (GELU on a 4×-wide MLP layer fed through LayerNorm), not from learning; training
+  adds a little on shapes (+0.12) and nothing measurable on CIFAR (+0.02, one seed). This is the one
+  dictionary-side measurement where the ConvNeXt is more neuron-aligned than the plain CNN, and the
+  random-init control shows it is mostly not a learned property.
 
 ## 7. Size sweep (`vis_sweep.png`)
 
-RESULTS_SWEEP
+Shapes only (the CIFAR sweep runs were stopped: on the shared GPU each one was taking 30-60 min). ConvNeXt
+with the modern recipe at 0.2M (dims 16-96, 2 seeds), 1.2M (the M_arch above, 3 seeds) and 4.6M (dims 64-512,
+1 seed); all reach 100% test accuracy.
+
+| params | late poles clean on a task factor | positive poles with one main job | poles read correctly (fixed tools) |
+|---|---|---|---|
+| 0.2M | 22% ± 53 (2 seeds) | 99% | 62% ± 20 |
+| 1.2M | 27% ± 7 | 99% | 68% ± 5 |
+| 4.6M | 27% (1 seed) | 99% | 60% (1 seed) |
+
+No trend with size. The essay's sweep (92k / 7.06M / 28.6M) spans 300x; ours spans 23x on a task every
+size solves perfectly, so this is a weak test.
 
 ## 8. Galleries (`vis_gallery_shapes.png`, `vis_gallery_cifar.png`)
 
@@ -237,8 +250,9 @@ the object.
    contributors, none tested: (a) scale: 1.2M-parameter models, 32×32 / 64×64 images, 10/24 classes, versus
    ImageNet; the shapes task saturates at ~100% for every model, so there is little pressure to organise;
    (b) the modern recipe is under-trained at 60 CIFAR epochs (train accuracy 93% vs 99% for the old recipe; a
-   180-epoch run reached 90.9% test at epoch 100 before it was killed by a GPU out-of-memory error from a
-   shared-GPU job, so no long-recipe checkpoint was analysed); (c) our ConvNeXt "neuron" choice (MLP hidden
+   180-epoch seed-0 run reached 90.9% test at epoch 100 before a CUDA out-of-memory error, caused by other jobs
+   on the shared GPU, killed it; a resumable 120-epoch retry (`--resume`) was stopped at epoch 15 for time, so
+   no long-recipe checkpoint was analysed and this confound is open); (c) our ConvNeXt "neuron" choice (MLP hidden
    units, 4× wider, each writing a delta to the residual stream) may not be the essay's; (d) mixup/cutmix
    train on blended images, which plausibly spreads class evidence across units.
 2. **SAE near-copies and rotation search** do not reproduce (section 6).

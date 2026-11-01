@@ -575,5 +575,55 @@
   "rot_sae_fve": 0.8567082285881042,
   "rot_near_copy_share": 0.0,
   "rot_near_copy_frac_live": 0.0
+ },
+ "cifar_arch_s0_init": {
+  "layer": "s4b1",
+  "d": 1024,
+  "n_vectors": 100000,
+  "sae_fve": 0.6910461783409119,
+  "near_copy_share": 0.0,
+  "near_copy_frac_live": 0.0,
+  "cos_hist": [
+   0,
+   3648,
+   437,
+   8,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "rot_sae_fve": 0.6945804357528687,
+  "rot_near_copy_share": 0.0,
+  "rot_near_copy_frac_live": 0.0
+ },
+ "cifar_old_s1": {
+  "layer": "s4c2",
+  "d": 256,
+  "n_vectors": 100000,
+  "sae_fve": 0.9436964988708496,
+  "near_copy_share": 0.0,
+  "near_copy_frac_live": 0.0,
+  "cos_hist": [
+   0,
+   24,
+   177,
+   46,
+   11,
+   3,
+   0,
+   0,
+   0,
+   0
+  ],
+  "base_acc": 0.9092,
+  "splice_all_acc": 0.9089,
+  "splice_near_copy_only_acc": 0.1,
+  "splice_other_only_acc": 0.9089,
+  "rot_sae_fve": 0.9434994459152222,
+  "rot_near_copy_share": 0.0,
+  "rot_near_copy_frac_live": 0.0
  }
 }
