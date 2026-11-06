@@ -35,7 +35,7 @@ def ica_alignment(X, seed):
     ev = ev.clamp(min=ev.max() * 1e-6)
     W = V @ torch.diag(ev ** -0.5) @ V.T          # ZCA whitening
     Wi = V @ torch.diag(ev ** 0.5) @ V.T
-    rs = ct.rotation_search(X @ W, steps=1000, seed=seed)
+    rs = ct.rotation_search(X @ W, steps=1000, seed=seed, check_identity=False)
     P = Wi @ torch.as_tensor(rs["R"], device=X.device).T      # columns = patterns
     P = P / P.norm(dim=0, keepdim=True)
     al = P.abs().max(0).values.cpu().numpy()
@@ -48,20 +48,26 @@ def run(dname, tag, seed, init=False):
     X = late_vectors(m, D["xtr"][:6250], m.neuron_layers[-1])
     d = X.shape[1]
     rng = np.random.default_rng(seed)
-    raw, ica, rawm, icam = [], [], [], []
+    raw, ica, rawm, icam, idal, objr, objid = [], [], [], [], [], [], []
     for r in range(3):
         cols = torch.as_tensor(rng.choice(d, min(256, d), replace=False), device=X.device)
         Xs = X[:, cols]
         live = Xs.std(0) > 1e-6
         Xs = Xs[:, live]
-        a = ct.rotation_search(Xs, steps=1000, seed=100 * seed + r)["align"]
+        rs = ct.rotation_search(Xs, steps=1000, seed=100 * seed + r)
+        a = rs["align"]
+        idal.append(rs["identity_aligned_0p9"])
+        objr.append(rs["obj_end"] / rs["obj_neuron"])
+        objid.append(rs["obj_identity_end"] / rs["obj_neuron"])
         b = ica_alignment(Xs, 100 * seed + r)
         raw.append(float((a >= 0.9).mean()))
         rawm.append(float(a.mean()))
         ica.append(float((b >= 0.9).mean()))
         icam.append(float(b.mean()))
     return dict(raw_aligned=float(np.mean(raw)), raw_mean_cos=float(np.mean(rawm)),
-                ica_aligned=float(np.mean(ica)), ica_mean_cos=float(np.mean(icam)), dead_frac=float(1 - live.float().mean()))
+                ica_aligned=float(np.mean(ica)), ica_mean_cos=float(np.mean(icam)),
+                raw_obj_end_over_neuron=float(np.mean(objr)), identity_start_aligned=float(np.mean(idal)),
+                identity_start_obj_over_neuron=float(np.mean(objid)), dead_frac=float(1 - live.float().mean()))
 
 
 def main(tags=("old", "recipe", "arch")):

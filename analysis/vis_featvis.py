@@ -186,13 +186,23 @@ def run(dname, tag, seed, init=False, fv_seeds=(0, 1, 2)):
     smax = np.array([scores[0 if p == "pos" else 1][:, u].max() for u, p in zip(units.tolist(), poles)])
     smed = np.array([np.median(scores[0 if p == "pos" else 1][:, u]) for u, p in zip(units.tolist(), poles)])
     rho = torch.as_tensor(smax - smed, dtype=torch.float32, device=DEV)
-    rbar = path_targets(model, D, layer, prev, units, signs, scores)
     imgs, acts = {}, {}
-    for st in SETTINGS:
-        for fs in fv_seeds:
-            x, s = visualize(model, D, layer, prev, units, signs, rho, rbar, st, 1000 * fs + seed)
-            imgs[(st, fs)] = x.cpu()
-            acts[(st, fs)] = s.cpu().numpy()
+    fvfn = os.path.join(CACHE, name + "_fv.npz")
+    if os.environ.get("VIS_REJUDGE") == "1" and os.path.exists(fvfn):
+        # re-judge cached FV images (e.g. after a change to clean_tools.purity) without re-optimising them
+        z = np.load(fvfn)
+        assert np.array_equal(z["units"], units.cpu().numpy())
+        for st in SETTINGS:
+            for fs in fv_seeds:
+                imgs[(st, fs)] = torch.as_tensor(z[f"{st}_{fs}"].astype(np.float32))
+                acts[(st, fs)] = z[f"act_{st}_{fs}"]
+    else:
+        rbar = path_targets(model, D, layer, prev, units, signs, scores)
+        for st in SETTINGS:
+            for fs in fv_seeds:
+                x, s = visualize(model, D, layer, prev, units, signs, rho, rbar, st, 1000 * fs + seed)
+                imgs[(st, fs)] = x.cpu()
+                acts[(st, fs)] = s.cpu().numpy()
     # judge
     res = dict(units=sel.tolist(), layer=layer)
     jobs = {}
@@ -252,7 +262,7 @@ def main(tags=("old", "recipe", "arch"), datasets=DATASETS):
             for seed in available(dname, tag):
                 for init in (False, True):
                     name = f"{dname}_{tag}_s{seed}{'_init' if init else ''}"
-                    if name in out and os.environ.get("VIS_RECOMPUTE") != "1":
+                    if name in out and os.environ.get("VIS_RECOMPUTE") != "1" and os.environ.get("VIS_REJUDGE") != "1":
                         continue
                     name, r = run(dname, tag, seed, init, (0,) if init else (0, 1, 2))
                     out[name] = r

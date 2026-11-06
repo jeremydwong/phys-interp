@@ -113,10 +113,10 @@ Last neuron layer, share of poles (both signs; for 2017-era tools the negative p
 
 | step | shapes: read correctly | shapes: clean on task factor | CIFAR: read correctly | CIFAR: class-clean |
 |---|---|---|---|---|
-| M_old, 2017-era tools | 25 ± 4 [8 ± 24] | 23 ± 10 [0] | **8 ± 6** [0] | 10 ± 4 [0] |
-| M_old, fixed tools | **67 ± 17** [39 ± 31] | 28 ± 19 [0] | **44 ± 5** [0] | 9 ± 2 [0] |
-| M_recipe, fixed tools | 54 ± 13 [38 ± 35] | 8 ± 2 [0] | 41 ± 13 [0] | 1 ± 1 [0] |
-| M_arch, fixed tools | 68 ± 5 [15 ± 16] | 27 ± 7 [0] | 8 ± 5 [0] | 5 ± 2 [0] |
+| M_old, 2017-era tools | 25 ± 4 [10 ± 22] | 23 ± 10 [0] | **8 ± 6** [0] | 10 ± 4 [0] |
+| M_old, fixed tools | **67 ± 17** [30 ± 58] | 28 ± 19 [0] | **44 ± 5** [0] | 9 ± 2 [0] |
+| M_recipe, fixed tools | 54 ± 13 [29 ± 59] | 8 ± 2 [0] | 41 ± 13 [0] | 1 ± 1 [0] |
+| M_arch, fixed tools | 68 ± 5 [10 ± 19] | 27 ± 7 [0] | 8 ± 5 [0] | 5 ± 2 [0] |
 
 Positive poles only (the essay counts neurons; most of what we read is on the positive side):
 
@@ -136,7 +136,7 @@ Reading the tables:
   M_old's negative poles vs 87% ± 2 of positive). Path anchoring adds +5 ± 7 on M_old and +18 on M_recipe
   over robust FV, in the direction the essay describes but not separable from seed noise on M_old.
 - **On shapes the tools step is real but the control is high.** Random-init plain CNNs have many
-  luminance/background detectors that a robust FV renders correctly (39% ± 31 read, all of them on nuisance
+  luminance/background detectors that a robust FV renders correctly (30% ± 58 read, all of them on nuisance
   factors: `vis_jobs.png`). Trained late units are clean only on task factors and random-init late units only
   on nuisances, so the census column (task factors) is the cleaner comparison there.
 - **Recipe: no gain, the census gets worse.** M_recipe reads about the same (CIFAR 41 vs 44) and its
@@ -214,8 +214,8 @@ from a random start lands "back on the neurons, in every block" ("What Dictionar
 - **Rotation search.** On raw activations the L4 search never returns to the neurons (mean max |cos| 0.20,
   = random): the objective is dominated by the few highest-variance directions. After whitening (ICA) the
   plain CNNs still land on random-looking directions (0.23–0.27, the same as their random init), but the
-  **ConvNeXt's** found axes are pulled toward its neurons (shapes 0.43 ± 0.04, CIFAR 0.65), though at most 3%
-  of axes reach |cos| ≥ 0.9. Most of that pull is already there at random init (shapes 0.31, CIFAR 0.63), so it
+  **ConvNeXt's** found axes are pulled toward its neurons (shapes 0.43 ± 0.04, CIFAR 0.62, 3 seeds), though at
+  most 3% of axes reach |cos| ≥ 0.9. Most of that pull is already there at random init (shapes 0.31, CIFAR 0.62), so it
   comes from the architecture (GELU on a 4×-wide MLP layer fed through LayerNorm), not from learning; training
   adds a little on shapes (+0.12) and nothing measurable on CIFAR (+0.02, one seed). This is the one
   dictionary-side measurement where the ConvNeXt is more neuron-aligned than the plain CNN, and the
@@ -256,11 +256,38 @@ the object.
    units, 4× wider, each writing a delta to the residual stream) may not be the essay's; (d) mixup/cutmix
    train on blended images, which plausibly spreads class evidence across units.
 2. **SAE near-copies and rotation search** do not reproduce (section 6).
-3. **One-main-job purity saturates on shapes** for trained and random-init plain CNNs alike (88–99%), so on
-   shapes it does not discriminate; on CIFAR random init is 0% and the measure works.
+3. **One-main-job purity is high on shapes for random-init plain CNNs too** (late positive poles 50% raw-shape /
+   60% percentile after the 2026-11 `purity` fix; it was 89% / 92% before, see "Changes after the clean_tools
+   fixes"), so on shapes it discriminates only partly; on CIFAR random init is 0% and the measure works.
 4. Our verdict needs both a pure strong set and a legible FV judged by a readout. That is stricter than a
    human reading a gallery and different from the essay's agent pipeline; absolute percentages are not
    comparable to the essay's 5/50/70/99, only the differences between steps are.
+
+## Changes after the clean_tools fixes (2026-11)
+
+Three bugs in `analysis/clean_tools.py`, found by the sibling Pluto study, were fixed and the affected vis
+analyses rerun (`vis_census`, `vis_rotation` with `VIS_RECOMPUTE=1`, `vis_featvis` re-judged from the cached FV
+images with `VIS_REJUDGE=1`, `vis_figures`; about 80 min on the shared GPU):
+1. `poles()` on 2-D input [N, U] returned (z, −z), so both poles had the same census. Now pos = max(z, 0),
+   neg = max(−z, 0). The vis models always have a spatial axis, so **no vis number changed**.
+2. `purity()` took the best over all factors, continuous ones in quintiles; with many nuisance factors some
+   quintile is always over-represented in a small strong set, so random-init nets scored ~90% "one job". It now
+   takes the best over **categorical factors only** by default (`cat_only=True`). **Trained-model numbers are
+   unchanged** (their purity winners were already categorical). Random-init controls on shapes drop: late
+   positive poles with one main job 89% → 50% (raw-shape set) and 92% → 60% (top 1%) for the plain CNNs, 30% → 19%
+   for the ConvNeXt; the "read correctly" controls in the ladder table drop from 39/38/15% to 30/29/10%
+   (M_old / M_recipe / M_arch, fixed tools). CIFAR controls were already 0%. So the trained-vs-control gaps on
+   shapes widen; no headline claim changes.
+3. `rotation_search` used a fixed normalised step (0.71 at d = 512 in Pluto, 0.5 at d = 256 here) and could drift.
+   It now decays the step in four stages (×1, ¼, 1/16, 1/64), keeps the best R, and also runs from the identity as a
+   sanity check. **Results unchanged**: 0% of found axes reach |cos| ≥ 0.9 on raw activations; ICA mean max |cos|
+   moves by ≤ 0.003 per model (CIFAR now has all 3 seeds: ConvNeXt 0.62, random init 0.62). The identity-start
+   check shows why the raw search never returns: started *at* the neurons, the decaying-step search still leaves
+   them (only 23–75% of axes keep |cos| ≥ 0.9) and ends at the same objective as from a random start, 3–27× the
+   neuron basis's. On raw activations the neuron basis is not a local maximum of this objective, so the miss is a
+   property of the objective on these layers, not of the optimiser.
+Also: `train_topk_sae` now accumulates the mean code with a running sum instead of materialising [n, n_feat]
+(needed for 12k-feature SAEs on ImageNet; same result).
 
 ## How to rerun
 

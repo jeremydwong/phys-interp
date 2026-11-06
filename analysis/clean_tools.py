@@ -30,7 +30,7 @@ weak_strong_thresholds(...)  OURS (essay: "removing the weakest 75%" vs "the str
 TopKSAE / near_copy_share(...)  OURS formalization of "88% of its activity is near-copies of single neurons":
                     decoder direction d_f is a near copy if max_i |cos(d_f, e_i)| >= 0.9; share = sum of mean
                     activation of near-copy features / sum over all features.
-rotation_search(...) OURS formalization of "search the rotations of a layer for the one where a handful of
+rotation_search(...) OURS formalization (decaying-step schedule, identity-start sanity check) of "search the rotations of a layer for the one where a handful of
                     units carry the most activity, starting from a random one": maximise E sum_i (R x)_i^4 over
                     orthogonal R from a random start (data centred and scaled globally, which is basis-free);
                     report how close the rotated axes land to the neuron axes.
@@ -46,9 +46,14 @@ N_BINS, PAIR_BINS = 30, 6
 # ------------------------------------------------------------------ poles
 
 def poles(z):
-    """z: [B, C, ...positions] pre-activation (numpy or torch) -> (pos [B, C], neg [B, C]), neg = -min."""
+    """z: [B, C, ...positions] pre-activation (numpy or torch) -> (pos [B, C], neg [B, C]), neg = -min.
+
+    2-D input [B, C] (no position axis): pos = max(z, 0), neg = max(-z, 0). (Fixed 2026-11: this used to return
+    (z, -z), which gives the two poles identical rank orders up to reversal and so identical census R^2.)"""
     if z.ndim == 2:
-        return z, -z
+        if hasattr(z, "clamp"):
+            return z.clamp(min=0), (-z).clamp(min=0)
+        return np.maximum(z, 0), np.maximum(-z, 0)
     flat = z.reshape(z.shape[0], z.shape[1], -1)
     if hasattr(flat, "amax"):
         return flat.amax(-1), -flat.amin(-1)
@@ -203,9 +208,17 @@ def strong_set(s, mode="pct", top_frac=0.01, raw_frac=0.5, lo=20, hi_frac=0.10):
     return order[:int(np.clip(n, lo, int(hi_frac * N)))]
 
 
-def purity(S, factors: dict, kinds: dict, mode="pct", **kw):
-    """Per unit: best chance-corrected purity over factors, the factor, its modal value, and set size."""
-    names = list(factors)
+def purity(S, factors: dict, kinds: dict, mode="pct", cat_only=True, **kw):
+    """Per unit: best chance-corrected purity over factors, the factor, its modal value, and set size.
+
+    cat_only (default True, fixed 2026-11): take the best over CATEGORICAL factors only. Taking the best over
+    every factor, with continuous ones cut into quintiles, saturates to ~100% "one job" even for random-init
+    nets when there are many continuous factors (some quintile of some nuisance is always over-represented in a
+    small strong set). If no factor is categorical, falls back to all factors."""
+    names = [k for k in factors if kinds[k] == "cat"] if cat_only else list(factors)
+    if not names:
+        names = list(factors)
+    factors = {k: factors[k] for k in names}
     codes = {k: (np.unique(np.asarray(v), return_inverse=True)[1] if kinds[k] == "cat" else quantile_codes(v, 5))
              for k, v in factors.items()}
     p0 = {k: np.bincount(c).max() / len(c) for k, c in codes.items()}
@@ -325,9 +338,11 @@ def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="c
         z = encode(Xte)
         rec = z @ W_dec + b_pre
         fve = 1 - ((rec - Xte) ** 2).sum() / ((Xte - Xte.mean(0)) ** 2).sum()
-        zall = torch.cat([encode(X[i:i + 8192]) for i in range(0, n, 8192)])
+        zsum = torch.zeros(n_feat, device=device)
+        for i in range(0, n, 8192):         # running sum (a dense [n, n_feat] code matrix does not fit for big layers)
+            zsum += encode(X[i:i + 8192]).sum(0)
     return dict(W_enc=W_enc.detach(), b_enc=b_enc.detach(), W_dec=W_dec.detach(), b_pre=b_pre.detach(),
-                fve=float(fve), mean_z=zall.mean(0).cpu().numpy(), k=k, encode=encode)
+                fve=float(fve), mean_z=(zsum / n).cpu().numpy(), k=k, encode=encode)
 
 
 def near_copy_share(W_dec, mean_z, basis=None, kappa=0.9):
@@ -353,34 +368,71 @@ def random_rotation(d, seed=0):
     return q * np.sign(np.diag(r))
 
 
-def rotation_search(X, steps=1000, lr=None, seed=0, device="cuda", init=None):
-    """OURS. X [n, d] activations. Maximise mean_x sum_i (x R^T)_i^4 over orthogonal R (Riemannian gradient
-    ascent with QR retraction), starting from a random rotation. Returns R [d, d] (rows = found axes),
-    alignment = per found axis max_i |cos(R_k, e_i)|, objective values (start, end, neuron basis)."""
+def _rotation_ascent(X, R, steps, lr, device):
+    """Normalised Riemannian gradient ascent on O(d) with QR retraction; returns (R_best, obj_best)."""
+    import torch
+    d = X.shape[1]
+    eye = torch.eye(d, device=device)
+    best_R, best_f = R.clone(), -float("inf")
+    for s in range(steps):
+        R.requires_grad_(True)
+        f = (X @ R.T).pow(4).sum(1).mean()
+        G, = torch.autograd.grad(f, R)
+        with torch.no_grad():
+            if float(f) > best_f:
+                best_f, best_R = float(f), R.detach().clone()
+            A = G @ R.T
+            A = A - A.T                       # skew part = Riemannian gradient direction
+            A = A / (A.norm() + 1e-12)
+            Q, Rr = torch.linalg.qr((eye + lr * A) @ R.detach())
+            R = (Q * torch.sign(torch.diagonal(Rr))[None]).detach()
+    with torch.no_grad():
+        f = float((X @ R.T).pow(4).sum(1).mean())
+    if f > best_f:
+        best_f, best_R = f, R
+    return best_R, best_f
+
+
+def rotation_search(X, steps=1000, lr=None, seed=0, device="cuda", init=None, schedule=(1, 4, 16, 64),
+                    check_identity=True):
+    """OURS. X [n, d] activations. Maximise mean_x sum_i (x R^T)_i^4 over orthogonal R (normalised Riemannian
+    gradient ascent with QR retraction), starting from a random rotation (or `init`).
+
+    Fixed 2026-11: the step is decayed in stages lr0 / f for f in `schedule` (default x1, 1/4, 1/16, 1/64), each
+    stage `steps // len(schedule)` steps starting from the previous stage's best R; the best R seen is kept. With
+    the old fixed step (lr0 = 0.5 sqrt(d/256), 0.71 at d = 512) the search oscillated and drifted away from the
+    optimum even when started at the identity. With check_identity, the same schedule is also run from the
+    identity (the neuron basis) as a sanity check: a working optimiser started at a local optimum stays there.
+
+    Returns R [d, d] (rows = found axes), align = per found axis max_i |cos(R_k, e_i)|, objective values
+    (start, end, neuron basis), per-stage history, and (check_identity) obj_identity_end / align_identity."""
     import torch
     X = torch.as_tensor(X).float().to(device)
     X = X - X.mean(0)
     X = X / X.pow(2).sum(1).mean().sqrt()
     d = X.shape[1]
-    lr = 0.5 * (d / 256) ** 0.5 if lr is None else lr
-    R = torch.as_tensor(random_rotation(d, seed) if init is None else init).float().to(device)
+    lr0 = 0.5 * (d / 256) ** 0.5 if lr is None else lr
+    n_st = max(1, steps // len(schedule))
 
     def obj(R):
-        return (X @ R.T).pow(4).sum(1).mean()
-
-    o_start, o_neuron = float(obj(R)), float(obj(torch.eye(d, device=device)))
-    for s in range(steps):
-        R.requires_grad_(True)
-        f = obj(R)
-        G, = torch.autograd.grad(f, R)
         with torch.no_grad():
-            # Riemannian gradient on O(d): G - R G^T R  (skew part), normalised step
-            A = G @ R.T
-            A = A - A.T
-            A = A / (A.norm() + 1e-12)
-            Q, Rr = torch.linalg.qr((torch.eye(d, device=device) + lr * A) @ R)
-            R = Q * torch.sign(torch.diagonal(Rr))[None]   # keep orthogonality
-            R = R.detach()
-        # QR returns Q with orthonormal columns; rows of R remain orthonormal because Q is square.
+            return float((X @ R.T).pow(4).sum(1).mean())
+
+    def run(R):
+        hist = []
+        for f in schedule:
+            R, o = _rotation_ascent(X, R, n_st, lr0 / f, device)
+            hist.append(dict(lr=lr0 / f, obj=o, align_mean=float(R.abs().max(1).values.mean())))
+        return R, hist
+
+    R0 = torch.as_tensor(random_rotation(d, seed) if init is None else init).float().to(device)
+    o_start, o_neuron = obj(R0), obj(torch.eye(d, device=device))
+    R, hist = run(R0)
     align = R.abs().max(1).values.cpu().numpy()
-    return dict(R=R.cpu().numpy(), align=align, obj_start=o_start, obj_end=float(obj(R)), obj_neuron=o_neuron)
+    out = dict(R=R.cpu().numpy(), align=align, obj_start=o_start, obj_end=obj(R), obj_neuron=o_neuron, history=hist)
+    if check_identity:
+        Ri, _ = run(torch.eye(d, device=device))
+        ai = Ri.abs().max(1).values.cpu().numpy()
+        out.update(obj_identity_end=obj(Ri), align_identity=ai, align_identity_mean=float(ai.mean()),
+                   identity_aligned_0p9=float((ai >= 0.9).mean()))
+    return out
