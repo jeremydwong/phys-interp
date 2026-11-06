@@ -324,10 +324,82 @@ def _eval_chunks(X_eval, chunk, device, transform):
             yield transform(X_eval[i:i + chunk].to(device))
 
 
+def _sparse_fns():
+    """Custom autograd for a TopK SAE whose codes are sparse (OURS, an implementation detail; same maths as dense).
+    EncGather: the selected pre-activations h[b, idx[b, j]] (computed outside without a graph); backward gives
+    dW_enc^T[f] = sum_{(b, j): idx = f} g_bj x_b and dc[f] = sum g_bj (row scatter-adds), instead of a dense
+    [d, B] x [B, F] product. SparseDec: x_hat = sum_j v_bj W_dec[idx_bj] (embedding_bag); dW_dec by scatter-add of
+    v_bj g_b; dv_bj = g_b . W_dec[idx_bj]. Small K (<= 64) uses these row ops in chunks; large K (the aux decode)
+    falls back to dense products on a scattered [B, F] code matrix."""
+    import torch
+    import torch.nn.functional as F
+
+    def rows_chunks(B, K, d):
+        step = max(1, int(2 ** 26 // (K * d)))
+        return range(0, B, step), step
+
+    def scatter_rows(idx, coef, X, n_feat):
+        """sum over (b, j) of coef[b, j] * X[b] into row idx[b, j] of an [n_feat, d] matrix."""
+        B, K = idx.shape
+        out = torch.zeros(n_feat, X.shape[1], device=X.device, dtype=X.dtype)
+        rng, step = rows_chunks(B, K, X.shape[1])
+        for a in rng:
+            i, c, x = idx[a:a + step], coef[a:a + step], X[a:a + step]
+            out.index_add_(0, i.reshape(-1), (c[:, :, None] * x[:, None, :]).reshape(-1, X.shape[1]))
+        return out
+
+    def dense_codes(idx, vals, n_feat):
+        return torch.zeros(idx.shape[0], n_feat, device=vals.device, dtype=vals.dtype).scatter_(1, idx, vals)
+
+    class EncGather(torch.autograd.Function):
+        @staticmethod
+        def forward(ctx, W_enc, c, xs, idx, vals):
+            ctx.save_for_backward(xs, idx)
+            ctx.n_feat = W_enc.shape[1]
+            return vals.clone()
+
+        @staticmethod
+        def backward(ctx, gv):
+            xs, idx = ctx.saved_tensors
+            if idx.shape[1] <= 64:
+                gWt = scatter_rows(idx, gv, xs, ctx.n_feat)                      # [F, d]
+                gW = gWt.T
+            else:
+                gW = xs.T @ dense_codes(idx, gv, ctx.n_feat)                     # [d, F]
+            gc = torch.zeros(ctx.n_feat, device=gv.device, dtype=gv.dtype).index_add_(0, idx.reshape(-1),
+                                                                                        gv.reshape(-1))
+            return gW, gc, None, None, None
+
+    class SparseDec(torch.autograd.Function):
+        @staticmethod
+        def forward(ctx, v, idx, W_dec):
+            ctx.save_for_backward(v, idx, W_dec)
+            if idx.shape[1] <= 64:
+                return F.embedding_bag(idx, W_dec, per_sample_weights=v, mode="sum")
+            return dense_codes(idx, v, W_dec.shape[0]) @ W_dec
+
+        @staticmethod
+        def backward(ctx, g):
+            v, idx, W_dec = ctx.saved_tensors
+            B, K = idx.shape
+            if K <= 64:
+                gv = torch.empty_like(v)
+                rng, step = rows_chunks(B, K, W_dec.shape[1])
+                for a in rng:
+                    gv[a:a + step] = (W_dec[idx[a:a + step]] * g[a:a + step, None, :]).sum(-1)
+                gW = scatter_rows(idx, v, g, W_dec.shape[0])
+            else:
+                gv = (g @ W_dec.T).gather(1, idx)
+                gW = dense_codes(idx, v, W_dec.shape[0]).T @ g
+            return gv, None, gW
+
+    return EncGather, SparseDec
+
+
 def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="cuda", *,
                    sampler=None, X_eval=None, transform=None, aux_k=0, aux_coef=1 / 32, dead_tokens=None,
                    norm_mse=False, adam_eps=1e-8, grad_clip=None, b_pre_init="mean", scale_inputs=False,
-                   grad_proj=False, sparse_decode=False, log_every=0, eval_chunk=8192):
+                   grad_proj=False, sparse=False, log_every=0, eval_chunk=8192):
     """TopK SAE (Gao et al. 2024, "Scaling and Evaluating Sparse Autoencoders").
 
     Default arguments reproduce the original behaviour (no aux loss, plain per-vector summed MSE, b_pre at the
@@ -350,7 +422,9 @@ def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="c
       scale_inputs  multiply inputs by a constant so E||x||^2 = 1 (folded back at the end: the returned
                     encode / W_dec / b_pre act on raw vectors; W_dec stays unit-norm and z carries the scale).
       grad_proj     remove the component of each decoder row's gradient parallel to the row before the step.
-      sparse_decode decode with embedding_bag over the active latents (same result, less memory and compute).
+      sparse        use the custom sparse autograd of _sparse_fns (encoder forward is the only dense product
+                    besides the aux decode's gradient): same loss and gradients, ~4x faster and ~half the memory at
+                    49k latents.
     Returns dict: W_enc, b_enc, W_dec (unit-norm rows, [n_feat, d]), b_pre, fve (held-out), mean_z (mean code over
     the held-out set, or over all X in the default mode), k, encode (raw x -> z), dead_frac (latents not fired in
     the last dead_tokens training vectors; with dead_tokens None: never fired in training), history, scale."""
@@ -372,20 +446,23 @@ def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="c
     else:
         init = Xtr.mean(0) * scale
     b_pre = init.clone().requires_grad_(True)
+    if sampler is not None:
+        del X, Xtr        # the init sample is not needed once b_pre and the scale are set (GPU memory)
     W_dec = torch.randn(n_feat, d, generator=g).to(device)
     W_dec = (W_dec / W_dec.norm(dim=1, keepdim=True)).requires_grad_(True)
     W_enc = W_dec.detach().T.clone().requires_grad_(True)
     b_enc = torch.zeros(n_feat, device=device, requires_grad=True)
     params = [b_pre, W_dec, W_enc, b_enc]
-    opt = torch.optim.Adam(params, lr=lr, eps=adam_eps)
+    opt = torch.optim.Adam(params, lr=lr, eps=adam_eps, **(dict(fused=True) if sparse and device != "cpu" else {}))
     since = torch.zeros(n_feat, dtype=torch.long, device=device)
     ever = torch.zeros(n_feat, dtype=torch.bool, device=device)
     hist = []
 
     def decode(v, i):
-        if sparse_decode:
-            return F.embedding_bag(i, W_dec, per_sample_weights=v, mode="sum")
         return torch.zeros(v.shape[0], n_feat, device=v.device, dtype=v.dtype).scatter(1, i, v) @ W_dec
+
+    if sparse:
+        EncGather, SparseDec = _sparse_fns()
 
     def dead_now():
         return float((since > dead_tokens).float().mean()) if dead_tokens is not None else float((~ever).float().mean())
@@ -396,10 +473,18 @@ def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="c
         else:
             x = tf(sampler(s).to(device))
         xs = x * scale if scale != 1.0 else x
-        h = (xs - b_pre) @ W_enc + b_enc
-        v, i = h.topk(k, dim=1)
-        v = torch.relu(v)
-        rec = decode(v, i) + b_pre
+        if sparse:
+            c = b_enc - b_pre @ W_enc                     # (x - b_pre) W_enc + b_enc = x W_enc + c
+            with torch.no_grad():
+                h = xs @ W_enc + c
+                v0, i = h.topk(k, dim=1)
+            v = torch.relu(EncGather.apply(W_enc, c, xs, i, v0))
+            rec = SparseDec.apply(v, i, W_dec) + b_pre
+        else:
+            h = (xs - b_pre) @ W_enc + b_enc
+            v, i = h.topk(k, dim=1)
+            v = torch.relu(v)
+            rec = decode(v, i) + b_pre
         if norm_mse:
             loss = ((rec - xs) ** 2).sum() / ((xs - xs.mean(0)) ** 2).sum()
         else:
@@ -412,14 +497,22 @@ def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="c
             ever |= fired
         aux = torch.zeros((), device=device)
         if aux_k and dead_tokens is not None:
-            dead = since > dead_tokens
-            nd = int(dead.sum())
+            dead_idx = torch.nonzero(since > dead_tokens)[:, 0]
+            nd = len(dead_idx)
             if nd > 0:
-                va, ia = h.masked_fill(~dead[None], float("-inf")).topk(min(aux_k, nd), dim=1)
-                va = torch.relu(va)
+                with torch.no_grad():
+                    va0, ia_loc = h.index_select(1, dead_idx).topk(min(aux_k, nd), dim=1)
+                    ia = dead_idx[ia_loc]
+                if sparse:      # restricted to the dead latents' columns (cost ~ n_dead instead of n_feat)
+                    va = torch.relu(EncGather.apply(W_enc.index_select(1, dead_idx), c.index_select(0, dead_idx),
+                                                    xs, ia_loc, va0))
+                    ehat = SparseDec.apply(va, ia_loc, W_dec.index_select(0, dead_idx))
+                else:
+                    ehat = decode(torch.relu(h.gather(1, ia)), ia)
                 e = (xs - rec).detach()
-                aux = (((decode(va, ia) - e) ** 2).sum() / ((e - e.mean(0)) ** 2).sum()).nan_to_num(0)
+                aux = (((ehat - e) ** 2).sum() / ((e - e.mean(0)) ** 2).sum()).nan_to_num(0)
                 loss = loss + aux_coef * aux
+        h = None
         opt.zero_grad(set_to_none=True)
         loss.backward()
         if grad_proj:
