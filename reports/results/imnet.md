@@ -33,7 +33,7 @@ Every threshold the essay does not state is ours and is marked **(ours)**. Essay
 | Removing unmatched SAE directions | "leaves accuracy unchanged, and the few answers it flips were already near-ties" | GoogLeNet −12.3 / −21.8 pp. ConvNeXt-T −1.5 / −1.0 pp, flipped answers are near-ties (median top-1/top-2 margin 0.08–0.10 vs 0.69 overall), but zeroing the whole block costs only −1.1 pp | – | **not reproduced / uninformative** (GoogLeNet breaks; on ConvNeXt the block barely matters) |
 | Rotation search ("What Dictionaries Learn") | "starting from a random one, you land back on the neurons, in every block" | ConvNeXt-T last MLP, 256-unit sets: **76% of found axes within \|cos\| ≥ 0.9 of a neuron** (raw), 94% (whitened). 1,024-unit sets: 20% / 44%. Full 3,072: 0% (search under-converged). GoogLeNet: 0% everywhere | ConvNeXt-T init 0% / 4%; GoogLeNet init 0% | **reproduces for ConvNeXt** (on sets where our optimiser converges), **not for GoogLeNet** |
 | Weak activations, Inception final layer ("Weak Activations: Further Measurements") | keep strongest quarter (p75): 69.47% vs 70.08% (−0.60 pp); p95 −7.72; p99 −33.63 | GoogLeNet inception5b: p75 **−0.49 pp** (69.29 vs 69.78%); p95 −7.52; p99 −47.81 | – (random init is at chance) | **reproduces** (p25–p95 within 0.2 pp; p99 harsher) |
-| Weak activations, ConvNeXt late MLP branches | last block rows ≈ 0 at every cutoff (medium: +0.02 to +0.06 pp) | ConvNeXt-T last block: **−0.01 to +0.01 pp** at every cutoff | – | **reproduces** |
+| Weak activations, ConvNeXt MLP branches, one block at a time | last block ≈ 0 at every cutoff (medium: +0.02 to +0.06 pp); other blocks −0.0 to −0.7 pp up to p95, except the first block (−4.1 at p95) | last block **−0.01 to +0.01 pp**; all 18 blocks within 0.4 pp of the essay's row at p25–p95, first block −3.5 at p95 | – | **reproduces** (block by block) |
 | Cutoff at all 18 blocks | p75 −1.02, p95 −19.12, **p99 → 3.80%** (medium); large p99 → 27.78% | ConvNeXt-T all 18 blocks: p75 −4.59, p95 −55.26, **p99 → 11.96%** | – | **reproduces qualitatively** (tolerant to p50, collapse by p99); ours is more fragile from p75 |
 | Weakest 75% vs strongest at equal mass (medium ConvNeXt, all 18 blocks) | "accuracy 72% → 71% · 1 in 10 answers change" vs "72% → 4% · 96 in 100 answers change" | ConvNeXt-T: weakest 75% 82.1 → 77.5% (13% of answers change); mass-matched strongest 82.1 → 0.9% (99% change) | – | **reproduces qualitatively** (the asymmetry is the same; our weak cut costs more) |
 
@@ -70,7 +70,7 @@ GoogLeNet top-1 **69.78%** (reference 69.78%) and ConvNeXt-T **82.14%** (referen
   and one mid layer (the last block of stage 2).
 - Pole score per image: the spatial max of the pre-activation (+ pole) and minus the spatial min (− pole).
 
-Runtime on the shared RTX 5070 Ti: about 6 GPU-hours in total, most of it the weak grid (155 passes over
+Runtime on the shared RTX 5070 Ti: about 5 hours wall-clock, most of it the weak grid (155 passes over
 50k images) and the 12k-feature SAEs. Peak GPU memory stayed under 6 GB.
 
 ## 2. Last-layer interpretability (`imnet_purity.png`, `imnet_top20_*.png`)
@@ -227,7 +227,27 @@ total activation, costs −6.12 pp (20.9% change).
 **ConvNeXt-T** (base 82.14%), change in top-1 (pp), with the essay's ConvNeXt medium (base 72.08%) for the
 matching rows:
 
-CONVNEXT_TABLE
+| block (essay row) | p25 | p50 | p75 | p95 | p99 |
+|---|---|---|---|---|---|
+| f1.0 (stage0.block0) | +0.03 (+0.00) | -0.05 (-0.05) | -0.15 (-0.27) | -3.53 (-4.07) | -5.63 (-13.44) |
+| f1.1 (stage0.block1) | +0.02 (-0.00) | -0.01 (-0.01) | -0.11 (-0.05) | -0.39 (-0.48) | -0.44 (-1.09) |
+| f1.2 (stage0.block2) | +0.01 (+0.00) | -0.10 (-0.04) | -0.51 (-0.13) | -0.48 (-0.66) | -0.53 (-1.60) |
+| f3.0 (stage1.block0) | +0.00 (-0.03) | -0.06 (-0.00) | -0.27 (-0.06) | -0.31 (-0.61) | -0.32 (-1.08) |
+| f3.1 (stage1.block1) | -0.01 (+0.00) | -0.05 (-0.02) | -0.38 (-0.08) | -0.56 (-0.45) | -0.37 (-0.81) |
+| f3.2 (stage1.block2) | +0.02 (-0.02) | +0.00 (-0.02) | -0.10 (-0.07) | -0.15 (-0.44) | -0.16 (-0.96) |
+| f5.0 (stage2.block0) | +0.01 (-0.02) | +0.00 (-0.02) | +0.02 (-0.05) | -0.09 (-0.39) | -0.10 (-0.76) |
+| f5.1 (stage2.block1) | +0.01 (-0.01) | +0.02 (+0.00) | -0.06 (-0.05) | -0.18 (-0.22) | -0.28 (-0.42) |
+| f5.2 (stage2.block2) | +0.00 (+0.01) | -0.05 (+0.03) | -0.12 (-0.01) | -0.19 (-0.12) | -0.11 (-0.35) |
+| f5.3 (stage2.block3) | +0.00 (+0.02) | +0.01 (-0.02) | -0.05 (-0.03) | -0.12 (-0.16) | -0.19 (-0.33) |
+| f5.4 (stage2.block4) | +0.02 (-0.02) | -0.02 (-0.04) | -0.07 (-0.05) | -0.15 (-0.17) | -0.22 (-0.43) |
+| f5.5 (stage2.block5) | +0.00 (-0.02) | +0.01 (-0.01) | -0.01 (-0.02) | -0.10 (-0.12) | -0.15 (-0.31) |
+| f5.6 (stage2.block6) | +0.00 (-0.01) | +0.02 (-0.01) | -0.01 (-0.02) | -0.20 (-0.11) | -0.26 (-0.44) |
+| f5.7 (stage2.block7) | +0.02 (-0.02) | +0.00 (-0.03) | -0.06 (-0.05) | -0.12 (-0.20) | -0.32 (-0.52) |
+| f5.8 (stage2.block8) | +0.00 (+0.01) | +0.03 (+0.01) | +0.00 (+0.00) | -0.10 (-0.06) | -0.10 (-0.23) |
+| f7.0 (stage3.block0) | -0.01 (+0.01) | +0.01 (-0.00) | +0.01 (-0.02) | -0.04 (-0.37) | -0.05 (-0.65) |
+| f7.1 (stage3.block1) | +0.01 (+0.02) | +0.01 (+0.01) | +0.03 (+0.03) | -0.03 (+0.00) | -0.09 (-0.36) |
+| **f7.2** (stage3.block2) | +0.01 (+0.02) | +0.00 (+0.02) | +0.01 (+0.03) | -0.01 (+0.03) | -0.00 (+0.06) |
+| **all** (all) | -0.04 (-0.01) | -0.61 (-0.13) | -4.59 (-1.02) | -55.26 (-19.12) | -70.18 (-68.28) |
 
 Mass-matched pairs: in the last block, the weakest 75% cost +0.02 pp and the mass-matched strongest −0.71 pp.
 In all 18 blocks, the weakest 75% take 82.1 → 77.5% (13.4% of answers change) and the mass-matched strongest
@@ -236,6 +256,10 @@ take it to 0.9% (99.0% change). Essay (medium, all 18 blocks): "Removing the wea
 
 - **Last layers reproduce closely.** GoogLeNet's final layer matches the essay cell for cell through p95,
   and p75 is −0.49 vs −0.60 pp. The ConvNeXt last block is flat at every cutoff, as in the essay.
+- **ConvNeXt single blocks reproduce closely, block by block.** Every one of the 18 blocks of our ConvNeXt-T
+  is within 0.4 pp of the essay's ConvNeXt medium at p25–p95. The exception is the first block, where both are
+  the most sensitive (p95 −3.5 vs −4.1 pp; p99 −5.6 vs −13.4). One block at a time, cutting everything below
+  p95 costs ≤ 0.6 pp anywhere past the first block. Our p99 cells are milder than the essay's.
 - **The all-blocks row and the weak-vs-strong asymmetry reproduce in shape**, but our ConvNeXt-T is more
   fragile from p75 on (−4.6 vs −1.0 pp; p99 12.0% vs 3.8%).
 - **Early GoogLeNet layers are far more fragile in ours** (conv1 p25 −28.9 vs −0.2 pp). The essay's

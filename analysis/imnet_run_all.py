@@ -35,6 +35,7 @@ if __name__ == "__main__":
         imnet_purity.main(a.data)
     if "sae" in steps:
         imnet_sae.main(a.data)
+        imnet_sae.zero_layer_control(a.data)
     if "rotation" in steps:
         imnet_rotation.main(a.data)
     if "weak" in steps:

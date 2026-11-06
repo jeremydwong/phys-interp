@@ -110,6 +110,13 @@ def main(dataset="imagenet_val", archs=("googlenet", "convnext_tiny")):
                 continue
             out[dataset][tag] = run_subsets(dataset, arch, trained)
             json.dump(out, open(fn, "w"), indent=1)
+    for arch in archs:                       # larger sets, more steps (googlenet: the full 1024-unit layer)
+        for trained in (True, False):
+            tag = C.tag(arch, trained) + "_sub1024_3000steps"
+            if tag in out[dataset] and os.environ.get("IMNET_RECOMPUTE") != "1":
+                continue
+            out[dataset][tag] = run_subsets(dataset, arch, trained, size=1024, reps=1, steps=3000)
+            json.dump(out, open(fn, "w"), indent=1)
     return out
 
 

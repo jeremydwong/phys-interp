@@ -503,6 +503,336 @@
      "top1": 0.82016,
      "delta_pp": -0.12400000000000189,
      "changed": 0.02106
+    },
+    "features.5.7.mlp|p99": {
+     "top1": 0.81818,
+     "delta_pp": -0.32200000000000006,
+     "changed": 0.0271
+    },
+    "features.5.6.mlp|p25": {
+     "top1": 0.82142,
+     "delta_pp": 0.002000000000002,
+     "changed": 0.0054
+    },
+    "features.5.6.mlp|p50": {
+     "top1": 0.82158,
+     "delta_pp": 0.017999999999995797,
+     "changed": 0.00772
+    },
+    "features.5.6.mlp|p75": {
+     "top1": 0.82126,
+     "delta_pp": -0.014000000000002899,
+     "changed": 0.01212
+    },
+    "features.5.6.mlp|p95": {
+     "top1": 0.8194,
+     "delta_pp": -0.20000000000000018,
+     "changed": 0.02264
+    },
+    "features.5.6.mlp|p99": {
+     "top1": 0.81878,
+     "delta_pp": -0.26200000000000667,
+     "changed": 0.02792
+    },
+    "features.5.5.mlp|p25": {
+     "top1": 0.8214,
+     "delta_pp": 0.0,
+     "changed": 0.00122
+    },
+    "features.5.5.mlp|p50": {
+     "top1": 0.82146,
+     "delta_pp": 0.005999999999994898,
+     "changed": 0.00432
+    },
+    "features.5.5.mlp|p75": {
+     "top1": 0.82126,
+     "delta_pp": -0.014000000000002899,
+     "changed": 0.00964
+    },
+    "features.5.5.mlp|p95": {
+     "top1": 0.82038,
+     "delta_pp": -0.10200000000000209,
+     "changed": 0.0167
+    },
+    "features.5.5.mlp|p99": {
+     "top1": 0.81994,
+     "delta_pp": -0.14600000000000168,
+     "changed": 0.0215
+    },
+    "features.5.4.mlp|p25": {
+     "top1": 0.8216,
+     "delta_pp": 0.019999999999997797,
+     "changed": 0.00116
+    },
+    "features.5.4.mlp|p50": {
+     "top1": 0.82122,
+     "delta_pp": -0.0180000000000069,
+     "changed": 0.00464
+    },
+    "features.5.4.mlp|p75": {
+     "top1": 0.82066,
+     "delta_pp": -0.0740000000000074,
+     "changed": 0.01158
+    },
+    "features.5.4.mlp|p95": {
+     "top1": 0.8199,
+     "delta_pp": -0.15000000000000568,
+     "changed": 0.02076
+    },
+    "features.5.4.mlp|p99": {
+     "top1": 0.81924,
+     "delta_pp": -0.21600000000000508,
+     "changed": 0.02618
+    },
+    "features.5.3.mlp|p25": {
+     "top1": 0.82144,
+     "delta_pp": 0.003999999999992898,
+     "changed": 0.00122
+    },
+    "features.5.3.mlp|p50": {
+     "top1": 0.82148,
+     "delta_pp": 0.007999999999996898,
+     "changed": 0.00428
+    },
+    "features.5.3.mlp|p75": {
+     "top1": 0.82088,
+     "delta_pp": -0.051999999999996493,
+     "changed": 0.01132
+    },
+    "features.5.3.mlp|p95": {
+     "top1": 0.82016,
+     "delta_pp": -0.12400000000000189,
+     "changed": 0.02152
+    },
+    "features.5.3.mlp|p99": {
+     "top1": 0.81946,
+     "delta_pp": -0.19400000000000528,
+     "changed": 0.02486
+    },
+    "features.5.2.mlp|p25": {
+     "top1": 0.82142,
+     "delta_pp": 0.002000000000002,
+     "changed": 0.00196
+    },
+    "features.5.2.mlp|p50": {
+     "top1": 0.82094,
+     "delta_pp": -0.046000000000001595,
+     "changed": 0.0076
+    },
+    "features.5.2.mlp|p75": {
+     "top1": 0.82024,
+     "delta_pp": -0.11600000000000499,
+     "changed": 0.01602
+    },
+    "features.5.2.mlp|p95": {
+     "top1": 0.81954,
+     "delta_pp": -0.18599999999999728,
+     "changed": 0.02368
+    },
+    "features.5.2.mlp|p99": {
+     "top1": 0.82026,
+     "delta_pp": -0.11400000000000299,
+     "changed": 0.02448
+    },
+    "features.5.1.mlp|p25": {
+     "top1": 0.82152,
+     "delta_pp": 0.012000000000000899,
+     "changed": 0.00126
+    },
+    "features.5.1.mlp|p50": {
+     "top1": 0.82164,
+     "delta_pp": 0.024000000000001798,
+     "changed": 0.00546
+    },
+    "features.5.1.mlp|p75": {
+     "top1": 0.82084,
+     "delta_pp": -0.056000000000000494,
+     "changed": 0.0136
+    },
+    "features.5.1.mlp|p95": {
+     "top1": 0.81964,
+     "delta_pp": -0.17599999999999838,
+     "changed": 0.02172
+    },
+    "features.5.1.mlp|p99": {
+     "top1": 0.81864,
+     "delta_pp": -0.27599999999999847,
+     "changed": 0.02404
+    },
+    "features.5.0.mlp|p25": {
+     "top1": 0.82154,
+     "delta_pp": 0.014000000000002899,
+     "changed": 0.00226
+    },
+    "features.5.0.mlp|p50": {
+     "top1": 0.82142,
+     "delta_pp": 0.002000000000002,
+     "changed": 0.00812
+    },
+    "features.5.0.mlp|p75": {
+     "top1": 0.82162,
+     "delta_pp": 0.021999999999999797,
+     "changed": 0.01834
+    },
+    "features.5.0.mlp|p95": {
+     "top1": 0.82046,
+     "delta_pp": -0.09400000000000519,
+     "changed": 0.0256
+    },
+    "features.5.0.mlp|p99": {
+     "top1": 0.8204,
+     "delta_pp": -0.10000000000000009,
+     "changed": 0.0248
+    },
+    "features.3.2.mlp|p25": {
+     "top1": 0.8216,
+     "delta_pp": 0.019999999999997797,
+     "changed": 0.00242
+    },
+    "features.3.2.mlp|p50": {
+     "top1": 0.82144,
+     "delta_pp": 0.003999999999992898,
+     "changed": 0.0089
+    },
+    "features.3.2.mlp|p75": {
+     "top1": 0.82038,
+     "delta_pp": -0.10200000000000209,
+     "changed": 0.02034
+    },
+    "features.3.2.mlp|p95": {
+     "top1": 0.81994,
+     "delta_pp": -0.14600000000000168,
+     "changed": 0.02994
+    },
+    "features.3.2.mlp|p99": {
+     "top1": 0.81976,
+     "delta_pp": -0.16399999999999748,
+     "changed": 0.02898
+    },
+    "features.3.1.mlp|p25": {
+     "top1": 0.8213,
+     "delta_pp": -0.009999999999998899,
+     "changed": 0.00538
+    },
+    "features.3.1.mlp|p50": {
+     "top1": 0.82088,
+     "delta_pp": -0.051999999999996493,
+     "changed": 0.01638
+    },
+    "features.3.1.mlp|p75": {
+     "top1": 0.81762,
+     "delta_pp": -0.37800000000000056,
+     "changed": 0.03918
+    },
+    "features.3.1.mlp|p95": {
+     "top1": 0.81582,
+     "delta_pp": -0.5580000000000029,
+     "changed": 0.04582
+    },
+    "features.3.1.mlp|p99": {
+     "top1": 0.81768,
+     "delta_pp": -0.37200000000000566,
+     "changed": 0.03862
+    },
+    "features.3.0.mlp|p25": {
+     "top1": 0.82142,
+     "delta_pp": 0.002000000000002,
+     "changed": 0.00556
+    },
+    "features.3.0.mlp|p50": {
+     "top1": 0.82084,
+     "delta_pp": -0.056000000000000494,
+     "changed": 0.01868
+    },
+    "features.3.0.mlp|p75": {
+     "top1": 0.8187,
+     "delta_pp": -0.27000000000000357,
+     "changed": 0.0343
+    },
+    "features.3.0.mlp|p95": {
+     "top1": 0.81826,
+     "delta_pp": -0.31400000000000317,
+     "changed": 0.0359
+    },
+    "features.3.0.mlp|p99": {
+     "top1": 0.81822,
+     "delta_pp": -0.31800000000000717,
+     "changed": 0.03164
+    },
+    "features.1.2.mlp|p25": {
+     "top1": 0.82148,
+     "delta_pp": 0.007999999999996898,
+     "changed": 0.0037
+    },
+    "features.1.2.mlp|p50": {
+     "top1": 0.8204,
+     "delta_pp": -0.10000000000000009,
+     "changed": 0.0172
+    },
+    "features.1.2.mlp|p75": {
+     "top1": 0.81632,
+     "delta_pp": -0.5079999999999973,
+     "changed": 0.04372
+    },
+    "features.1.2.mlp|p95": {
+     "top1": 0.81662,
+     "delta_pp": -0.47800000000000065,
+     "changed": 0.04396
+    },
+    "features.1.2.mlp|p99": {
+     "top1": 0.8161,
+     "delta_pp": -0.5299999999999971,
+     "changed": 0.04658
+    },
+    "features.1.1.mlp|p25": {
+     "top1": 0.82162,
+     "delta_pp": 0.021999999999999797,
+     "changed": 0.00454
+    },
+    "features.1.1.mlp|p50": {
+     "top1": 0.82132,
+     "delta_pp": -0.007999999999996898,
+     "changed": 0.01204
+    },
+    "features.1.1.mlp|p75": {
+     "top1": 0.82034,
+     "delta_pp": -0.10600000000000609,
+     "changed": 0.02478
+    },
+    "features.1.1.mlp|p95": {
+     "top1": 0.81752,
+     "delta_pp": -0.38799999999999946,
+     "changed": 0.03684
+    },
+    "features.1.1.mlp|p99": {
+     "top1": 0.81696,
+     "delta_pp": -0.44399999999999995,
+     "changed": 0.04386
+    },
+    "features.1.0.mlp|p25": {
+     "top1": 0.82168,
+     "delta_pp": 0.027999999999994696,
+     "changed": 0.003
+    },
+    "features.1.0.mlp|p50": {
+     "top1": 0.82094,
+     "delta_pp": -0.046000000000001595,
+     "changed": 0.01354
+    },
+    "features.1.0.mlp|p75": {
+     "top1": 0.8199,
+     "delta_pp": -0.15000000000000568,
+     "changed": 0.0294
+    },
+    "features.1.0.mlp|p95": {
+     "top1": 0.78614,
+     "delta_pp": -3.526000000000007,
+     "changed": 0.1219
+    },
+    "features.1.0.mlp|p99": {
+     "top1": 0.76506,
+     "delta_pp": -5.634000000000006,
+     "changed": 0.1571
     }
    },
    "layers": [
