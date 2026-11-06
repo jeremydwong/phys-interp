@@ -1,0 +1,99 @@
+{
+ "what": "OURS. One reader (the Claude agent that ran this study) looked at reports/figs/imnet_top20_<model>.png (positive poles of 24 random last-layer units, 20 strongest of 50,000 val images, 22-px thumbnails with labels) and marked each unit legible if one nameable thing is shared by most of the 20 images (an object, part, texture or scene type; class names visible). Not blind to model identity, not repeated, n = 24 per model. Closest we came to the essay's yardstick (a reader names what a neuron's 20 strongest images share); treat as a rough check.",
+ "googlenet": {
+  "legible": {
+   "553": "digital clocks/watches",
+   "643": "pitchers/teapots/mugs",
+   "41": "totem poles",
+   "923": "small light sources in the dark",
+   "570": "small dark dogs",
+   "16": "water birds",
+   "833": "face masks (ski/gas mask, snorkel)",
+   "638": "keyboards/typewriters",
+   "512": "hand-held stick with round end (maraca, plunger)",
+   "953": "upright cylinder with bright tip (lipstick, missile, candle)"
+  },
+  "not": [
+   "985",
+   "2",
+   "75",
+   "176",
+   "656 (ladybugs + white terriers)",
+   "309",
+   "270",
+   "283",
+   "686 (rickshaws + finches)",
+   "615",
+   "741",
+   "851",
+   "510 (acorns + hummingbirds)",
+   "821 (jays + dogs)"
+  ],
+  "share": 0.4166666666666667,
+  "n": 24
+ },
+ "convnext_tiny": {
+  "legible": {
+   "2973": "rulers/graduated markings",
+   "1937": "organs/ornate church interiors",
+   "8": "cardigans/knitwear",
+   "229": "netting/mesh fabric",
+   "535": "cameras/lenses",
+   "939": "black-and-tan dogs",
+   "1717": "slugs",
+   "50": "Christmas stockings/red knit",
+   "851": "sundials",
+   "2504": "baseball",
+   "1942": "wild boar/brown animals in fields",
+   "1559": "tarantulas",
+   "1857": "locomotives/trains",
+   "2235": "ruddy turnstones",
+   "2593": "trombones/brass players",
+   "2868": "dark birds",
+   "2486": "pajamas (+ orange lifeboats)"
+  },
+  "not": [
+   "1666",
+   "125",
+   "2793",
+   "1986",
+   "823",
+   "2060",
+   "1541"
+  ],
+  "share": 0.7083333333333334,
+  "n": 24
+ },
+ "convnext_small": {
+  "legible": {
+   "2973": "toucans",
+   "1937": "rocking chairs/slatted structures",
+   "125": "porcupines",
+   "229": "washbasins",
+   "535": "hoopskirts/gowns",
+   "1986": "boxy electronic devices",
+   "939": "violins",
+   "1717": "robins",
+   "851": "bald eagles",
+   "1857": "masks/objects at the mouth",
+   "2235": "coils/spirals",
+   "1541": "hen-of-the-woods/fungal texture",
+   "2486": "TV/home-theatre screens"
+  },
+  "not": [
+   "1666",
+   "8",
+   "2793",
+   "823",
+   "50",
+   "2504",
+   "1942",
+   "1559",
+   "2060",
+   "2593",
+   "2868"
+  ],
+  "share": 0.5416666666666666,
+  "n": 24
+ }
+}
