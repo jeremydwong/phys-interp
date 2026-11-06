@@ -303,46 +303,172 @@ def mask_fn(tau, mode):
 
 # ------------------------------------------------------------------ SAE near-copy share
 
-def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="cuda"):
-    """TopK SAE (Gao et al. 2024) without the aux loss. X [n, d] (torch). Returns dict with W_enc, b_enc, W_dec
-    (unit-norm rows, [n_feat, d]), b_pre, fve (held-out fraction of variance explained)."""
+def _geometric_median(X, iters=30, eps=1e-6):
+    """Weiszfeld iterations on a [n, d] sample (Gao et al. 2024 initialise b_pre at the geometric median)."""
+    m = X.mean(0)
+    for _ in range(iters):
+        w = 1 / (X - m).norm(dim=1).clamp(min=eps)
+        m_new = (w[:, None] * X).sum(0) / w.sum()
+        if (m_new - m).norm() < eps * (m.norm() + eps):
+            break
+        m = m_new
+    return m
+
+
+def _eval_chunks(X_eval, chunk, device, transform):
+    if callable(X_eval) and not hasattr(X_eval, "shape"):
+        for x in X_eval():
+            yield transform(x.to(device))
+    else:
+        for i in range(0, len(X_eval), chunk):
+            yield transform(X_eval[i:i + chunk].to(device))
+
+
+def train_topk_sae(X, n_feat, k, steps=3000, bs=2048, lr=1e-3, seed=0, device="cuda", *,
+                   sampler=None, X_eval=None, transform=None, aux_k=0, aux_coef=1 / 32, dead_tokens=None,
+                   norm_mse=False, adam_eps=1e-8, grad_clip=None, b_pre_init="mean", scale_inputs=False,
+                   grad_proj=False, sparse_decode=False, log_every=0, eval_chunk=8192):
+    """TopK SAE (Gao et al. 2024, "Scaling and Evaluating Sparse Autoencoders").
+
+    Default arguments reproduce the original behaviour (no aux loss, plain per-vector summed MSE, b_pre at the
+    mean, Adam eps 1e-8, decoder renormalised after each step, X split 90/10 into train / held-out, mean_z over
+    all X).
+
+    Keyword-only options for the Gao recipe (added 2026-11 for imnet_sae2):
+      sampler       callable(step) -> raw batch [bs, d] (any dtype/device); streams the training set instead of
+                    holding it. X is then only an init sample (b_pre, input scale) and X_eval the held-out set.
+      X_eval        held-out vectors (tensor, moved to `device` in chunks, or a callable yielding chunks). FVE and
+                    mean_z are computed on it. Without a sampler and with X_eval None the old 90/10 split is used.
+      transform     callable(raw on device) -> float32 vectors (e.g. GELU of stored pre-activations, a rotation).
+      aux_k         AuxK loss (Gao sec. A.2): latents that have not fired for `dead_tokens` training vectors are
+                    dead; the residual e = x - x_hat (detached, so the main reconstruction gets no gradient from
+                    it) is reconstructed with the top-aux_k pre-activations among dead latents only,
+                    e_hat = z_aux @ W_dec, and aux_coef * ||e - e_hat||^2 / ||e - mean e||^2 is added.
+      norm_mse      main loss = ||x_hat - x||^2 / ||x - mean x||^2 (batch sums).
+      adam_eps, grad_clip   Gao: eps 6.25e-10, gradient-norm clip 1.
+      b_pre_init    "mean" or "median" (geometric median of up to 20k vectors of X).
+      scale_inputs  multiply inputs by a constant so E||x||^2 = 1 (folded back at the end: the returned
+                    encode / W_dec / b_pre act on raw vectors; W_dec stays unit-norm and z carries the scale).
+      grad_proj     remove the component of each decoder row's gradient parallel to the row before the step.
+      sparse_decode decode with embedding_bag over the active latents (same result, less memory and compute).
+    Returns dict: W_enc, b_enc, W_dec (unit-norm rows, [n_feat, d]), b_pre, fve (held-out), mean_z (mean code over
+    the held-out set, or over all X in the default mode), k, encode (raw x -> z), dead_frac (latents not fired in
+    the last dead_tokens training vectors; with dead_tokens None: never fired in training), history, scale."""
     import torch
+    import torch.nn.functional as F
     g = torch.Generator(device="cpu").manual_seed(seed)
-    X = X.to(device).float()
+    tf = transform or (lambda x: x.float())
+    legacy = sampler is None and X_eval is None
+    X = tf(X.to(device))
     n, d = X.shape
-    perm = torch.randperm(n, generator=g).to(device)
-    Xtr, Xte = X[perm[: int(0.9 * n)]], X[perm[int(0.9 * n):]]
-    b_pre = Xtr.mean(0).clone().requires_grad_(True)
+    if legacy:
+        perm = torch.randperm(n, generator=g).to(device)
+        Xtr, Xte = X[perm[: int(0.9 * n)]], X[perm[int(0.9 * n):]]
+    else:
+        Xtr, Xte = X, X_eval
+    scale = float(1 / X.pow(2).sum(1).mean().sqrt()) if scale_inputs else 1.0
+    if b_pre_init == "median":
+        init = _geometric_median(X[torch.randperm(n, generator=g)[:20000].to(device)] * scale)
+    else:
+        init = Xtr.mean(0) * scale
+    b_pre = init.clone().requires_grad_(True)
     W_dec = torch.randn(n_feat, d, generator=g).to(device)
     W_dec = (W_dec / W_dec.norm(dim=1, keepdim=True)).requires_grad_(True)
     W_enc = W_dec.detach().T.clone().requires_grad_(True)
     b_enc = torch.zeros(n_feat, device=device, requires_grad=True)
-    opt = torch.optim.Adam([b_pre, W_dec, W_enc, b_enc], lr=lr)
+    params = [b_pre, W_dec, W_enc, b_enc]
+    opt = torch.optim.Adam(params, lr=lr, eps=adam_eps)
+    since = torch.zeros(n_feat, dtype=torch.long, device=device)
+    ever = torch.zeros(n_feat, dtype=torch.bool, device=device)
+    hist = []
 
-    def encode(x):
-        h = (x - b_pre) @ W_enc + b_enc
-        v, i = h.topk(k, dim=1)
-        return torch.zeros_like(h).scatter_(1, i, torch.relu(v))
+    def decode(v, i):
+        if sparse_decode:
+            return F.embedding_bag(i, W_dec, per_sample_weights=v, mode="sum")
+        return torch.zeros(v.shape[0], n_feat, device=v.device, dtype=v.dtype).scatter(1, i, v) @ W_dec
+
+    def dead_now():
+        return float((since > dead_tokens).float().mean()) if dead_tokens is not None else float((~ever).float().mean())
 
     for s in range(steps):
-        idx = torch.randint(0, len(Xtr), (bs,), generator=g).to(device)
-        x = Xtr[idx]
-        z = encode(x)
-        loss = ((z @ W_dec + b_pre - x) ** 2).sum(1).mean()
-        opt.zero_grad()
+        if sampler is None:
+            x = Xtr[torch.randint(0, len(Xtr), (bs,), generator=g).to(device)]
+        else:
+            x = tf(sampler(s).to(device))
+        xs = x * scale if scale != 1.0 else x
+        h = (xs - b_pre) @ W_enc + b_enc
+        v, i = h.topk(k, dim=1)
+        v = torch.relu(v)
+        rec = decode(v, i) + b_pre
+        if norm_mse:
+            loss = ((rec - xs) ** 2).sum() / ((xs - xs.mean(0)) ** 2).sum()
+        else:
+            loss = ((rec - xs) ** 2).sum(1).mean()
+        with torch.no_grad():
+            fired = torch.zeros(n_feat, dtype=torch.bool, device=device)
+            fired[i[v > 0]] = True
+            since += len(x)
+            since[fired] = 0
+            ever |= fired
+        aux = torch.zeros((), device=device)
+        if aux_k and dead_tokens is not None:
+            dead = since > dead_tokens
+            nd = int(dead.sum())
+            if nd > 0:
+                va, ia = h.masked_fill(~dead[None], float("-inf")).topk(min(aux_k, nd), dim=1)
+                va = torch.relu(va)
+                e = (xs - rec).detach()
+                aux = (((decode(va, ia) - e) ** 2).sum() / ((e - e.mean(0)) ** 2).sum()).nan_to_num(0)
+                loss = loss + aux_coef * aux
+        opt.zero_grad(set_to_none=True)
         loss.backward()
+        if grad_proj:
+            with torch.no_grad():
+                W_dec.grad -= (W_dec.grad * W_dec).sum(1, keepdim=True) * W_dec
+        if grad_clip:
+            torch.nn.utils.clip_grad_norm_(params, grad_clip)
         opt.step()
         with torch.no_grad():
             W_dec /= W_dec.norm(dim=1, keepdim=True)
+        if log_every and (s % log_every == 0 or s == steps - 1):
+            hist.append(dict(step=s, loss=loss.item(), aux=aux.item(), dead_frac=dead_now()))
+            print(f"    [sae] step {s} loss {hist[-1]['loss']:.4f} aux {hist[-1]['aux']:.4f} dead {hist[-1]['dead_frac']:.3f}",
+                  flush=True)
+    dead_frac = dead_now()
     with torch.no_grad():
-        z = encode(Xte)
-        rec = z @ W_dec + b_pre
-        fve = 1 - ((rec - Xte) ** 2).sum() / ((Xte - Xte.mean(0)) ** 2).sum()
-        zsum = torch.zeros(n_feat, device=device)
-        for i in range(0, n, 8192):         # running sum (a dense [n, n_feat] code matrix does not fit for big layers)
-            zsum += encode(X[i:i + 8192]).sum(0)
-    return dict(W_enc=W_enc.detach(), b_enc=b_enc.detach(), W_dec=W_dec.detach(), b_pre=b_pre.detach(),
-                fve=float(fve), mean_z=(zsum / n).cpu().numpy(), k=k, encode=encode)
+        # fold the input scale back: z_raw = z_scaled / scale, b_pre_raw = b_pre / scale, W_dec unchanged
+        b_pre_r, b_enc_r = (b_pre / scale).detach(), (b_enc / scale).detach()
+        W_enc_r, W_dec_r = W_enc.detach(), W_dec.detach()
+
+        def encode(x):
+            hh = (x - b_pre_r) @ W_enc_r + b_enc_r
+            vv, ii = hh.topk(k, dim=1)
+            return torch.zeros_like(hh).scatter_(1, ii, torch.relu(vv))
+
+        if legacy:
+            z = encode(Xte)
+            r = z @ W_dec_r + b_pre_r
+            fve = float(1 - ((r - Xte) ** 2).sum() / ((Xte - Xte.mean(0)) ** 2).sum())
+            zsum = torch.zeros(n_feat, device=device)
+            for j in range(0, n, 8192):     # running sum (a dense [n, n_feat] code matrix does not fit)
+                zsum += encode(X[j:j + 8192]).sum(0)
+            mean_z = (zsum / n).cpu().numpy()
+        else:
+            zsum = torch.zeros(n_feat, device=device, dtype=torch.float64)
+            se, sxx, m = 0.0, 0.0, 0
+            sx = torch.zeros(d, device=device, dtype=torch.float64)
+            for xe in _eval_chunks(Xte, eval_chunk, device, tf):
+                z = encode(xe)
+                r = z @ W_dec_r + b_pre_r
+                se += float(((r - xe).double() ** 2).sum())
+                sx += xe.double().sum(0)
+                sxx += float((xe.double() ** 2).sum())
+                m += len(xe)
+                zsum += z.double().sum(0)
+            fve = 1 - se / (sxx - float((sx ** 2).sum()) / m)
+            mean_z = (zsum / m).float().cpu().numpy()
+    return dict(W_enc=W_enc_r, b_enc=b_enc_r, W_dec=W_dec_r, b_pre=b_pre_r, fve=float(fve), mean_z=mean_z, k=k,
+                encode=encode, dead_frac=dead_frac, history=hist, scale=scale)
 
 
 def near_copy_share(W_dec, mean_z, basis=None, kappa=0.9):
