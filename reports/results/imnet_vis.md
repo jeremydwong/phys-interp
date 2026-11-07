@@ -43,11 +43,11 @@ path targets each), peak memory 5.7 / 6.6 GB. The whole run took about 5 minutes
 
 **Figures** (`imnet_gallery.py`, 200 dpi):
 - `reports/figs/imnet_gallery_<arch>.png` (2404 x 2716 px): the essay's ladybug figure with the microscope
-  timeline on the left. One row per unit: the three FVs, then the 20 strongest val images in order; a
+  timeline on the left. One row per unit: the four FVs (2009-style, 2017, path-anchored, tuned), then the 20 strongest val images in order; a
   white-on-dark label names the class of every image outside the row's majority class; the row title gives
   "unit N · majority class · k of 20" and the sample role; the right margin gives FV activation / dataset max.
 - `reports/figs/imnet_gallery/<arch>/<unit>.jpg` (2404 x 124 px, JPEG quality 92): each row on its own.
-- `reports/figs/imnet_fv_seeds_<arch>.png` (656 x 274 px): seed stability, 2 units x 3 settings x 2 seeds.
+- `reports/figs/imnet_fv_seeds_<arch>.png` (880 x 274 px): seed stability, 2 units x 4 settings x 2 seeds.
 - `reports/figs/imnet_negpoles_<arch>.png` (1528 x 2020 px): the essay's "+Taxis / -Ambulances" figure: the 6
   units where both poles are most class-dominated (max over units of min(purity+, purity-) on the top 20 of each
   pole), 8 strongest images per pole.
@@ -98,7 +98,9 @@ but not in layout (`imnet_fv_seeds_*.png`).
    even for the 20/20 bird units. This is a microscope failure on our side, not evidence against the neurons: the
    dataset examples of the same units are unambiguous. The essay's 2026 settings include regularization tweaks we
    have not reproduced (its exact recipe is not given), and Lucid-era settings tuned on InceptionV1 are known to
-   transfer poorly to LayerNorm / GELU / 7x7-depthwise networks.
+   transfer poorly to LayerNorm / GELU / 7x7-depthwise networks. **Update: see "Tuning the microscope" below;
+   the main fault was our objective (spatial max), and on ConvNeXt-T the missing ingredient is a magnitude
+   constraint.**
 4. **Path anchoring changes the layout of the FV but not its legibility.** Side by side, `path` and `robust` images
    of the same unit have the same palette and texture vocabulary and a different arrangement, with the same
    objective ratio (3.69 vs 3.68 median for GoogLeNet, 3.66 vs 3.83 for ConvNeXt-T); for several units (GoogLeNet
@@ -122,11 +124,89 @@ but not in layout (`imnet_fv_seeds_*.png`).
    class-dominated units from the mixtures (snail 19/20 and kimono 2/20 look alike), so the shape alone is not a
    purity signal here; the point of the figure is that percentile ranks would erase the spike in all of them.
 
+## Tuning the microscope (`analysis/imnet_featvis2.py`, figures `imnet_fv2_<arch>.jpg`)
+
+Observation 3 above said our 2017-style renders were textured fragments where the essay's are objects. The
+tuning sweep asks which of our settings is to blame, on 6 units per model (GoogLeNet 748 hourglass, 502 shower
+cap, 476 banjo, 41 totem pole, 177 bow, 16 black grouse; ConvNeXt-T 312 indigo bunting, 702 plunger, 552
+parachute, 945 limpkin, 50 Christmas stocking, 2803 snail), with one objective yardstick so the choice is not
+made by eye: **the other pretrained net reads each render** (ConvNeXt-T judges GoogLeNet's renders and vice
+versa) and we record the rank of the unit's top-20 majority class in its prediction. A render "reads as the unit"
+if that independent judge ranks the class in its top 5. The unit's own net is also recorded but is not
+independent (a render optimised against a net is adversarial to it: the own-net rank is 1 for almost every
+ConvNeXt-T render, whatever it looks like). The selection rule, fixed before the renders were viewed: the
+variant with the lowest geometric-mean independent rank over the 6 units.
+
+| variant | what changes | GoogLeNet: gm rank, top-5 | ConvNeXt-T: gm rank, top-5 |
+|---|---|---|---|
+| robust (our "2017") | objective = spatial **max** of the pre-activation, 4 samples, 256 steps | 202, 0/6 | 79, 1/6 |
+| mean | objective = spatial **mean** (Lucid's channel objective), Lucid transforms (jitter 16, scale 0.9-1.1, rotate 10), 8 samples, 512 steps | 34, 2/6 | 61, 0/6 |
+| center | objective = centre cell of the 7x7 map (Lucid's neuron objective) | 83, 0/6 | 73, 2/6 |
+| center_tv | center + total-variation penalty (0.3 x dataset max per unit of mean abs gradient) | 104, 1/6 | 96, 0/6 |
+| mean_lowf | mean with Fourier scale 1/f^1.5 and larger transforms (jitter 24, scale 0.75-1.25) | **34, 2/6** | 34, 2/6 |
+| maco | magnitude-constrained (Fel et al. 2023): Fourier magnitude fixed to the mean spectrum of 2,000 val images, only the phase is optimised; 6 random crops (40-60% of a 448 px canvas) + noise 0.05 per step; NAdam lr 1.0, 512 steps | 41, 2/6 | 10, 2/6 |
+| maco_path | maco + our path anchor for the first 64 steps | 53, 2/6 | 8, 3/6 |
+| maco_long | maco, 1,000 steps | 43, 2/6 | 13, 1/6 |
+| maco_lowf | maco_long with an extra 1/sqrt(f) on the magnitude and a grey start (one phase shared by the colour channels + 0.1 rad noise) | 90, 0/6 | **4.3, 3/6** |
+| maco_dc | maco_lowf with the phase optimised in Lucid's decorrelated colour space | 36, 2/6 | 8, 3/6 |
+| maco_dc1 | maco_dc with 1/f instead of 1/sqrt(f) | 177, 1/6 | 9, 2/6 |
+
+(gm rank = geometric mean over the 6 units of the independent judge's rank of the majority class; top-5 = units
+whose render it ranks in the top 5. Per-unit ranks, objective values and times are in `imnet_featvis2.json`;
+every render is in `reports/figs/imnet_fv2/<arch>/` and on the contact sheets `imnet_fv2_<arch>.jpg`, where each
+cell is labelled "independent rank / own rank".)
+
+**What was wrong.** Mostly the objective. We optimised the spatial *max* of the unit's map, which is the pole
+score the purity statistics use, but as a feature-vis objective it rewards one spiky position and leaves the
+rest of the image free to be noise. Lucid's channel objective (the spatial mean) alone takes GoogLeNet's
+shower-cap unit from rank 42 to rank 1 and the banjo unit from 490 to 5, and the renders show caps on heads and a
+figure holding a banjo. A stronger low-frequency prior helps both nets. On ConvNeXt-T the Lucid family stays
+busy and high-frequency however it is set; the magnitude constraint (MACO), which forbids the optimiser from
+putting energy where natural images have none, is what brings its renders into the judge's top ranks (plunger and
+snail units at rank 1, bunting at 1-2) and, notably, keeps them inside the natural activation range (objective /
+dataset max 0.3-1.2 against 3-6 for every Lucid-family setting: the renders stop over-driving the unit).
+
+**Decision** (by the rule above): "tuned" = `mean_lowf` for GoogLeNet and `maco_lowf` for ConvNeXt-T. On
+GoogLeNet three variants tie within the noise of 6 units (mean 34.1, mean_lowf 33.7, maco_dc 36.0); the rule
+picks mean_lowf, whose renders are also the most legible by eye (hourglasses with sand, shower caps on heads). On
+ConvNeXt-T maco_lowf wins clearly; maco_dc is the runner-up and has more natural colours (brown snail shells, a
+red plunger cup), so a reader who prefers it can look at that column on the contact sheet. The tuned setting was
+then rendered for all 20 gallery units of each model (plus FV seed 1 for the two seed units) and added as a fourth
+column to `imnet_gallery_<arch>.png`, `imnet_fv_seeds_<arch>.png` and the json (`fv["tuned"]`, `ratio["tuned"]`,
+and `judge[setting]` = independent / own rank for every setting and unit).
+
+**Result on the full sample** (`judge_summary` in the json; "class-dominated" = majority >= 10 of 20, so that the
+unit has a class for the judge to find):
+
+| model | setting | class-dominated units whose render the independent judge ranks top-5 | median rank, all 20 units |
+|---|---|---|---|
+| GoogLeNet inception5b | 2009-style | 0 of 8 | 457 |
+| | 2017 (our first settings) | 0 of 8 | 406 |
+| | path-anchored | 0 of 8 | 505 |
+| | **tuned (mean_lowf)** | **5 of 8** | 182 |
+| ConvNeXt-T last MLP | 2009-style | 0 of 14 | 413 |
+| | 2017 (our first settings) | 0 of 14 | 349 |
+| | path-anchored | 0 of 14 | 273 |
+| | **tuned (maco_lowf)** | **4 of 14** | 33 |
+
+**Reading.** The tuned GoogLeNet column now reaches what the essay's 2017 column shows for InceptionV1: the
+hourglass units render as hourglasses with sand, the shower-cap unit as caps on heads, the banjo units as a
+player with an instrument, and the mixture units (random draws, 2-9 of 20) render as the texture mixtures they
+are. For ConvNeXt-T the tuned renders are the right colour and rough shape (a blue bird-shaped blob for the
+indigo-bunting unit, a red cup on a stick for the plunger unit, a spiral shell for the snail unit) and an
+independent classifier reads 4 of the 14 class-dominated units from them, against 0 before, but they are not
+the crisp objects of the essay's ConvNeXt renders. The gap is now a matter of degree on ConvNeXt-T and closed on
+GoogLeNet. Path anchoring, with or without the other fixes, does not change the judge's verdict on either model
+(it was never the missing ingredient here; the essay introduces it for a different failure, the dog basin).
+Time: the sweep is 11 variants x 6 units, 15-136 s each; the full-sample renders took 167 s (GoogLeNet) and
+495 s (ConvNeXt-T).
+
 ## Files
 
-- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`
+- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning)
+- `reports/results/imnet_featvis2.json`, `reports/figs/imnet_fv2_<arch>.jpg`, `reports/figs/imnet_fv2/<arch>/<unit>_<variant>.png`
 - `reports/results/imnet_featvis.json` (per unit: role, majority class and count, dataset max and median, rho,
   FV objective and objective / dataset max per setting and seed; per arch: the negative-pole selection)
-- `reports/figs/imnet_fv/<arch>/<unit>_<setting>[_s1].png` (66 per arch, 224 px)
+- `reports/figs/imnet_fv/<arch>/<unit>_<setting>[_s1].png` (88 per arch, 224 px; `_tuned` from imnet_featvis2.py)
 - `reports/figs/imnet_gallery_{googlenet,convnext_tiny}.png`, `reports/figs/imnet_gallery/<arch>/<unit>.jpg`,
   `reports/figs/imnet_fv_seeds_*.png`, `reports/figs/imnet_negpoles_*.png`, `reports/figs/imnet_shapes_*.png`

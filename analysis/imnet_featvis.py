@@ -43,8 +43,9 @@ from analysis.imnet_purity import modal, top_k  # noqa: E402
 from analysis.vis_featvis import fourier_param, pixel_param, robust_transform  # noqa: E402
 
 DEV = C.DEV
-SETTINGS = ["pixel", "robust", "path"]
-LABELS = {"pixel": "2009-style", "robust": "2017", "path": "path-anchored (ours)"}
+SETTINGS = ["pixel", "robust", "path", "tuned"]
+LABELS = {"pixel": "2009-style", "robust": "2017", "path": "path-anchored (ours)", "tuned": "tuned (ours)"}
+RUN_SETTINGS = SETTINGS[:3]        # rendered here; "tuned" is rendered by imnet_featvis2.py --render
 RES, STEPS, PATH_STEPS, N_AUG, TOPK, LR = 224, 256, 64, 4, 60, 0.05
 N_PICK, N_RAND, N_SEED_UNITS, EXTRA_SEEDS = 8, 12, 2, (1,)
 ARCHS = ("googlenet", "convnext_tiny")
@@ -174,7 +175,7 @@ def save_png(x, fn):
     Image.fromarray(a).save(fn)
 
 
-def run(arch, nb=None, settings=SETTINGS):
+def run(arch, nb=None, settings=RUN_SETTINGS):
     torch.backends.cudnn.benchmark = True
     X, y = C.images("imagenet_val")
     _, names = C.class_meta()

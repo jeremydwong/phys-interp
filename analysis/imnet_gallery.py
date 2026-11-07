@@ -6,7 +6,7 @@ of the pre-activation, neg = minus the spatial min, over the 50,000 val images).
 
 Per arch (googlenet, convnext_tiny):
   imnet_gallery_<arch>.png     "ladybug-figure" + "microscope-timeline": one row per sampled neuron: the three FVs
-                               (2009-style | 2017 | path-anchored) then the 20 strongest val images in order of
+                               (2009-style | 2017 | path-anchored | tuned) then the 20 strongest val images in order of
                                pole score; a white-on-dark label names the class of any image outside the row's
                                majority class; row title "unit N · <majority class> · k of 20" plus the sample
                                role (picked by purity / random).
@@ -72,7 +72,7 @@ def load_fv(arch, u, st, seed=0):
 
 
 def row_width():
-    return 3 * (TILE + GAP) + GROUP_GAP + K * (TILE + GAP) - GAP
+    return len(SETTINGS) * (TILE + GAP) + GROUP_GAP + K * (TILE + GAP) - GAP
 
 
 def draw_row(fig, y0, W, H, arch, u, info, X, y, names, T):
@@ -92,7 +92,7 @@ def draw_row(fig, y0, W, H, arch, u, info, X, y, names, T):
     for i, st in enumerate(SETTINGS):
         ax = _tile(fig, i * (TILE + GAP), yt, TILE, TILE, W, H, load_fv(arch, u, st))
         _label(ax, LABELS[st], color="#f2f2f2", bg="#333333", fontsize=3.6)
-    x0 = 3 * (TILE + GAP) + GROUP_GAP
+    x0 = len(SETTINGS) * (TILE + GAP) + GROUP_GAP
     for c in range(K):
         ax = _tile(fig, x0 + c * (TILE + GAP), yt, TILE, TILE, W, H, np.asarray(X[T[c]]))
         if y[T[c]] != maj:
