@@ -1309,5 +1309,52 @@
    }
   },
   "verdict": "last layers reproduce closely; all-blocks row reproduces in shape; early GoogLeNet layers far more fragile in ours"
+ },
+ "sae_near_copy_retrained": {
+  "recipe": "Gao et al. 2024 TopK + AuxK, 25.6M positions from 200,455 ImageNet train images, 6,250 steps x 4,096; eval on val",
+  "essay": 0.88,
+  "essay_fve": 0.82,
+  "best": {
+   "convnext_tiny_mlp": {
+    "run": "cnt_mlp_w4_k8",
+    "fve": 0.7744,
+    "near_copy_share": 0.8408
+   },
+   "convnext_small_mlp": {
+    "run": "cns_mlp_w4_k32",
+    "fve": 0.753,
+    "near_copy_share": 0.7571
+   },
+   "googlenet": {
+    "run": "g5b_w4_k128",
+    "fve": 0.9085,
+    "near_copy_share": 0.6611,
+    "note": "no rotated control at k=128"
+   },
+   "convnext_tiny_resid": {
+    "run": "all",
+    "near_copy_share": 0.0
+   }
+  },
+  "controls": {
+   "rotated_basis": 0.0,
+   "random_init": 0.0,
+   "rotated_recovers_true_neurons": {
+    "g5b_w16_k2_rot": 0.0,
+    "g5b_w16_k32_rot": 0.1427,
+    "cnt_res_w16_k2_rot": 0.0,
+    "cnt_res_w16_k32_rot": 0.0497,
+    "cnt_mlp_w16_k2_rot": 0.7908,
+    "cnt_mlp_w16_k32_rot": 0.938,
+    "cns_mlp_w16_k32_rot": 0.8314
+   }
+  },
+  "removal_best": {
+   "remove_unmatched_pp": -0.19,
+   "splice_all_pp": -0.02,
+   "zero_block_pp": -1.146
+  },
+  "details": "imnet_sae2.json",
+  "verdict": "reproduces for ConvNeXt last MLP; not for GoogLeNet inception5b or ConvNeXt residual"
  }
 }

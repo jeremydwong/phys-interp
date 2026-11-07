@@ -26,7 +26,7 @@ def main():
     d = json.load(open(os.path.join(C.RESULTS, "imnet_sae2.json")))
     runs = d["runs"]
     old = json.load(open(os.path.join(C.RESULTS, "imnet_sae.json")))["imagenet_val"]
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.0, 3.1), gridspec_kw=dict(width_ratios=[1.25, 1]))
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.0, 3.7), gridspec_kw=dict(width_ratios=[1.25, 1]))
 
     # step-1 SAEs (ImageNetV2, no aux, 4k steps) as small grey points
     for t in ("googlenet", "convnext_tiny", "convnext_tiny_resid"):
@@ -62,20 +62,20 @@ def main():
     h += [Line2D([], [], ls="", marker="o", mfc="none", mec=INK2, label="rotated-basis control"),
           Line2D([], [], ls="", marker="o", color="#999999", label="random-init network"),
           Line2D([], [], ls="", marker="o", color="#bbbbbb", ms=4, label="step-1 SAEs (ImageNetV2)")]
-    a1.legend(handles=h, fontsize=5.4, loc="upper left", bbox_to_anchor=(0.0, 0.86), frameon=False, ncol=1)
-    a1.text(0.99, 0.01, "marker size = width (4x, 16x, 64x)", transform=a1.transAxes, fontsize=5.4, color=MUTED,
-            ha="right", va="bottom")
+    fig.legend(handles=h, fontsize=5.4, loc="lower center", frameon=False, ncol=5)
+    a1.text(0.01, 0.80, "marker size = width (4x, 16x, 64x)", transform=a1.transAxes, fontsize=5.4, color=MUTED,
+            ha="left", va="top")
 
-    # right: activity-weighted |cos| histograms, 16x k=2 per layer, trained vs rotated vs init
+    # right: activity-weighted |cos| histograms, 16x k=32 per layer, trained vs rotated vs init
     edges = np.linspace(0, 1, 21)
     ctr = (edges[:-1] + edges[1:]) / 2
     for L in ("g5b", "cnt_res", "cnt_mlp", "cns_mlp"):
-        r = runs.get(f"{L}_w16_k2")
+        r = runs.get(f"{L}_w16_k32")
         if not r:
             continue
         a2.plot(ctr, 100 * np.asarray(r["cos_hist_weighted"]), color=LAYER_COL[L], lw=1.6, label=LAYER_NAME[L],
                 drawstyle="steps-mid")
-        rr = runs.get(f"{L}_w16_k2_rot")
+        rr = runs.get(f"{L}_w16_k32_rot")
         if rr:
             a2.plot(ctr, 100 * np.asarray(rr["cos_hist_weighted"]), color=LAYER_COL[L], lw=0.9, ls=":",
                     drawstyle="steps-mid")
@@ -83,10 +83,9 @@ def main():
     a2.text(0.89, a2.get_ylim()[1] * 0.97, "near-copy\n|cos| ≥ 0.9", fontsize=5.6, color=MUTED, ha="right", va="top")
     a2.set_xlabel("max |cos| of decoder row to a neuron axis")
     a2.set_ylabel("share of SAE activity (%)")
-    a2.set_title("Where the activity sits (16x, k = 2; dotted = rotated)", fontsize=8, loc="left")
-    a2.legend(fontsize=5.4, frameon=False, loc="upper left")
+    a2.set_title("Where the activity sits (16x, k = 32; dotted = rotated)", fontsize=8, loc="left")
     a2.set_xlim(0, 1)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0.14, 1, 1))
     fn = os.path.join(C.FIGS, "imnet_sae2.png")
     fig.savefig(fn, dpi=200)
     print("wrote", fn)

@@ -7,16 +7,17 @@ run on pretrained ImageNet classifiers over the 50,000 ImageNet validation image
 essay reports numbers. The question: **do our tools reproduce the essay's numbers in its own setting?** If they
 do, the earlier small-model misses come from scale; if not, our measurements differ from the essay's.
 
-**Decision.** **Mostly yes for the activation-level claims, no for the dictionary claim, so the answer is
-split.** In the essay's setting, three of the four claims reproduce with our tools: the weak-activation grid
+**Decision.** **Yes for the activation-level claims and, once the SAE is trained the essay's way, for the
+dictionary claim on ConvNeXt; not for GoogLeNet.** In the essay's setting, three of the four claims reproduce with our tools: the weak-activation grid
 (GoogLeNet's last layer matches to within 0.2 pp at p25–p95), the ConvNeXt-over-InceptionV1 ordering of
 last-layer interpretability, and the rotation search landing on ConvNeXt neurons (on 256-unit sets, with a
 random-init control at 0%). Those were misses or weak results on our 1.2M-parameter models, so **scale (or
-the real ImageNet models) accounts for them.** The SAE near-copy claim does not reproduce: 0% of SAE activity in
-GoogLeNet and 8–9% in ConvNeXt-T, against the essay's 88%. Our planted-neuron check recovers 98%, so
-the SAE tool works. Either the essay's SAE or "near-copy" definition differs from ours, or the claim
-depends on the essay's own models. For that claim **our measurement and the essay's differ**, and scale alone
-does not explain the vis_ miss. The absolute interpretability numbers (essay ~70% / ~99%, human-judged) are
+the real ImageNet models) accounts for them.** With our first, weak SAEs the near-copy claim did not reproduce (0% of SAE activity in GoogLeNet, 8–9% in
+ConvNeXt-T, against the essay's 88%). **Retrained the essay's way (AuxK loss, 25.6M training positions; section
+3b), ConvNeXt-T's last MLP reaches 84% at FVE 0.77 (essay: 88% at 0.82) and ConvNeXt-S 76%**, with the
+rotated-basis and random-init controls at 0%. So that miss came from our SAE, and the dictionary claim
+reproduces for ConvNeXt's MLP neurons. It does not for GoogLeNet's last layer (0–12% except very dense SAEs)
+or for ConvNeXt's residual stream (0% everywhere). The absolute interpretability numbers (essay ~70% / ~99%, human-judged) are
 not reproduced by any automatic proxy we have. Class dominance gives 5% / 38%, and one non-blind reader gives
 42% / 71%. Only the ordering is a match.
 
@@ -29,7 +30,7 @@ Every threshold the essay does not state is ours and is marked **(ours)**. Essay
 | claim (essay) | essay number | ours (ImageNet val, 50k) | random-init control | verdict |
 |---|---|---|---|---|
 | Last layer interpretable, InceptionV1 retrained vs ConvNeXt ("A History of Microscope Errors") | "more like 70%" vs "about 99%" (human reading) | top-20 ≥ 50% one class, + pole: **GoogLeNet 4.7%, ConvNeXt-T 38.4%**, ConvNeXt-S 27.8%. Superclass (K = 60): 17% / 52% / 40%. One reader, n = 24: 42% / 71% / 54% | 0% (all three) | **ordering reproduces** (ConvNeXt ≫ InceptionV1, ×8 by class dominance, ×1.7 by reading); absolute levels do not; proxy is stricter than legibility |
-| SAE near-copies ("What Dictionaries Learn") | "On the last layer, 88% of its activity is near-copies of single neurons" | GoogLeNet inception5b: **0.0%** (k = 8 and 32). ConvNeXt-T last MLP: **8.8% / 7.7%** (k = 8 / 32). ConvNeXt-T residual stream: 0.0% | 0% (rotated basis 0% everywhere; planted neurons 98%) | **does not reproduce** |
+| SAE near-copies ("What Dictionaries Learn") | "On the last layer, 88% of its activity is near-copies of single neurons" | Step-1 SAE: GoogLeNet 0.0%, ConvNeXt-T last MLP 8.8% / 7.7%. **Essay-recipe retrain (3b): ConvNeXt-T last MLP 84.1% (4×, k = 8, FVE 0.77), ConvNeXt-S 75.7%**; GoogLeNet inception5b 0–12% (66% only at k = 128, no control); ConvNeXt-T residual 0.0% | 0% (rotated basis and random init, every layer; the rotated SAE recovers the true neurons at 79–94%; planted neurons 99%) | **reproduces for ConvNeXt's last MLP** (after retraining the SAE); not for GoogLeNet or the residual stream |
 | Removing unmatched SAE directions | "leaves accuracy unchanged, and the few answers it flips were already near-ties" | GoogLeNet −12.3 / −21.8 pp. ConvNeXt-T −1.5 / −1.0 pp, flipped answers are near-ties (median top-1/top-2 margin 0.08–0.10 vs 0.69 overall), but zeroing the whole block costs only −1.1 pp | – | **not reproduced / uninformative** (GoogLeNet breaks; on ConvNeXt the block barely matters) |
 | Rotation search ("What Dictionaries Learn") | "starting from a random one, you land back on the neurons, in every block" | ConvNeXt-T last MLP, 256-unit sets: **76% of found axes within \|cos\| ≥ 0.9 of a neuron** (raw), 94% (whitened). 1,024-unit sets: 20% / 44%. Full 3,072: 0% (search under-converged). GoogLeNet: 0% everywhere | ConvNeXt-T init 0% / 4%; GoogLeNet init 0% | **reproduces for ConvNeXt** (on sets where our optimiser converges), **not for GoogLeNet** |
 | Weak activations, Inception final layer ("Weak Activations: Further Measurements") | keep strongest quarter (p75): 69.47% vs 70.08% (−0.60 pp); p95 −7.72; p99 −33.63 | GoogLeNet inception5b: p75 **−0.49 pp** (69.29 vs 69.78%); p95 −7.52; p99 −47.81 | – (random init is at chance) | **reproduces** (p25–p95 within 0.2 pp; p99 harsher) |
@@ -157,6 +158,59 @@ max |cos| ≥ 0.9 with one neuron axis. The share is the near-copy features' mea
   points to the essay's 88% being one better optimiser away. The essay's SAE figure is anchored
   "convnext-sae-residual", so it may have used the residual stream. There we find 0%.
 
+## 3b. SAE retrained the essay's way (`imnet_sae2.png`, prefix `imnet_sae2`)
+
+The section 3 SAEs were weak (FVE 0.36–0.65; up to 41% of ConvNeXt-T features never fired). We retrained
+them with the recipe of Gao et al. (2024, arXiv 2406.04093), which the essay's SAE description points to:
+TopK with an **AuxK loss** (features dead for 2M tokens reconstruct the residual x − x̂ with their own top-k_aux,
+weight 1/32), normalised MSE, unit-norm decoder with the parallel gradient removed, encoder initialised as the
+decoder transpose, b_pre at the geometric median, Adam ε 6.25e-10, gradient clip 1, batch 4,096. Data is
+essay scale: **25.6M positions sampled from 9.8M last-layer vectors of 200,455 ImageNet training images**,
+6,250 steps; FVE and near-copy share are measured on ImageNet val positions. Widths 4×, 16×, 64×;
+k ∈ {2, 8, 32, 64, 128}. 47 runs in all, with a rotated-basis and a random-init control per layer.
+Code: `clean_tools.train_topk_sae` (the recipe is keyword options; the defaults are unchanged),
+`analysis/imnet_train.py`, `imnet_sae2.py`, `imnet_sae2_fig.py`. Numbers: `imnet_sae2.json`.
+
+Near-copy share of SAE activity (|cos| ≥ 0.9 to a neuron axis, weighted by mean activation, as in section 3):
+
+| layer | 4× k=2 | 4× k=8 | 4× k=32 | 4× k=128 | 16× k=2 | 16× k=8 | 16× k=32 | 16× k=64 | rotated basis (16×, k=2 / 32) | random init (16×, k=2 / 32) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ConvNeXt-T last MLP (3072) | 68.9% (FVE 0.52) | **84.1% (FVE 0.77)** | 75.3% (0.94) | 31.3% (0.97) | 31.3% (0.44) | 54.3% (0.70) | 46.2% (0.88) | 24.2% (0.93) | **0.0% / 0.0%** | **0.0% / 0.0%** |
+| ConvNeXt-S last MLP (3072) | 10.9% (0.36) | 41.4% (0.51) | **75.7% (0.75)** | – | 4.7% (0.33) | 22.1% (0.47) | 47.4% (0.68) | – | – / 0.0% | – |
+| GoogLeNet inception5b (1024) | 0.0% (0.41) | 0.0% (0.60) | 11.6% (0.76) | 66.1% (0.91) | 0.0% (0.41) | 0.0% (0.60) | 9.4% (0.76) | 30.7% (0.83) | 0.0% / 0.0% | 0.0% / 0.1% |
+| ConvNeXt-T residual (768) | 0.0% (0.49) | 0.0% (0.63) | 0.0% (0.74) | 0.0% (0.86) | 0.0% (0.49) | 0.0% (0.65) | 0.0% (0.78) | 0.0% (0.82) | 0.0% / 0.0% | 0.0% / 0.0% |
+| planted sparse codes on the axes | 99.8% (k=2) | 98.9% (k=8) | | | | | | | rotated plant: 0.0%, 99.98% match the planted directions | |
+
+64× runs (GoogLeNet, ConvNeXt-T residual, k = 2 / 32) give 0.0–0.2%.
+
+- **ConvNeXt's last MLP reproduces the essay's number.** The best ConvNeXt-T SAE puts **84% of its activity on
+  near-copies of single neurons at FVE 0.77**; the essay reports 88% at FVE 0.82. ConvNeXt-S reaches 76% at
+  FVE 0.75. The share falls when the SAE is much wider (16×) or much denser (k = 128): with spare features the
+  SAE splits a neuron into several directions, none of them within 0.9.
+- **The controls say the alignment is a property of the network, not of the SAE.** Training the same SAE on the
+  same activations written in a random orthonormal basis gives **0% near-copies of the rotated axes**, but
+  measured against the true neurons (rotated back) the same SAE has **79% (k = 2) and 94% (k = 32)** of its
+  activity on near-copies for ConvNeXt-T, and 83% for ConvNeXt-S. So the SAE finds the neuron directions
+  whatever basis it is given. Random-init networks give 0%. In GoogLeNet the rotated SAE finds 14% (k = 32).
+- **The section 3 miss came from the SAE, not the network.** Same layer, same near-copy definition: 8.8% with
+  the weak SAE, 84% with the essay-scale one.
+- **The residual stream stays at 0%** in every setting. The essay's figure anchor is "convnext-sae-residual",
+  but its 88% sentence says "the last layer"; the residual stream has no per-coordinate nonlinearity, so a
+  preferred basis is not expected there. Our reading: the 88% is about the MLP's neurons.
+- **GoogLeNet is mixed.** Near-copies appear only for dense SAEs (k ≥ 32): 66% at 4× k = 128 (FVE 0.91), with a
+  flat profile from |cos| 0.8 to 0.95, i.e. features lying almost exactly on single neurons. There is no
+  rotated control at k = 128, so we do not count this as a reproduction.
+- **Removal test.** Removing every feature that matches no neuron, ConvNeXt-T best run: −0.19 pp (flipped answers
+  have median top-1/top-2 margin 0.04 vs 0.69 overall, so they were near-ties); splicing in the whole SAE:
+  −0.02 pp. Across the ConvNeXt-T runs: −0.19 to −1.30 pp; ConvNeXt-S: −0.01 to −0.12 pp. This matches the
+  essay's wording, but zeroing the whole ConvNeXt-T last MLP costs only −1.1 pp, so the test cannot tell much
+  on this block (no ConvNeXt-S block control was run). On GoogLeNet, removal costs −19 to −66 pp against
+  −69.7 pp for zeroing the layer; on the ConvNeXt-T residual, −74 to −81 pp against −82.0 pp.
+- **Top-20 on training images** (the essay's scans may use 50k training images): GoogLeNet 4.4% / 4.2%
+  class-dominated (two disjoint 50k samples; val 4.7%), ConvNeXt-T last MLP 42.0% / 43.2% (val 38.4%),
+  ConvNeXt-S last MLP 32.0% / 32.5% (val 27.8%), ConvNeXt-T residual 1.3% (val 1.2%). The choice of images does not
+  explain the gap to the essay's ~99%.
+
 ## 4. Rotation search (`imnet_sae_rotation.png`, right)
 
 Essay: "if you search the rotations of a layer for the one where a handful of units carry the most activity,
@@ -283,8 +337,10 @@ of the raw objective, the same as GoogLeNet here. No vis headline claim changed.
    not the essay's 7.06M parameter-matched ConvNeXt; the essay's "ConvNeXt of the same size" is that 7.06M one.
 2. **Interpretability proxy.** Class or superclass dominance of the top 20 is an automatic lower bound on
    legibility. The single-reader check is small (n = 24), not blind, and done by an AI agent.
-3. **SAE recipe.** Ours is a plain TopK SAE, 4× wide, k ∈ {8, 32}, 4k steps, fit on ImageNetV2 vectors. The
-   essay does not give its recipe or its exact near-copy criterion. The 0.9 cosine threshold and the
+3. **SAE recipe.** Section 3 used a plain TopK SAE (4×, k ∈ {8, 32}, 4k steps, ImageNetV2 vectors); section 3b
+   follows Gao et al. (2024). The essay's stated SAE recipe (640 features, k = 2, 25.6M positions, FVE 0.82) is
+   for its squeezed 10-channel mixed3b layer; its 88% sentence names no layer width, k or threshold, so our
+   sweep, the near-copy criterion and the share definition are ours. The 0.9 cosine threshold and the
    activity-share definition are ours.
 4. **Rotation objective and optimiser** are ours. At d ≥ 1024 the search from a random start is
    under-converged, so the subset results carry the ConvNeXt verdict.
