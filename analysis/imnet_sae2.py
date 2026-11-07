@@ -227,6 +227,10 @@ SWEEP = (
     *[(f"{L}_w64_k{k}", L, 64, k, False, True) for L in ("g5b", "cnt_res") for k in (2, 32)],
     *[(f"{L}_w16_k{k}_rot", L, 16, k, True, True) for L in ("g5b", "cnt_res", "cnt_mlp") for k in (2, 32)],
     *[(f"{L}_w16_k{k}_init", L, 16, k, False, False) for L in ("g5b", "cnt_res", "cnt_mlp") for k in (2, 32)],
+    # second pass: higher k (toward FVE >= 0.8) and ConvNeXt-S's last MLP
+    *[(f"{L}_w{w}_k{k}", L, w, k, False, True) for L in ("g5b", "cnt_res", "cnt_mlp") for w, k in ((4, 128), (16, 64))],
+    *[(f"cns_mlp_w{w}_k{k}", "cns_mlp", w, k, False, True) for w in (4, 16) for k in (2, 8, 32)],
+    ("cns_mlp_w16_k32_rot", "cns_mlp", 16, 32, True, True),
 )
 
 

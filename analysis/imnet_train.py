@@ -117,10 +117,17 @@ class NpyReader:
 
     def rows(self, i, n):
         n = min(n, self.shape[0] - i)
-        with self.lock:
+        out = np.empty((n, *self.shape[1:]), self.dtype)
+        mv = memoryview(out.reshape(-1).view(np.uint8))
+        with self.lock:                     # raw reads > 2 GB come back short on Windows: loop in 1 GB pieces
             self.f.seek(self.off + i * self.row)
-            b = self.f.read(n * self.row)
-        return np.frombuffer(b, self.dtype).reshape(n, *self.shape[1:])
+            got = 0
+            while got < len(mv):
+                r = self.f.readinto(mv[got:got + (1 << 30)])
+                if not r:
+                    raise IOError(f"short read in {self.fn}")
+                got += r
+        return out
 
     def take(self, idx):
         """Sorted-ish arbitrary rows (one read per row; use for small sets)."""
