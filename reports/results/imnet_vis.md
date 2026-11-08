@@ -306,10 +306,59 @@ first 64 steps" is a real ingredient and we have it; its "few subtle tweaks to r
 and the remaining gap to the 2026 column is theirs to publish or ours to find. Single seed; per-unit rank
 swings of tens are partly seed noise, the direction across three judges is the robust part.
 
+### Seeds for default vs path (`analysis/imnet_lucid_seeds.py`, figure `imnet_lucid_seeds_grid.png`)
+
+The sweep above had one FV seed per unit, so its per-unit claims (670 junco 397 -> 1) could not be separated from
+seed luck. Here `default` and `path` were rendered with 5 seeds (0-4) on the same 12 units, both through the
+sweep's own loop (`render_own`: lucent's chain step by step, torch and numpy seeded), so that at a given seed the
+two renders start from the same Fourier image and see the same jitter / scale / rotate draws and differ only in
+the anchor term of the first 64 steps. The sweep's `path` seed-0 renders are the same code path and were reused;
+its `default` seed-0 renders were not (they came from lucent's `render_vis`, which seeds torch only while the
+transforms draw from numpy), so default was re-rendered for all five seeds (seed-0 default scores therefore differ
+from the sweep's row: 852 goes 83 / 290 / 900 there, 61 / 218 / 756 here). Same three judges. Geometric-mean rank
+over the 8 picked / 4 random units per seed, then mean +- sd over the 5 seeds; paired wins = (unit, seed) pairs
+where path ranks the class better than default, out of 60, two-sided sign test with ties dropped; the last column
+counts units where path wins in at least 3 of the 5 seeds:
+
+| variant | judge | gmean picked (mean +- sd) | gmean random (mean +- sd) | paired path < default (ties) | units path better >= 3/5 |
+|---|---|---|---|---|---|
+| default | own net | 21.1 +- 3.4 | 55.0 +- 20.7 | | |
+| path | own net | **5.7 +- 1.2** | 41.7 +- 13.7 | 33 / 60 (15 ties; default better 12; p = 0.002) | 7 / 12 |
+| default | ConvNeXt-T | 99.1 +- 37.5 | 41.5 +- 20.9 | | |
+| path | ConvNeXt-T | **46.9 +- 9.4** | 20.3 +- 8.5 | 38 / 60 (0 ties; p = 0.05) | 10 / 12 |
+| default | GoogLeNet | 121.8 +- 33.9 | 37.7 +- 14.9 | | |
+| path | GoogLeNet | **44.0 +- 7.6** | 22.7 +- 14.1 | 36 / 60 (3 ties; p = 0.06) | 8 / 12 |
+
+(Median objective / dataset max 1.72 default, 1.81 path, as in the sweep. Per unit x variant x seed in
+`imnet_lucid_seeds.json`; renders `reports/figs/imnet_fv2/inceptionv1_lucid/<unit>_{default,path}_s<seed>.png`.
+Rendering 253 s for default and 482 s for path, 12 units x 5 seeds each, batches of 8 at 48-57 s when the GPU was
+free and up to 223 s when the other job on it was busy; peak 2.5 GB.)
+
+**Reading (by eye, then the numbers).** By eye the seed changes the layout and the setting changes the subject:
+within a setting the five renders of a unit share their motif and differ in arrangement (852 is always a fan of
+feathers with an eye, 59 always a twisted orange shape, 41 always dog faces in green), while the anchor changes
+what the motif is on about half the units, in every seed or nearly: 670 is armour and faces in 4 of 5 default
+seeds and one bird with an eye and beak in 5 of 5 path seeds (own rank 1 in all five); 894 grows a cat-like face
+in 3 of 5 default seeds and is a bird silhouette in 4 of 5 path seeds; 860 is several bird heads under default and
+more often one perched bird under path; 273 has several small dishes under default and one large dish in 3 of 5
+path seeds. On the other half (105, 59, 813, 1013, 642) the two columns are not distinguishable by eye and the
+seed-to-seed change is larger than the setting change; 1013 and 642 stay clutter in both, and path does not
+produce "a single photographic object" on any unit in any seed. The numbers agree: the picked-unit gain holds
+across seeds on all three judges (sd 1-9 for path against 3-38 for default; path's worst seed beats default's best
+on ConvNeXt-T and GoogLeNet), the own-net paired count is significant (33 wins vs 12 at p = 0.002), while the two
+independent judges are at p = 0.05-0.06 with 10/12 and 8/12 units favouring path by majority; 105 (1/5 on both
+independent judges) and 59 (the own net ranks the corkscrew 1st under both settings in all seeds) are the units
+that go the other way or do not move. Five seeds settle that the sweep's direction was not a seed accident and
+that it is a unit-dependent effect, strong where the default render fell into a wrong basin (670, 894) and
+absent where it was already on target; they cannot settle the size of the gain on any single unit (the
+independent judges' ranks still swing by hundreds between seeds on 852 and 894) nor whether more seeds or a
+different anchor length would move the non-responders.
+
 ## Files
 
-- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning), `analysis/imnet_lucid.py` (the essay's InceptionV1 via lucent), `analysis/imnet_lucid_sweep.py` (2026-column sweep on it)
+- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning), `analysis/imnet_lucid.py` (the essay's InceptionV1 via lucent), `analysis/imnet_lucid_sweep.py` (2026-column sweep on it), `analysis/imnet_lucid_seeds.py` (default vs path, 5 seeds)
 - `reports/results/imnet_lucid_sweep.json`, `reports/figs/imnet_lucid_sweep.jpg`, `reports/figs/imnet_fv2/inceptionv1_lucid/<unit>_<variant>.png`
+- `reports/results/imnet_lucid_seeds.json`, `reports/figs/imnet_lucid_seeds_grid.png` (+ `.jpg` for the web report), `reports/figs/imnet_fv2/inceptionv1_lucid/<unit>_{default,path}_s<seed>.png`
 - `reports/results/imnet_lucid.json`, `reports/figs/imnet_gallery_inceptionv1_lucid.png`, `reports/figs/imnet_lucid_models.png`, `reports/figs/imnet_lucid_seeds.png`, `reports/figs/imnet_fv/inceptionv1_lucid/<unit>_lucid[_s1].png`
 - `reports/results/imnet_featvis2.json`, `reports/figs/imnet_fv2_<arch>.jpg`, `reports/figs/imnet_fv2/<arch>/<unit>_<variant>.png`
 - `reports/results/imnet_featvis.json` (per unit: role, majority class and count, dataset max and median, rho,
