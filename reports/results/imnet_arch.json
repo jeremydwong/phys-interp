@@ -1,0 +1,1891 @@
+{
+ "networks": [
+  {
+   "key": "inceptionv1_lucid",
+   "name": "InceptionV1 (Lucid, 2014 weights)",
+   "year": 2014,
+   "family": "Inception",
+   "source": "torch-lucent 0.1.8 lucent.modelzoo.inceptionv1(pretrained=True); port of the TF inception5h graph",
+   "input": "224x224x3 RGB, RGB*255 - 117 (mean-subtracted, no std scaling)",
+   "n_outputs": 1008,
+   "n_params": 7066380,
+   "n_weight_layers": 58,
+   "norm": "LRN (2 layers, functional); no BatchNorm",
+   "residual": false,
+   "weights": {
+    "url": "https://github.com/ProGamerGov/pytorch-old-tensorflow-models/raw/master/inception5h.pth",
+    "recipe": "2014 Google training (Szegedy et al. 2015), TF inception5h release 2015",
+    "acc1": 69.13,
+    "acc1_note": "OURS: top-1 on the 50k ILSVRC2012 val, 224 centre crops, 1008->1000 class map recovered as the modal true label per output (reports/results/imnet_lucid.json class_map/acc_rgb)"
+   },
+   "studied": "mixed5b (1024 ch, 7x7), the four branch convs pre-ReLU",
+   "verified": {
+    "lrn_calls_in_forward": 2,
+    "aux_heads": [],
+    "norm_modules": [],
+    "relu": "RedirectedReLU helper (gradient trick for feature vis); no BN"
+   },
+   "notes": [
+    "Feed-forward: every stage consumes only the previous stage's output; no skip connections.",
+    "The two auxiliary softmax heads of the 2014 paper are absent from the inception5h graph and the lucent port.",
+    "Conv biases present (no BN); LRN after the first pool and after conv2d2 as in the 2014 paper."
+   ],
+   "stages": [
+    {
+     "name": "conv2d0",
+     "style": "conv",
+     "params": 9472,
+     "out": [
+      64,
+      112,
+      112
+     ],
+     "spatial": 112,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "7x7/2 conv, 64 ch"
+    },
+    {
+     "name": "maxpool0",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2"
+    },
+    {
+     "name": "lrn0",
+     "style": "lrn",
+     "params": 0,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "F.local_response_norm(size=9, alpha=1e-4, beta=0.5)"
+    },
+    {
+     "name": "conv2d1",
+     "style": "conv",
+     "params": 4160,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "1x1 conv, 64 ch"
+    },
+    {
+     "name": "conv2d2",
+     "style": "conv",
+     "params": 110784,
+     "out": [
+      192,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "3x3 conv, 192 ch"
+    },
+    {
+     "name": "lrn1",
+     "style": "lrn",
+     "params": 0,
+     "out": [
+      192,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "F.local_response_norm(size=9, alpha=1e-4, beta=0.5)"
+    },
+    {
+     "name": "maxpool1",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      192,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2"
+    },
+    {
+     "name": "mixed3a",
+     "style": "inception",
+     "params": 163696,
+     "out": [
+      256,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 64 | 3x3 128 | 5x5 32 | pool_reduce 32, concatenated"
+    },
+    {
+     "name": "mixed3b",
+     "style": "inception",
+     "params": 388736,
+     "out": [
+      480,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 128 | 3x3 192 | 5x5 96 | pool_reduce 64, concatenated"
+    },
+    {
+     "name": "maxpool4",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      480,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2"
+    },
+    {
+     "name": "mixed4a",
+     "style": "inception",
+     "params": 372716,
+     "out": [
+      508,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 192 | 3x3 204 | 5x5 48 | pool_reduce 64, concatenated"
+    },
+    {
+     "name": "mixed4b",
+     "style": "inception",
+     "params": 447720,
+     "out": [
+      512,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 160 | 3x3 224 | 5x5 64 | pool_reduce 64, concatenated"
+    },
+    {
+     "name": "mixed4c",
+     "style": "inception",
+     "params": 510104,
+     "out": [
+      512,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 128 | 3x3 256 | 5x5 64 | pool_reduce 64, concatenated"
+    },
+    {
+     "name": "mixed4d",
+     "style": "inception",
+     "params": 605376,
+     "out": [
+      528,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 112 | 3x3 288 | 5x5 64 | pool_reduce 64, concatenated"
+    },
+    {
+     "name": "mixed4e",
+     "style": "inception",
+     "params": 868352,
+     "out": [
+      832,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 256 | 3x3 320 | 5x5 128 | pool_reduce 128, concatenated"
+    },
+    {
+     "name": "maxpool10",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      832,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2"
+    },
+    {
+     "name": "mixed5a",
+     "style": "inception",
+     "params": 1107984,
+     "out": [
+      832,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 256 | 3x3 320 | 5x5 128 | pool_reduce 128, concatenated"
+    },
+    {
+     "name": "mixed5b",
+     "style": "inception",
+     "params": 1444080,
+     "out": [
+      1024,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 2,
+     "studied": true,
+     "note": "branch widths 1x1 384 | 3x3 384 | 5x5 128 | pool_reduce 128, concatenated"
+    },
+    {
+     "name": "avgpool0",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      1024,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "7x7 average pool (functional)"
+    },
+    {
+     "name": "softmax2",
+     "style": "head",
+     "params": 1033200,
+     "out": [
+      1008
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 1024 -> 1008 (2012 devkit class order; 8 unused outputs)"
+    }
+   ],
+   "n_stages": 20,
+   "depth": 22,
+   "params_in_stages": 7066380
+  },
+  {
+   "key": "googlenet",
+   "name": "GoogLeNet (torchvision, BatchNorm)",
+   "year": "2014 arch; BN re-implementation",
+   "family": "Inception",
+   "source": "torchvision 0.29 googlenet(weights=IMAGENET1K_V1), aux_logits=True, transform_input=True",
+   "input": "224x224x3 RGB, ImageNet mean/std normalised (then re-scaled inside by transform_input)",
+   "n_outputs": 1000,
+   "n_params": 13004888,
+   "n_params_excl_aux": 6624904,
+   "n_weight_layers": 64,
+   "norm": "BatchNorm after every conv; no LRN",
+   "residual": false,
+   "weights": {
+    "enum": "GoogLeNet_Weights.IMAGENET1K_V1",
+    "url": "https://download.pytorch.org/models/googlenet-1378be20.pth",
+    "num_params": 6624904,
+    "acc1": 69.778,
+    "acc5": 89.53,
+    "recipe": "https://github.com/pytorch/vision/tree/main/references/classification#googlenet",
+    "min_size": [
+     15,
+     15
+    ],
+    "docs": "These weights are ported from the original paper."
+   },
+   "studied": "inception5b (1024 ch, 7x7), the branch convs pre-ReLU",
+   "verified": {
+    "norm_modules": [
+     "BatchNorm"
+    ],
+    "aux_heads": [
+     "aux1",
+     "aux2"
+    ]
+   },
+   "notes": [
+    "Same topology as (a) (3 stem convs, 9 Inception modules, 4 max-pools, GAP, 1 FC), but every conv is bias-free conv + BatchNorm + ReLU, the LRN layers are gone, the 5x5 branch is a 3x3 conv (TF-slim convention) and the two auxiliary heads are present as modules (used only in training).",
+    "Weights: torchvision's meta says 'ported from the original paper'; they are a BatchNorm-era re-training, not the 2014 release. Top-1 69.78 vs our 69.13 for the Lucid weights.",
+    "torchvision's num_params (6,624,904) excludes the aux heads; with aux_logits=True the module has 13,004,888, and torchvision warns that the aux heads are NOT pretrained (random init)."
+   ],
+   "stages": [
+    {
+     "name": "conv1",
+     "style": "bnconv",
+     "params": 9536,
+     "out": [
+      64,
+      112,
+      112
+     ],
+     "spatial": 112,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "7x7/2 conv (no bias) + BN + ReLU"
+    },
+    {
+     "name": "maxpool1",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2, ceil_mode"
+    },
+    {
+     "name": "conv2",
+     "style": "bnconv",
+     "params": 4224,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "1x1/1 conv (no bias) + BN + ReLU"
+    },
+    {
+     "name": "conv3",
+     "style": "bnconv",
+     "params": 110976,
+     "out": [
+      192,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "3x3/1 conv (no bias) + BN + ReLU"
+    },
+    {
+     "name": "maxpool2",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      192,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2, ceil_mode"
+    },
+    {
+     "name": "inception3a",
+     "style": "inception",
+     "params": 155872,
+     "out": [
+      256,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 64 | 3x3 128 | 3x3(5x5 slot) 32 | pool 1x1 32, each conv + BN + ReLU"
+    },
+    {
+     "name": "inception3b",
+     "style": "inception",
+     "params": 340224,
+     "out": [
+      480,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 128 | 3x3 192 | 3x3(5x5 slot) 96 | pool 1x1 64, each conv + BN + ReLU"
+    },
+    {
+     "name": "maxpool3",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      480,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2, ceil_mode"
+    },
+    {
+     "name": "inception4a",
+     "style": "inception",
+     "params": 364512,
+     "out": [
+      512,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 192 | 3x3 208 | 3x3(5x5 slot) 48 | pool 1x1 64, each conv + BN + ReLU"
+    },
+    {
+     "name": "aux1",
+     "style": "aux",
+     "params": 3188968,
+     "out": [
+      1000
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "avgpool 5x5/3 -> 1x1 conv 128 -> FC 1024 -> FC 1000; off in eval()"
+    },
+    {
+     "name": "inception4b",
+     "style": "inception",
+     "params": 425232,
+     "out": [
+      512,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 160 | 3x3 224 | 3x3(5x5 slot) 64 | pool 1x1 64, each conv + BN + ReLU"
+    },
+    {
+     "name": "inception4c",
+     "style": "inception",
+     "params": 486192,
+     "out": [
+      512,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 128 | 3x3 256 | 3x3(5x5 slot) 64 | pool 1x1 64, each conv + BN + ReLU"
+    },
+    {
+     "name": "inception4d",
+     "style": "inception",
+     "params": 573312,
+     "out": [
+      528,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 112 | 3x3 288 | 3x3(5x5 slot) 64 | pool 1x1 64, each conv + BN + ReLU"
+    },
+    {
+     "name": "aux2",
+     "style": "aux",
+     "params": 3191016,
+     "out": [
+      1000
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "same as aux1; off in eval()"
+    },
+    {
+     "name": "inception4e",
+     "style": "inception",
+     "params": 803840,
+     "out": [
+      832,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 256 | 3x3 320 | 3x3(5x5 slot) 128 | pool 1x1 128, each conv + BN + ReLU"
+    },
+    {
+     "name": "maxpool4",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      832,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2, ceil_mode"
+    },
+    {
+     "name": "inception5a",
+     "style": "inception",
+     "params": 978944,
+     "out": [
+      832,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 2,
+     "studied": false,
+     "note": "branch widths 1x1 256 | 3x3 320 | 3x3(5x5 slot) 128 | pool 1x1 128, each conv + BN + ReLU"
+    },
+    {
+     "name": "inception5b",
+     "style": "inception",
+     "params": 1347040,
+     "out": [
+      1024,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 2,
+     "studied": true,
+     "note": "branch widths 1x1 384 | 3x3 384 | 3x3(5x5 slot) 128 | pool 1x1 128, each conv + BN + ReLU"
+    },
+    {
+     "name": "avgpool",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      1024,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "AdaptiveAvgPool2d(1) + dropout 0.2"
+    },
+    {
+     "name": "fc",
+     "style": "head",
+     "params": 1025000,
+     "out": [
+      1000
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 1024 -> 1000"
+    }
+   ],
+   "n_stages": 20,
+   "depth": 22,
+   "params_in_stages": 13004888
+  },
+  {
+   "key": "convnext_tiny",
+   "name": "ConvNeXt-T (torchvision)",
+   "year": 2022,
+   "family": "ConvNeXt",
+   "source": "torchvision 0.29 convnext_tiny(weights=IMAGENET1K_V1)",
+   "input": "224x224x3 RGB, ImageNet mean/std normalised",
+   "n_outputs": 1000,
+   "n_params": 28589128,
+   "n_weight_layers": 59,
+   "norm": "LayerNorm (one per block, in stem, downsamples and head); no BatchNorm",
+   "residual": true,
+   "weights": {
+    "enum": "ConvNeXt_Tiny_Weights.IMAGENET1K_V1",
+    "url": "https://download.pytorch.org/models/convnext_tiny-983f1562.pth",
+    "num_params": 28589128,
+    "acc1": 82.52,
+    "acc5": 96.146,
+    "recipe": "https://github.com/pytorch/vision/tree/main/references/classification#convnext",
+    "min_size": [
+     32,
+     32
+    ],
+    "docs": "These weights improve upon the results of the original paper by using a modified version of TorchVision's `new training recipe <https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/>`_."
+   },
+   "depths": [
+    3,
+    3,
+    9,
+    3
+   ],
+   "widths": [
+    96,
+    192,
+    384,
+    768
+   ],
+   "studied": "stage 3 (features[5]), last block (9 of 9), the 1536 MLP hidden units after GELU",
+   "verified": {
+    "norm_modules": [
+     "LayerNorm"
+    ],
+    "depths": [
+     3,
+     3,
+     9,
+     3
+    ],
+    "widths": [
+     96,
+     192,
+     384,
+     768
+    ]
+   },
+   "notes": [
+    "Residual stream: every block adds its output to its input (x + gamma * MLP(LN(dwconv(x)))), so the same 96/192/384/768-channel tensor runs through each stage and is only rewritten at the downsamples.",
+    "Blocks use GELU, not ReLU, and one LayerNorm per block instead of BatchNorm after every conv."
+   ],
+   "stages": [
+    {
+     "name": "stem",
+     "style": "stem",
+     "params": 4896,
+     "out": [
+      96,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "4x4/4 conv 3 -> 96 + LayerNorm (patchify)"
+    },
+    {
+     "name": "stage1",
+     "style": "convnext",
+     "params": 237888,
+     "out": [
+      96,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 blocks, 96 ch, MLP hidden 384 (x4), layer scale init 1e-6, stochastic depth in training"
+    },
+    {
+     "name": "down1",
+     "style": "downsample",
+     "params": 74112,
+     "out": [
+      192,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage2",
+     "style": "convnext",
+     "params": 918144,
+     "out": [
+      192,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 blocks, 192 ch, MLP hidden 768 (x4), layer scale init 1e-6, stochastic depth in training"
+    },
+    {
+     "name": "down2",
+     "style": "downsample",
+     "params": 295680,
+     "out": [
+      384,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage3",
+     "style": "convnext",
+     "params": 10817280,
+     "out": [
+      384,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": 9,
+     "depth": 27,
+     "studied": true,
+     "note": "9 blocks, 384 ch, MLP hidden 1536 (x4), layer scale init 1e-6, stochastic depth in training"
+    },
+    {
+     "name": "down3",
+     "style": "downsample",
+     "params": 1181184,
+     "out": [
+      768,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage4",
+     "style": "convnext",
+     "params": 14289408,
+     "out": [
+      768,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 blocks, 768 ch, MLP hidden 3072 (x4), layer scale init 1e-6, stochastic depth in training"
+    },
+    {
+     "name": "avgpool",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      768,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "AdaptiveAvgPool2d(1)"
+    },
+    {
+     "name": "classifier",
+     "style": "head",
+     "params": 770536,
+     "out": [
+      1000
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + Linear 768 -> 1000"
+    }
+   ],
+   "n_stages": 10,
+   "depth": 59,
+   "params_in_stages": 28589128
+  },
+  {
+   "key": "resnet50",
+   "name": "ResNet-50 (torchvision, architecture only)",
+   "year": 2015,
+   "family": "ResNet",
+   "source": "torchvision 0.29 resnet50(weights=None); weights V1 / V2 share this module",
+   "input": "224x224x3 RGB, ImageNet mean/std normalised",
+   "n_outputs": 1000,
+   "n_params": 25557032,
+   "n_weight_layers": 54,
+   "norm": "BatchNorm after every conv",
+   "residual": true,
+   "weights": {
+    "IMAGENET1K_V1": {
+     "enum": "ResNet50_Weights.IMAGENET1K_V1",
+     "url": "https://download.pytorch.org/models/resnet50-0676ba61.pth",
+     "num_params": 25557032,
+     "acc1": 76.13,
+     "acc5": 92.862,
+     "recipe": "https://github.com/pytorch/vision/tree/main/references/classification#resnet",
+     "min_size": [
+      1,
+      1
+     ],
+     "docs": "These weights reproduce closely the results of the paper using a simple training recipe."
+    },
+    "IMAGENET1K_V2": {
+     "enum": "ResNet50_Weights.IMAGENET1K_V2",
+     "url": "https://download.pytorch.org/models/resnet50-11ad3fa6.pth",
+     "num_params": 25557032,
+     "acc1": 80.858,
+     "acc5": 95.434,
+     "recipe": "https://github.com/pytorch/vision/issues/3995#issuecomment-1013906621",
+     "min_size": [
+      1,
+      1
+     ],
+     "docs": "These weights improve upon the results of the original paper by using TorchVision's `new training recipe <https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/>`_."
+    }
+   },
+   "studied": "layer4 (2048 ch, 7x7) if used",
+   "verified": {
+    "norm_modules": [
+     "BatchNorm"
+    ],
+    "blocks": [
+     3,
+     4,
+     6,
+     3
+    ]
+   },
+   "notes": [
+    "V1 and V2 weights have the same num_params (the same module); V2 adds ~4.7 top-1 points purely by training recipe (long schedule, heavy augmentation, EMA, label smoothing; see the recipe URLs).",
+    "'50' = 49 convs on the main path (1 stem + 16 blocks x 3) + 1 FC; the 4 projection shortcuts are extra."
+   ],
+   "stages": [
+    {
+     "name": "stem",
+     "style": "bnconv",
+     "params": 9536,
+     "out": [
+      64,
+      112,
+      112
+     ],
+     "spatial": 112,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "7x7/2 conv 3 -> 64 + BN + ReLU"
+    },
+    {
+     "name": "maxpool",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      64,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "3x3/2"
+    },
+    {
+     "name": "layer1",
+     "style": "bottleneck",
+     "params": 215808,
+     "out": [
+      256,
+      56,
+      56
+     ],
+     "spatial": 56,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 bottleneck blocks, 64 -> 256 ch; first block has a 1x1 projection shortcut"
+    },
+    {
+     "name": "layer2",
+     "style": "bottleneck",
+     "params": 1219584,
+     "out": [
+      512,
+      28,
+      28
+     ],
+     "spatial": 28,
+     "blocks": 4,
+     "depth": 12,
+     "studied": false,
+     "note": "4 bottleneck blocks, 128 -> 512 ch; first block has a 1x1 projection shortcut"
+    },
+    {
+     "name": "layer3",
+     "style": "bottleneck",
+     "params": 7098368,
+     "out": [
+      1024,
+      14,
+      14
+     ],
+     "spatial": 14,
+     "blocks": 6,
+     "depth": 18,
+     "studied": false,
+     "note": "6 bottleneck blocks, 256 -> 1024 ch; first block has a 1x1 projection shortcut"
+    },
+    {
+     "name": "layer4",
+     "style": "bottleneck",
+     "params": 14964736,
+     "out": [
+      2048,
+      7,
+      7
+     ],
+     "spatial": 7,
+     "blocks": 3,
+     "depth": 9,
+     "studied": true,
+     "note": "3 bottleneck blocks, 512 -> 2048 ch; first block has a 1x1 projection shortcut"
+    },
+    {
+     "name": "avgpool",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      2048,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "AdaptiveAvgPool2d(1)"
+    },
+    {
+     "name": "fc",
+     "style": "head",
+     "params": 2049000,
+     "out": [
+      1000
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 2048 -> 1000"
+    }
+   ],
+   "n_stages": 8,
+   "depth": 50,
+   "params_in_stages": 25557032
+  },
+  {
+   "key": "vis_plaincnn",
+   "name": "PlainCNN (ours, M_old / M_recipe)",
+   "year": 2026,
+   "family": "plain CNN",
+   "source": "models/vis_models.py PlainCNN(24, stem_stride=2); no weights loaded",
+   "input": "64x64x3 shapes images in [0,1], normalised inside",
+   "n_outputs": 24,
+   "n_params": 1179384,
+   "n_weight_layers": 9,
+   "norm": "BatchNorm after every conv",
+   "residual": false,
+   "weights": {
+    "url": null,
+    "recipe": "models/vis_train.py --step old|recipe",
+    "acc1": null,
+    "acc1_note": "shapes test acc 99.99% (old) / 99.96% (recipe); CIFAR-10 91.2 / 89.5 (reports/results/vis.md)"
+   },
+   "studied": "s4c2 (256 units at 4x4), the last conv's BN output pre-ReLU",
+   "notes": [
+    "VGG-style: 8 convs in 4 stages of 2, max-pool between stages, no skip connections.",
+    "The CIFAR variant differs only in stem stride (1), input (32 px) and head (10 classes)."
+   ],
+   "stages": [
+    {
+     "name": "stage1",
+     "style": "bnconv",
+     "params": 10208,
+     "out": [
+      32,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": 2,
+     "depth": 2,
+     "studied": false,
+     "note": "2 x (3x3 conv + BN + ReLU), 32 ch (first conv stride 2)"
+    },
+    {
+     "name": "pool1",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      32,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "2x2/2"
+    },
+    {
+     "name": "stage2",
+     "style": "bnconv",
+     "params": 55552,
+     "out": [
+      64,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": 2,
+     "depth": 2,
+     "studied": false,
+     "note": "2 x (3x3 conv + BN + ReLU), 64 ch"
+    },
+    {
+     "name": "pool2",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      64,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "2x2/2"
+    },
+    {
+     "name": "stage3",
+     "style": "bnconv",
+     "params": 221696,
+     "out": [
+      128,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": 2,
+     "depth": 2,
+     "studied": false,
+     "note": "2 x (3x3 conv + BN + ReLU), 128 ch"
+    },
+    {
+     "name": "pool3",
+     "style": "pool",
+     "params": 0,
+     "out": [
+      128,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "2x2/2"
+    },
+    {
+     "name": "stage4",
+     "style": "bnconv",
+     "params": 885760,
+     "out": [
+      256,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": 2,
+     "depth": 2,
+     "studied": true,
+     "note": "2 x (3x3 conv + BN + ReLU), 256 ch"
+    },
+    {
+     "name": "gap",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      256,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "spatial mean"
+    },
+    {
+     "name": "head",
+     "style": "head",
+     "params": 6168,
+     "out": [
+      24
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 256 -> 24"
+    }
+   ],
+   "n_stages": 9,
+   "depth": 9,
+   "params_in_stages": 1179384
+  },
+  {
+   "key": "vis_convnexts_s",
+   "name": "ConvNeXtS-s (ours, 0.2M)",
+   "year": 2026,
+   "family": "ConvNeXt",
+   "source": "models/vis_models.py ConvNeXtS(24, stem_stride=2, **ARCH_SIZES['s']); no weights loaded",
+   "input": "64x64x3 shapes images in [0,1], normalised inside",
+   "n_outputs": 24,
+   "n_params": 203848,
+   "n_weight_layers": 20,
+   "norm": "LayerNorm (per block, stem, downsamples, head)",
+   "residual": true,
+   "depths": [
+    1,
+    1,
+    2,
+    1
+   ],
+   "widths": [
+    16,
+    32,
+    64,
+    96
+   ],
+   "weights": {
+    "url": null,
+    "recipe": "models/vis_train.py --step arch --size s",
+    "acc1": null,
+    "acc1_note": "size sweep, see vis.md"
+   },
+   "studied": "s4b1 MLP hidden units (4 x last width) at 4x4",
+   "notes": [
+    "Miniature of ConvNeXt-T: same block, 4 stages, patchify stem, LN downsamples; depths [1, 1, 2, 1], widths [16, 32, 64, 96]."
+   ],
+   "stages": [
+    {
+     "name": "stem",
+     "style": "stem",
+     "params": 816,
+     "out": [
+      16,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "4x4/2 conv + LayerNorm"
+    },
+    {
+     "name": "stage1",
+     "style": "convnext",
+     "params": 2976,
+     "out": [
+      16,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 16 ch, MLP hidden 64"
+    },
+    {
+     "name": "down1",
+     "style": "downsample",
+     "params": 2112,
+     "out": [
+      32,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage2",
+     "style": "convnext",
+     "params": 10048,
+     "out": [
+      32,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 32 ch, MLP hidden 128"
+    },
+    {
+     "name": "down2",
+     "style": "downsample",
+     "params": 8320,
+     "out": [
+      64,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage3",
+     "style": "convnext",
+     "params": 72960,
+     "out": [
+      64,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": 2,
+     "depth": 6,
+     "studied": false,
+     "note": "2 block(s), 64 ch, MLP hidden 256"
+    },
+    {
+     "name": "down3",
+     "style": "downsample",
+     "params": 24800,
+     "out": [
+      96,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage4",
+     "style": "convnext",
+     "params": 79296,
+     "out": [
+      96,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": 1,
+     "depth": 3,
+     "studied": true,
+     "note": "1 block(s), 96 ch, MLP hidden 384"
+    },
+    {
+     "name": "gap",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      96,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "spatial mean + LayerNorm"
+    },
+    {
+     "name": "head",
+     "style": "head",
+     "params": 2520,
+     "out": [
+      24
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 96 -> 24"
+    }
+   ],
+   "n_stages": 10,
+   "depth": 20,
+   "params_in_stages": 203848
+  },
+  {
+   "key": "vis_convnexts_m",
+   "name": "ConvNeXtS-m (ours, 1.2M, M_arch)",
+   "year": 2026,
+   "family": "ConvNeXt",
+   "source": "models/vis_models.py ConvNeXtS(24, stem_stride=2, **ARCH_SIZES['m']); no weights loaded",
+   "input": "64x64x3 shapes images in [0,1], normalised inside",
+   "n_outputs": 24,
+   "n_params": 1182392,
+   "n_weight_layers": 23,
+   "norm": "LayerNorm (per block, stem, downsamples, head)",
+   "residual": true,
+   "depths": [
+    1,
+    1,
+    3,
+    1
+   ],
+   "widths": [
+    32,
+    64,
+    128,
+    256
+   ],
+   "weights": {
+    "url": null,
+    "recipe": "models/vis_train.py --step arch --size m",
+    "acc1": null,
+    "acc1_note": "M_arch: shapes test acc 100%, CIFAR-10 86.9% (reports/results/vis.md)"
+   },
+   "studied": "s4b1 MLP hidden units (4 x last width) at 4x4",
+   "notes": [
+    "Miniature of ConvNeXt-T: same block, 4 stages, patchify stem, LN downsamples; depths [1, 1, 3, 1], widths [32, 64, 128, 256]."
+   ],
+   "stages": [
+    {
+     "name": "stem",
+     "style": "stem",
+     "params": 1632,
+     "out": [
+      32,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "4x4/2 conv + LayerNorm"
+    },
+    {
+     "name": "stage1",
+     "style": "convnext",
+     "params": 10048,
+     "out": [
+      32,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 32 ch, MLP hidden 128"
+    },
+    {
+     "name": "down1",
+     "style": "downsample",
+     "params": 8320,
+     "out": [
+      64,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage2",
+     "style": "convnext",
+     "params": 36480,
+     "out": [
+      64,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 64 ch, MLP hidden 256"
+    },
+    {
+     "name": "down2",
+     "style": "downsample",
+     "params": 33024,
+     "out": [
+      128,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage3",
+     "style": "convnext",
+     "params": 415488,
+     "out": [
+      128,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 block(s), 128 ch, MLP hidden 512"
+    },
+    {
+     "name": "down3",
+     "style": "downsample",
+     "params": 131584,
+     "out": [
+      256,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage4",
+     "style": "convnext",
+     "params": 539136,
+     "out": [
+      256,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": 1,
+     "depth": 3,
+     "studied": true,
+     "note": "1 block(s), 256 ch, MLP hidden 1024"
+    },
+    {
+     "name": "gap",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      256,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "spatial mean + LayerNorm"
+    },
+    {
+     "name": "head",
+     "style": "head",
+     "params": 6680,
+     "out": [
+      24
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 256 -> 24"
+    }
+   ],
+   "n_stages": 10,
+   "depth": 23,
+   "params_in_stages": 1182392
+  },
+  {
+   "key": "vis_convnexts_l",
+   "name": "ConvNeXtS-l (ours, 4.6M)",
+   "year": 2026,
+   "family": "ConvNeXt",
+   "source": "models/vis_models.py ConvNeXtS(24, stem_stride=2, **ARCH_SIZES['l']); no weights loaded",
+   "input": "64x64x3 shapes images in [0,1], normalised inside",
+   "n_outputs": 24,
+   "n_params": 4625752,
+   "n_weight_layers": 23,
+   "norm": "LayerNorm (per block, stem, downsamples, head)",
+   "residual": true,
+   "depths": [
+    1,
+    1,
+    3,
+    1
+   ],
+   "widths": [
+    64,
+    128,
+    256,
+    512
+   ],
+   "weights": {
+    "url": null,
+    "recipe": "models/vis_train.py --step arch --size l",
+    "acc1": null,
+    "acc1_note": "size sweep, see vis.md"
+   },
+   "studied": "s4b1 MLP hidden units (4 x last width) at 4x4",
+   "notes": [
+    "Miniature of ConvNeXt-T: same block, 4 stages, patchify stem, LN downsamples; depths [1, 1, 3, 1], widths [64, 128, 256, 512]."
+   ],
+   "stages": [
+    {
+     "name": "stem",
+     "style": "stem",
+     "params": 3264,
+     "out": [
+      64,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "4x4/2 conv + LayerNorm"
+    },
+    {
+     "name": "stage1",
+     "style": "convnext",
+     "params": 36480,
+     "out": [
+      64,
+      32,
+      32
+     ],
+     "spatial": 32,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 64 ch, MLP hidden 256"
+    },
+    {
+     "name": "down1",
+     "style": "downsample",
+     "params": 33024,
+     "out": [
+      128,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage2",
+     "style": "convnext",
+     "params": 138496,
+     "out": [
+      128,
+      16,
+      16
+     ],
+     "spatial": 16,
+     "blocks": 1,
+     "depth": 3,
+     "studied": false,
+     "note": "1 block(s), 128 ch, MLP hidden 512"
+    },
+    {
+     "name": "down2",
+     "style": "downsample",
+     "params": 131584,
+     "out": [
+      256,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage3",
+     "style": "convnext",
+     "params": 1617408,
+     "out": [
+      256,
+      8,
+      8
+     ],
+     "spatial": 8,
+     "blocks": 3,
+     "depth": 9,
+     "studied": false,
+     "note": "3 block(s), 256 ch, MLP hidden 1024"
+    },
+    {
+     "name": "down3",
+     "style": "downsample",
+     "params": 525312,
+     "out": [
+      512,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "LayerNorm + 2x2/2 conv"
+    },
+    {
+     "name": "stage4",
+     "style": "convnext",
+     "params": 2126848,
+     "out": [
+      512,
+      4,
+      4
+     ],
+     "spatial": 4,
+     "blocks": 1,
+     "depth": 3,
+     "studied": true,
+     "note": "1 block(s), 512 ch, MLP hidden 2048"
+    },
+    {
+     "name": "gap",
+     "style": "gap",
+     "params": 0,
+     "out": [
+      512,
+      1,
+      1
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 0,
+     "studied": false,
+     "note": "spatial mean + LayerNorm"
+    },
+    {
+     "name": "head",
+     "style": "head",
+     "params": 13336,
+     "out": [
+      24
+     ],
+     "spatial": 1,
+     "blocks": null,
+     "depth": 1,
+     "studied": false,
+     "note": "Linear 512 -> 24"
+    }
+   ],
+   "n_stages": 10,
+   "depth": 23,
+   "params_in_stages": 4625752
+  }
+ ],
+ "text_rows": [
+  {
+   "key": "essay_92k",
+   "name": "ConvNeXt 92k (essay)",
+   "n_params": 92000,
+   "blocks": null,
+   "note": "smallest of the essay's three ConvNeXts; parameters from the essay text, no code or weights"
+  },
+  {
+   "key": "essay_7m",
+   "name": "ConvNeXt 7.06M (essay)",
+   "n_params": 7060000,
+   "blocks": null,
+   "note": "middle size of the essay's sweep; text only"
+  },
+  {
+   "key": "essay_28m",
+   "name": "ConvNeXt 28.6M (essay)",
+   "n_params": 28600000,
+   "blocks": 18,
+   "note": "largest; 18 blocks (3/3/9/3 like ConvNeXt-T, whose torchvision count is 28,589,128); text only"
+  }
+ ],
+ "hf_check": {
+  "url": "https://huggingface.co/facebook/convnext-tiny-224/raw/main/config.json",
+  "fetched": true,
+  "config": {
+   "depths": [
+    3,
+    3,
+    9,
+    3
+   ],
+   "hidden_sizes": [
+    96,
+    192,
+    384,
+    768
+   ],
+   "patch_size": 4,
+   "num_stages": 4,
+   "layer_scale_init_value": 1e-06,
+   "hidden_act": "gelu",
+   "image_size": 224,
+   "model_type": "convnext"
+  },
+  "matched": true,
+  "torchvision": {
+   "depths": [
+    3,
+    3,
+    9,
+    3
+   ],
+   "widths": [
+    96,
+    192,
+    384,
+    768
+   ]
+  }
+ },
+ "styles": {
+  "conv": "conv + ReLU (plain)",
+  "bnconv": "conv + BatchNorm + ReLU",
+  "inception": "Inception module (1x1 | 3x3 | 5x5 | pool branches, concatenated)",
+  "bottleneck": "bottleneck residual block (1x1-3x3-1x1 + skip), BatchNorm",
+  "convnext": "ConvNeXt block (7x7 depthwise -> LayerNorm -> 1x1 MLP x4, GELU -> layer scale -> skip)",
+  "head": "linear head (classes)",
+  "aux": "auxiliary head (training only)",
+  "stem": "patchify stem (4x4/4 conv + LayerNorm)",
+  "downsample": "downsample (LayerNorm + 2x2/2 conv)",
+  "lrn": "local response norm (LRN)",
+  "pool": "max pool",
+  "gap": "global average pool"
+ },
+ "depth_rule": {
+  "conv": 1,
+  "bnconv": 1,
+  "inception": 2,
+  "bottleneck": 3,
+  "convnext": 3,
+  "head": 1,
+  "stem": 1,
+  "downsample": 1,
+  "aux": 0,
+  "lrn": 0,
+  "pool": 0,
+  "gap": 0
+ },
+ "torch": "2.14.1+cu132",
+ "torchvision": "0.29.1+cu132",
+ "essay": "Cammarata (2026), Neural Networks Are Already Clean, Goodfire"
+}
