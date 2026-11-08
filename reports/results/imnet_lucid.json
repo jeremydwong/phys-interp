@@ -1,0 +1,244 @@
+{
+ "tag": "inceptionv1_lucid",
+ "layer": "mixed5b",
+ "model": "Lucid's InceptionV1 (inception5h, 2014) via lucent 0.1.8; input RGB*255-117",
+ "recipe": {
+  "library": "lucent render_vis defaults",
+  "size": 128,
+  "steps": 512,
+  "lr": 0.05,
+  "transforms": "pad 12 (grey), jitter 8, scale 0.9..1.1 (11 values), rotate -10..10 deg, jitter 4, bilinear upsample 128->224",
+  "param": "Fourier (1/f) + colour decorrelation, sigmoid",
+  "objective": "spatial mean of the pre-ReLU branch channel"
+ },
+ "class_map": {
+  "acc_rgb": 0.69128,
+  "acc_bgr": 0.5344,
+  "covered": 1000
+ },
+ "picked": [
+  852,
+  860,
+  670,
+  105,
+  59,
+  894,
+  813,
+  1013
+ ],
+ "random": [
+  16,
+  41,
+  77,
+  179,
+  273,
+  312,
+  516,
+  642,
+  661,
+  828,
+  859,
+  934
+ ],
+ "seed_units": [
+  852,
+  860
+ ],
+ "units": {
+  "852": {
+   "role": "picked",
+   "majority": 11,
+   "count": 14,
+   "dataset_max": 453.75,
+   "judge_other": 290,
+   "judge_own": 83
+  },
+  "860": {
+   "role": "picked",
+   "majority": 95,
+   "count": 14,
+   "dataset_max": 401.5,
+   "judge_other": 13,
+   "judge_own": 65
+  },
+  "670": {
+   "role": "picked",
+   "majority": 13,
+   "count": 13,
+   "dataset_max": 387.75,
+   "judge_other": 247,
+   "judge_own": 397
+  },
+  "105": {
+   "role": "picked",
+   "majority": 13,
+   "count": 13,
+   "dataset_max": 438.75,
+   "judge_other": 23,
+   "judge_own": 11
+  },
+  "59": {
+   "role": "picked",
+   "majority": 512,
+   "count": 13,
+   "dataset_max": 395.5,
+   "judge_other": 161,
+   "judge_own": 1
+  },
+  "894": {
+   "role": "picked",
+   "majority": 11,
+   "count": 12,
+   "dataset_max": 304.75,
+   "judge_other": 168,
+   "judge_own": 27
+  },
+  "813": {
+   "role": "picked",
+   "majority": 570,
+   "count": 11,
+   "dataset_max": 439.5,
+   "judge_other": 9,
+   "judge_own": 1
+  },
+  "1013": {
+   "role": "picked",
+   "majority": 143,
+   "count": 11,
+   "dataset_max": 395.5,
+   "judge_other": 594,
+   "judge_own": 387
+  },
+  "16": {
+   "role": "random",
+   "majority": 430,
+   "count": 6,
+   "dataset_max": 231.375,
+   "judge_other": 306,
+   "judge_own": 224
+  },
+  "41": {
+   "role": "random",
+   "majority": 154,
+   "count": 8,
+   "dataset_max": 327.0,
+   "judge_other": 4,
+   "judge_own": 511
+  },
+  "77": {
+   "role": "random",
+   "majority": 164,
+   "count": 3,
+   "dataset_max": 231.25,
+   "judge_other": 518,
+   "judge_own": 23
+  },
+  "179": {
+   "role": "random",
+   "majority": 121,
+   "count": 2,
+   "dataset_max": 257.75,
+   "judge_other": 33,
+   "judge_own": 28
+  },
+  "273": {
+   "role": "random",
+   "majority": 755,
+   "count": 9,
+   "dataset_max": 261.5,
+   "judge_other": 5,
+   "judge_own": 2
+  },
+  "312": {
+   "role": "random",
+   "majority": 196,
+   "count": 4,
+   "dataset_max": 275.75,
+   "judge_other": 535,
+   "judge_own": 182
+  },
+  "516": {
+   "role": "random",
+   "majority": 241,
+   "count": 7,
+   "dataset_max": 270.0,
+   "judge_other": 595,
+   "judge_own": 129
+  },
+  "642": {
+   "role": "random",
+   "majority": 99,
+   "count": 8,
+   "dataset_max": 282.75,
+   "judge_other": 870,
+   "judge_own": 443
+  },
+  "661": {
+   "role": "random",
+   "majority": 387,
+   "count": 4,
+   "dataset_max": 296.5,
+   "judge_other": 413,
+   "judge_own": 251
+  },
+  "828": {
+   "role": "random",
+   "majority": 92,
+   "count": 5,
+   "dataset_max": 317.75,
+   "judge_other": 297,
+   "judge_own": 333
+  },
+  "859": {
+   "role": "random",
+   "majority": 507,
+   "count": 3,
+   "dataset_max": 333.5,
+   "judge_other": 499,
+   "judge_own": 72
+  },
+  "934": {
+   "role": "random",
+   "majority": 158,
+   "count": 5,
+   "dataset_max": 369.75,
+   "judge_other": 81,
+   "judge_own": 79
+  }
+ },
+ "render_time_s": {},
+ "judge_summary": {
+  "n_units": 20,
+  "class_dominated": 8,
+  "dominated_top5_other": 0,
+  "dominated_top5_own": 2,
+  "median_rank_other_all": 268.5,
+  "median_rank_own_all": 81.0
+ },
+ "same_microscope_other_nets": {
+  "googlenet_748": {
+   "majority": 604,
+   "count": 20,
+   "judge_other": 1,
+   "time_s": 16.182942628860474
+  },
+  "googlenet_502": {
+   "majority": 793,
+   "count": 17,
+   "judge_other": 1,
+   "time_s": 16.091081619262695
+  },
+  "convnext_tiny_312": {
+   "majority": 14,
+   "count": 20,
+   "judge_other": 235,
+   "time_s": 14.766496181488037
+  },
+  "convnext_tiny_702": {
+   "majority": 731,
+   "count": 20,
+   "judge_other": 51,
+   "time_s": 14.298680543899536
+  }
+ }
+}

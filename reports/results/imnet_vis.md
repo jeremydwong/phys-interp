@@ -200,15 +200,76 @@ reads 4 of the 14 class-dominated units from them, against 0 before, but they ar
 coarse yardstick (it rewards "the class is findable somewhere in the frame", not "one clean object"), so the
 numbers overstate the visual gain. Two untested differences are the most likely cause: the model (the essay uses
 the original 2014 InceptionV1 weights; ours is torchvision's BatchNorm retrain) and our re-implementation of the
-2017 recipe rather than the Lucid library. Next: run lucent (the Lucid port) on both nets and compare by eye.
+2017 recipe rather than the Lucid library. Done: see "The essay's own InceptionV1" below; the model was the difference.
 Path anchoring, with or without the other fixes, does not change the judge's verdict on either model
 (it was never the missing ingredient here; the essay introduces it for a different failure, the dog basin).
 Time: the sweep is 11 variants x 6 units, 15-136 s each; the full-sample renders took 167 s (GoogLeNet) and
 495 s (ConvNeXt-T).
 
+## The essay's own InceptionV1: Lucid's 2014 weights (`analysis/imnet_lucid.py`)
+
+**Why.** After the tuning sweep our GoogLeNet renders were still far below the essay's 2017 InceptionV1 column by
+eye (small tiled shapes with high-frequency sparkle, against one large smoothly shaded object). Two differences
+were untested: our re-implementation of the 2017 recipe, and the model (torchvision's GoogLeNet is a BatchNorm
+retrain; the essay's figures use the original 2014 inception5h weights that Lucid ships). The smell test that
+settled it: the same library with the same defaults (lucent 0.1.8, Lucid's PyTorch port: 128 px Fourier image with
+colour decorrelation, pad 12 / jitter 8 / scale 0.9-1.1 / rotate +-10 / jitter 4, bilinear upsample to 224, Adam
+0.05, 512 steps) gives the essay's look on the 2014 weights at once and mush on torchvision's GoogLeNet and on
+ConvNeXt-T (`reports/figs/imnet_lucid_models.png`). **The specimen was the difference, not the recipe.**
+
+**What was done.** The 2014 net (lucent `inceptionv1(pretrained=True)`, input RGB in [0,1] x 255 - 117) was run over
+the 50,000 val crops of the shared cache; mixed5b pre-ReLU pole scores (concat of the four branch convs, 1024 ch)
+saved to `data/imnet_cache/imagenet_val/inceptionv1_lucid_extract.npz` like the other nets. Its 1,008 outputs use
+the 2012 devkit class order, so the map to the standard order was recovered as the modal true label per output
+index and checked by the accuracy it yields: **69.1% top-1 in RGB, 53.4% with the channels flipped** (so RGB is
+the right order; 995 distinct classes are covered). The unit sample is the same rule as the other models (8 by
+top-20 purity, 12 random, seed 0). Renders: lucent defaults, objective = spatial mean of the unit's pre-ReLU branch
+channel, 8 units per batched optimisation (31-33 s per batch of 8 on the 5070 Ti; a first single-unit run after the
+extraction pass took 312 s per unit because the GPU cache was full: free it first). Judges as before: ConvNeXt-T
+(independent) and the net itself through the recovered map. Figures: `imnet_gallery_inceptionv1_lucid.png`
+(20 units: render + 20 strongest photos, 1400 x 5200), `imnet_lucid_models.png` (one microscope, three nets),
+`imnet_lucid_seeds.png` (seeds 0 and 1 for units 852 and 860: same bird, different layout). Numbers:
+`reports/results/imnet_lucid.json`.
+
+| unit | role | top-20 majority | ConvNeXt-T rank | own rank | by eye (render) |
+|---|---|---|---|---|---|
+| 852 | picked | goldfinch 14 | 290 | 83 | one large bird: eye, beak, feather texture |
+| 860 | picked | jacamar 14 | 13 | 65 | green/blue bird heads |
+| 670 | picked | junco 13 | 247 | 397 | grey plumage, no whole bird |
+| 105 | picked | junco 13 | 23 | 11 | a small grey bird with an eye |
+| 59 | picked | corkscrew 13 | 161 | 1 | twisted metal shape |
+| 894 | picked | goldfinch 12 | 168 | 27 | yellow-green bird parts |
+| 813 | picked | gasmask 11 | 9 | 1 | a mask-like face with a round filter |
+| 1013 | picked | oystercatcher 11 | 594 | 387 | a bird head with an eye, clutter |
+| 16 | random | basketball 6 | 306 | 224 | eyes and curved shapes (mixture unit) |
+| 41 | random | Pekinese 8 | 4 | 511 | dog faces |
+| 273 | random | radio telescope 9 | 5 | 2 | dish shapes against sky |
+| 934 | random | toy terrier 5 | 81 | 79 | a dog face |
+| others | random | 2-8 of 20 | 33-870 | 23-443 | animal-part collages |
+
+Judge summary: class-dominated units (majority >= 10/20) = 8; the independent judge ranks **0 of 8** in its top 5
+(median rank over all 20 units: 268); the net itself ranks 2 of 8 (median 81). For comparison, under the same
+lucent defaults the ConvNeXt-T judge ranks torchvision GoogLeNet's hourglass and shower-cap renders 1st although
+they are mush to a human, and ranks the Lucid goldfinch render 290th although it is plainly a bird.
+
+**Reading.** (1) The renders have the essay's 2017 look on every unit: large smooth forms, natural palette, legible
+subjects on the purer units (goldfinch, jacamar, junco, gasmask, Pekinese, radio dishes, terrier) and animal-part
+collages on the mixture units, which is how the essay describes the 2014 net's late layer. This is the first time
+our feature visualizations match the essay's figures by eye; the microscope question for claim A is answered on
+the essay's own specimen. (2) The 2014 net's purest last-layer units are only 11-14 of 20 class-dominated, against
+20 of 20 for torchvision's GoogLeNet and ConvNeXt-T: the old net is messier in the dataset examples too, as the
+essay's ladder (~5% / ~50% for this net) says. (3) Our independent-classifier judge does not track human
+legibility for this rendering style: ConvNeXt-T reads none of the Lucid renders and reads the mushy torchvision
+ones. The judge was a fair way to pick among settings on one model; it is not a measure of essay-quality, and the
+earlier "5 of 8 read correctly" numbers should be read with that in mind. (4) Still open: the essay's 2026 column
+(cleaner single objects on the same net) is not reproduced yet; a sweep of longer / larger / path-anchored / TV
+variants on these units is in progress (`analysis/imnet_lucid_sweep.py`). The other pretrained analyses (purity,
+negative poles, weak grid, SAE) have not been rerun on the 2014 net.
+
 ## Files
 
-- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning)
+- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning), `analysis/imnet_lucid.py` (the essay's InceptionV1 via lucent)
+- `reports/results/imnet_lucid.json`, `reports/figs/imnet_gallery_inceptionv1_lucid.png`, `reports/figs/imnet_lucid_models.png`, `reports/figs/imnet_lucid_seeds.png`, `reports/figs/imnet_fv/inceptionv1_lucid/<unit>_lucid[_s1].png`
 - `reports/results/imnet_featvis2.json`, `reports/figs/imnet_fv2_<arch>.jpg`, `reports/figs/imnet_fv2/<arch>/<unit>_<variant>.png`
 - `reports/results/imnet_featvis.json` (per unit: role, majority class and count, dataset max and median, rho,
   FV objective and objective / dataset max per setting and seed; per arch: the negative-pole selection)

@@ -19,6 +19,7 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
     "torch>=2.14.1",
+    "torch-lucent>=0.1.8",
     "torchvision>=0.29.1",
     "transformers>=5.20.1",
 ]
