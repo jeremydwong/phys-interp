@@ -261,14 +261,55 @@ the essay's own specimen. (2) The 2014 net's purest last-layer units are only 11
 essay's ladder (~5% / ~50% for this net) says. (3) Our independent-classifier judge does not track human
 legibility for this rendering style: ConvNeXt-T reads none of the Lucid renders and reads the mushy torchvision
 ones. The judge was a fair way to pick among settings on one model; it is not a measure of essay-quality, and the
-earlier "5 of 8 read correctly" numbers should be read with that in mind. (4) Still open: the essay's 2026 column
-(cleaner single objects on the same net) is not reproduced yet; a sweep of longer / larger / path-anchored / TV
-variants on these units is in progress (`analysis/imnet_lucid_sweep.py`). The other pretrained analyses (purity,
-negative poles, weak grid, SAE) have not been rerun on the 2014 net.
+earlier "5 of 8 read correctly" numbers should be read with that in mind. (4) The essay's 2026 column (cleaner single objects on the same net) is partly reproduced by the path anchor
+and no further: see the next subsection. The other pretrained analyses (purity, negative poles, weak grid, SAE)
+have not been rerun on the 2014 net.
+
+### Toward the essay's 2026 column (`analysis/imnet_lucid_sweep.py`, figure `imnet_lucid_sweep.jpg`)
+
+The essay's timeline shows a further step from 2017 to 2026 on the same InceptionV1 neurons: one clean object,
+less clutter of faces and animal parts. Six variants on 12 of the units above (the 8 picked + 41, 273, 642, 934),
+one FV seed each, all with lucent's transforms and colour decorrelation; path / path_long / tv use our own loop
+that copies lucent's chain exactly (128 px image, standard transforms, x*255-117, bilinear upsample to 224, Adam
+0.05). Path anchor as in `imnet_featvis.py`: previous layer = `mixed5a` (post-ReLU concat, 832 ch), A = sum over
+positions of a_prev * ds/da_prev, r_bar = mean A over the unit's 60 strongest val images, rho = dataset max -
+median of the pole score, first 64 steps only. TV weight per unit = 10% of the default render's objective per
+unit of TV (307-659; realised penalty 4.7% of the objective at step 0). Three judges (rank of the majority class):
+the net itself (through the recovered map), ConvNeXt-T, torchvision GoogLeNet. Geometric means over the 8 picked
+/ 4 random units:
+
+| variant | what | own net | ConvNeXt-T | GoogLeNet | median obj / dataset max | time (12 units) |
+|---|---|---|---|---|---|---|
+| default | lucent defaults, 128 px, 512 steps | 26.5 / 77.3 | 86.4 / 34.5 | 108.9 / 52.5 | 1.72 | (reused) |
+| long | 128 px, 2560 steps | 19.7 / 56.5 | 69.6 / 31.1 | 95.4 / 17.8 | 1.88 | 259 s |
+| hires | 224 px, 1024 steps, no upsample | 27.9 / 45.3 | 124.4 / 48.1 | 107.3 / 81.2 | 3.51 | 122 s |
+| path | default + path anchor, first 64 steps | **5.0** / 35.3 | 56.2 / 11.5 | **54.8** / 18.6 | 1.83 | 56 s |
+| path_long | path, 2560 steps | 7.0 / **27.4** | **38.2** / **10.8** | 57.4 / **15.4** | 1.90 | 263 s |
+| tv | default + total-variation penalty | 22.4 / 30.6 | 65.9 / 24.5 | 81.8 / 23.7 | 1.91 | 50 s |
+
+(Per unit and variant: objective, ratio, three ranks, path cosine and TV at step 0, in `imnet_lucid_sweep.json`;
+every render in `reports/figs/imnet_fv2/inceptionv1_lucid/`; contact sheet cells labelled "own / ConvNeXt-T /
+GoogLeNet". Peak GPU 2.4 GB; 13 min in all.)
+
+**Reading (by eye, then the numbers).** The path anchor is the only tweak that moves the renders toward the 2026
+look, and it moves them part of the way: greyer, flatter backgrounds, fewer texture tiles, and more often one
+whole thing (860 one perched bird with head and beak; 670 one bird head with an eye instead of armour and faces;
+894 a single bird silhouette; 273 one dish on legs; 934 one animal head; 59 one corkscrew shape). It still has
+extra eyes, duplicated parts and feather spill (852, 105), so it is not the essay's 2026 render (a single
+photographic-looking object). All three judges agree on the direction (picked-unit geometric mean 26.5 -> 5.0
+own, 86 -> 56 ConvNeXt-T, 109 -> 55 GoogLeNet; 670 junco goes from ranks 397 / 247 / 507 to 1 / 15 / 67).
+path_long scores best on two independent judges but by eye regresses toward clutter once the anchor is released
+(face-like blobs regrow on 852 and 860), with one exception (642 grows a goose head). long alone is more saturated
+and more cluttered than default; hires is the worst by eye and by judge (fractal high-frequency clutter, ratio 3.5:
+the usual exploit signature); tv is default, slightly smoother. So the essay's "path-guided optimisation for the
+first 64 steps" is a real ingredient and we have it; its "few subtle tweaks to reasonable settings" we do not,
+and the remaining gap to the 2026 column is theirs to publish or ours to find. Single seed; per-unit rank
+swings of tens are partly seed noise, the direction across three judges is the robust part.
 
 ## Files
 
-- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning), `analysis/imnet_lucid.py` (the essay's InceptionV1 via lucent)
+- `analysis/imnet_featvis.py`, `analysis/imnet_gallery.py`, `analysis/imnet_featvis2.py` (microscope tuning), `analysis/imnet_lucid.py` (the essay's InceptionV1 via lucent), `analysis/imnet_lucid_sweep.py` (2026-column sweep on it)
+- `reports/results/imnet_lucid_sweep.json`, `reports/figs/imnet_lucid_sweep.jpg`, `reports/figs/imnet_fv2/inceptionv1_lucid/<unit>_<variant>.png`
 - `reports/results/imnet_lucid.json`, `reports/figs/imnet_gallery_inceptionv1_lucid.png`, `reports/figs/imnet_lucid_models.png`, `reports/figs/imnet_lucid_seeds.png`, `reports/figs/imnet_fv/inceptionv1_lucid/<unit>_lucid[_s1].png`
 - `reports/results/imnet_featvis2.json`, `reports/figs/imnet_fv2_<arch>.jpg`, `reports/figs/imnet_fv2/<arch>/<unit>_<variant>.png`
 - `reports/results/imnet_featvis.json` (per unit: role, majority class and count, dataset max and median, rho,
