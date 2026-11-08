@@ -189,14 +189,19 @@ unit has a class for the judge to find):
 | | path-anchored | 0 of 14 | 273 |
 | | **tuned (maco_lowf)** | **4 of 14** | 33 |
 
-**Reading.** The tuned GoogLeNet column now reaches what the essay's 2017 column shows for InceptionV1: the
-hourglass units render as hourglasses with sand, the shower-cap unit as caps on heads, the banjo units as a
-player with an instrument, and the mixture units (random draws, 2-9 of 20) render as the texture mixtures they
-are. For ConvNeXt-T the tuned renders are the right colour and rough shape (a blue bird-shaped blob for the
-indigo-bunting unit, a red cup on a stick for the plunger unit, a spiral shell for the snail unit) and an
-independent classifier reads 4 of the 14 class-dominated units from them, against 0 before, but they are not
-the crisp objects of the essay's ConvNeXt renders. The gap is now a matter of degree on ConvNeXt-T and closed on
-GoogLeNet. Path anchoring, with or without the other fixes, does not change the judge's verdict on either model
+**Reading (corrected 7 Nov).** The tuned GoogLeNet column is a clear step up from our first settings: the
+hourglass units render as small hourglasses with sand, the shower-cap unit as caps on heads, the banjo units as a
+player with an instrument, and the mixture units (random draws, 2-9 of 20) as texture mixtures. But put beside the
+essay's 2017 InceptionV1 column it is not close: theirs is one large, smoothly shaded object filling the frame in
+natural colours; ours tiles the frame with small copies, washed-out contrast and high-frequency sparkle. For
+ConvNeXt-T the tuned renders are the right colour and rough shape (a blue bird-shaped blob for the indigo-bunting
+unit, a red cup on a stick for the plunger unit, a spiral shell for the snail unit) and an independent classifier
+reads 4 of the 14 class-dominated units from them, against 0 before, but they are not objects. The judge is a
+coarse yardstick (it rewards "the class is findable somewhere in the frame", not "one clean object"), so the
+numbers overstate the visual gain. Two untested differences are the most likely cause: the model (the essay uses
+the original 2014 InceptionV1 weights; ours is torchvision's BatchNorm retrain) and our re-implementation of the
+2017 recipe rather than the Lucid library. Next: run lucent (the Lucid port) on both nets and compare by eye.
+Path anchoring, with or without the other fixes, does not change the judge's verdict on either model
 (it was never the missing ingredient here; the essay introduces it for a different failure, the dog basin).
 Time: the sweep is 11 variants x 6 units, 15-136 s each; the full-sample renders took 167 s (GoogLeNet) and
 495 s (ConvNeXt-T).
