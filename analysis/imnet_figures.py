@@ -16,7 +16,8 @@ from analysis import imnet_common as C  # noqa: E402
 from analysis.common import SERIES, setup_style  # noqa: E402
 
 PCTS = (25, 50, 75, 95, 99)
-NICE = {"googlenet": "GoogLeNet (InceptionV1)", "convnext_tiny": "ConvNeXt-T", "convnext_small": "ConvNeXt-S"}
+NICE = {"googlenet": "GoogLeNet\n(torchvision)", "convnext_tiny": "ConvNeXt-T", "convnext_small": "ConvNeXt-S",
+        "inceptionv1_lucid": "InceptionV1 2014\n(Lucid weights)"}
 
 
 def _load(name):
@@ -128,6 +129,40 @@ def fig_weak(dataset):
     plt.close(fig)
 
 
+def fig_weak_lucid(dataset):
+    """Like-for-like weak-activation grid: the essay's own InceptionV1 (Lucid 2014 weights) in our pipeline, the
+    essay's published grid for that network, and torchvision's GoogLeNet, side by side (same rows, same cutoffs)."""
+    import matplotlib.pyplot as plt
+    _, seq = setup_style()
+    W = _load("imnet_weak.json").get(dataset, {})
+    Ess = _load("imnet_essay_weak_grid.json")
+    if "inceptionv1_lucid" not in W:
+        return
+    panels = []
+    g = W["inceptionv1_lucid"]
+    rows = g["layers"]
+    M = np.array([[g["cells"].get(f"{r}|p{p}", {}).get("delta_pp", np.nan) for p in PCTS] for r in rows])
+    panels.append((f"ours: InceptionV1 (Lucid 2014)\nbase {100 * g['base_top1']:.2f}%", rows, M))
+    e = Ess.get("Inception v1", {})
+    if e:
+        er = list(e["rows"])
+        panels.append((f"essay: Inception v1\nbase {e['base']:.2f}%", er,
+                       np.array([[e["rows"][r].get(f"p{p}", np.nan) for p in PCTS] for r in er])))
+    if "googlenet" in W:
+        g = W["googlenet"]
+        M = np.array([[g["cells"].get(f"{r}|p{p}", {}).get("delta_pp", np.nan) for p in PCTS] for r in g["layers"]])
+        panels.append((f"ours: GoogLeNet (torchvision)\nbase {100 * g['base_top1']:.2f}%", g["layers"], M))
+    fig, axes = plt.subplots(1, len(panels), figsize=(7, 4.2), gridspec_kw=dict(wspace=0.75))
+    for ax, (t, r, M) in zip(np.atleast_1d(axes), panels):
+        im = _grid(ax, r, M, t, cmap=seq)
+    cb = fig.colorbar(im, ax=axes, shrink=0.6, pad=0.02)
+    cb.set_label("top-1 loss (pp)", fontsize=7)
+    fig.suptitle("Zeroing activations below each neuron's p-th percentile, one layer at a time (change in top-1, pp)",
+                 fontsize=8.5, x=0.02, ha="left", y=0.99)
+    fig.savefig(os.path.join(C.FIGS, "imnet_weak_grid_inceptionv1_lucid.png"), dpi=200)
+    plt.close(fig)
+
+
 def fig_sae_rot(dataset):
     import matplotlib.pyplot as plt
     S = _load("imnet_sae.json")
@@ -140,17 +175,17 @@ def fig_sae_rot(dataset):
             for t, col, suf in ((C.tag(a, True), SERIES[0], ""), (C.tag(a, False), "#999999", " init")):
                 r = S.get(dataset, {}).get(t, {}).get(k)
                 if r:
-                    labels.append(f"{NICE[a].split(' ')[0]} {k}{suf}")
+                    labels.append(f"{NICE[a].split()[0]} {k}{suf}")
                     vals.append(100 * r["near_copy_share"])
                     cols.append(col)
             r = S.get(dataset, {}).get(C.tag(a, True) + "_resid", {}).get(k)
             if r:
-                labels.append(f"{NICE[a].split(' ')[0]} {k} residual")
+                labels.append(f"{NICE[a].split()[0]} {k} residual")
                 vals.append(100 * r["near_copy_share"])
                 cols.append(SERIES[6])
             r = S.get(dataset, {}).get(C.tag(a, True), {}).get(k)
             if r:
-                labels.append(f"{NICE[a].split(' ')[0]} {k} rot.")
+                labels.append(f"{NICE[a].split()[0]} {k} rot.")
                 vals.append(100 * r["rotated_control"]["near_copy_share"])
                 cols.append(SERIES[3])
     for nm in ("axes", "rotated"):
@@ -183,7 +218,7 @@ def fig_sae_rot(dataset):
                           ("256-unit sets, identity start", sub["identity_aligned"], SERIES[1]),
                           ("256-unit sets, whitened (ICA)", sub["ica_aligned"], SERIES[2])]
             for nm, v, col in items:
-                labels.append(f"{NICE[a].split(' ')[0]}{'' if tr else ' init'}: {nm}")
+                labels.append(f"{NICE[a].split()[0]}{'' if tr else ' init'}: {nm}")
                 vals.append(100 * v)
                 cols.append(col if tr else "#999999")
     y = np.arange(len(vals))
@@ -203,6 +238,7 @@ def main(dataset="imagenet_val"):
     setup_style()
     fig_purity(dataset)
     fig_weak(dataset)
+    fig_weak_lucid(dataset)
     fig_sae_rot(dataset)
     summary(dataset)
 

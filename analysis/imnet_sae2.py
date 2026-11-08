@@ -46,7 +46,8 @@ from analysis import imnet_train as T  # noqa: E402
 OUT = os.path.join(C.RESULTS, "imnet_sae2.json")
 SAVE = os.path.join(C.CACHE, "sae2_saes")
 LAYER = {"g5b": ("googlenet", "inception5b"), "cnt_mlp": ("convnext_tiny", "features.7.2.mlp"),
-         "cnt_res": ("convnext_tiny", "features.7"), "cns_mlp": ("convnext_small", "features.7.2.mlp")}
+         "cnt_res": ("convnext_tiny", "features.7"), "cns_mlp": ("convnext_small", "features.7.2.mlp"),
+         "l5b": ("inceptionv1_lucid", "mixed5b")}      # l5b: the essay's own 2014 InceptionV1, mixed5b
 TOKENS = 25_600_000
 BS = 4096
 DEAD = 2_000_000
@@ -110,7 +111,7 @@ def eval_set(arch, trained, layer):
 def transform_for(arch, layer, Q=None):
     def f(x):
         x = x.float()
-        if layer.endswith(".mlp") or arch == "googlenet" and layer.startswith("inception"):
+        if layer.endswith(".mlp") or arch == "googlenet" and layer.startswith("inception") or arch == "inceptionv1_lucid":
             x = C.post_act(arch, x)
         return x @ Q.T if Q is not None else x
     return f
@@ -231,6 +232,10 @@ SWEEP = (
     *[(f"{L}_w{w}_k{k}", L, w, k, False, True) for L in ("g5b", "cnt_res", "cnt_mlp") for w, k in ((4, 128), (16, 64))],
     *[(f"cns_mlp_w{w}_k{k}", "cns_mlp", w, k, False, True) for w in (4, 16) for k in (2, 8, 32)],
     ("cns_mlp_w16_k32_rot", "cns_mlp", 16, 32, True, True),
+    # third pass: the essay's own InceptionV1 (Lucid 2014 weights), the g5b grid minus the 64x runs
+    *[(f"l5b_w{w}_k{k}", "l5b", w, k, False, True) for w, k in ((4, 8), (4, 32), (4, 2), (4, 128), (16, 32), (16, 8), (16, 2), (16, 64))],
+    *[(f"l5b_w16_k{k}_rot", "l5b", 16, k, True, True) for k in (2, 32)],
+    *[(f"l5b_w16_k{k}_init", "l5b", 16, k, False, False) for k in (2, 32)],
 )
 
 

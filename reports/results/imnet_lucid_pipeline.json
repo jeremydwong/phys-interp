@@ -1,0 +1,44 @@
+{
+ "stages": {
+  "extract": {
+   "minutes": 1.751744600137075,
+   "peak_gpu_gb": 3.901206528,
+   "modal_map_classes_covered": 995,
+   "matched_map_differs_on_outputs": 5,
+   "top1": 0.6912
+  },
+  "purity": {
+   "minutes": 1.950867776075999,
+   "peak_gpu_gb": 0.447222272
+  },
+  "sae2_dumps": {
+   "minutes": 9.307402543226878,
+   "peak_gpu_gb": 3.870575616
+  },
+  "weak": {
+   "minutes": 84.4,
+   "peak_gpu_gb": 5.14,
+   "note": "sum of six resumed runs: 46.1 min (27 cells, concurrent with the SAE dumps/runs) + 4 x 8.7 + 2.3 min foreground chunks; one more chunk was killed by the harness for system memory pressure after 1 cell"
+  },
+  "sae2": {
+   "minutes": 100.87466862201691,
+   "peak_gpu_gb": 4.289135616,
+   "note": "12 runs incl. removal tests; concurrent with the weak grid for its first 46 min"
+  },
+  "rotation_full_sub256": {
+   "minutes": 4.865257743994395,
+   "peak_gpu_gb": 1.272879616,
+   "note": "the sub1024_3000steps run was skipped for time"
+  },
+  "figures": {
+   "minutes": 0.09155445496241252,
+   "peak_gpu_gb": 0.0
+  }
+ },
+ "arch": "inceptionv1_lucid",
+ "killed_by_harness": [
+  "smoke test (09:16, system RAM pressure during the other GPU job)",
+  "rotation (background, 10:27)",
+  "weak remainder (background, 10:27)"
+ ]
+}

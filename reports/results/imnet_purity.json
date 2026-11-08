@@ -988,6 +988,278 @@
     },
     "n_units": 832
    }
+  },
+  "inceptionv1_lucid": {
+   "top1": 0.6912,
+   "n_images": 50000,
+   "mixed5b": {
+    "pos": {
+     "class": {
+      "dominated": 0.0244140625,
+      "mean_modal_share": 0.204052734375
+     },
+     "super60": {
+      "dominated": 0.208984375,
+      "mean_modal_share": 0.3568359375
+     },
+     "super130": {
+      "dominated": 0.318359375,
+      "mean_modal_share": 0.421630859375
+     }
+    },
+    "neg": {
+     "class": {
+      "dominated": 0.0361328125,
+      "mean_modal_share": 0.221826171875
+     },
+     "super60": {
+      "dominated": 0.2958984375,
+      "mean_modal_share": 0.416552734375
+     },
+     "super130": {
+      "dominated": 0.5517578125,
+      "mean_modal_share": 0.542431640625
+     }
+    },
+    "both": {
+     "class": {
+      "dominated": 0.0302734375
+     },
+     "super60": {
+      "dominated": 0.25244140625
+     },
+     "super130": {
+      "dominated": 0.43505859375
+     }
+    },
+    "n_units": 1024,
+    "census": {
+     "pos": {
+      "clean": 0.0,
+      "partial": 0.00390625,
+      "unexplained": 0.99609375,
+      "conj": 0.0,
+      "mean_best_r2": 0.02946120873093605,
+      "n": 1024,
+      "best_factor_share": {
+       "class": 0.056640625,
+       "super60": 0.4951171875,
+       "super130": 0.4482421875
+      },
+      "purity_top1pct_one_job": 0.03125,
+      "purity_top1pct_mean": 0.18579195635638934,
+      "rank_census": {
+       "clean": 0.0,
+       "partial": 0.0,
+       "unexplained": 1.0,
+       "conj": 0.0,
+       "mean_best_r2": 0.025598721578717232,
+       "n": 1024
+      }
+     },
+     "neg": {
+      "clean": 0.0,
+      "partial": 0.001953125,
+      "unexplained": 0.998046875,
+      "conj": 0.0,
+      "mean_best_r2": 0.04570590704679489,
+      "n": 1024,
+      "best_factor_share": {
+       "class": 0.0048828125,
+       "super60": 0.287109375,
+       "super130": 0.7080078125
+      },
+      "purity_top1pct_one_job": 0.1328125,
+      "purity_top1pct_mean": 0.29574450564652516,
+      "rank_census": {
+       "clean": 0.0,
+       "partial": 0.0,
+       "unexplained": 1.0,
+       "conj": 0.0,
+       "mean_best_r2": 0.036840759217739105,
+       "n": 1024
+      }
+     }
+    }
+   },
+   "mixed4e": {
+    "pos": {
+     "class": {
+      "dominated": 0.015625,
+      "mean_modal_share": 0.19056490384615385
+     },
+     "super60": {
+      "dominated": 0.2608173076923077,
+      "mean_modal_share": 0.38936298076923076
+     },
+     "super130": {
+      "dominated": 0.484375,
+      "mean_modal_share": 0.5182692307692307
+     }
+    },
+    "neg": {
+     "class": {
+      "dominated": 0.013221153846153846,
+      "mean_modal_share": 0.17770432692307692
+     },
+     "super60": {
+      "dominated": 0.38100961538461536,
+      "mean_modal_share": 0.44849759615384616
+     },
+     "super130": {
+      "dominated": 0.6850961538461539,
+      "mean_modal_share": 0.6303485576923077
+     }
+    },
+    "both": {
+     "class": {
+      "dominated": 0.014423076923076924
+     },
+     "super60": {
+      "dominated": 0.32091346153846156
+     },
+     "super130": {
+      "dominated": 0.5847355769230769
+     }
+    },
+    "n_units": 832
+   }
+  },
+  "inceptionv1_lucid_init": {
+   "top1": 0.001,
+   "n_images": 50000,
+   "mixed5b": {
+    "pos": {
+     "class": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.079052734375
+     },
+     "super60": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.16484375
+     },
+     "super130": {
+      "dominated": 0.0263671875,
+      "mean_modal_share": 0.2791015625
+     }
+    },
+    "neg": {
+     "class": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.07880859375
+     },
+     "super60": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.1630859375
+     },
+     "super130": {
+      "dominated": 0.013671875,
+      "mean_modal_share": 0.277685546875
+     }
+    },
+    "both": {
+     "class": {
+      "dominated": 0.0
+     },
+     "super60": {
+      "dominated": 0.0
+     },
+     "super130": {
+      "dominated": 0.02001953125
+     }
+    },
+    "n_units": 1024,
+    "census": {
+     "pos": {
+      "clean": 0.0,
+      "partial": 0.0,
+      "unexplained": 1.0,
+      "conj": 0.0,
+      "mean_best_r2": 0.009911767207086086,
+      "n": 1024,
+      "best_factor_share": {
+       "class": 0.013671875,
+       "super60": 0.544921875,
+       "super130": 0.44140625
+      },
+      "purity_top1pct_one_job": 0.0,
+      "purity_top1pct_mean": 0.10443571610552525,
+      "rank_census": {
+       "clean": 0.0,
+       "partial": 0.0,
+       "unexplained": 1.0,
+       "conj": 0.0,
+       "mean_best_r2": 0.010465740226209164,
+       "n": 1024
+      }
+     },
+     "neg": {
+      "clean": 0.0,
+      "partial": 0.0,
+      "unexplained": 1.0,
+      "conj": 0.0,
+      "mean_best_r2": 0.009994670748710632,
+      "n": 1024,
+      "best_factor_share": {
+       "class": 0.015625,
+       "super60": 0.5126953125,
+       "super130": 0.4716796875
+      },
+      "purity_top1pct_one_job": 0.0,
+      "purity_top1pct_mean": 0.10366684790443133,
+      "rank_census": {
+       "clean": 0.0,
+       "partial": 0.0,
+       "unexplained": 1.0,
+       "conj": 0.0,
+       "mean_best_r2": 0.010504590347409248,
+       "n": 1024
+      }
+     }
+    }
+   },
+   "mixed4e": {
+    "pos": {
+     "class": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.07914663461538461
+     },
+     "super60": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.16274038461538462
+     },
+     "super130": {
+      "dominated": 0.014423076923076924,
+      "mean_modal_share": 0.2737379807692307
+     }
+    },
+    "neg": {
+     "class": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.07854567307692308
+     },
+     "super60": {
+      "dominated": 0.0,
+      "mean_modal_share": 0.16334134615384616
+     },
+     "super130": {
+      "dominated": 0.021634615384615384,
+      "mean_modal_share": 0.27421875
+     }
+    },
+    "both": {
+     "class": {
+      "dominated": 0.0
+     },
+     "super60": {
+      "dominated": 0.0
+     },
+     "super130": {
+      "dominated": 0.018028846153846152
+     }
+    },
+    "n_units": 832
+   }
   }
  },
  "imagenetv2": {

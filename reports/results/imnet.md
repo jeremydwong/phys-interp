@@ -20,6 +20,9 @@ reproduces for ConvNeXt's MLP neurons. It does not for GoogLeNet's last layer (0
 or for ConvNeXt's residual stream (0% everywhere). The absolute interpretability numbers (essay ~70% / ~99%, human-judged) are
 not reproduced by any automatic proxy we have. Class dominance gives 5% / 38%, and one non-blind reader gives
 42% / 71%. Only the ordering is a match.
+**On the essay's own 2014 InceptionV1** (section after 5): the weak grid reproduces cell for cell in all 12 layers
+and the SAE near-copy claim reproduces (87.5% at FVE 0.84 vs 88% at 0.82), while rotation search and absolute
+purity (2.4% class-dominated) still do not.
 
 Every threshold the essay does not state is ours and is marked **(ours)**. Essay quotes are from the live page
 (fetched 2026-11-05); the weak-activation grid values are the figure's cell labels, saved verbatim in
@@ -319,7 +322,130 @@ take it to 0.9% (99.0% change). Essay (medium, all 18 blocks): "Removing the wea
 - **Early GoogLeNet layers are far more fragile in ours** (conv1 p25 −28.9 vs −0.2 pp). The essay's
   InceptionV1 is a different network: its own retrain, with layer names from the Lucid model. Our
   "percentile of positive activations" may also differ from its cutoff in layers where almost every
-  activation is positive. We did not try to resolve this.
+  activation is positive. Resolved in the next section: on the essay's own 2014 weights the same cutoff
+  reproduces every early-layer cell, so the gap was the model.
+
+## The same pipeline on the essay's own InceptionV1 (2014 weights)
+
+Everything above used torchvision's GoogLeNet, a BatchNorm retrain. `imnet_vis.md` found that the essay's
+specimen is the **original 2014 InceptionV1 (inception5h) that Lucid ships**, loaded here through lucent
+(`from lucent.modelzoo import inceptionv1`). To give every pretrained number a like-for-like value on the essay's
+own network, the pipeline was rerun on it unchanged (arch `inceptionv1_lucid`; driver
+`analysis/imnet_lucid_pipeline.py`). Numbers sit under that key in `imnet_purity.json`, `imnet_weak.json` and
+`imnet_rotation.json`, as runs `l5b_*` in `imnet_sae2.json`, and the per-stage wall time and peak GPU memory in
+`imnet_lucid_pipeline.json` (extract 1.8 min, purity 2.0, weak grid 84, SAE dumps 9.3, 12 SAE runs 101, rotation
+4.9; peak 5.1 GB; the SAE runs include three 50k-image removal passes each in fp32).
+
+**Wrapper (ours).** `imnet_common.LucidInceptionV1` takes the pipeline's normalised input, converts it to lucent's
+scale (RGB in [0, 255] minus 117) and runs the net in fp32 (under fp16 autocast its local response norms overflow
+and top-1 falls to 3%), in sub-batches of 50 because lucent's flat forward keeps every intermediate alive. Its
+1008 outputs are in the 2012 devkit order; the 1000 standard logits are gathered through a one-to-one map
+recovered from val (maximum-weight matching between outputs and ground-truth labels on the vote matrix). The
+modal-label map of `imnet_lucid.py` covers only 995 classes; the matched map covers 1000 and differs from it on 5
+outputs. Top-1 **69.12%** (modal map 69.13%; essay 70.08%). "The last layer" is **`mixed5b`**: the pre-ReLU concat
+of the four branch convs (1x1 | 3x3 | 5x5 | pool_reduce, 1024 channels at 7x7) for the poles, the post-ReLU block
+output for the weak grid, SAE and rotation, exactly as for `inception5b`. The random-init control is lucent's
+`InceptionV1(pretrained=False)`. The BN recalibration does not apply (no BatchNorm); instead each conv's weight
+and bias are scaled by one scalar so its output has unit std on 200 ImageNetV2 images, weight directions
+untouched (**ours**; without it the default init's activations vanish by mixed5b).
+
+### Last-layer top-20 purity (`imnet_top20_inceptionv1_lucid.png`, `imnet_top20_inceptionv1_lucid_init.png`)
+
+| last layer | top-1 | + pole: class | + pole: superclass (K=60) | + pole: superclass (K=130) | − pole: class | − pole: superclass (K=60) | random init, + pole (class / super60) | essay (human legibility) |
+|---|---|---|---|---|---|---|---|---|
+| **InceptionV1 2014 (Lucid), mixed5b** | 69.12% | **2.4%** | 20.9% | 31.8% | 3.6% | 29.6% | 0.0% / 0.0% | ~5% (2017 tools), ~50% (new tools) |
+| GoogLeNet inception5b (torchvision) | 69.78% | 4.7% | 17.2% | 26.1% | 2.6% | 18.8% | 0.0% / 0.0% | ~70% (essay's own retrain) |
+| ConvNeXt-T last MLP | 82.14% | 38.4% | 51.9% | 58.7% | 0.1% | 1.4% | 0.0% / 0.0% | ~99% |
+
+Mid layer, + pole class / superclass: mixed4e 1.6% / 26.1% (GoogLeNet inception4e 2.3% / 19.2%). The census and
+top-1% purity tools give no signal here either (mean best R² 0.03; 3.1% "one job"). The contact sheet shows the
+essay's picture of this network: most units mix two or three unrelated things (lifeboat + giant panda, academic
+gown + colobus monkey, balloon + white dogs), and one of 24 random units is class-dominated.
+
+### Weak activations (`imnet_weak_grid_inceptionv1_lucid.png`)
+
+Change in top-1 (pp) when activations below each neuron's p-th percentile of positive activations are zeroed, one
+layer at a time (cutoff definition of section 5, unchanged). Cells read **ours on the 2014 net (essay's grid for
+the same network; ours on torchvision GoogLeNet)**. Base 69.12% (essay 70.08%; GoogLeNet 69.78%).
+
+| layer | p25 | p50 | p75 | p95 | p99 |
+|---|---|---|---|---|---|
+| conv2d0 | −0.16 (−0.17; −28.88) | −3.73 (−3.50; −63.29) | −23.48 (−22.36; −69.26) | −58.03 (−59.21; −69.64) | −65.49 (−66.60; −69.64) |
+| conv2d1 | −0.79 (−0.33; −6.18) | −6.52 (−4.39; −24.40) | −25.27 (−20.94; −47.63) | −58.03 (−58.94; −66.83) | −67.09 (−68.62; −69.24) |
+| conv2d2 | −0.07 (−0.10; −2.42) | −0.74 (−0.90; −12.78) | −9.11 (−11.24; −42.33) | −44.30 (−47.02; −67.38) | −61.25 (−64.65; −69.51) |
+| mixed3a | −0.11 (+0.02; −0.88) | −0.96 (−0.72; −5.61) | −5.60 (−5.35; −31.22) | −36.92 (−40.62; −68.64) | −60.51 (−64.61; −69.56) |
+| mixed3b | −0.02 (+0.01; −0.21) | −0.28 (−0.12; −1.51) | −1.76 (−2.14; −9.19) | −21.35 (−24.35; −57.23) | −50.33 (−54.40; −68.89) |
+| mixed4a | −0.03 (−0.02; −0.14) | −0.25 (−0.14; −0.98) | −2.26 (−1.92; −11.00) | −18.36 (−19.65; −68.44) | −44.56 (−49.44; −69.62) |
+| mixed4b | −0.00 (−0.05; −0.63) | −0.34 (−0.21; −2.98) | −2.15 (−2.20; −11.84) | −16.80 (−18.27; −55.47) | −40.70 (−43.92; −68.93) |
+| mixed4c | −0.04 (−0.09; −0.21) | −0.47 (−0.29; −1.83) | −2.51 (−2.03; −10.77) | −18.78 (−18.87; −58.44) | −41.86 (−42.63; −69.06) |
+| mixed4d | +0.01 (−0.04; −0.18) | −0.29 (−0.14; −1.37) | −1.82 (−1.45; −6.50) | −12.92 (−12.51; −38.54) | −32.71 (−33.95; −65.52) |
+| mixed4e | +0.01 (−0.03; −0.00) | −0.08 (−0.04; −0.22) | −0.61 (−0.81; −1.86) | −7.72 (−8.23; −17.77) | −24.11 (−25.40; −49.99) |
+| mixed5a | −0.05 (+0.01; +0.01) | −0.22 (−0.12; −0.18) | −1.77 (−1.70; −1.72) | −13.42 (−13.87; −14.40) | −32.82 (−34.53; −43.34) |
+| **mixed5b** | −0.02 (−0.04; −0.01) | −0.11 (−0.04; −0.06) | **−0.76 (−0.60; −0.49)** | **−7.98 (−7.72; −7.52)** | −29.57 (−33.63; −47.81) |
+
+The essay's own number: "Keeping roughly the strongest quarter of positive activations in Inception's final layer
+preserves 69.47% accuracy, versus 70.08% originally" (−0.61 pp). Ours on the same network at p75: **68.36% versus
+69.12% (−0.76 pp)**, 9.2% of answers change (GoogLeNet −0.49 pp). Mass-matched pair at mixed5b (ours): the weakest
+75% of nonzero activations cost −0.76 pp (9.2% of answers change); the strongest 13.9%, carrying the same total
+activation, cost −1.70 pp (12.1%). GoogLeNet: −0.48 vs −6.12 pp.
+
+### SAE near-copies, essay recipe (`imnet_sae2.png`, runs `l5b_*`)
+
+Same recipe and data as section 3b (TopK + AuxK, 25.6M training positions from the 200k ImageNet training images,
+FVE and near-copy share on held-out val positions), the GoogLeNet grid minus the 64x runs. Near-copy share of SAE
+activity (|cos| ≥ 0.9 to a neuron axis), FVE in brackets.
+
+| last layer | 4× k=2 | 4× k=8 | 4× k=32 | 4× k=128 | 16× k=2 | 16× k=8 | 16× k=32 | 16× k=64 | rotated basis (16×, k=2 / 32) | random init (16×, k=2 / 32) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **InceptionV1 2014 (Lucid), mixed5b** | 0.5% (0.32) | 27.4% (0.49) | 79.3% (0.72) | 99.7% (0.96) | 0.2% (0.32) | 21.9% (0.50) | 76.6% (0.72) | **87.5% (0.84)** | **0.0% / 0.0%** (true neurons through the rotation: 0.8% / 79.2%) | **0.0% / 0.0%** |
+| GoogLeNet inception5b (torchvision) | 0.0% (0.41) | 0.0% (0.60) | 11.6% (0.76) | 66.1% (0.91) | 0.0% (0.41) | 0.0% (0.60) | 9.4% (0.76) | 30.7% (0.83) | 0.0% / 0.0% (true neurons: 0.0% / 14.3%) | 0.0% / 0.1% |
+| ConvNeXt-T last MLP | 68.9% (0.52) | 84.1% (0.77) | 75.3% (0.94) | 31.3% (0.97) | 31.3% (0.44) | 54.3% (0.70) | 46.2% (0.88) | 24.2% (0.93) | 0.0% / 0.0% (true neurons: 79% / 94%) | 0.0% / 0.0% |
+| essay, "the last layer" | 88% of activity at FVE 0.82 | | | | | | | | | |
+
+Removal test on the 2014 net (remove every feature with no neuron match, error kept): 16× k=64 **−3.71 pp**
+(flipped answers' median top-1/top-2 margin 0.61 against 0.999 over all images; this net's softmax is very
+peaked), 4× k=128 **+0.00 pp** (splicing in the whole SAE −0.15 pp; flipped margin 0.06), 4× / 16× k=32 −14.5 /
+−16.0 pp, k=8 −52 / −54 pp, k=2 −45 / −47 pp. Zeroing mixed5b sends top-1 to 0% (500-image check). GoogLeNet:
+−19 to −61 pp at every k.
+
+### Rotation search
+
+Share of found axes within |cos| ≥ 0.9 of a neuron (mean max |cos| in brackets), 1,000 steps, as in section 4. The
+1,024-unit / 3,000-step run was skipped for time.
+
+| layer, unit set | raw, random start | raw, identity start | ICA, random start | random init: raw / identity / ICA | identity-start objective ÷ neuron basis |
+|---|---|---|---|---|---|
+| **InceptionV1 2014 (Lucid), mixed5b, 3 × 256 units** | **1.3% (0.36)** | 10.2% (0.60) | 0.1% (0.41) | 0% / 69% / 0% | 1.59 |
+| InceptionV1 2014 (Lucid), mixed5b, all 1,024 | 0% (0.13) | 0% (0.49) | 0% (0.18) | 0% / 82% / 0% | 7.66 |
+| GoogLeNet inception5b, 3 × 256 | 0% (0.26) | 7% (0.66) | 0.1% (0.35) | 0% / 87% / 0% | 2.64 |
+| GoogLeNet inception5b, all 1,024 | 0% (0.11) | 37% (–) | 0% (0.16) | 0% / 99% / 0% | – |
+| ConvNeXt-T last MLP, 3 × 256 | 76% (0.88) | 94% (0.97) | 94% (0.97) | 0% / 67% / 4% | 1.40 |
+| essay | "starting from a random one, you land back on the neurons, in every block" | | | | |
+
+### Reading
+
+On the essay's own network, two of the four pretrained claims that had failed or wobbled on torchvision's
+GoogLeNet now reproduce, and two still do not. **The weak-activation grid reproduces cell for cell in all twelve
+layers**, including the early layers where torchvision GoogLeNet lost 30–60 pp more than the essay (conv2d0 at p25:
+−0.16 vs the essay's −0.17, against −28.9 for GoogLeNet), so that discrepancy was the BatchNorm retrain, not our
+cutoff; the essay's headline number (70.08% → 69.47%, −0.61 pp) comes out as 69.12% → 68.36% (−0.76 pp). **The
+dictionary claim reproduces too**: a 16× SAE with k = 64 puts 87.5% of its activity on near-copies of single
+neurons at FVE 0.84 (essay: 88% at 0.82), the rotated-basis control is at 0% while recovering 79% of the true
+neurons through the rotation, and the random-init network is at 0%; GoogLeNet's inception5b never passed 31% at a
+comparable FVE. The share depends strongly on k (0.5% at k = 2, 99.7% at k = 128), and the essay's second sentence
+("removing every dictionary direction that matches no neuron leaves accuracy unchanged") holds only for the k = 128
+SAE, which is nearly a copy of the neuron basis; at k = 64 the removal costs 3.7 pp. **Rotation search still does
+not land on the neurons**: as for GoogLeNet, the identity start drifts away (the objective ends 1.6–7.7× above the
+neuron basis), so under our fourth-moment objective the 2014 neuron basis is not even a local optimum, and the
+essay's objective is not stated. **Top-20 purity is 2.4% class-dominated**, the lowest of the three networks and
+below the 4.7% of the retrain, which matches the essay's ordering (2014 net < modern retrain < ConvNeXt) and sits
+near its "around 5% with tools of that era". But our yardstick is not the essay's: we count units whose 20
+strongest images are at least half one class (or one WordNet superclass, 21% here), while the essay counts units a
+human finds legible from feature visualisations plus examples, which is how it gets "more like 50%" on this same
+layer with new tools; polysemantic units with two clear themes count for the essay and not for us, and nothing
+here measures the 5% → 50% microscope effect. Random-init controls are 0% throughout. Caveats specific to this
+run: the class map was recovered from val labels (a near-permutation, 5 ambiguous outputs), the random-init
+scaling is ours, and the SAE sweep for this net lacks a 64× width and a rotated control at k = 64 or 128.
 
 ## 6. What changed after the clean_tools fixes (vision study)
 
@@ -361,3 +487,4 @@ Needs `data/imagenet_val/data/validation-*-of-00014.parquet` and `data/imagenet_
 `imnet_extract.py`, `imnet_purity.py`, `imnet_sae.py`, `imnet_rotation.py`, `imnet_weak.py`, `imnet_figures.py`.
 Numbers: `reports/results/imnet.json` (summary), `imnet_purity.json`, `imnet_sae.json`, `imnet_rotation.json`,
 `imnet_weak.json`, `imnet_essay_weak_grid.json` (essay values), `imnet_legibility_ours.json` (reader judgments).
+The essay's own 2014 InceptionV1: `analysis/imnet_lucid_pipeline.py` (driver; arch `inceptionv1_lucid` in `imnet_common.py`), `imnet_lucid_pipeline.json` (stage times, peak GPU), figures `imnet_top20_inceptionv1_lucid*.png`, `imnet_weak_grid_inceptionv1_lucid.png`.

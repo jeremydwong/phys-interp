@@ -26,6 +26,8 @@ from analysis import imnet_common as C  # noqa: E402
 def layers(arch):
     if arch == "googlenet":
         return [C.last_layer(arch), "inception4e"]
+    if arch == "inceptionv1_lucid":
+        return [C.last_layer(arch), "mixed4e"]
     mid = {"convnext_tiny": "features.5.8.mlp", "convnext_small": "features.5.26.mlp"}[arch]
     return [C.last_layer(arch), "features.7", mid]
 
@@ -68,8 +70,15 @@ def extract(dataset, arch, trained, n_pos=2, bs=200, force=False):
     rec.detach()
     acc = float((pred == y).mean())
     print(f"[extract] {dataset} {t}: top-1 {100 * acc:.3f}%  ({time.time() - t0:.0f} s)", flush=True)
+    extra = {}
+    if arch == "inceptionv1_lucid":     # keep what imnet_lucid.py reads from this file (its raw 1008-way pass)
+        m1008, _ = C.lucid_class_map()
+        extra = dict(map1008=m1008, acc=acc)
+        if os.path.exists(fn):
+            z0 = np.load(fn)
+            extra.update({k: z0[k] for k in ("acc_bgr", "time_s") if k in z0.files})
     np.savez(fn, pred=pred, margin=margin, layers=np.array(L),
-             **{f"{n}_pos": pos[n] for n in L}, **{f"{n}_neg": neg[n] for n in L})
+             **{f"{n}_pos": pos[n] for n in L}, **{f"{n}_neg": neg[n] for n in L}, **extra)
     np.save(os.path.join(d, f"{t}_samples.npy"), np.concatenate(samples))
     np.save(os.path.join(d, f"{t}_samples_idx.npy"), np.concatenate(sidx))
     del m

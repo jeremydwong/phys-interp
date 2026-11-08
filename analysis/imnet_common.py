@@ -13,7 +13,9 @@ hypernym path, that covers at most K of the 1000 classes. K = 60 gives 125 group
 "working dog", "terrier", ...); K = 130 gives 47 coarser groups ("canine", "device", "conveyance", ...).
 
 Models. torchvision googlenet (IMAGENET1K_V1) and convnext_tiny / convnext_small (IMAGENET1K_V1), and a random-
-init control of each (torchvision's default init, same seed every time, eval mode).
+init control of each (torchvision's default init, same seed every time, eval mode). `inceptionv1_lucid`: the
+essay's own specimen, Lucid's 2014 InceptionV1 (inception5h) through the lucent port, wrapped so it takes the
+pipeline's normalised input and returns 1000-way logits in the standard class order (see LucidInceptionV1).
 """
 from __future__ import annotations
 
@@ -37,7 +39,7 @@ FIGS = os.path.join(ROOT, "reports", "figs")
 DEV = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MEAN = torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1) * 255
 STD = torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1) * 255
-MODELS = ("googlenet", "convnext_tiny", "convnext_small")
+MODELS = ("googlenet", "convnext_tiny", "convnext_small", "inceptionv1_lucid")
 ESSAY = "Cammarata (2026), Neural Networks Are Already Clean, Goodfire"
 
 
@@ -195,9 +197,180 @@ def superclasses(K=60):
 
 # ------------------------------------------------------------------ models and layers
 
+LUCID_BLOCKS = ["conv2d0", "conv2d1", "conv2d2", "mixed3a", "mixed3b", "mixed4a", "mixed4b", "mixed4c", "mixed4d",
+                "mixed4e", "mixed5a", "mixed5b"]
+LUCID_MAP = os.path.join(CACHE, "inceptionv1_lucid_map1008.npz")
+
+
+def is_relu_net(arch):
+    """Inception-style nets whose 'neuron' is a ReLU channel (post = ReLU(pre)); the others are ConvNeXt (GELU)."""
+    return arch in ("googlenet", "inceptionv1_lucid")
+
+
+def _lucid_raw(trained):
+    from lucent.modelzoo.inceptionv1 import InceptionV1
+    return InceptionV1(pretrained=trained, redirected_ReLU=False)
+
+
+@torch.no_grad()
+def lucid_class_map(force=False):
+    """The 1008 outputs of Lucid's InceptionV1 are in the 2012 devkit order (plus 8 unused). Recovered (OURS) from
+    the net's argmax over ImageNet val: votes[o, c] = images of class c whose argmax is output o; the one-to-one
+    map is the maximum-weight matching (scipy linear_sum_assignment), so every class gets a distinct output.
+    imnet_lucid.py's modal-label map (argmax of each row) covers 995 classes; the matched map covers 1000 and
+    differs on 5 outputs. Returns (map1008 [1008] -> class or -1, gather [1000] -> output).
+    Cached in data/imnet_cache/inceptionv1_lucid_map1008.npz (map1008, gather, votes, modal)."""
+    if os.path.exists(LUCID_MAP) and not force:
+        z = np.load(LUCID_MAP)
+        return z["map1008"], z["gather"]
+    _, y = images("imagenet_val")
+    old = os.path.join(cache_dir("imagenet_val"), "inceptionv1_lucid_extract.npz")
+    if os.path.exists(old) and "map1008" in np.load(old).files and np.load(old)["pred"].max() > 999:
+        pred = np.load(old)["pred"]                              # raw 1008-way argmax from imnet_lucid.extract
+    else:
+        net = _lucid_raw(True).to(DEV).eval()
+        pred = []
+        for _, x in batches("imagenet_val", bs=250):
+            x = x.contiguous() * STD.to(DEV) + MEAN.to(DEV) - 117.0
+            pred.append(net(x).argmax(1).cpu().numpy())
+        pred = np.concatenate(pred)
+        del net
+    from scipy.optimize import linear_sum_assignment
+    votes = np.zeros((1008, 1000), np.int64)
+    np.add.at(votes, (pred, y), 1)
+    modal = np.where(votes.sum(1) > 0, votes.argmax(1), -1)          # imnet_lucid.py's map: modal label per output
+    modal_cov = len(np.unique(modal[modal >= 0]))
+    # one-to-one map: assign each class the output that voted for it most, without reusing an output
+    # (maximum-weight bipartite matching on the vote matrix); this covers all 1000 classes by construction
+    rows, cols = linear_sum_assignment(-votes)
+    gather = np.full(1000, -1, np.int64)
+    gather[cols] = rows
+    m1008 = np.full(1008, -1, np.int64)
+    m1008[gather] = np.arange(1000)
+    n_cov = int((gather >= 0).sum())
+    n_diff = int((m1008[modal >= 0] != modal[modal >= 0]).sum())
+    print(f"[lucid map] modal map covers {modal_cov}/1000 classes (top-1 {100 * float((modal[pred] == y).mean()):.2f}%); "
+          f"matched map covers {n_cov}/1000, differs from modal on {n_diff} outputs, top-1 of the matched output "
+          f"{100 * float((m1008[pred] == y).mean()):.2f}%; min votes on a matched pair {int(votes[gather, np.arange(1000)].min())}",
+          flush=True)
+    assert n_cov == 1000, f"class map covers only {n_cov} classes"
+    os.makedirs(CACHE, exist_ok=True)
+    np.savez(LUCID_MAP, map1008=m1008, gather=gather, votes=votes, modal=modal, modal_cov=modal_cov, n_diff=n_diff)
+    return m1008, gather
+
+
+class LucidInceptionV1(torch.nn.Module):
+    """Lucid's 2014 InceptionV1 (lucent port) behind the pipeline's interface.
+
+    forward(x): x is the pipeline's normalised input ([x*255 - mean]/std); it is converted to lucent's scale
+    (RGB in [0, 255] minus 117) and the 1008 logits (the Linear before lucent's softmax) are gathered into the
+    1000 standard classes through `lucid_class_map`.
+    Hooks inside the lucent net route every block's PRE-ReLU tensor (conv2d0..2: the conv output; mixedXX: the
+    concat of the four branch convs in lucent's order 1x1 | 3x3 | 5x5 | pool_reduce, so mixed5b is 1024 ch)
+    through `self.pre[name]` (an Identity) and the block's post-ReLU output through `self.post[name]`, whose
+    forward-hook return value replaces the tensor in the network. Recorder hooks those two Identities.
+    No BatchNorm anywhere, so the random-init control (pretrained=False, PyTorch default conv init) needs no
+    BN calibration; see `lucid_init_scaled`."""
+
+    def __init__(self, trained=True, chunk=50):
+        super().__init__()
+        self.net = _lucid_raw(trained)
+        self.chunk = chunk           # lucent's flat forward keeps every intermediate alive: fp32 at batch 200 is 12 GB
+        self._acc = {}
+        _, gather = lucid_class_map()
+        self.register_buffer("gather", torch.as_tensor(gather))
+        self.register_buffer("mean", MEAN.clone())
+        self.register_buffer("std", STD.clone())
+        self.pre = torch.nn.ModuleDict({n: torch.nn.Identity() for n in LUCID_BLOCKS})
+        self.post = torch.nn.ModuleDict({n: torch.nn.Identity() for n in LUCID_BLOCKS})
+        self._logits = {}
+        for n in LUCID_BLOCKS:
+            convs = [f"{n}_pre_relu_conv"] if n.startswith("conv2d") else \
+                [f"{n}_{b}_pre_relu_conv" for b in ("1x1", "3x3", "5x5", "pool_reduce")]
+            store = {}
+            for k, c in enumerate(convs):
+                getattr(self.net, c).register_forward_hook(self._branch(n, store, k))
+            getattr(self.net, n).register_forward_hook(self._block_out(n, store, len(convs)))
+        self.net.softmax2_pre_activation_matmul.register_forward_hook(lambda m, i, o: self._logits.__setitem__(0, o))
+
+    def _recorded(self, n):      # only blocks a Recorder has attached to are stored (memory)
+        return bool(self.pre[n]._forward_hooks)
+
+    def _branch(self, n, store, k):
+        def f(mod, inp, out):
+            if self._recorded(n):
+                store[k] = out
+        return f
+
+    def _block_out(self, n, store, k):
+        def f(mod, inp, out):
+            if self._recorded(n):
+                self._acc.setdefault(n, []).append(torch.cat([store.pop(i) for i in range(k)], 1) if k > 1 else store.pop(0))
+            if self.post[n]._forward_hooks:       # the edit is per sample, so it is applied chunk by chunk
+                return self.post[n](out)
+        return f
+
+    def forward(self, x):
+        # fp32 throughout: under fp16 autocast the net's local response norms overflow (x^2 of activations in the
+        # hundreds), top-1 falls from 69% to 3%. The 2014 net is small enough that fp32 costs little. Sub-batches
+        # of `chunk` keep the peak under ~3 GB; recorded pre-activations are emitted once, concatenated.
+        with torch.autocast("cuda", enabled=False):
+            x = x.float().contiguous() * self.std + self.mean - 117.0
+            self._acc = {}
+            outs = []
+            for i in range(0, len(x), self.chunk):
+                self.net(x[i:i + self.chunk])
+                outs.append(self._logits.pop(0))
+            for n, lst in self._acc.items():
+                self.pre[n](torch.cat(lst) if len(lst) > 1 else lst[0])
+            self._acc = {}
+            return torch.cat(outs)[:, self.gather]
+
+
+@torch.no_grad()
+def lucid_init_scaled(m, seed, n=200):
+    """Random-init Lucid InceptionV1 control (OURS). There is no BatchNorm, so the googlenet BN recalibration does
+    not apply; PyTorch's default conv init shrinks activations layer by layer. Each conv's weight and bias are
+    scaled by one scalar so that its pre-ReLU output has unit std on n ImageNetV2 images (weights' directions
+    untouched; equivalent to a per-layer learning-rate-free normalisation). Cached like the googlenet control."""
+    fn = os.path.join(CACHE, f"inceptionv1_lucid_init_s{seed}_scaled.pt")
+    if os.path.exists(fn):
+        m.load_state_dict(torch.load(fn))
+        return m
+    convs = [(nm, mod) for nm, mod in m.net.named_modules() if isinstance(mod, (torch.nn.Conv2d, torch.nn.Linear))]
+    X, _ = images("imagenetv2")
+    x = to_input(np.asarray(X[:n]))
+    stats, scaling = {}, [True]
+
+    def hook(mod, i, o, nm):        # scale this layer in place and pass the scaled output downstream, in one pass
+        s = float(o.float().std())
+        if scaling[0] and s > 0:
+            mod.weight.mul_(1 / s)
+            if mod.bias is not None:
+                mod.bias.mul_(1 / s)
+            return o / s
+        stats[nm] = s
+    hs = [mod.register_forward_hook(lambda mo, i, o, nm=nm: hook(mo, i, o, nm)) for nm, mod in convs]
+    m(x[:n])
+    scaling[0] = False
+    m(x[:n])                        # verify
+    for h in hs:
+        h.remove()
+    print(f"[lucid init] per-layer output std after scaling: min {min(stats.values()):.3f} max {max(stats.values()):.3f}",
+          flush=True)
+    os.makedirs(CACHE, exist_ok=True)
+    torch.save(m.state_dict(), fn)
+    return m
+
+
 def load_model(arch, trained=True, seed=0):
     import torchvision.models as tvm
     torch.manual_seed(seed)
+    if arch == "inceptionv1_lucid":
+        m = LucidInceptionV1(trained).to(DEV).eval()
+        if not trained:
+            m = lucid_init_scaled(m, seed)
+        return m.eval().to(DEV)
     if arch == "googlenet":
         if trained:     # torchvision drops the aux heads itself and sets transform_input=True
             m = tvm.googlenet(weights="IMAGENET1K_V1")
@@ -241,6 +414,8 @@ def last_layer(arch):
       post = GELU(pre). Secondary: the stage-3 output (768 channels, residual stream)."""
     if arch == "googlenet":
         return "inception5b"
+    if arch == "inceptionv1_lucid":
+        return "mixed5b"
     return "features.7.2.mlp"
 
 
@@ -250,6 +425,8 @@ def block_names(arch):
     if arch == "googlenet":
         return ["conv1", "conv2", "conv3", "inception3a", "inception3b", "inception4a", "inception4b", "inception4c",
                 "inception4d", "inception4e", "inception5a", "inception5b"]
+    if arch == "inceptionv1_lucid":
+        return list(LUCID_BLOCKS)
     depth = {"convnext_tiny": (3, 3, 9, 3), "convnext_small": (3, 3, 27, 3)}[arch]
     return [f"features.{2 * s + 1}.{b}.mlp" for s in range(4) for b in range(depth[s])]
 
@@ -264,7 +441,8 @@ class Recorder:
     """Forward hooks that capture / edit the named layers.
 
     For googlenet inception blocks the captured tensor is the pre-ReLU concat of branch BN outputs [B, C, H, W];
-    for conv1..3 the pre-ReLU BN output. For convnext ".mlp" names it is the pwconv1 output (pre-GELU) [B, H, W, 4C],
+    for conv1..3 the pre-ReLU BN output. For inceptionv1_lucid the pre-ReLU branch-conv concat (mixedXX) or conv
+    output (conv2d0..2), and the edit applies to the block's post-ReLU output. For convnext ".mlp" names it is the pwconv1 output (pre-GELU) [B, H, W, 4C],
     returned as [B, 4C, H, W]. `edit[name] = f(post) -> post` modifies the post-activation in the forward pass
     (googlenet: the block/conv output; convnext: the GELU output, residual bypass intact)."""
 
@@ -285,6 +463,9 @@ class Recorder:
                 else:
                     self.handles.append(mod.bn.register_forward_hook(self._pre(n)))
                     self.handles.append(mod.register_forward_hook(self._post_edit(n)))
+            elif self.arch == "inceptionv1_lucid":   # LucidInceptionV1 routes pre / post tensors through Identities
+                self.handles.append(self.m.pre[n].register_forward_hook(self._pre(n)))
+                self.handles.append(self.m.post[n].register_forward_hook(self._post_edit(n)))
             elif not n.endswith(".mlp"):        # plain module output (e.g. convnext stage output, residual stream)
                 self.handles.append(_resolve(self.m, n).register_forward_hook(self._pre(n)))
                 self.handles.append(_resolve(self.m, n).register_forward_hook(self._post_edit(n)))
@@ -338,7 +519,7 @@ class Recorder:
 
 
 def post_act(arch, pre):
-    return F.relu(pre) if arch == "googlenet" else F.gelu(pre)
+    return F.relu(pre) if is_relu_net(arch) else F.gelu(pre)
 
 
 @torch.no_grad()

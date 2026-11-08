@@ -70,7 +70,7 @@ def fit_samples(fit, arch, n_img=5000, n_pos=4, bs=100):
 def cutoffs(arch, A):
     """A [n, C] post-activation samples -> {p: tau [C]} (see module docstring)."""
     A = A.to(C.DEV).float()
-    if arch == "googlenet":
+    if C.is_relu_net(arch):
         A = torch.where(A > 0, A, torch.full_like(A, float("nan")))
     else:
         A = A.abs()
@@ -93,7 +93,7 @@ def cut_strong(tau):
     return f
 
 
-def run(dataset, arch, out, save, bs=200):
+def run(dataset, arch, out, save, bs=200, max_minutes=None):
     fit = FIT[dataset]
     S = fit_samples(fit, arch)
     names = C.block_names(arch)
@@ -106,8 +106,14 @@ def run(dataset, arch, out, save, bs=200):
     r = out.setdefault(C.tag(arch, True), dict(fit_on=fit, eval_on=dataset, base_top1=float((p0 == y).mean()),
                                                cells={}, layers=names))
 
+    t_start = time.time()
+
     def cell(key, edit):
         if key in r["cells"]:
+            return
+        if max_minutes is not None and (time.time() - t_start) / 60 > max_minutes:
+            r["skipped"] = sorted(set(r.get("skipped", [])) | {key})
+            save()
             return
         t0 = time.time()
         rec.edit = edit
@@ -115,15 +121,18 @@ def run(dataset, arch, out, save, bs=200):
         rec.edit = {}
         acc = float((p == y).mean())
         r["cells"][key] = dict(top1=acc, delta_pp=100 * (acc - r["base_top1"]), changed=float((p != p0).mean()))
+        if key in r.get("skipped", []):
+            r["skipped"].remove(key)
         print(f"[weak] {dataset} {arch} {key}: top-1 {100 * acc:.3f}% ({r['cells'][key]['delta_pp']:+.3f} pp, "
               f"{100 * r['cells'][key]['changed']:.1f}% answers changed) {time.time() - t0:.0f} s", flush=True)
         save()
 
     # headline cells first: the last layer, then (convnext) all blocks, then mass-matched pairs, then the rest
-    order = [names[-1]] + (["all"] if arch != "googlenet" else []) + ["pairs"] + names[-2::-1]
+    relu = C.is_relu_net(arch)
+    order = [names[-1]] + (["all"] if not relu else []) + ["pairs"] + names[-2::-1]
     for n in order:
         if n == "pairs":
-            for nm in ([names[-1]] + (["all"] if arch != "googlenet" else [])):
+            for nm in ([names[-1]] + (["all"] if not relu else [])):
                 ls = names if nm == "all" else [nm]
                 tw, ts = {}, {}
                 for l in ls:
@@ -142,7 +151,7 @@ def run(dataset, arch, out, save, bs=200):
     torch.cuda.empty_cache()
 
 
-def main(dataset="imagenet_val", archs=("googlenet", "convnext_tiny")):
+def main(dataset="imagenet_val", archs=("googlenet", "convnext_tiny"), max_minutes=None):
     fn = os.path.join(C.RESULTS, "imnet_weak.json")
     allout = json.load(open(fn)) if os.path.exists(fn) else {}
     out = allout.setdefault(dataset, {})
@@ -150,10 +159,12 @@ def main(dataset="imagenet_val", archs=("googlenet", "convnext_tiny")):
     def save():
         json.dump(allout, open(fn, "w"), indent=1)
     for arch in archs:
-        run(dataset, arch, out, save)
+        run(dataset, arch, out, save, max_minutes=max_minutes)
     save()
     return allout
 
 
-if __name__ == "__main__":
-    main(*(sys.argv[1:2] or ["imagenet_val"]))
+if __name__ == "__main__":       # imnet_weak.py [dataset] [arch,arch] [max_minutes]
+    main(sys.argv[1] if len(sys.argv) > 1 else "imagenet_val",
+         tuple(sys.argv[2].split(",")) if len(sys.argv) > 2 else ("googlenet", "convnext_tiny"),
+         float(sys.argv[3]) if len(sys.argv) > 3 else None)

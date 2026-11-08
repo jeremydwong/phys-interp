@@ -13,8 +13,9 @@ from analysis import imnet_common as C  # noqa: E402
 from analysis.common import INK2, MUTED, SERIES, setup_style  # noqa: E402
 
 LAYER_NAME = {"g5b": "GoogLeNet inception5b (1024)", "cnt_mlp": "ConvNeXt-T last MLP (3072)",
-              "cnt_res": "ConvNeXt-T residual (768)", "cns_mlp": "ConvNeXt-S last MLP (3072)"}
-LAYER_COL = {"g5b": SERIES[0], "cnt_mlp": SERIES[1], "cnt_res": SERIES[2], "cns_mlp": SERIES[6]}
+              "cnt_res": "ConvNeXt-T residual (768)", "cns_mlp": "ConvNeXt-S last MLP (3072)",
+              "l5b": "InceptionV1 2014 (Lucid) mixed5b (1024)"}
+LAYER_COL = {"g5b": SERIES[0], "cnt_mlp": SERIES[1], "cnt_res": SERIES[2], "cns_mlp": SERIES[6], "l5b": SERIES[3]}
 K_MARK = {2: "o", 8: "s", 32: "^", 64: "D", 128: "v"}
 ESSAY_RED = "#b52f2f"
 
@@ -69,7 +70,7 @@ def main():
     # right: activity-weighted |cos| histograms, 16x k=32 per layer, trained vs rotated vs init
     edges = np.linspace(0, 1, 21)
     ctr = (edges[:-1] + edges[1:]) / 2
-    for L in ("g5b", "cnt_res", "cnt_mlp", "cns_mlp"):
+    for L in ("g5b", "l5b", "cnt_res", "cnt_mlp", "cns_mlp"):
         r = runs.get(f"{L}_w16_k32")
         if not r:
             continue

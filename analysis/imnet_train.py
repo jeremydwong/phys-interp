@@ -39,7 +39,7 @@ TRAIN_DIR = os.path.join(C.DATA, "imagenet_train")
 SHARDS = [int(s) for s in np.round(np.linspace(0, 293, 46)).astype(int)]
 ACTS = os.path.join(C.CACHE, "sae2_acts")
 LAYERS = {"googlenet": ["inception5b"], "convnext_tiny": ["features.7.2.mlp", "features.7"],
-          "convnext_small": ["features.7.2.mlp"]}
+          "convnext_small": ["features.7.2.mlp"], "inceptionv1_lucid": ["mixed5b"]}
 
 
 def shard_files():
